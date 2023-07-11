@@ -2,14 +2,24 @@ const express = require("express");
 require("dotenv").config();
 
 const sequelize = require("./util/database");
+const Ciudad = require("./models/ciudad");
 
 const app = express();
 
 
+app.use((req, res, next) => {
+  Ciudad.findAll()
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
+
+
 sequelize
-  .authenticate()
+  .sync()
   .then((result) => {
     console.log("Conectado");
-    app.listen(5000);
   })
   .catch((err) => console.log("Error"));
