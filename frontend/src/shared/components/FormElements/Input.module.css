@@ -1,0 +1,15 @@
+.input-container {
+  border: 4px solid #000;
+  margin: 0.5rem 0 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container input {
+  border-style: none;
+}
+
+.input-container input:focus {
+  outline: none;
+}

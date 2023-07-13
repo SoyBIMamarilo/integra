@@ -1,0 +1,10 @@
+{
+  "editor.linkedEditing": true,
+  "git.ignoreLimitWarning": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
