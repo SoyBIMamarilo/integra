@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 
+const ciudadesControllers = require("./controllers/ciudades-controllers");
+
 const sequelize = require("./util/database");
 const Ciudad = require("./models/ciudad");
 const PaqueteTrabajo = require("./models/paquete_trabajo");
@@ -9,14 +11,17 @@ const Proyecto = require("./models/proyecto");
 
 const app = express();
 
-app.use((req, res, next) => {
-  Ciudad.drop();
-  Ciudad.findAll()
-    .then((ciudades) => {
-      console.log(ciudades);
-    })
-    .catch((err) => console.log(err));
-});
+// app.use((req, res, next) => {
+//   Ciudad.findAll()
+//     .then((ciudades) => {
+//       console.log(ciudades);
+//     })
+//     .catch((err) => console.log(err));
+// });
+
+app.get("/", ciudadesControllers.getCiudades);
+
+app.get("/test", ciudadesControllers.test);
 
 sequelize
   .sync()

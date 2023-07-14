@@ -9,11 +9,11 @@ module.exports = {
     container: {
       center: true,
     },
-    // extend: {
-    //   fontFamily: {
-    //     roboto: ["Roboto", "sans-serif"],
-    //   },
-    // },
+    extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
+    },
     // extend: {
     //   backgroundImage: {
     //     "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
