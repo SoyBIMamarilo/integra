@@ -3,20 +3,20 @@ import Link from "next/link";
 const Layout = ({ children }) => {
   return (
     <div className="h-screen">
-      <div className="sticky flex flex-row h-[10%] items-center bg-neutral-800  text-neutral-200">
-        <div className="text-3xl font-semibold basis-1/6 text-center">
+      <div className="sticky flex h-[10%] flex-row items-center  bg-neutral-800 text-neutral-200 ">
+        <div className="basis-1/6 text-center text-3xl font-semibold">
           INTEGRA
         </div>
         <div
-          className="text-2xl p-8 grow 
+          className="grow p-8 text-right 
         
-        text-right"
+        text-2xl"
         >
           Mi Perfil
         </div>
       </div>
-      <div className="h-[90%] flex flex-row">
-        <div className="h-full bg-neutral-200 basis-1/6 flex flex-col justify-center items-center text-xl text-neutral-600 gap-10">
+      <div className="flex h-[90%] flex-row">
+        <div className="flex h-full basis-1/6 flex-col items-center justify-center gap-10 bg-neutral-200 text-xl text-neutral-600">
           <Link href="/proyectos" className="hover:text-neutral-900">
             Proyectos
           </Link>

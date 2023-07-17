@@ -5,7 +5,7 @@ import React from "react";
 const Button = (props) => {
   return (
     <button
-      className="p-2 font-normal text-sm  border border-solid border-black rounded-sm bg-black text-white"
+      className="rounded-sm border border-solid  border-black bg-black p-2 text-sm font-normal text-white"
       onClick={props.onClick}
     >
       {props.children}

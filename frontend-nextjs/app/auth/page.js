@@ -11,9 +11,9 @@ import LogoAmarilo from "../../public/amarilo-logo.png";
 const Auth = () => {
   const router = useRouter();
   return (
-    <div className="flex flex-wrap w-100 h-screen justify-center content-evenly">
-      <div className="flex flex-col w-64 gap-3 h-fit">
-        <h1 className="font-semibold text-6xl text-center">INTEGRA</h1>
+    <div className="w-100 flex h-screen flex-wrap content-evenly justify-center">
+      <div className="flex h-fit w-64 flex-col gap-3">
+        <h1 className="text-center text-6xl font-semibold">INTEGRA</h1>
         <Input
           type="email"
           element="input"
