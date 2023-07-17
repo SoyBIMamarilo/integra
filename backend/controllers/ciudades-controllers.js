@@ -4,14 +4,11 @@ exports.getCiudades = async (req, res, next) => {
   let ciudades;
 
   try {
-    ciudades = await Ciudad.findAll();
+    ciudades = await Ciudad.findByPk(1);
   } catch (err) {
     console.log(err);
   }
   res.json(ciudades);
-  // res.json({
-  //   ciudades: ciudades.map((ciudad) => ciudad.toObject({ getters: true })),
-  // });
   console.log(ciudades);
   return next();
 };

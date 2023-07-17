@@ -28,7 +28,7 @@ const Auth = () => {
           label="Contraseña"
           placeholder="Tu Contraseña"
         />
-        <Button onClick={() => router.push("/main")}>INICIAR SESIÓN</Button>
+        <Button onClick={() => router.push("/")}>INICIAR SESIÓN</Button>
         <div className="content-center justify-center">
           <Image src={LogoAmarilo} />
         </div>
