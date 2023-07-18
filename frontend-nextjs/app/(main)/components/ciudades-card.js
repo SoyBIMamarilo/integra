@@ -1,8 +1,9 @@
 const CiudadesCard = (props) => {
   return (
     <>
-      <div>{props.nombre}</div>
-      <div>{props.id}</div>
+      <div>
+        Nombre: {props.nombre} Id: {props.id}
+      </div>
     </>
   );
 };

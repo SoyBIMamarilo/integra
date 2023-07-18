@@ -7,11 +7,11 @@ const PaqueteTrabajo = require("./models/paquete_trabajo");
 const Presupuesto = require("./models/presupuesto");
 const Proyecto = require("./models/proyecto");
 
-const ciudadRoutes = require("./routes/ciudades-routes");
+const ciudadRoutes = require("./routes/bases-datos");
 
 const app = express();
 
-app.use("/ciudades", ciudadRoutes);
+app.use("/bases-datos", ciudadRoutes);
 
 sequelize
   .sync()
