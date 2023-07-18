@@ -22,7 +22,7 @@ const fetchPaquetesTrabajo = async () => {
   return json;
 };
 
-const BasesDatos = async () => {
+export default async function BasesDatos() {
   const ciudadesData = fetchCiudades();
   const paquetesTrabajoData = fetchPaquetesTrabajo();
 
@@ -38,7 +38,7 @@ const BasesDatos = async () => {
           <div>{ciudad.nombre}</div>
         ))}
       </div>
-      <Link href="/bases-datos/crear">Crear Ciudad</Link>
+      <Link href="/bases-datos/login">Crear Ciudad</Link>
       <div>
         <div>Paquetes de trabajo</div>
         {paquetesTrabajo.map((ciudad) => (
@@ -47,6 +47,4 @@ const BasesDatos = async () => {
       </div>
     </>
   );
-};
-
-export default BasesDatos;
+}

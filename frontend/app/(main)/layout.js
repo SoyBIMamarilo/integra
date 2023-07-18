@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Layout = (props) => {
+export default function Layout(props) {
   return (
     <div className="h-screen">
       <div className="sticky flex h-[10%] flex-row items-center  bg-neutral-800 text-neutral-200 ">
@@ -25,6 +25,4 @@ const Layout = (props) => {
       </div>
     </div>
   );
-};
-
-export default Layout;
+}
