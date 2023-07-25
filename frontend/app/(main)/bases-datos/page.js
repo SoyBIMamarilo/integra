@@ -32,18 +32,22 @@ export default async function BasesDatos() {
   ]);
   return (
     <>
-      <div>
-        <div>Ciudades</div>
-        {ciudades.map((ciudad) => (
-          <div>{ciudad.nombre}</div>
-        ))}
+      <div className="mx-16 w-1/2">
+        <div className="font-semibold text-3xl mb-8">Ciudades</div>
+        <div className="flex flex-row justify-start basis-24 gap-y-3 mb-8">
+          {ciudades.map((ciudad) => (
+            <CiudadesCard name={ciudad.nombre} id={ciudad.id} />
+          ))}
+        </div>
+        <Link href="/bases-datos/login ">Crear Ciudad</Link>
       </div>
-      <Link href="/bases-datos/login">Crear Ciudad</Link>
-      <div>
-        <div>Paquetes de trabajo</div>
-        {paquetesTrabajo.map((ciudad) => (
-          <div>{ciudad.nombre}</div>
-        ))}
+      <div className="mt-8 mx-16 w-1/2">
+        <div className="font-semibold text-3xl mb-8">Paquetes de trabajo</div>
+        <div className="flex flex-row flex-wrap gap-y-3">
+          {paquetesTrabajo.map((paquete) => (
+            <CiudadesCard name={paquete.nombre} id={paquete.id} />
+          ))}
+        </div>
       </div>
     </>
   );

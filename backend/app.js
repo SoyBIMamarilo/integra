@@ -15,11 +15,5 @@ app.use("/bases-datos", ciudadRoutes);
 
 sequelize
   .sync()
-  .then((result) => {
-    return Ciudad.findAll();
-  })
-  .then((ciudad) => {
-    console.log(JSON.stringify(ciudad, null, 2));
-  })
   .then(() => app.listen(8080))
   .catch((err) => console.log(err));

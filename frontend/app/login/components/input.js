@@ -14,7 +14,7 @@ const Input = (props) => {
     );
 
   return (
-    <div className="border border-solid border-black p-2">
+    <div className="m-1 border border-solid border-black p-2">
       <label htmlFor={props.id} />
       {element}
       {/* {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>} */}

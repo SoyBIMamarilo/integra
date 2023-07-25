@@ -26,15 +26,15 @@ export default function Auth() {
         />
 
         <Link
-          className="rounded-sm border border-solid  border-black bg-black p-2 text-sm font-normal text-white"
-          href="/"
+          className="rounded-sm border border-solid  border-black bg-black p-2 text-sm font-normal text-white text-center"
+          href="/bases-datos"
         >
           INICIAR SESIÓN
         </Link>
         <div className="content-center justify-center">
           <Image src={LogoAmarilo} />
         </div>
-        <Link href="/login/login">Modal Activate</Link>
+        {/* <Link href="/login/login">Modal Activate</Link> */}
       </div>
     </div>
   );
