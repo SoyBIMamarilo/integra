@@ -9,9 +9,9 @@ export default function Page() {
     <>
       <div
         onClick={() => router.back()}
-        className="z-10 absolute top-0 left-0 backdrop-blur-sm h-screen w-screen"
+        className="absolute left-0 top-0 z-10 h-screen w-screen backdrop-blur-sm"
       ></div>
-      <div className="z-20 absolute top-0 right-0 bg-neutral-100 h-screen w-2/6 p-10 text-lg font-semibold">
+      <div className="absolute right-0 top-0 z-20 h-screen w-2/6 bg-neutral-100 p-10 text-lg font-semibold">
         <div>Crear Ciudad</div>
         <Input
           type="text"

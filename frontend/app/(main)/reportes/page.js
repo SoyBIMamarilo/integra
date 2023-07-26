@@ -1,3 +1,3 @@
 export default function Reportes() {
-  return <div className="font-semibold text-3xl mb-8">Reportes</div>;
+  return <div className="mb-8 text-3xl font-semibold">Reportes</div>;
 }

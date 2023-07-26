@@ -26,7 +26,7 @@ export default function Auth() {
         />
 
         <Link
-          className="rounded-sm border border-solid  border-black bg-black p-2 text-sm font-normal text-white text-center"
+          className="rounded-sm border border-solid  border-black bg-black p-2 text-center text-sm font-normal text-white"
           href="/bases-datos"
         >
           INICIAR SESIÓN

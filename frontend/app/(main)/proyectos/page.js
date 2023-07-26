@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Proyectos() {
   return (
     <>
-      <div className="font-semibold text-3xl mb-8">Proyectos</div>
+      <div className="mb-8 text-3xl font-semibold">Proyectos</div>
       <Link href="/proyectos/login">Link Modal</Link>
     </>
   );
