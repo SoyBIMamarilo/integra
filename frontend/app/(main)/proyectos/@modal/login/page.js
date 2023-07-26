@@ -1,7 +1,7 @@
 export default function Page() {
   return (
     <>
-      <div>LOGIN modal WORKS</div>
+      <div>Modal Proyectos Works</div>
     </>
   );
 }
