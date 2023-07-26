@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const projectSlice = createSlice({
-  name: "project",
+  name: "projects",
   initialState: {
-    projects: [],
+    loadedProjects: [],
   },
   reducers: {
     setProjects(state, action) {
-      state.projects = action.payload;
+      state.loadedProjects = action.payload;
     },
   },
 });
