@@ -8,7 +8,6 @@ export default function (props) {
         <ProjectSelector />
       </ReduxProvider>
       {props.children}
-      {props.modal}
     </>
   );
 }

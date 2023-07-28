@@ -30,3 +30,10 @@ exports.getPresupuestos = async (req, res, next) => {
   console.log(presupuestos);
   return next();
 };
+
+exports.postPresupuestos = async (req, res, next) => {
+  const projectId = req.params.pid;
+  const version = req.body.version;
+  console.log(projectId);
+  console.log(version);
+};

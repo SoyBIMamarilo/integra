@@ -4,7 +4,7 @@ export default function Layout(props) {
   return (
     <div>
       {/* <div className="z-100 absolute top-0 left-0 bg-gray-500 h-screen w-screen"></div>- */}
-      <div className="sticky top-0 flex h-[10vh] flex-row items-center  bg-neutral-800 text-neutral-200 ">
+      <div className="sticky top-0 box-border flex h-[10vh] flex-row items-center  bg-neutral-800 text-neutral-200 ">
         <div className="basis-1/6 text-center text-3xl font-semibold">
           INTEGRA
         </div>
@@ -22,7 +22,9 @@ export default function Layout(props) {
             Bases de Datos
           </Link>
         </div>
-        <div className="basis-5/6 p-4">{props.children}</div>
+        <div className="row flex min-h-full basis-5/6 flex-col p-4 ">
+          {props.children}
+        </div>
       </div>
     </div>
   );

@@ -22,23 +22,17 @@ export default function ProjectSelector() {
     console.log(selectedProject);
   }
   return (
-    <>
-      <button value={selectedProject} className="peer focus-within:shadow-lg">
+    <Listbox value={selectedProject} onChange={projectChangeHandler}>
+      <Listbox.Button className="grow-0 text-left text-3xl font-semibold">
         {selectedProject.nombre}
-      </button>
-      <div className="invisible peer-focus:visible  ">List test</div>
-    </>
-    // <Listbox value={selectedProject} onChange={projectChangeHandler}>
-    //   <Listbox.Button className="mb-2 text-3xl font-semibold">
-    //     {selectedProject.nombre}
-    //   </Listbox.Button>
-    //   <Listbox.Options>
-    //     {projects.map((project) => (
-    //       <Listbox.Option key={project.id} value={project}>
-    //         {project.nombre}
-    //       </Listbox.Option>
-    //     ))}
-    //   </Listbox.Options>
-    // </Listbox>
+      </Listbox.Button>
+      <Listbox.Options>
+        {projects.map((project) => (
+          <Listbox.Option key={project.id} value={project}>
+            {project.nombre}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
+    </Listbox>
   );
 }
