@@ -27,7 +27,7 @@ export default async function Page({ params }) {
             href={{
               pathname: `/proyectos/${params.project}/create`,
               query: {
-                title: "Crear_Versión",
+                // title: "Crear_Versión",
                 // inputs: { version: { name: "Versión", type: "number" } },
                 // fetchUrl: ``,
               },
