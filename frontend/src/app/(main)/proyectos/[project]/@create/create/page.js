@@ -23,6 +23,8 @@ export default function Create({ params }) {
         }),
       }
     );
+    router.refresh();
+    router.back();
   };
 
   return (
