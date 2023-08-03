@@ -8,6 +8,7 @@ const Ciudad = require("./models/ciudad");
 const PaqueteTrabajo = require("./models/paquete_trabajo");
 const Presupuesto = require("./models/presupuesto");
 const Proyecto = require("./models/proyecto");
+const PresupuestoPaqueteTrabajo = require("./models/presupuesto_paquete_trabajo");
 
 const ciudadRoutes = require("./routes/bases-datos");
 const proyectoRoutes = require("./routes/proyectos");

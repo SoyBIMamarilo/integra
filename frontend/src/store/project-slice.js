@@ -4,6 +4,7 @@ const projectSlice = createSlice({
   name: "projects",
   initialState: {
     loadedProjects: [],
+    loadedPaquetes: [],
     selectedProject: { nombre: "Seleccionar Proyecto" },
   },
   reducers: {
@@ -12,6 +13,9 @@ const projectSlice = createSlice({
     },
     setSelectedProject(state, action) {
       state.selectedProject = action.payload;
+    },
+    setPaquetes(state, action) {
+      state.loadedPaquetes = action.payload;
     },
   },
 });

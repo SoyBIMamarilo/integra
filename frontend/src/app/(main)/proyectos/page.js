@@ -10,13 +10,25 @@ async function fetchProyectos() {
   return json;
 }
 
+const fetchPaquetesTrabajo = async () => {
+  const res = await fetch(
+    "http://localhost:8080/bases-datos/paquetes-trabajo",
+    {
+      cache: "no-store",
+    }
+  );
+  const json = await res.json();
+  return json;
+};
+
 export default async function Proyectos() {
   const projects = await fetchProyectos();
+  const paquetes = await fetchPaquetesTrabajo();
 
   return (
     <>
       <ReduxProvider>
-        <Preloader projects={projects} />
+        <Preloader paquetes={paquetes} projects={projects} />
       </ReduxProvider>
     </>
   );
