@@ -4,7 +4,7 @@ const proyectosControllers = require("../controllers/proyecto-controllers");
 
 const router = express.Router();
 
-router.post("/:pid", proyectosControllers.postPresupuestos);
+router.post("/:pid/presupuesto", proyectosControllers.postPresupuestos);
 
 router.get("/:pid", proyectosControllers.getPresupuestos);
 

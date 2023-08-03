@@ -33,7 +33,20 @@ exports.getPresupuestos = async (req, res, next) => {
 
 exports.postPresupuestos = async (req, res, next) => {
   const projectId = req.params.pid;
-  const version = req.body.version;
-  console.log(projectId);
-  console.log(version);
+  const versionNumber = req.body.version;
+  const version = Presupuesto.build({
+    version: versionNumber,
+    proyecto_id: projectId,
+  });
+
+  console.log(version instanceof Presupuesto);
+  console.log(version.version);
+
+  try {
+    await version.save();
+  } catch (err) {
+    console.log(err);
+  }
+
+  next();
 };

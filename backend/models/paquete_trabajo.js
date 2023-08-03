@@ -6,7 +6,7 @@ const PaqueteTrabajo = sequelize.define(
   "paquete_trabajo",
   {
     id: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,

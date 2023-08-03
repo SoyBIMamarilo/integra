@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 require("dotenv").config();
 
 const sequelize = require("./util/database");
@@ -9,6 +11,7 @@ const Proyecto = require("./models/proyecto");
 
 const ciudadRoutes = require("./routes/bases-datos");
 const proyectoRoutes = require("./routes/proyectos");
+const presupuestosRoutes = require("./routes/presupuestos");
 
 const app = express();
 
@@ -18,8 +21,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();
 });
+
+app.use(bodyParser.json());
+
 app.use("/bases-datos", ciudadRoutes);
 app.use("/proyectos", proyectoRoutes);
+app.use("/presupuestos", presupuestosRoutes);
 
 sequelize
   .sync()
