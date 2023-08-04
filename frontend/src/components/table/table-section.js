@@ -27,7 +27,7 @@ export default function ({ paquete, path }) {
         <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
         <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
       </tr>
-      {open && <TableItem path={path} />}
+      {open && <TableItem path={path} paquete={paquete.id} />}
     </>
   );
 }

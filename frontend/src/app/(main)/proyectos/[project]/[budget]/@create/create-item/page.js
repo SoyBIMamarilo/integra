@@ -13,21 +13,26 @@ const fetchEjecutados = async () => {
   return json;
 };
 
-export default async function Create({ params }) {
+export default async function Create({ params, searchParams }) {
   const router = useRouter();
   const ejecutados = await fetchEjecutados();
+  console.log(ejecutados);
   let nf = new Intl.NumberFormat("en-US");
+  const paquete = searchParams.paquete;
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    const paquete = event.target.selection.value;
-    await fetch(`http://localhost:8080/presupuestos/${params.budget}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        paquete: paquete,
-      }),
-    });
+    const referente = event.target.selection.value;
+    await fetch(
+      `http://localhost:8080/presupuestos/${params.budget}/${paquete}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referente: referente,
+        }),
+      }
+    );
     router.refresh();
     router.back();
   };
@@ -44,9 +49,9 @@ export default async function Create({ params }) {
               className="w-full basis-3/4 border border-none outline-none"
             >
               {ejecutados.map((ejecutado) => (
-                <option value={ejecutado.line_id}>{`${ejecutado.descripcion}, ${
-                  ejecutado.nombre
-                } - ${nf.format(ejecutado.sum)}`}</option>
+                <option value={ejecutado.linea_id}>{`${
+                  ejecutado.descripcion
+                }, ${ejecutado.nombre} - ${nf.format(ejecutado.sum)}`}</option>
               ))}
             </select>
           </div>

@@ -10,6 +10,8 @@ router.get("/:prid", presupuestoControllers.getPaquetesPresupuesto);
 
 router.get("/vr_prueba", presupuestoControllers.getValorPresupuesto);
 
+router.post("/:prid/:pqid", presupuestoControllers.postReferente);
+
 router.post("/:prid", presupuestoControllers.postPaquetes);
 
 module.exports = router;

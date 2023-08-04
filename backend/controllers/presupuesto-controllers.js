@@ -82,3 +82,27 @@ exports.getEjecutados = async (req, res, next) => {
   console.log(ejecutados);
   return next();
 };
+
+exports.postReferente = async (req, res, next) => {
+  const presupuestoId = req.params.prid;
+  const paquete = req.params.pqid;
+  const referente = req.body.referente;
+
+  console.log(presupuestoId);
+  console.log(paquete);
+  console.log(referente);
+  // const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
+  //   presupuesto_id: presupuestoId,
+  //   paquete_trabajo_id: paquete,
+  // });
+
+  // console.log(presupuestoPaquete);
+
+  // try {
+  //   await presupuestoPaquete.save();
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  return;
+  // next();
+};
