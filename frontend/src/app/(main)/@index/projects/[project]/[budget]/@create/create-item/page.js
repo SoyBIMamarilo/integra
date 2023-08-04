@@ -49,9 +49,9 @@ export default async function Create({ params, searchParams }) {
               className="w-full basis-3/4 border border-none outline-none"
             >
               {ejecutados.map((ejecutado) => (
-                <option value={ejecutado.linea_id}>{`${
+                <option value={ejecutado.linea_id}>{`${ejecutado.nombre}, ${
                   ejecutado.descripcion
-                }, ${ejecutado.nombre} - ${nf.format(ejecutado.sum)}`}</option>
+                },  - ${nf.format(ejecutado.sum)}`}</option>
               ))}
             </select>
           </div>

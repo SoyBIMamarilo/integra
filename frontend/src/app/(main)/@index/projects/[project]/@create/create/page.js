@@ -30,10 +30,10 @@ export default function Create({ params }) {
   return (
     <>
       <Modal>
-        <div className="mb-4 text-lg font-bold">Añadir Paquete de Trabajo</div>
+        <div className="mb-4 text-lg font-bold">Crear Versión Presupuesto</div>
         <form onSubmit={formSubmitHandler}>
           <div className="mt-2 flex flex-row gap-2">
-            <label className="basis-1/4">Paquete: </label>
+            <label className="basis-1/4">Versión: </label>
             <input
               ref={versionRef}
               min="0"

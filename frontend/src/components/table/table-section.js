@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import TableItem from "./table-item";
 
-export default function ({ paquete, path }) {
+export default function ({ paquete, path, budget }) {
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -15,19 +15,19 @@ export default function ({ paquete, path }) {
       <tr onClick={clickHandler}>
         <td
           colSpan={1}
-          className="h-6 border border-neutral-500 hover:bg-neutral-50"
+          className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50"
         >
           {paquete.nombre}
         </td>
         <td />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
       </tr>
-      {open && <TableItem path={path} paquete={paquete.id} />}
+      {open && <TableItem budget={budget} path={path} paquete={paquete.id} />}
     </>
   );
 }

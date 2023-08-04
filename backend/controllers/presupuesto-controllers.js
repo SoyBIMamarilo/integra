@@ -3,6 +3,7 @@ const { QueryTypes } = require("sequelize");
 const Presupuesto = require("../models/presupuesto");
 const PresupuestoPaqueteTrabajo = require("../models/presupuesto_paquete_trabajo");
 const ValorPresupuesto = require("../models/valor_presupuesto");
+const Item = require("../models/item");
 const sequelize = require("../util/database");
 
 exports.getPaquetesPresupuesto = async (req, res, next) => {
@@ -91,18 +92,46 @@ exports.postReferente = async (req, res, next) => {
   console.log(presupuestoId);
   console.log(paquete);
   console.log(referente);
-  // const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
-  //   presupuesto_id: presupuestoId,
-  //   paquete_trabajo_id: paquete,
-  // });
 
-  // console.log(presupuestoPaquete);
+  const item = Item.build({
+    presupuesto_id: presupuestoId,
+    paquete_trabajo_id: paquete,
+    referente_id: referente,
+  });
 
-  // try {
-  //   await presupuestoPaquete.save();
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  console.log(item);
+
+  try {
+    await item.save();
+  } catch (err) {
+    console.log(err);
+  }
   return;
   // next();
+};
+
+exports.getReferente = async (req, res, next) => {
+  const presupuestoId = req.params.prid;
+  const paqueteId = req.params.pqid;
+
+  // console.log(presupuestoId);
+  // console.log(paqueteId);
+
+  try {
+    referente = await sequelize.query(
+      `select * from presupuesto.item it
+      left join presupuesto.valor_presupuesto tm on it.referente_id=tm.linea_id 
+      left join presupuesto.proyecto py on tm.proyecto_id=py.id
+      where presupuesto_id=:pid and paquete_trabajo_id=:pqid`,
+      {
+        replacements: { pid: presupuestoId, pqid: paqueteId },
+        type: QueryTypes.SELECT,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.json(referente);
+  console.log(referente);
+  return next();
 };

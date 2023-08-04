@@ -18,9 +18,10 @@ export default function ProjectSelector() {
   function projectChangeHandler(event) {
     console.log(event);
     dispatch(projectActions.setSelectedProject(event));
-    router.replace(`/proyectos/${event.id}`);
+    router.replace(`/projects/${event.id}`);
     console.log(selectedProject);
   }
+
   return (
     <Listbox value={selectedProject} onChange={projectChangeHandler}>
       <Listbox.Button className="grow-0 text-left text-3xl font-semibold">

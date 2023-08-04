@@ -2,7 +2,22 @@
 
 import Link from "next/link";
 
-export default function async({ path, paquete }) {
+// async function fetchPaquetes(budget, paquete) {
+//   const res = await fetch(
+//     `http://localhost:8080/presupuestos/paquetes/${budget}/${paquete}`,
+//     {
+//       method: "GET",
+//       cache: "no-store",
+//     }
+//   );
+//   const json = await res.json();
+//   console.log(json);
+//   return json;
+// }
+
+export default function ({ path, paquete, budget }) {
+  console.log(budget);
+  // const paquetes = await fetchPaquetes(budget, paquete);
   return (
     <>
       <tr>

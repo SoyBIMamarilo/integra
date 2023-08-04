@@ -6,16 +6,19 @@ async function fetchPaquetes(budget) {
     cache: "no-store",
   });
   const json = await res.json();
-  console.log(json);
+  // console.log(json);
   return json;
 }
 
 export default async function Page({ params }) {
   const paquetes = await fetchPaquetes(params.budget);
+  console.log("presupuesto!!!!!!!!!");
+  console.log(params.budget);
   return (
     <Table
       paquetes={paquetes}
-      path={`/proyectos/${params.project}/${params.budget}`}
+      budget={params.budget}
+      path={`/projects/${params.project}/${params.budget}`}
     />
   );
 }

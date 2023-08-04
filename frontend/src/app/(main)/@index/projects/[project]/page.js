@@ -23,7 +23,7 @@ export default async function Page({ params }) {
           ))}
           <Link
             href={{
-              pathname: `/proyectos/${params.project}/create`,
+              pathname: `/projects/${params.project}/create`,
             }}
             className="absolute bottom-8 right-10 rounded-sm border border-solid border-black  bg-black px-8 py-2 text-center text-lg font-normal text-white"
           >

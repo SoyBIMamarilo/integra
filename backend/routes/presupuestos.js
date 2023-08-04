@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/ejecutados", presupuestoControllers.getEjecutados);
 
+router.get("/paquetes/:prid/:pqid", presupuestoControllers.getReferente);
+
 router.get("/:prid", presupuestoControllers.getPaquetesPresupuesto);
 
 router.get("/vr_prueba", presupuestoControllers.getValorPresupuesto);

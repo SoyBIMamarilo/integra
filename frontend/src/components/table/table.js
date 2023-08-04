@@ -2,16 +2,17 @@ import Link from "next/link";
 import Plus from "../svg/plus";
 import TableSection from "./table-section";
 
-export default function ({ paquetes, path }) {
-  console.log(paquetes);
+export default function ({ paquetes, path, budget }) {
+  // console.log(paquetes);
+  console.log(budget);
   const headerStyle =
-    "h-16 w-[7rem] border border-neutral-500 bg-neutral-100 p-2 align-middle";
+    "h-16 w-[7rem] border border-neutral-500 bg-neutral-50 p-2 align-middle";
   return (
     <div className="flex justify-center text-xs">
       <table className=" table-auto">
         <thead>
           <tr>
-            <th className="h-16 w-48 border border-neutral-500	 bg-neutral-100 p-2 align-middle">
+            <th className="h-16 w-48 border border-neutral-500	 bg-neutral-50 p-2 align-middle">
               Costo Directo
             </th>
             <th className="w-4"></th>
@@ -27,7 +28,7 @@ export default function ({ paquetes, path }) {
           <tr className="h-2"></tr>
 
           {paquetes.map((paquete) => (
-            <TableSection path={path} paquete={paquete} />
+            <TableSection path={path} budget={budget} paquete={paquete} />
           ))}
 
           <tr className="h-2" />
