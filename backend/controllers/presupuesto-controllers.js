@@ -1,12 +1,8 @@
 const { QueryTypes } = require("sequelize");
 
-const Presupuesto = require("../models/presupuesto");
-const PresupuestoPaqueteTrabajo = require("../models/presupuesto_paquete_trabajo");
-const ValorPresupuesto = require("../models/valor_presupuesto");
-const Item = require("../models/item");
 const sequelize = require("../util/database");
 
-const supabaseFunctions = require("../util/planeFetch");
+const supabaseFunctions = require("../util/supabase-endpoints");
 
 exports.getPaquetesPresupuesto = supabaseFunctions.getExpressCall(
   async (supabase, params) => {

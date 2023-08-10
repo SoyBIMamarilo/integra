@@ -1,6 +1,4 @@
-const Ciudad = require("../models/ciudad");
-const PaqueteTrabajo = require("../models/paquete_trabajo");
-const supabaseFunctions = require("../util/planeFetch")
+const supabaseFunctions = require("../util/supabase-endpoints")
 
 exports.getCiudades = supabaseFunctions.planeFetch("ciudad")
 

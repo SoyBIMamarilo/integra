@@ -1,6 +1,4 @@
-const Proyecto = require("../models/proyecto");
-const Presupuesto = require("../models/presupuesto");
-const supabaseFunctions = require("../util/planeFetch")
+const supabaseFunctions = require("../util/supabase-endpoints")
 
 exports.getProyectos = supabaseFunctions.planeFetch("proyecto")
 
