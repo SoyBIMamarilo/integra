@@ -13,7 +13,6 @@ export default function Preloader({ projects, paquetes }) {
     dispatch(projectActions.setProjects(projects));
     dispatch(projectActions.setPaquetes(paquetes));
     loaded.current = true;
-    console.log(projectsStore);
   }
   return null;
 }

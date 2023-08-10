@@ -1,10 +1,8 @@
 export default function GroupCard(props) {
   return (
-    <div className="relative flex flex-col p-6">
-      <div className="mb-3 to-neutral-800 text-xl font-semibold">
-        {props.title}
-      </div>
-      <div className=" grow  border border-solid border-neutral-500 p-2 ">
+    <div className="relative my-3 flex max-h-full flex-col overflow-auto">
+      <div className="title-black mb-3 text-neutral-600">{props.title}</div>
+      <div className="mx-2 box-border max-h-full grow overflow-auto border border-solid border-neutral-300 ">
         {props.children}
       </div>
     </div>

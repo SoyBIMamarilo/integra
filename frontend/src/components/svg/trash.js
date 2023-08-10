@@ -1,6 +1,9 @@
-export default function () {
+"use client";
+
+export default function (props) {
   return (
     <svg
+      onClick={props.onClick}
       xmlns="http://www.w3.org/2000/svg"
       className="mx-1 h-6 w-6 fill-none stroke-neutral-500 stroke-1 hover:stroke-neutral-900 hover:stroke-[1.25]"
     >

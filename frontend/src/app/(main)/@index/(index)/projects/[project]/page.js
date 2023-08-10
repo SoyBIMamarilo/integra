@@ -5,30 +5,33 @@ import GroupCard from "@/src/components/card/group-card";
 async function fetchPresupuestos(project) {
   const res = await fetch(`http://localhost:8080/proyectos/${project}`, {
     method: "GET",
+    headers: { "Content-Type": "application/json" },
     cache: "no-store",
   });
   const json = await res.json();
-  console.log(json);
   return json;
 }
 
 export default async function Page({ params }) {
   const presupuestos = await fetchPresupuestos(params.project);
+
   return (
     <>
-      <div className="grid grow grid-cols-2">
+      <div className="relative grid h-[80vh] grow grid-cols-2">
         <GroupCard title="Presupuestos">
           {presupuestos.map((presupuesto) => (
             <PresupuestoCard presupuesto={presupuesto} />
           ))}
-          <Link
-            href={{
-              pathname: `/projects/${params.project}/create`,
-            }}
-            className="absolute bottom-8 right-10 rounded-sm border border-solid border-black  bg-black px-8 py-2 text-center text-lg font-normal text-white"
-          >
-            Crear
-          </Link>
+          <div className="my-5 ml-2 place-self-end	">
+            <Link
+              href={{
+                pathname: `/projects/${params.project}/create`,
+              }}
+              className="button-black  "
+            >
+              Crear
+            </Link>
+          </div>
         </GroupCard>
         <GroupCard title="Reportes" />
       </div>

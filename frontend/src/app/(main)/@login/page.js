@@ -34,7 +34,6 @@ export default function Auth() {
         <div className="content-center justify-center">
           <Image src={LogoAmarilo} />
         </div>
-        {/* <Link href="/login/login">Modal Activate</Link> */}
       </div>
     </div>
   );

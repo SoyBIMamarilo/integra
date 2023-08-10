@@ -12,8 +12,6 @@ async function fetchPaquetes(budget) {
 
 export default async function Page({ params }) {
   const paquetes = await fetchPaquetes(params.budget);
-  console.log("presupuesto!!!!!!!!!");
-  console.log(params.budget);
   return (
     <Table
       paquetes={paquetes}

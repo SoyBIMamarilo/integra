@@ -11,10 +11,10 @@ export default function Create({ params }) {
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
+
     const version = versionRef.current.value;
-    console.log(version);
-    await fetch(
-      `http://localhost:8080/proyectos/${params.project}/presupuesto`,
+    const res = await fetch(
+      `http://localhost:8080/proyectos/presupuesto/${params.project}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,31 +30,26 @@ export default function Create({ params }) {
   return (
     <>
       <Modal>
-        <div className="mb-4 text-lg font-bold">Crear Versión Presupuesto</div>
+        <div className="mb-4 font-bold">Crear Versión Presupuesto</div>
         <form onSubmit={formSubmitHandler}>
-          <div className="mt-2 flex flex-row gap-2">
-            <label className="basis-1/4">Versión: </label>
+          <div className="mt-2 box-border flex flex-row flex-wrap items-start justify-evenly gap-2">
+            <label className="">Versión: </label>
             <input
               ref={versionRef}
               min="0"
               step=".1"
               type="number"
-              className="w-full basis-3/4 border border-none outline-none"
+              className="w-full max-w-[400px] flex-initial basis-2/3 "
             />
-          </div>
-          <div className="mt-4 flex flex-row gap-2">
+            <button type="submit" className="button-black  grow">
+              Crear
+            </button>
             <button
               type="button"
               onClick={() => router.back()}
-              className="basis-1/2 rounded border border-solid border-black  bg-black px-1 py-1 text-center font-normal	 text-white"
+              className="button-black grow "
             >
               Cancelar
-            </button>
-            <button
-              type="submit"
-              className="basis-1/2 rounded border border-solid border-black  bg-black px-1 py-1 text-center font-normal	 text-white"
-            >
-              Crear
             </button>
           </div>
         </form>

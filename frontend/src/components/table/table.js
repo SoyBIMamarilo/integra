@@ -3,8 +3,6 @@ import Plus from "../svg/plus";
 import TableSection from "./table-section";
 
 export default function ({ paquetes, path, budget }) {
-  // console.log(paquetes);
-  console.log(budget);
   const headerStyle =
     "h-16 w-[7rem] border border-neutral-500 bg-neutral-50 p-2 align-middle";
   return (

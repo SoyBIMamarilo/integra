@@ -16,7 +16,6 @@ import Link from "next/link";
 // }
 
 export default function ({ path, paquete, budget }) {
-  console.log(budget);
   // const paquetes = await fetchPaquetes(budget, paquete);
   return (
     <>

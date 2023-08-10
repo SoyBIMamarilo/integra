@@ -16,7 +16,6 @@ const fetchEjecutados = async () => {
 export default async function Create({ params, searchParams }) {
   const router = useRouter();
   const ejecutados = await fetchEjecutados();
-  console.log(ejecutados);
   let nf = new Intl.NumberFormat("en-US");
   const paquete = searchParams.paquete;
 
