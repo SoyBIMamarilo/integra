@@ -1,28 +1,7 @@
 const Ciudad = require("../models/ciudad");
 const PaqueteTrabajo = require("../models/paquete_trabajo");
+const supabaseFunctions = require("../util/planeFetch")
 
-exports.getCiudades = async (req, res, next) => {
-  let ciudades;
+exports.getCiudades = supabaseFunctions.planeFetch("ciudad")
 
-  try {
-    ciudades = await Ciudad.findAll();
-  } catch (err) {
-    console.log(err);
-  }
-  res.json(ciudades);
-  console.log(ciudades);
-  return next();
-};
-
-exports.getPaquetesTrabajo = async (req, res, next) => {
-  let paquetesTrabajo;
-
-  try {
-    paquetesTrabajo = await PaqueteTrabajo.findAll();
-  } catch (err) {
-    console.log(err);
-  }
-  res.json(paquetesTrabajo);
-  console.log(paquetesTrabajo);
-  return next();
-};
+exports.getPaquetesTrabajo = supabaseFunctions.planeFetch("paquete_trabajo")

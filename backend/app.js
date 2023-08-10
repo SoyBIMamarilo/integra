@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
+
+const supabase_client = require("./util/supabase-client")
 const sequelize = require("./util/database");
 const Ciudad = require("./models/ciudad");
 const PaqueteTrabajo = require("./models/paquete_trabajo");

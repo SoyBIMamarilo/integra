@@ -6,63 +6,32 @@ const ValorPresupuesto = require("../models/valor_presupuesto");
 const Item = require("../models/item");
 const sequelize = require("../util/database");
 
-exports.getPaquetesPresupuesto = async (req, res, next) => {
-  const presupuestoId = req.params.prid;
-  let paquetes;
+const supabaseFunctions = require("../util/planeFetch");
 
-  try {
-    paquetes = await sequelize.query(
-      `select * from presupuesto.presupuesto_paquete_trabajo ppt 
-      left join presupuesto.paquete_trabajo pt on ppt.paquete_trabajo_id=pt.id
-      where ppt.presupuesto_id=:presupuestoId;`,
-      {
-        replacements: { presupuestoId: presupuestoId },
-        type: QueryTypes.SELECT,
-      }
-    );
-  } catch (err) {
-    console.log(err);
+exports.getPaquetesPresupuesto = supabaseFunctions.getExpressCall(
+  async (supabase, params) => {
+    return supabase
+      .from("presupuesto_paquete_trabajo")
+      .select(
+        `
+  *,
+  paquete_trabajo!left (id, nombre )
+  `
+      )
+      .eq("presupuesto_id", params.prid);
   }
-  res.json(paquetes);
-  console.log(paquetes);
-  return next();
-};
+);
 
-exports.getValorPresupuesto = async (req, res, next) => {
-  let valorPresupuesto;
+exports.getValorPresupuesto = supabaseFunctions.planeFetch("valor_presupuesto");
 
-  console.log("");
-  try {
-    valorPresupuesto = await ValorPresupuesto.findAll();
-  } catch (err) {
-    console.log(err);
+exports.postPaquetes = supabaseFunctions.getExpressCall(
+  async (supabase, params, body) => {
+    return supabase.from("presupuesto_paquete_trabajo").insert({
+      presupuesto_id: params.prid,
+      paquete_trabajo_id: body.paquete,
+    });
   }
-  res.json(valorPresupuesto);
-  console.log(valorPresupuesto);
-  return next();
-};
-
-exports.postPaquetes = async (req, res, next) => {
-  const presupuestoId = req.params.prid;
-  const paquete = req.body.paquete;
-
-  // console.log(presupuestoId);
-  // console.log(paquete);
-  const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
-    presupuesto_id: presupuestoId,
-    paquete_trabajo_id: paquete,
-  });
-
-  console.log(presupuestoPaquete);
-
-  try {
-    await presupuestoPaquete.save();
-  } catch (err) {
-    console.log(err);
-  }
-
-  next();
-};
+);
 
 exports.getEjecutados = async (req, res, next) => {
   let ejecutados;
@@ -84,38 +53,19 @@ exports.getEjecutados = async (req, res, next) => {
   return next();
 };
 
-exports.postReferente = async (req, res, next) => {
-  const presupuestoId = req.params.prid;
-  const paquete = req.params.pqid;
-  const referente = req.body.referente;
-
-  console.log(presupuestoId);
-  console.log(paquete);
-  console.log(referente);
-
-  const item = Item.build({
-    presupuesto_id: presupuestoId,
-    paquete_trabajo_id: paquete,
-    referente_id: referente,
-  });
-
-  console.log(item);
-
-  try {
-    await item.save();
-  } catch (err) {
-    console.log(err);
+exports.postReferente = supabaseFunctions.getExpressCall(
+  async (supabase, params, body) => {
+    return supabase.from("item").insert({
+      presupuesto_id: params.prid,
+      paquete_trabajo_id: params.pqid,
+      referente_id: body.referente,
+    });
   }
-  return;
-  // next();
-};
+);
 
 exports.getReferente = async (req, res, next) => {
   const presupuestoId = req.params.prid;
   const paqueteId = req.params.pqid;
-
-  // console.log(presupuestoId);
-  // console.log(paqueteId);
 
   try {
     referente = await sequelize.query(
