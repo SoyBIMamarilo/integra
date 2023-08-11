@@ -1,7 +1,3 @@
-const { QueryTypes } = require("sequelize");
-
-const sequelize = require("../util/database");
-
 const supabaseFunctions = require("../util/supabase-endpoints");
 
 exports.getPaquetesPresupuesto = supabaseFunctions.getExpressCall(
@@ -29,25 +25,9 @@ exports.postPaquetes = supabaseFunctions.getExpressCall(
   }
 );
 
-exports.getEjecutados = async (req, res, next) => {
-  let ejecutados;
-
-  try {
-    ejecutados = await sequelize.query(
-      `select * from presupuesto.valor_presupuesto vp 
-      left join presupuesto.proyecto pr on vp.proyecto_id=pr.id 
-      where line_type='Level 1';`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-  res.json(ejecutados);
-  console.log(ejecutados);
-  return next();
-};
+exports.getEjecutados = supabaseFunctions.getExpressCall(async (supabase) => {
+  return supabase.rpc("get_ejecutados");
+});
 
 exports.postReferente = supabaseFunctions.getExpressCall(
   async (supabase, params, body) => {
@@ -59,25 +39,6 @@ exports.postReferente = supabaseFunctions.getExpressCall(
   }
 );
 
-exports.getReferente = async (req, res, next) => {
-  const presupuestoId = req.params.prid;
-  const paqueteId = req.params.pqid;
-
-  try {
-    referente = await sequelize.query(
-      `select * from presupuesto.item it
-      left join presupuesto.valor_presupuesto tm on it.referente_id=tm.linea_id 
-      left join presupuesto.proyecto py on tm.proyecto_id=py.id
-      where presupuesto_id=:pid and paquete_trabajo_id=:pqid`,
-      {
-        replacements: { pid: presupuestoId, pqid: paqueteId },
-        type: QueryTypes.SELECT,
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-  res.json(referente);
-  console.log(referente);
-  return next();
-};
+exports.getReferente = supabaseFunctions.getExpressCall(async (supabase,params) => {
+  return supabase.rpc("get_referente",{pid:params.prid,pqid:params.pqid});
+});

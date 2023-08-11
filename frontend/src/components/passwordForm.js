@@ -4,13 +4,17 @@ import Input from "./input";
 import LogoAmarilo from "../public/amarilo-logo.png";
 import Image from "next/image";
 import { useState } from "react";
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/dist/client/components/headers";
+import { getAuth,  setAuthCookies } from "./cookieSetter";
 
 export default function PasswordForm(props) {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
-  const supabase = createClient("https://kfkiyhtoznvoealcynsj.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtma2l5aHRvem52b2VhbGN5bnNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg1MDg1ODcsImV4cCI6MjAwNDA4NDU4N30._d-ZkAwBr5fLh13sTMEVAot3U8b7LQibKMU_X4CVjgk")
+
+
+  const supabase = createClient(props.db_host, props.db_anon_key);
   const handleSubmit = (event) => {
     event.preventDefault();
     const signInWithEmail = async () => {
@@ -19,26 +23,31 @@ export default function PasswordForm(props) {
         password: password,
       });
     };
-    const signUpWithEmail = async ()=>{
+    const signUpWithEmail = async () => {
       return await supabase.auth.signUp({
         email: userName,
         password: password,
       });
+    };
 
-    }
-    
     if (props.formType === "login") {
-      signInWithEmail().then(({data,error})=>{console.log(data)})
+      signInWithEmail().then(async ({ data, error }) => {
+
+        const response = await setAuthCookies(
+          data.session.access_token,
+          data.session.refresh_token
+        );
+        console.log(await getAuth(props.db_host, props.db_anon_key))
+      });
     } else {
-      signUpWithEmail().then(({data,error})=>{console.log(data)})
+      signUpWithEmail().then(({ data, error }) => {
+        console.log(data);
+      });
     }
   };
 
   return (
-    <form
-      className="flex h-fit w-64 flex-col gap-3"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex h-fit w-64 flex-col gap-3" onSubmit={handleSubmit}>
       <h1 className="text-center text-6xl font-semibold">INTEGRA </h1>
       <Input
         type="email"
@@ -67,7 +76,7 @@ export default function PasswordForm(props) {
         className="rounded-sm border border-solid  border-black bg-black p-2 text-center text-sm font-normal text-white"
         href="/bases-datos"
       >
-        {props.formType === "login"?"INICIAR SESIÓN":"REGISTRARSE"}
+        {props.formType === "login" ? "INICIAR SESIÓN" : "REGISTRARSE"}
       </button>
       <div className="content-center justify-center">
         <Image src={LogoAmarilo} />

@@ -26,7 +26,6 @@ const fetchPaquetesTrabajo = async () => {
 export default async function Layout({ index, login }) {
   const projects = await fetchProyectos();
   const paquetes = await fetchPaquetesTrabajo();
-
   const isLoggedIn = false;
 
   const indexLayout = (
