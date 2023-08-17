@@ -1,25 +1,24 @@
 import Link from "next/link";
-import Plus from "../svg/plus";
 import TableSection from "./table-section";
 
 export default function ({ paquetes, path, budget }) {
-  const headerStyle =
-    "h-16 w-[7rem] border border-neutral-500 bg-neutral-50 p-2 align-middle";
   return (
-    <div className="flex justify-center text-xs">
+    <div className="mt-5 flex justify-center text-xs">
       <table className=" table-auto">
         <thead>
           <tr>
-            <th className="h-16 w-48 border border-neutral-500	 bg-neutral-50 p-2 align-middle">
-              Costo Directo
-            </th>
+            <th className="table-header w-[15rem]">Costo Directo</th>
             <th className="w-4"></th>
-            <th className={headerStyle}>Area</th>
-            <th className={headerStyle}>Costo M2 Subcapitulo</th>
-            <th className={headerStyle}>Valor Total</th>
-            <th className={headerStyle}>Valor Total M2 Area Const.</th>
-            <th className={headerStyle}>Valor Total M2 Area Vendible</th>
-            <th className={headerStyle}>% Incidencia</th>
+            <th className="table-header w-[7rem]">Area</th>
+            <th className="table-header w-[7rem]">Costo M2 Subcapitulo</th>
+            <th className="table-header w-[7rem]">Valor Total</th>
+            <th className="table-header w-[7rem]">
+              Valor Total M2 Area Const.
+            </th>
+            <th className="table-header w-[7rem]">
+              Valor Total M2 Area Vendible
+            </th>
+            <th className="table-header w-[7rem]">% Incidencia</th>
           </tr>
         </thead>
         <tbody>
@@ -29,12 +28,11 @@ export default function ({ paquetes, path, budget }) {
             <TableSection path={path} budget={budget} paquete={paquete} />
           ))}
 
-          <tr className="h-2" />
-
+          {/* <hr className="my-2 border-2 border-solid" /> */}
           <tr>
             <td>
               <Link href={path + "/create"}>
-                <Plus />
+                <button className="button-black my-3">Añadir paquete </button>
               </Link>
             </td>
           </tr>

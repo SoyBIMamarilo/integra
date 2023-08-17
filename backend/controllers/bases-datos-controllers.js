@@ -10,7 +10,6 @@ exports.getCiudades = async (req, res, next) => {
     console.log(err);
   }
   res.json(ciudades);
-  console.log(ciudades);
   return next();
 };
 
@@ -23,6 +22,5 @@ exports.getPaquetesTrabajo = async (req, res, next) => {
     console.log(err);
   }
   res.json(paquetesTrabajo);
-  console.log(paquetesTrabajo);
   return next();
 };

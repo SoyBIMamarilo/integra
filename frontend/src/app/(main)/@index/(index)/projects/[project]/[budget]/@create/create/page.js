@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
+import { createPaquete } from "@/src/app/actions";
 import store from "@/src/store/index";
 import Modal from "@/src/components/modal/create-modal";
 
@@ -13,13 +13,7 @@ export default function Create({ params }) {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const paquete = event.target.selection.value;
-    await fetch(`http://localhost:8080/presupuestos/${params.budget}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        paquete: paquete,
-      }),
-    });
+    createPaquete(params.budget, paquete);
     router.refresh();
     router.back();
   };

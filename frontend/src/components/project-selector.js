@@ -17,7 +17,7 @@ export default function ProjectSelector() {
 
   function projectChangeHandler(event) {
     dispatch(projectActions.setSelectedProject(event));
-    router.replace(`/projects/${event.id}`);
+    router.push(`/projects/${event.id}`);
   }
 
   return (

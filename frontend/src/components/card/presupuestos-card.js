@@ -1,5 +1,6 @@
 "use client";
 
+// import { revalidateTag } from "next/cache";
 import { useRouter } from "next/navigation";
 
 import Link from "next/link";
@@ -7,20 +8,16 @@ import Copy from "../svg/copy";
 import Block from "../svg/block";
 import Trash from "../svg/trash";
 
-async function deletePresupuesto(version) {
-  const res = await fetch(`http://localhost:8080/presupuestos/${version}`, {
-    method: "DELETE",
-  });
-
-  const data = await res.json();
-  return;
-}
+import { deletePresupuesto } from "@/src/app/actions";
 
 export default async function PresupuestoCard(props) {
   const router = useRouter();
 
   const deletePresupuestoHandler = async () => {
-    await deletePresupuesto(props.presupuesto.id);
+    await deletePresupuesto(
+      props.presupuesto.id,
+      props.presupuesto.proyecto_id
+    );
     router.refresh();
   };
 

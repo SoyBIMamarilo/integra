@@ -2,11 +2,9 @@ import Table from "@/src/components/table/table";
 
 async function fetchPaquetes(budget) {
   const res = await fetch(`http://localhost:8080/presupuestos/${budget}`, {
-    method: "GET",
-    cache: "no-store",
+    next: { tags: ["paquete"] },
   });
   const json = await res.json();
-  // console.log(json);
   return json;
 }
 

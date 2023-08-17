@@ -1,33 +1,46 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
+import { deletePresupuestoPaquete } from "@/src/app/actions";
 import TableItem from "./table-item";
+import Trash from "../svg/trash";
 
-export default function ({ paquete, path, budget }) {
+export default function ({ paquete, path }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+  const deletePaqueteHandler = async () => {
+    await deletePresupuestoPaquete(
+      paquete.presupuesto_id,
+      paquete.paquete_trabajo_id
+    );
+    router.refresh();
+  };
 
   return (
     <>
-      <tr onClick={clickHandler}>
-        <td
-          colSpan={1}
-          className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50"
-        >
-          {paquete.nombre}
+      <tr>
+        <td colSpan={1} className="table-content cursor-pointer">
+          <div className="flex flex-row place-items-center px-2">
+            <div onClick={clickHandler} className="grow ">
+              {paquete.nombre}
+            </div>
+            <Trash onClick={deletePaqueteHandler} />
+          </div>
         </td>
         <td />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
-        <td className="h-6 border border-dotted border-neutral-500 hover:bg-neutral-50" />
+        <td className="table-content" />
+        <td className="table-content" />
+        <td className="table-content" />
+        <td className="table-content" />
+        <td className="table-content" />
+        <td className="table-content" />
       </tr>
-      {open && <TableItem budget={budget} path={path} paquete={paquete.id} />}
+      {open && <TableItem path={path} paquete={paquete.id} />}
     </>
   );
 }

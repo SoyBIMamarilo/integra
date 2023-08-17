@@ -7,6 +7,7 @@ const Item = require("../models/item");
 const sequelize = require("../util/database");
 
 exports.getPaquetesPresupuesto = async (req, res, next) => {
+  console.log("proyect-controllers getPaquetesPresupuesto");
   const presupuestoId = req.params.prid;
   let paquetes;
 
@@ -24,36 +25,33 @@ exports.getPaquetesPresupuesto = async (req, res, next) => {
     console.log(err);
   }
   res.json(paquetes);
-  console.log(paquetes);
   return next();
 };
 
 exports.getValorPresupuesto = async (req, res, next) => {
+  console.log("proyect-controllers getValorPresupuesto");
+
   let valorPresupuesto;
 
-  console.log("");
   try {
     valorPresupuesto = await ValorPresupuesto.findAll();
   } catch (err) {
     console.log(err);
   }
   res.json(valorPresupuesto);
-  console.log(valorPresupuesto);
   return next();
 };
 
 exports.postPaquetes = async (req, res, next) => {
+  console.log("proyect-controllers postPaquetes");
+
   const presupuestoId = req.params.prid;
   const paquete = req.body.paquete;
 
-  // console.log(presupuestoId);
-  // console.log(paquete);
   const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
     presupuesto_id: presupuestoId,
     paquete_trabajo_id: paquete,
   });
-
-  console.log(presupuestoPaquete);
 
   try {
     await presupuestoPaquete.save();
@@ -65,13 +63,15 @@ exports.postPaquetes = async (req, res, next) => {
 };
 
 exports.getEjecutados = async (req, res, next) => {
+  console.log("proyect-controllers getEjecutados");
+
   let ejecutados;
 
   try {
     ejecutados = await sequelize.query(
       `select * from presupuesto.valor_presupuesto vp 
       left join presupuesto.proyecto pr on vp.proyecto_id=pr.id 
-      where line_type='Level 1';`,
+      where line_type!='Position';`,
       {
         type: QueryTypes.SELECT,
       }
@@ -79,19 +79,15 @@ exports.getEjecutados = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  res.json(ejecutados);
-  console.log(ejecutados);
-  return next();
+  res.status(200).json(ejecutados);
 };
 
 exports.postReferente = async (req, res, next) => {
+  console.log("proyect-controllers postReferente");
+
   const presupuestoId = req.params.prid;
   const paquete = req.params.pqid;
   const referente = req.body.referente;
-
-  console.log(presupuestoId);
-  console.log(paquete);
-  console.log(referente);
 
   const item = Item.build({
     presupuesto_id: presupuestoId,
@@ -99,23 +95,19 @@ exports.postReferente = async (req, res, next) => {
     referente_id: referente,
   });
 
-  console.log(item);
-
   try {
     await item.save();
   } catch (err) {
     console.log(err);
   }
   return;
-  // next();
 };
 
 exports.getReferente = async (req, res, next) => {
+  console.log("proyect-controllers getReferente");
+
   const presupuestoId = req.params.prid;
   const paqueteId = req.params.pqid;
-
-  // console.log(presupuestoId);
-  // console.log(paqueteId);
 
   try {
     referente = await sequelize.query(
@@ -132,6 +124,74 @@ exports.getReferente = async (req, res, next) => {
     console.log(err);
   }
   res.json(referente);
-  console.log(referente);
-  return next();
+};
+
+exports.deletePresupuestos = async (req, res, next) => {
+  console.log("proyect-controllers deletePresupuestos");
+
+  const versionNumber = req.params.prid;
+  const version = await Presupuesto.findByPk(versionNumber);
+
+  try {
+    await version.destroy();
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(200).json({ mesage: "Presupuesto Eliminado!" });
+};
+
+exports.deletePresupuestoPaquete = async (req, res, next) => {
+  console.log("proyect-controllers deletePresupuestoPaquete");
+
+  const presupuesto = req.body.presupuesto_id;
+  const paquete = req.body.paquete_id;
+  const version = await PresupuestoPaqueteTrabajo.findOne({
+    where: {
+      presupuesto_id: presupuesto,
+      paquete_trabajo_id: paquete,
+    },
+  });
+  try {
+    await version.destroy();
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json({ mesage: "Paquete Eliminado!" });
+};
+
+exports.getIndicadores = async (req, res, next) => {
+  console.log("proyect-controllers getIndicadores");
+
+  const origen = req.params.prorid;
+  const destino = req.params.prdestid;
+  let indicadores;
+
+  try {
+    indicadores = await sequelize.query(
+      `WITH origen AS (
+        SELECT id id_or, indicador_id ind_id_or, presupuesto_id pr_id_or, valor vr_or
+        FROM presupuesto.presupuesto_indicador
+        WHERE presupuesto_id=:prorid
+      ),
+       dest AS (
+        SELECT id id_dest, indicador_id ind_id_dest, presupuesto_id pr_id_dest, valor vr_dest
+        FROM presupuesto.presupuesto_indicador
+        WHERE presupuesto_id=:prdestid
+      )
+       
+      SELECT *
+      FROM origen 
+        INNER JOIN dest ON origen.ind_id_or=dest.ind_id_dest
+        INNER JOIN presupuesto.indicador ind ON origen.ind_id_or=ind.id`,
+      {
+        type: QueryTypes.SELECT,
+        replacements: { prorid: origen, prdestid: destino },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  console.log({ indicadores });
+  res.status(200).json({ indicadores });
 };

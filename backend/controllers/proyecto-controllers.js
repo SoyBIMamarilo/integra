@@ -2,6 +2,7 @@ const Proyecto = require("../models/proyecto");
 const Presupuesto = require("../models/presupuesto");
 
 exports.getProyectos = async (req, res, next) => {
+  console.log("proyecto-controllers getProyectos");
   let proyectos;
 
   try {
@@ -10,13 +11,13 @@ exports.getProyectos = async (req, res, next) => {
     console.log(err);
   }
   res.json(proyectos);
-  console.log(proyectos);
   return next();
 };
 
 exports.getPresupuestos = async (req, res, next) => {
+  console.log("proyecto-controllers getPresupuestos");
   const projectId = req.params.pid;
-  console.log(projectId);
+  projectId;
   let presupuestos;
 
   try {
@@ -26,12 +27,11 @@ exports.getPresupuestos = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  res.json(presupuestos);
-  console.log(presupuestos);
-  return next();
+  res.status(200).json(presupuestos);
 };
 
 exports.postPresupuestos = async (req, res, next) => {
+  console.log("proyecto-controllers postPresupuestos");
   const projectId = req.params.pid;
   const versionNumber = req.body.version;
   const version = Presupuesto.build({
@@ -39,14 +39,11 @@ exports.postPresupuestos = async (req, res, next) => {
     proyecto_id: projectId,
   });
 
-  console.log(version instanceof Presupuesto);
-  console.log(version.version);
-
   try {
     await version.save();
   } catch (err) {
     console.log(err);
   }
 
-  next();
+  res.status(201).json({ message: "Presupuesto Creado" });
 };
