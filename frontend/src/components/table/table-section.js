@@ -40,7 +40,13 @@ export default function ({ paquete, path }) {
         <td className="table-content" />
         <td className="table-content" />
       </tr>
-      {open && <TableItem path={path} paquete={paquete.id} />}
+      {open && (
+        <TableItem
+          path={path}
+          paquete={paquete.paquete_trabajo_id}
+          presupuesto={paquete.presupuesto_id}
+        />
+      )}
     </>
   );
 }

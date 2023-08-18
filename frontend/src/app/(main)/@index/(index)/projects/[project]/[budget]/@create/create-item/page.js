@@ -39,22 +39,11 @@ export default async function Create({ params, searchParams }) {
     <>
       <Modal>
         <div className="mb-2 text-lg font-bold">Añadir Item</div>
-        <PresupuestosEjecutados presupuestos={ejecutados} />
-        <div className="mt-4 flex flex-row gap-2">
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="basis-1/2 rounded border border-solid border-black  bg-black px-1 py-1 text-center font-normal	 text-white"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="basis-1/2 rounded border border-solid border-black  bg-black px-1 py-1 text-center font-normal	 text-white"
-          >
-            Crear
-          </button>
-        </div>
+        <PresupuestosEjecutados
+          presupuestos={ejecutados}
+          paquete={paquete}
+          budget={params.budget}
+        />
       </Modal>
     </>
   );

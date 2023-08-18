@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 import CreateItem from "../create-item";
 import Datalist from "../datalist";
 
-export default function PresupuestosEjecutados({ presupuestos }) {
+export default function PresupuestosEjecutados({
+  presupuestos,
+  paquete,
+  budget,
+}) {
   let nf = new Intl.NumberFormat("en", {
     maximumFractionDigits: 0,
   });
@@ -94,7 +98,7 @@ export default function PresupuestosEjecutados({ presupuestos }) {
         />
       </div>
 
-      <div>Disponibles: {selectedPresupuestos.length}</div>
+      <div>Actividades Disponibles: {selectedPresupuestos.length}</div>
       <div className="mb-5 h-1/4 overflow-auto">
         {selectedPresupuestos.map((ejecutado) => (
           <div
@@ -113,7 +117,11 @@ export default function PresupuestosEjecutados({ presupuestos }) {
           </div>
         ))}
       </div>
-      <CreateItem selected={addedPresupuestos} onDelete={onDeleteHandler} />
+      <CreateItem
+        selected={addedPresupuestos}
+        paquete={paquete}
+        budget={budget}
+      />
     </>
   );
 }

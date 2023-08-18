@@ -9,6 +9,10 @@ const Item = sequelize.define(
     presupuesto_id: DataTypes.INTEGER,
     paquete_trabajo_id: DataTypes.SMALLINT,
     referente_id: DataTypes.TEXT,
+    indicador_origen_id: DataTypes.INTEGER,
+    indicador_destino_id: DataTypes.INTEGER,
+    factor_ponderacion: DataTypes.NUMBER,
+    descripcion_ajuste: DataTypes.TEXT,
   },
   { schema: "presupuesto", freezeTableName: true }
 );

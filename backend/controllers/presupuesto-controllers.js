@@ -85,14 +85,22 @@ exports.getEjecutados = async (req, res, next) => {
 exports.postReferente = async (req, res, next) => {
   console.log("proyect-controllers postReferente");
 
-  const presupuestoId = req.params.prid;
-  const paquete = req.params.pqid;
-  const referente = req.body.referente;
+  const presupuesto_id = req.params.prid;
+  const paquete_trabajo_id = req.params.pqid;
+  const referente_id = req.body.referente_id;
+  const indicador_origen_id = req.body.origen_id;
+  const factor_ponderacion = req.body.ponderacion;
+  const indicador_destino_id = req.body.destino_id;
+  const descripcion_ajuste = req.body.descripcion;
 
   const item = Item.build({
-    presupuesto_id: presupuestoId,
-    paquete_trabajo_id: paquete,
-    referente_id: referente,
+    presupuesto_id,
+    paquete_trabajo_id,
+    referente_id,
+    indicador_origen_id,
+    factor_ponderacion,
+    indicador_destino_id,
+    descripcion_ajuste,
   });
 
   try {
@@ -100,7 +108,8 @@ exports.postReferente = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  return;
+
+  res.status(200).json({ message: "Creado con exito" });
 };
 
 exports.getReferente = async (req, res, next) => {
@@ -111,10 +120,12 @@ exports.getReferente = async (req, res, next) => {
 
   try {
     referente = await sequelize.query(
-      `select * from presupuesto.item it
-      left join presupuesto.valor_presupuesto tm on it.referente_id=tm.linea_id 
-      left join presupuesto.proyecto py on tm.proyecto_id=py.id
-      where presupuesto_id=:pid and paquete_trabajo_id=:pqid`,
+      `select vp.descripcion descripcion, vp.sum suma, pi_dest.valor dest_valor, pi_or.valor or_valor, it.factor_ponderacion
+        from presupuesto.item it
+        inner join presupuesto.valor_presupuesto vp on it.referente_id= vp.linea_id
+        inner join presupuesto.presupuesto_indicador pi_dest on it.indicador_destino_id=pi_dest.id
+        inner join presupuesto.presupuesto_indicador pi_or on it.indicador_origen_id=pi_or.id
+        where it.presupuesto_id=:pid and it.paquete_trabajo_id=:pqid `,
       {
         replacements: { pid: presupuestoId, pqid: paqueteId },
         type: QueryTypes.SELECT,
@@ -123,7 +134,7 @@ exports.getReferente = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  res.json(referente);
+  res.status(200).json({ referente });
 };
 
 exports.deletePresupuestos = async (req, res, next) => {
