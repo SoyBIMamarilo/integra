@@ -1,8 +1,8 @@
 const Proyecto = require("../models/proyecto");
 const Presupuesto = require("../models/presupuesto");
 
-exports.getProyectos = async (req, res, next) => {
-  console.log("proyecto-controllers getProyectos");
+exports.getProjects = async (req, res, next) => {
+  console.log("proyecto-controllers getProjects");
   let proyectos;
   try {
     proyectos = await Proyecto.findAll();
@@ -10,6 +10,17 @@ exports.getProyectos = async (req, res, next) => {
     console.log(err);
   }
   res.status(200).json(proyectos);
+};
+
+exports.getProject = async (req, res, next) => {
+  console.log("proyecto-controllers getProject");
+  let project;
+  try {
+    project = await Proyecto.findByPk(req.params.projectId);
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json(project);
 };
 
 exports.getPresupuestos = async (req, res, next) => {

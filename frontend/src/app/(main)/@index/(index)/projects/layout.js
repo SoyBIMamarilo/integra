@@ -1,17 +1,5 @@
-import ProjectSelector from "@/app/(main)/@index/(index)/projects/components/project-selector";
+const Layout = (props) => {
+  return <>{props.children}</>;
+};
 
-import { routeActions } from "@/store/route-slice";
-import store from "@/store";
-
-export default function (props) {
-  // store.dispatch(
-  //   routeActions.resetRoute([{ link: "/projects", name: "Projectos" }])
-  // );
-  // console.log(store.getState().routes.route);
-  return (
-    <>
-      {/* <ProjectSelector /> */}
-      <>{props.children}</>
-    </>
-  );
-}
+export default Layout;

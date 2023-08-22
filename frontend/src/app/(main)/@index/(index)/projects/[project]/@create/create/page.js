@@ -20,7 +20,7 @@ export default function Create({ params }) {
     <Modal>
       <div className="mb-4 font-bold">Crear Versión Presupuesto</div>
       <form action={formSubmitHandler}>
-        <div className="mt-2 box-border flex flex-row flex-wrap items-start justify-evenly gap-2">
+        <div className="flex flex-row gap-1">
           <label className="basis-0">Versión: </label>
           <input
             ref={versionRef}
@@ -31,6 +31,8 @@ export default function Create({ params }) {
             name="version"
             id="version"
           />
+        </div>
+        <div className="flex flex-row gap-1">
           <button type="submit" className="button-black grow basis-0	">
             Crear
           </button>

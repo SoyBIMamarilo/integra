@@ -6,6 +6,43 @@ const ValorPresupuesto = require("../models/valor_presupuesto");
 const Item = require("../models/item");
 const sequelize = require("../util/database");
 
+exports.getBudgetProject = async (req, res, next) => {
+  console.log("presupuesto-controllers getBudgetProject");
+  const projectId = req.params.projectId;
+  projectId;
+
+  let presupuestos;
+
+  try {
+    presupuestos = await Presupuesto.findAll({
+      where: { proyecto_id: projectId },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  console.log(presupuestos);
+  res.status(200).json(presupuestos);
+};
+
+exports.postBudget = async (req, res, next) => {
+  console.log("proyecto-controllers postPresupuestos");
+  const projectId = req.params.pid;
+  const versionNumber = req.body.version;
+  const version = Presupuesto.build({
+    version: versionNumber,
+    proyecto_id: projectId,
+  });
+
+  try {
+    await version.save();
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(201).json({ message: "Presupuesto Creado" });
+};
+
 exports.getPaquetesPresupuesto = async (req, res, next) => {
   console.log("proyect-controllers getPaquetesPresupuesto");
   const presupuestoId = req.params.prid;

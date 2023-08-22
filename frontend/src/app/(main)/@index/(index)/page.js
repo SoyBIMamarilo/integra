@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div className="mb-8 text-3xl font-semibold">Home</div>;
-}
+const Home = () => {
+  return <div className="title-black">Home</div>;
+};
+
+export default Home;

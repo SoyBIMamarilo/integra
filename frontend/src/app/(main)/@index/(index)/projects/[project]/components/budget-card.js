@@ -1,23 +1,20 @@
 "use client";
 
-// import { revalidateTag } from "next/cache";
 import { useRouter } from "next/navigation";
 
 import Link from "next/link";
-import Copy from "../svg/copy";
-import Block from "../svg/block";
-import Trash from "../svg/trash";
+import Copy from "@/components/svg/copy";
+import Block from "@/components/svg/block";
+import Trash from "@/components/svg/trash";
 
-import { deletePresupuesto } from "@/app/actions";
+import { deleteBudget } from "@/app/actions/budget-actions";
 
-export default async function PresupuestoCard(props) {
+const BudgetCard = ({ budget }) => {
+  console.log(budget);
   const router = useRouter();
 
   const deletePresupuestoHandler = async () => {
-    await deletePresupuesto(
-      props.presupuesto.id,
-      props.presupuesto.proyecto_id
-    );
+    await deleteBudget(budget.id);
     router.refresh();
   };
 
@@ -25,11 +22,11 @@ export default async function PresupuestoCard(props) {
     <>
       <div className="m-2 flex flex-row flex-wrap justify-between rounded border border-neutral-200 bg-neutral-100 p-3 hover:bg-neutral-300 ">
         <Link
-          href={`/projects/${props.presupuesto.proyecto_id}/${props.presupuesto.id}`}
+          href={`/projects/${budget.proyecto_id}/${budget.id}`}
           className="flex grow flex-row"
         >
           <div> Versión: </div>
-          <div className="mx-2 grow">{props.presupuesto.version}</div>
+          <div className="mx-2 grow">{budget.version}</div>
         </Link>
         <Copy />
         <Block />
@@ -37,4 +34,6 @@ export default async function PresupuestoCard(props) {
       </div>
     </>
   );
-}
+};
+
+export default BudgetCard;

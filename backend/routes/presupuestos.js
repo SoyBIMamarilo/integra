@@ -4,9 +4,9 @@ const presupuestoControllers = require("../controllers/presupuesto-controllers")
 
 const router = express.Router();
 
-router.get("/prueba/:p", (req, res, next) => {
-  res.status(200).json({ message: "Exito!!!", text: req.params.p });
-});
+router.get("/proyecto/:projectId", presupuestoControllers.getBudgetProject);
+
+router.post("/proyecto/:projectId", presupuestoControllers.postBudget);
 
 router.get("/ejecutados", presupuestoControllers.getEjecutados);
 

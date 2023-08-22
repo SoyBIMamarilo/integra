@@ -1,31 +1,24 @@
 import Link from "next/link";
-import PresupuestoCard from "@/components/card/presupuestos-card";
 import GroupCard from "@/components/card/group-card";
 
-async function fetchPresupuestos(project) {
-  const res = await fetch(`http://localhost:8080/proyectos/${project}`, {
-    next: { tags: ["a"] },
-  });
-  const json = await res.json();
-
-  return json;
-}
+import BudgetCard from "./components/budget-card";
+import { fetchBudgetProject } from "@/app/actions/budget-actions";
 
 export default async function Page({ params }) {
-  const presupuestos = await fetchPresupuestos(params.project);
+  const budgets = await fetchBudgetProject(params.project);
   return (
     <>
-      <div className="relative grid h-[80vh] grow grid-cols-2">
+      <div className="relative grid grow grid-cols-2">
         <GroupCard title="Presupuestos">
-          {presupuestos.map((presupuesto) => (
-            <PresupuestoCard presupuesto={presupuesto} />
+          {budgets.map((budget) => (
+            <BudgetCard budget={budget} />
           ))}
-          <div className="my-5 ml-2 place-self-end	">
+          <div className="my-5 ml-2 place-self-end">
             <Link
               href={{
                 pathname: `/projects/${params.project}/create`,
               }}
-              className="button-black  "
+              className="button-black"
             >
               Crear
             </Link>
