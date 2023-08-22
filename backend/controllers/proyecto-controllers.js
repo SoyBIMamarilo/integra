@@ -4,14 +4,12 @@ const Presupuesto = require("../models/presupuesto");
 exports.getProyectos = async (req, res, next) => {
   console.log("proyecto-controllers getProyectos");
   let proyectos;
-
   try {
     proyectos = await Proyecto.findAll();
   } catch (err) {
     console.log(err);
   }
-  res.json(proyectos);
-  return next();
+  res.status(200).json(proyectos);
 };
 
 exports.getPresupuestos = async (req, res, next) => {

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Input from "@/src/components/input";
+import Input from "@/components/input";
 
-import LogoAmarilo from "@/src/public/amarilo-logo.png";
+import LogoAmarilo from "@/public/amarilo-logo.png";
 
 export default function Auth() {
   return (

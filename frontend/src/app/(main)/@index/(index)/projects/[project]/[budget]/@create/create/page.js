@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 
-import { createPaquete } from "@/src/app/actions";
-import store from "@/src/store/index";
-import Modal from "@/src/components/modal/create-modal";
+import { createPaquete } from "@/app/actions";
+import store from "@/store/index";
+import Modal from "@/components/modal/create-modal";
 
 export default function Create({ params }) {
   const router = useRouter();

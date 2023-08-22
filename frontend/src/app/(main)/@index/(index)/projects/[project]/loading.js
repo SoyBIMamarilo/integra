@@ -1,4 +1,4 @@
-import Loader from "@/src/components/svg/loader";
+import Loader from "@/components/svg/loader";
 
 export default function Loading() {
   return (

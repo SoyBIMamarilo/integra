@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import { createPresupuesto } from "@/src/app/actions";
-import Modal from "@/src/components/modal/create-modal";
+import { createPresupuesto } from "@/app/actions";
+import Modal from "@/components/modal/create-modal";
 
 export default function Create({ params }) {
   const router = useRouter();

@@ -5,7 +5,7 @@ import { Listbox } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { projectActions } from "../store/project-slice";
+import { projectActions } from "@/store/project-slice";
 
 export default function ProjectSelector() {
   const router = useRouter();

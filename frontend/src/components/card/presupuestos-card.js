@@ -8,7 +8,7 @@ import Copy from "../svg/copy";
 import Block from "../svg/block";
 import Trash from "../svg/trash";
 
-import { deletePresupuesto } from "@/src/app/actions";
+import { deletePresupuesto } from "@/app/actions";
 
 export default async function PresupuestoCard(props) {
   const router = useRouter();

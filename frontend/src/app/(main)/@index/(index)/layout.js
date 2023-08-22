@@ -1,16 +1,9 @@
 import Link from "next/link";
 
-import ReduxProvider from "@/src/components/provider";
-import Preloader from "@/src/components/preloader";
+import ReduxProvider from "@/components/provider";
+import Preloader from "@/components/preloader";
 
-async function fetchProyectos() {
-  const res = await fetch("http://localhost:8080/proyectos");
-  if (!res.ok) {
-    throw new Error("Error al obtener proyectos");
-  }
-  const json = await res.json();
-  return json;
-}
+import { fetchProyectos } from "@/app/actions/project-actions";
 
 const fetchPaquetesTrabajo = async () => {
   const res = await fetch("http://localhost:8080/bases-datos/paquetes-trabajo");

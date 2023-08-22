@@ -1,4 +1,4 @@
-import Table from "@/src/components/table/table";
+import Table from "@/components/table/table";
 
 async function fetchPaquetes(budget) {
   const res = await fetch(`http://localhost:8080/presupuestos/${budget}`, {

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import PresupuestoCard from "@/src/components/card/presupuestos-card";
-import GroupCard from "@/src/components/card/group-card";
+import PresupuestoCard from "@/components/card/presupuestos-card";
+import GroupCard from "@/components/card/group-card";
 
 async function fetchPresupuestos(project) {
   const res = await fetch(`http://localhost:8080/proyectos/${project}`, {

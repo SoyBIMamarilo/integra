@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-import Modal from "@/src/components/modal/create-modal";
-import PresupuestosEjecutados from "@/src/components/card/presupuestos-ejecutados";
+import Modal from "@/components/modal/create-modal";
+import PresupuestosEjecutados from "@/components/card/presupuestos-ejecutados";
 
 const fetchEjecutados = async () => {
   const res = await fetch("http://localhost:8080/presupuestos/ejecutados", {

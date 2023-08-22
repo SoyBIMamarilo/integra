@@ -7,7 +7,7 @@
     @apply rounded border border-solid border-black  bg-black px-4 py-1 text-center font-medium text-white;
   }
   .title-black {
-    @apply text-xl font-semibold;
+    @apply mb-3 text-xl font-semibold;
   }
   .table-header {
     @apply h-16 border border-neutral-500 bg-neutral-800 p-2 align-middle text-sm text-neutral-300;

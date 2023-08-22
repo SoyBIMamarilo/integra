@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { projectActions } from "@/src/store/project-slice";
+import { projectActions } from "@/store/project-slice";
 
 export default function Preloader({ projects, paquetes }) {
   const dispatch = useDispatch();

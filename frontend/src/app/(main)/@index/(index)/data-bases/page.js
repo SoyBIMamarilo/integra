@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CiudadesCard from "@/src/components/card/ciudades-card";
+import CiudadesCard from "@/components/card/ciudades-card";
 
 const fetchCiudades = async () => {
   const res = await fetch("http://localhost:8080/bases-datos/ciudades", {
