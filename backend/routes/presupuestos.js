@@ -8,11 +8,14 @@ router.get("/proyecto/:projectId", presupuestoControllers.getBudgetProject);
 
 router.post("/proyecto/:projectId", presupuestoControllers.postBudget);
 
+router.get(
+  "/paquetes/:budgetId",
+  presupuestoControllers.getPaquetesPresupuesto
+);
+
 router.get("/ejecutados", presupuestoControllers.getEjecutados);
 
 router.get("/vr_prueba", presupuestoControllers.getValorPresupuesto);
-
-router.get("/:prid", presupuestoControllers.getPaquetesPresupuesto);
 
 router.get("/paquetes/:prid/:pqid", presupuestoControllers.getReferente);
 

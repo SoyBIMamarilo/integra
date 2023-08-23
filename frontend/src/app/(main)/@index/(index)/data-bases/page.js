@@ -10,18 +10,6 @@ const fetchCiudades = async () => {
   return json;
 };
 
-const fetchPaquetesTrabajo = async () => {
-  const res = await fetch(
-    "http://localhost:8080/bases-datos/paquetes-trabajo",
-    {
-      cache: "no-store",
-    }
-  );
-  const json = await res.json();
-  // console.log(json);
-  return json;
-};
-
 export default async function BasesDatos() {
   const ciudadesData = fetchCiudades();
   const paquetesTrabajoData = fetchPaquetesTrabajo();

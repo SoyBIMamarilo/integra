@@ -1,4 +1,4 @@
-export default function Loader() {
+const Loader = () => {
   return (
     <svg
       className="mx-1 h-20 w-20 fill-black  stroke-1"
@@ -46,4 +46,6 @@ export default function Loader() {
       </path>
     </svg>
   );
-}
+};
+
+export default Loader;

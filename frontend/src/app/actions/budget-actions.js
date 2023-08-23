@@ -3,14 +3,14 @@
 import { revalidateTag } from "next/cache";
 
 export const fetchBudgetProject = async (projectId) => {
+  console.log("fetching budget");
   const res = await fetch(
     `http://localhost:8080/presupuestos/proyecto/${projectId}`,
     {
-      next: { tags: ["a"] },
+      next: { tags: ["presupuestos"] },
     }
   );
   const json = await res.json();
-
   return json;
 };
 
@@ -20,7 +20,7 @@ export async function deleteBudget(version) {
   });
 
   const data = await res.json();
-  revalidateTag("a");
+  revalidateTag("presupuestos");
 }
 
 export async function createBudget(version, projectId) {
@@ -30,6 +30,18 @@ export async function createBudget(version, projectId) {
     body: JSON.stringify({
       version: version,
     }),
+    cache: "no-store",
   });
-  revalidateTag("a");
+  revalidateTag("presupuestos");
+}
+
+export async function fetchBudgetPackage(budget) {
+  const res = await fetch(
+    `http://localhost:8080/presupuestos/paquetes/${budget}`,
+    {
+      next: { tags: ["paquete"] },
+    }
+  );
+  const json = await res.json();
+  return json;
 }

@@ -10,7 +10,6 @@ import Trash from "@/components/svg/trash";
 import { deleteBudget } from "@/app/actions/budget-actions";
 
 const BudgetCard = ({ budget }) => {
-  console.log(budget);
   const router = useRouter();
 
   const deletePresupuestoHandler = async () => {

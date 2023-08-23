@@ -1,15 +1,12 @@
-import Table from "@/components/table/table";
+import Table from "./components/table";
 
-async function fetchPaquetes(budget) {
-  const res = await fetch(`http://localhost:8080/presupuestos/${budget}`, {
-    next: { tags: ["paquete"] },
-  });
-  const json = await res.json();
-  return json;
-}
+import { fetchBudgetPackage } from "@/app/actions/budget-actions";
+import { fetchPaquetesTrabajo } from "@/app/actions/paquetes-actions";
 
 export default async function Page({ params }) {
-  const paquetes = await fetchPaquetes(params.budget);
+  const paquetes = await fetchBudgetPackage(params.budget);
+  const paquetes1 = await fetchPaquetesTrabajo();
+  console.log(paquetes1);
   return (
     <Table
       paquetes={paquetes}

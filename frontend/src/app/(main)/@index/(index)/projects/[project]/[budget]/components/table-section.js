@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { deletePresupuestoPaquete } from "@/app/actions";
 import TableItem from "./table-item";
-import Trash from "../svg/trash";
+import Trash from "@/components/svg/trash";
 
 export default function ({ paquete, path }) {
   const router = useRouter();
@@ -29,7 +29,6 @@ export default function ({ paquete, path }) {
             <div onClick={clickHandler} className="grow ">
               {paquete.nombre}
             </div>
-            <Trash onClick={deletePaqueteHandler} />
           </div>
         </td>
         <td />
@@ -39,6 +38,10 @@ export default function ({ paquete, path }) {
         <td className="table-content" />
         <td className="table-content" />
         <td className="table-content" />
+
+        <td>
+          <Trash onClick={deletePaqueteHandler} />
+        </td>
       </tr>
       {open && (
         <TableItem

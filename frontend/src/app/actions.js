@@ -2,17 +2,6 @@
 
 import { revalidateTag } from "next/cache";
 
-export async function createPresupuesto(version, proyecto_id) {
-  await fetch(`http://localhost:8080/proyectos/presupuesto/${proyecto_id}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      version: version,
-    }),
-  });
-  revalidateTag("a");
-}
-
 export async function deletePresupuestoPaquete(presupuesto_id, paquete_id) {
   const res = await fetch("http://localhost:8080/presupuestos/paquete", {
     method: "DELETE",

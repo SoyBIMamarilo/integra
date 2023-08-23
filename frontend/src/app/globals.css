@@ -10,10 +10,10 @@
     @apply mb-1 text-xl font-semibold;
   }
   .table-header {
-    @apply h-16 border border-neutral-500 bg-neutral-800 p-2 align-middle text-sm text-neutral-300;
+    @apply h-16 border border-neutral-500 bg-neutral-800 p-2	align-middle text-base	font-bold	 text-neutral-100;
   }
   .table-content {
-    @apply h-6 border border-solid border-neutral-300 text-sm hover:bg-neutral-50;
+    @apply h-8 border border-solid border-neutral-300 text-base font-semibold	 hover:bg-neutral-50;
   }
 }
 

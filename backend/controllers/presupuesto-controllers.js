@@ -16,18 +16,18 @@ exports.getBudgetProject = async (req, res, next) => {
   try {
     presupuestos = await Presupuesto.findAll({
       where: { proyecto_id: projectId },
+      order: [["version", "ASC"]],
     });
   } catch (err) {
     console.log(err);
   }
 
-  console.log(presupuestos);
   res.status(200).json(presupuestos);
 };
 
 exports.postBudget = async (req, res, next) => {
   console.log("proyecto-controllers postPresupuestos");
-  const projectId = req.params.pid;
+  const projectId = req.params.projectId;
   const versionNumber = req.body.version;
   const version = Presupuesto.build({
     version: versionNumber,
@@ -45,7 +45,7 @@ exports.postBudget = async (req, res, next) => {
 
 exports.getPaquetesPresupuesto = async (req, res, next) => {
   console.log("proyect-controllers getPaquetesPresupuesto");
-  const presupuestoId = req.params.prid;
+  const presupuestoId = req.params.budgetId;
   let paquetes;
 
   try {
