@@ -5,8 +5,8 @@ import { fetchPaquetesTrabajo } from "@/app/actions/paquetes-actions";
 
 export default async function Page({ params }) {
   const paquetes = await fetchBudgetPackage(params.budget);
-  const paquetes1 = await fetchPaquetesTrabajo();
-  console.log(paquetes1);
+  // const paquetes1 = await fetchPaquetesTrabajo();
+  // console.log(paquetes1);
   return (
     <Table
       paquetes={paquetes}
