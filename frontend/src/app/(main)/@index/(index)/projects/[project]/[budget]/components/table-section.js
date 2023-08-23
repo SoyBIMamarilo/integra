@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { deletePresupuestoPaquete } from "@/app/actions";
+import { deletePresupuestoPaquete } from "@/app/actions/budget-actions";
 import TableItem from "./table-item";
 import Trash from "@/components/svg/trash";
 

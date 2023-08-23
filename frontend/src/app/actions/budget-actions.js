@@ -3,7 +3,6 @@
 import { revalidateTag } from "next/cache";
 
 export const fetchBudgetProject = async (projectId) => {
-  console.log("fetching budget");
   const res = await fetch(
     `http://localhost:8080/presupuestos/proyecto/${projectId}`,
     {
@@ -14,16 +13,17 @@ export const fetchBudgetProject = async (projectId) => {
   return json;
 };
 
-export async function deleteBudget(version) {
+export const deleteBudget = async (version) => {
   const res = await fetch(`http://localhost:8080/presupuestos/${version}`, {
     method: "DELETE",
+    cache: "no-store",
   });
 
   const data = await res.json();
   revalidateTag("presupuestos");
-}
+};
 
-export async function createBudget(version, projectId) {
+export const createBudget = async (version, projectId) => {
   await fetch(`http://localhost:8080/presupuestos//proyecto/${projectId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -33,9 +33,9 @@ export async function createBudget(version, projectId) {
     cache: "no-store",
   });
   revalidateTag("presupuestos");
-}
+};
 
-export async function fetchBudgetPackage(budget) {
+export const fetchBudgetPackage = async (budget) => {
   const res = await fetch(
     `http://localhost:8080/presupuestos/paquetes/${budget}`,
     {
@@ -44,4 +44,34 @@ export async function fetchBudgetPackage(budget) {
   );
   const json = await res.json();
   return json;
+};
+
+export const createBudgetPackage = async (presupuesto_id, paquete_id) => {
+  await fetch(`http://localhost:8080/presupuestos/paquete/${presupuesto_id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      paquete: paquete_id,
+    }),
+  });
+  revalidateTag("paquete");
+};
+
+export const fetchEjecutados = async () => {
+  const res = await fetch("http://localhost:8080/presupuestos/ejecutados");
+  const json = await res.json();
+  return json;
+};
+
+export async function deletePresupuestoPaquete(presupuesto_id, paquete_id) {
+  const res = await fetch("http://localhost:8080/presupuestos/paquete", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      presupuesto_id,
+      paquete_id,
+    }),
+  });
+  const data = await res.json();
+  revalidateTag("paquete");
 }

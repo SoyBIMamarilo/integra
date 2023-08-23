@@ -13,6 +13,12 @@ router.get(
   presupuestoControllers.getPaquetesPresupuesto
 );
 
+router.post("/paquete/:budgetId", presupuestoControllers.postPaquetes);
+
+router.delete("/paquete", presupuestoControllers.deletePresupuestoPaquete);
+
+router.delete("/:prid", presupuestoControllers.deletePresupuestos);
+
 router.get("/ejecutados", presupuestoControllers.getEjecutados);
 
 router.get("/vr_prueba", presupuestoControllers.getValorPresupuesto);
@@ -25,11 +31,5 @@ router.get(
 );
 
 router.post("/:prid/:pqid", presupuestoControllers.postReferente);
-
-router.post("/:prid", presupuestoControllers.postPaquetes);
-
-router.delete("/paquete", presupuestoControllers.deletePresupuestoPaquete);
-
-router.delete("/:prid", presupuestoControllers.deletePresupuestos);
 
 module.exports = router;

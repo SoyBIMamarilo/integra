@@ -2,17 +2,10 @@
 
 import { useState, useEffect } from "react";
 
-import CreateItem from "../create-item";
-import Datalist from "../datalist";
+import Datalist from "./datalist";
+import Available from "./available";
 
-export default function PresupuestosEjecutados({
-  presupuestos,
-  paquete,
-  budget,
-}) {
-  let nf = new Intl.NumberFormat("en", {
-    maximumFractionDigits: 0,
-  });
+const Search = ({ presupuestos, onAddHandler }) => {
   const [project, setProject] = useState(null);
   const [type, setType] = useState(null);
   const [description, setDescription] = useState(null);
@@ -21,7 +14,6 @@ export default function PresupuestosEjecutados({
   const [selectedPresupuestos, setSelectedPresupuestos] =
     useState(presupuestos);
 
-  const [addedPresupuestos, setAddedPresupuestos] = useState(null);
   useEffect(() => {
     setSelectedPresupuestos(
       presupuestos
@@ -64,13 +56,6 @@ export default function PresupuestosEjecutados({
         break;
     }
   };
-  const onAddHandler = (e, p) => {
-    setAddedPresupuestos(p);
-  };
-
-  const onDeleteHandler = () => {
-    setAddedPresupuestos(null);
-  };
 
   return (
     <>
@@ -100,28 +85,13 @@ export default function PresupuestosEjecutados({
 
       <div>Actividades Disponibles: {selectedPresupuestos.length}</div>
       <div className="mb-5 h-1/4 overflow-auto">
-        {selectedPresupuestos.map((ejecutado) => (
-          <div
-            className="m-2 rounded-md border border-solid bg-neutral-200 p-1"
-            value={ejecutado.linea_id}
-            onDoubleClick={(event) => onAddHandler(event, ejecutado)}
-          >
-            <div className="flex flex-row">
-              <div className="grow font-light">{ejecutado.descripcion}</div>
-              <div>{nf.format(ejecutado.sum)}</div>
-            </div>
-            <div className="flex flex-row">
-              <div className="grow font-bold">{ejecutado.cbs}</div>
-              <div>{ejecutado.nombre}</div>
-            </div>
-          </div>
-        ))}
+        <Available
+          onAddHandler={onAddHandler}
+          selectedPresupuestos={selectedPresupuestos}
+        />
       </div>
-      <CreateItem
-        selected={addedPresupuestos}
-        paquete={paquete}
-        budget={budget}
-      />
     </>
   );
-}
+};
+
+export default Search;

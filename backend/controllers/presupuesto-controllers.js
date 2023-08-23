@@ -82,7 +82,7 @@ exports.getValorPresupuesto = async (req, res, next) => {
 exports.postPaquetes = async (req, res, next) => {
   console.log("proyect-controllers postPaquetes");
 
-  const presupuestoId = req.params.prid;
+  const presupuestoId = req.params.budgetId;
   const paquete = req.body.paquete;
 
   const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
@@ -96,7 +96,7 @@ exports.postPaquetes = async (req, res, next) => {
     console.log(err);
   }
 
-  next();
+  res.status(200).json({ message: "Paquete añadido con exito" });
 };
 
 exports.getEjecutados = async (req, res, next) => {

@@ -4,7 +4,7 @@
 
 @layer utilities {
   .button-black {
-    @apply rounded border border-solid border-black bg-black px-6 py-2 text-center font-medium text-white;
+    @apply rounded border border-solid border-white bg-black px-6 py-2 text-center font-medium text-white hover:invert;
   }
   .title-black {
     @apply mb-1 text-xl font-semibold;

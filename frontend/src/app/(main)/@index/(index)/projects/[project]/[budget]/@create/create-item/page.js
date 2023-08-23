@@ -1,20 +1,8 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-
 import Modal from "@/components/modal/create-modal";
-import PresupuestosEjecutados from "@/components/card/presupuestos-ejecutados";
-
-const fetchEjecutados = async () => {
-  const res = await fetch("http://localhost:8080/presupuestos/ejecutados", {
-    cache: "no-store",
-  });
-  const json = await res.json();
-  return json;
-};
+import { fetchEjecutados } from "@/app/actions/budget-actions";
+import CreateItem from "./components/create";
 
 export default async function Create({ params, searchParams }) {
-  const router = useRouter();
   const ejecutados = await fetchEjecutados();
   const paquete = searchParams.paquete;
 
@@ -39,11 +27,13 @@ export default async function Create({ params, searchParams }) {
     <>
       <Modal>
         <div className="mb-2 text-lg font-bold">Añadir Item</div>
-        <PresupuestosEjecutados
+        <CreateItem presupuestos={ejecutados} />
+
+        {/* <PresupuestosEjecutados
           presupuestos={ejecutados}
           paquete={paquete}
           budget={params.budget}
-        />
+        /> */}
       </Modal>
     </>
   );

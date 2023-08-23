@@ -12,13 +12,13 @@ const Layout = (props) => {
         </div>
         <div className="flex flex-row">
           <div className="sticky top-[10vh]  flex h-[90vh] basis-1/6 flex-col items-start gap-3 bg-neutral-200 pl-10 pt-12 text-neutral-600">
-            <Link href="/projects" className="hover:text-neutral-900">
+            <Link href="/projects" className="hover:text-neutral-900 ">
               Proyectos
             </Link>
-            <Link href="/reports" className="hover:text-neutral-900">
+            <Link href="/reports" className="hover:text-neutral-900 ">
               Reportes
             </Link>
-            <Link href="/data-bases" className="hover:text-neutral-900">
+            <Link href="/data-bases" className="hover:text-neutral-900 ">
               Bases de Datos
             </Link>
           </div>
