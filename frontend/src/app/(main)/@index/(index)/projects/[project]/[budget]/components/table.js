@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TableSection from "./table-section";
 
-const Table = ({ paquetes, path, budget }) => {
+const Table = ({ paquetes, path, budget, items }) => {
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min	w-full 	table-auto ">
@@ -26,7 +26,14 @@ const Table = ({ paquetes, path, budget }) => {
           <tr className="h-2"></tr>
 
           {paquetes.map((paquete) => (
-            <TableSection path={path} budget={budget} paquete={paquete} />
+            <TableSection
+              path={path}
+              budget={budget}
+              paquete={paquete}
+              items={items.items.filter(
+                (it) => it.pqid == paquete.paquete_trabajo_id
+              )}
+            />
           ))}
 
           {/* <hr className="my-2 border-2 border-solid" /> */}

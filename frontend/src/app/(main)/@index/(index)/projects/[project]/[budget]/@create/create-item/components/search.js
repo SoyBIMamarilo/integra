@@ -84,7 +84,7 @@ const Search = ({ presupuestos, onAddHandler }) => {
       </div>
 
       <div>Actividades Disponibles: {selectedPresupuestos.length}</div>
-      <div className="mb-5 h-1/4 overflow-auto">
+      <div className="mb-3 h-1/4 overflow-auto">
         <Available
           onAddHandler={onAddHandler}
           selectedPresupuestos={selectedPresupuestos}

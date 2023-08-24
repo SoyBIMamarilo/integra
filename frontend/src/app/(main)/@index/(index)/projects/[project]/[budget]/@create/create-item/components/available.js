@@ -7,9 +7,9 @@ const Available = ({ selectedPresupuestos, onAddHandler }) => {
       {selectedPresupuestos.map((ejecutado) => (
         <div
           key={ejecutado.linea_id}
-          className="m-2 rounded-md border border-solid bg-neutral-200 p-1"
+          className="m-2 rounded-md border border-solid bg-neutral-200 p-1 hover:cursor-pointer	 hover:bg-neutral-300	"
           value={ejecutado.linea_id}
-          onDoubleClick={(event) => onAddHandler(event, ejecutado)}
+          onClick={(event) => onAddHandler(event, ejecutado)}
         >
           <div className="flex flex-row">
             <div className="grow font-light">{ejecutado.descripcion}</div>

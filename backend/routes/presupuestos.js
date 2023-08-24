@@ -13,6 +13,8 @@ router.get(
   presupuestoControllers.getPaquetesPresupuesto
 );
 
+router.get("/items/:budgetId", presupuestoControllers.getItemsBudget);
+
 router.post("/paquete/:budgetId", presupuestoControllers.postPaquetes);
 
 router.delete("/paquete", presupuestoControllers.deletePresupuestoPaquete);
@@ -30,6 +32,6 @@ router.get(
   presupuestoControllers.getIndicadores
 );
 
-router.post("/:prid/:pqid", presupuestoControllers.postReferente);
+router.post("/referente/:prid/:pqid", presupuestoControllers.postReferente);
 
 module.exports = router;

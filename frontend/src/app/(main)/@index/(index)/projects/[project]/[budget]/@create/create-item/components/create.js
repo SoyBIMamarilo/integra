@@ -9,7 +9,6 @@ import ReferenteForm from "./referente-form";
 
 const CreateItem = ({ presupuestos }) => {
   const [addedPresupuestos, setAddedPresupuestos] = useState(null);
-
   const [indicador, setIndicador] = useState(null);
 
   const onAddHandler = (e, p) => {

@@ -99,6 +99,26 @@ exports.postPaquetes = async (req, res, next) => {
   res.status(200).json({ message: "Paquete añadido con exito" });
 };
 
+exports.getItemsBudget = async (req, res, next) => {
+  console.log("presupuesto-controllers getItems");
+  const presupuestoId = req.params.budgetId;
+
+  try {
+    items = await sequelize.query(
+      `select *
+      from presupuesto.valor_item
+      where presupuesto.valor_item.prid=:prid`,
+      {
+        replacements: { prid: presupuestoId },
+        type: QueryTypes.SELECT,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json({ items });
+};
+
 exports.getEjecutados = async (req, res, next) => {
   console.log("proyect-controllers getEjecutados");
 
@@ -139,7 +159,6 @@ exports.postReferente = async (req, res, next) => {
     indicador_destino_id,
     descripcion_ajuste,
   });
-
   try {
     await item.save();
   } catch (err) {
@@ -218,14 +237,14 @@ exports.getIndicadores = async (req, res, next) => {
   try {
     indicadores = await sequelize.query(
       `WITH origen AS (
-        SELECT id id_or, indicador_id ind_id_or, presupuesto_id pr_id_or, valor vr_or
-        FROM presupuesto.presupuesto_indicador
-        WHERE presupuesto_id=:prorid
+        SELECT id id_or, indicador_id ind_id_or, proyecto_id pr_id_or, valor vr_or
+        FROM presupuesto.proyecto_indicador
+        WHERE proyecto_id=:prorid
       ),
        dest AS (
-        SELECT id id_dest, indicador_id ind_id_dest, presupuesto_id pr_id_dest, valor vr_dest
-        FROM presupuesto.presupuesto_indicador
-        WHERE presupuesto_id=:prdestid
+        SELECT id id_dest, indicador_id ind_id_dest, proyecto_id pr_id_dest, valor vr_dest
+        FROM presupuesto.proyecto_indicador
+        WHERE proyecto_id=:prdestid
       )
        
       SELECT *
@@ -240,6 +259,5 @@ exports.getIndicadores = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  console.log({ indicadores });
   res.status(200).json({ indicadores });
 };

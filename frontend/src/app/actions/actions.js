@@ -3,10 +3,9 @@
 import { revalidateTag } from "next/cache";
 
 export async function getIndicadores(origen_id, destino_id) {
-  console.log(origen_id);
-  console.log(destino_id);
   const res = await fetch(
-    `http://localhost:8080/presupuestos/indicadores/${origen_id}/${destino_id}`
+    `http://localhost:8080/presupuestos/indicadores/${origen_id}/${destino_id}`,
+    { cache: "no-store" }
   );
 
   const json = await res.json();
@@ -23,7 +22,7 @@ export async function postReferente(
   descripcion
 ) {
   await fetch(
-    `http://localhost:8080/presupuestos/${presupuesto_id}/${paquete_id}`,
+    `http://localhost:8080/presupuestos/referente/${presupuesto_id}/${paquete_id}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

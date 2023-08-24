@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -7,12 +8,13 @@ import { deletePresupuestoPaquete } from "@/app/actions/budget-actions";
 import TableItem from "./table-item";
 import Trash from "@/components/svg/trash";
 
-export default function ({ paquete, path }) {
+export default function ({ paquete, path, items }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
   const deletePaqueteHandler = async () => {
     await deletePresupuestoPaquete(
       paquete.presupuesto_id,
@@ -43,12 +45,21 @@ export default function ({ paquete, path }) {
           <Trash onClick={deletePaqueteHandler} />
         </td>
       </tr>
+      {open && items.map((item) => <TableItem key={item.da} item={item} />)}
       {open && (
-        <TableItem
-          path={path}
-          paquete={paquete.paquete_trabajo_id}
-          presupuesto={paquete.presupuesto_id}
-        />
+        <tr>
+          <td className="p-3">
+            <Link
+              href={{
+                pathname: path + "/create-item",
+                query: { paquete: paquete.paquete_trabajo_id },
+              }}
+              className="button-black"
+            >
+              +
+            </Link>
+          </td>
+        </tr>
       )}
     </>
   );

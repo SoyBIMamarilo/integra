@@ -11,14 +11,19 @@ const Factors = ({ selected, setIndicador }) => {
 
   const [indicadores, setIndicadores] = useState([]);
 
-  console.log(selected);
+  // console.log(selectedProject);
+  // console.log(selected.proyecto_id);
+
   useEffect(() => {
     const fetchIndicadores = async () => {
+      console.log(selectedProject);
+      console.log(selected.proyecto_id);
       const indicadores = await getIndicadores(
         selectedProject,
         selected.proyecto_id
       );
       setIndicadores(indicadores.indicadores);
+      console.log(indicadores);
     };
     if (selected) {
       fetchIndicadores();
@@ -44,7 +49,7 @@ const Factors = ({ selected, setIndicador }) => {
       </select>
     </div>
   );
-
+  // return <div>Prueba</div>;
   return component;
 };
 

@@ -2,11 +2,12 @@
 
 import { useRef, useState } from "react";
 import { useParams } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { postReferente } from "@/app/actions/actions";
 
 const ReferenteForm = ({ indicador, selected }) => {
+  const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const paquete = searchParams.get("paquete");
@@ -32,6 +33,8 @@ const ReferenteForm = ({ indicador, selected }) => {
       ponderacion,
       descripcion.current.value
     );
+    router.refresh();
+    router.back();
   };
 
   const card = indicador && (
@@ -67,20 +70,20 @@ const ReferenteForm = ({ indicador, selected }) => {
   return (
     <>
       {card}
-      <div className="mt-4 flex flex-row gap-2">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="button-black"
-        >
-          Cancelar
-        </button>
+      <div className="m-2 grid max-w-[70%] grid-cols-2 gap-3">
         <button
           type="submit"
           className="button-black"
           onClick={submitItemHandler}
         >
           Crear
+        </button>
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="button-black"
+        >
+          Cancelar
         </button>
       </div>
     </>

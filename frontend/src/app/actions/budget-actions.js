@@ -13,6 +13,15 @@ export const fetchBudgetProject = async (projectId) => {
   return json;
 };
 
+export const fetchBudgetItems = async (budgetId) => {
+  const res = await fetch(
+    `http://localhost:8080/presupuestos/items/${budgetId}`,
+    { next: { tags: ["presupuestos"] }, cache: "no-store" }
+  );
+  const json = await res.json();
+  return json;
+};
+
 export const deleteBudget = async (version) => {
   const res = await fetch(`http://localhost:8080/presupuestos/${version}`, {
     method: "DELETE",
