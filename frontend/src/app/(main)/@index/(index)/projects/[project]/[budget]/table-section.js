@@ -7,8 +7,11 @@ import { useRouter } from "next/navigation";
 import { deletePresupuestoPaquete } from "@/app/actions/budget-actions";
 import TableItem from "./table-item";
 import Trash from "@/components/svg/trash";
+import { nf, nf_per } from "@/util/date-format";
 
-export default function ({ paquete, path, items }) {
+export default function ({ paquete, path, items, packageItem }) {
+  console.log(packageItem);
+  const itemValues = packageItem ? packageItem : {};
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
@@ -25,7 +28,7 @@ export default function ({ paquete, path, items }) {
 
   return (
     <>
-      <tr>
+      <tr className="text-xs">
         <td colSpan={1} className="table-content cursor-pointer">
           <div className="flex flex-row place-items-center px-2">
             <div onClick={clickHandler} className="grow ">
@@ -34,18 +37,30 @@ export default function ({ paquete, path, items }) {
           </div>
         </td>
         <td />
-        <td className="table-content" />
-        <td className="table-content" />
-        <td className="table-content" />
-        <td className="table-content" />
-        <td className="table-content" />
-        <td className="table-content" />
+        <td className="table-content text-center">{itemValues.indicador} m2</td>
+        <td className="table-content text-center">
+          {nf.format(itemValues.valor_interno_paquete)}
+        </td>
+        <td className="table-content text-center">
+          {nf.format(itemValues.valor_total)}
+        </td>
+        <td className="table-content text-center">
+          {nf.format(itemValues.valor_m2const)}
+        </td>
+        <td className="table-content text-center">
+          {nf.format(itemValues.valor_m2vent)}
+        </td>
+        <td className="table-content text-center">
+          {nf_per.format(itemValues.incidencia)}
+        </td>
 
         <td>
           <Trash onClick={deletePaqueteHandler} />
         </td>
       </tr>
-      {open && items.map((item) => <TableItem key={item.da} item={item} />)}
+      {open &&
+        packageItem &&
+        items.map((item) => <TableItem key={item.da} item={item} />)}
       {open && (
         <tr>
           <td className="p-3">

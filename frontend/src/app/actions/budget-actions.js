@@ -55,6 +55,30 @@ export const fetchBudgetPackage = async (budget) => {
   return json;
 };
 
+export const fetchBudgetPackageValues = async (budget) => {
+  const res = await fetch(
+    `http://localhost:8080/presupuestos/paquetes/values/${budget}`,
+    {
+      next: { tags: ["presupuestos"] },
+    }
+  );
+  const json = await res.json();
+  return json;
+};
+
+export const fetchBudgetValues = async (budget) => {
+  const res = await fetch(
+    `http://localhost:8080/presupuestos/values/${budget}`,
+    {
+      next: { tags: ["presupuestos"] },
+    }
+  );
+  const json = await res.json();
+  console.log("IN BUDGET VALUES");
+  console.log(json);
+  return json;
+};
+
 export const createBudgetPackage = async (presupuesto_id, paquete_id) => {
   await fetch(`http://localhost:8080/presupuestos/paquete/${presupuesto_id}`, {
     method: "POST",

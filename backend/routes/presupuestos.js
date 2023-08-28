@@ -13,6 +13,13 @@ router.get(
   presupuestoControllers.getPaquetesPresupuesto
 );
 
+router.get(
+  "/paquetes/values/:budgetId",
+  presupuestoControllers.getPaquetesValuesBudget
+);
+
+router.get("/values/:budgetId", presupuestoControllers.getValuesBudget);
+
 router.get("/items/:budgetId", presupuestoControllers.getItemsBudget);
 
 router.post("/paquete/:budgetId", presupuestoControllers.postPaquetes);

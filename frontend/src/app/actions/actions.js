@@ -36,6 +36,7 @@ export async function postReferente(
       cache: "no-store",
     }
   );
+  revalidateTag("presupuestos")
 }
 
 export async function getReferente(presupuesto_id, paquete_trabajo_id) {

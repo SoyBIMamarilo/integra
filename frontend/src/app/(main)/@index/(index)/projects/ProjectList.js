@@ -1,7 +1,7 @@
 import LinkCard from "@/components/card/link-card";
 import { fetchProjects } from "@/app/actions/project-actions";
 
-const ProjectGroup = async () => {
+const ProjectList = async () => {
   const projects = await fetchProjects();
   return (
     <div className="flex w-1/2 flex-row gap-2">
@@ -18,4 +18,4 @@ const ProjectGroup = async () => {
   );
 };
 
-export default ProjectGroup;
+export default ProjectList;

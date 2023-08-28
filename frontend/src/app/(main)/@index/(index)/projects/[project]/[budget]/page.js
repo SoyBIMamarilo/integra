@@ -1,19 +1,23 @@
-import Table from "./components/table";
-
+import BudgetTable from "./BudgetTable";
 import {
   fetchBudgetItems,
   fetchBudgetPackage,
+  fetchBudgetPackageValues,
+  fetchBudgetValues,
 } from "@/app/actions/budget-actions";
 
 export default async function Page({ params }) {
   const paquetes = await fetchBudgetPackage(params.budget);
-  const items = await fetchBudgetItems(params.budget);
+  const itemsValues = await fetchBudgetItems(params.budget);
+  const packagesValues = await fetchBudgetPackageValues(params.budget);
+  const budgetValues = await fetchBudgetValues(params.budget);
   return (
-    <Table
+    <BudgetTable
       paquetes={paquetes}
       budget={params.budget}
-      path={`/projects/${params.project}/${params.budget}`}
-      items={items}
+      items={itemsValues}
+      packageItems={packagesValues}
+      budgetValues={budgetValues}
     />
   );
 }

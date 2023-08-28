@@ -119,6 +119,61 @@ exports.getItemsBudget = async (req, res, next) => {
   res.status(200).json({ items });
 };
 
+exports.getPaquetesValuesBudget = async (req, res, next) => {
+  console.log("presupuesto-controllers getPresupuestos");
+  const presupuestoId = req.params.budgetId;
+
+  try {
+    items = await sequelize.query(
+      `select prid,
+              pqid,
+              max(indicador_paquete) indicador,
+              sum(pond_interno) valor_interno_paquete,
+              sum(vrtot) valor_total,
+              sum(vrm2const) valor_m2const,
+              sum(vrm2vend) valor_m2vent,
+              sum(incidencia) incidencia
+      from presupuesto.valor_item
+      where presupuesto.valor_item.prid=:prid
+      group by prid,pqid`,
+      {
+        replacements: { prid: presupuestoId },
+        type: QueryTypes.SELECT,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json({ items });
+};
+
+exports.getValuesBudget = async (req, res, next) => {
+  console.log("presupuesto-controllers getPresupuestos");
+  const presupuestoId = req.params.budgetId;
+
+  try {
+    items = await sequelize.query(
+      `select prid,
+              max(indicador_paquete) indicador,
+              sum(pond_interno) valor_interno_paquete,
+              sum(vrtot) valor_total,
+              sum(vrm2const) valor_m2const,
+              sum(vrm2vend) valor_m2vent,
+              sum(incidencia) incidencia
+      from presupuesto.valor_item
+      where presupuesto.valor_item.prid=:prid
+      group by prid`,
+      {
+        replacements: { prid: presupuestoId },
+        type: QueryTypes.SELECT,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json({ items });
+};
+
 exports.getEjecutados = async (req, res, next) => {
   console.log("proyect-controllers getEjecutados");
 

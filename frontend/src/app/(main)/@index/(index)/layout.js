@@ -1,4 +1,4 @@
-import Link from "next/link";
+import SideBar from "./SideBar";
 
 const Layout = (props) => {
   return (
@@ -11,17 +11,7 @@ const Layout = (props) => {
           <div className="p-2 text-right text-2xl">Mi Perfil</div>
         </div>
         <div className="flex flex-row">
-          <div className="sticky top-[10vh]  flex h-[90vh] basis-1/6 flex-col items-start gap-3 bg-neutral-200 pl-10 pt-12 text-neutral-600">
-            <Link href="/projects" className="hover:text-neutral-900 ">
-              Proyectos
-            </Link>
-            <Link href="/reports" className="hover:text-neutral-900 ">
-              Reportes
-            </Link>
-            <Link href="/data-bases" className="hover:text-neutral-900 ">
-              Bases de Datos
-            </Link>
-          </div>
+          <SideBar />
           <div className="row z-40 box-border flex min-h-full basis-5/6 flex-col p-4	">
             {props.children}
           </div>

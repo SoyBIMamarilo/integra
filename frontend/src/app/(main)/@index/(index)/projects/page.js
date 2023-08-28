@@ -1,10 +1,10 @@
-import ProjectGroup from "./components/project-group";
+import ProjectList from "./ProjectList";
 
 const Projects = () => {
   return (
     <>
       <div className="title-black">Proyectos</div>
-      <ProjectGroup />
+      <ProjectList />
     </>
   );
 };
