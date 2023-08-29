@@ -9,16 +9,12 @@ import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 
-const BudgetTableBodyItem = ({
-  paquete,
-  items,
-  packageItem: paqueteValues,
-}) => {
-  console.log("BUDGET TABLE BODY");
-  console.log(paqueteValues);
+const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
+  console.log("Item");
+  console.log(itemValue);
+  console.log(packageValue);
   const path = usePathname() + "/create-item";
-  const itemValues = paqueteValues ? paqueteValues : {};
-  console.log(itemValues);
+  const packageValueAdj = packageValue ? packageValue : {};
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
@@ -44,21 +40,23 @@ const BudgetTableBodyItem = ({
           </div>
         </td>
         <td />
-        <td className="table-content text-center">{itemValues.indicador} m2</td>
         <td className="table-content text-center">
-          {nf.format(itemValues.valor_interno_paquete)}
+          {packageValueAdj.indicador} m2
         </td>
         <td className="table-content text-center">
-          {nf.format(itemValues.valor_total)}
+          {nf.format(packageValueAdj.valor_interno_paquete)}
         </td>
         <td className="table-content text-center">
-          {nf.format(itemValues.valor_m2const)}
+          {nf.format(packageValueAdj.valor_total)}
         </td>
         <td className="table-content text-center">
-          {nf.format(itemValues.valor_m2vent)}
+          {nf.format(packageValueAdj.valor_m2const)}
         </td>
         <td className="table-content text-center">
-          {nf_per.format(itemValues.incidencia)}
+          {nf.format(packageValueAdj.valor_m2vent)}
+        </td>
+        <td className="table-content text-center">
+          {nf_per.format(packageValueAdj.incidencia)}
         </td>
         <td>
           <Trash onClick={deletePaqueteHandler} />
@@ -74,7 +72,7 @@ const BudgetTableBodyItem = ({
           </Link>
         </td>
       </tr>
-      {items.map((item) => (
+      {itemValue.map((item) => (
         <BudgetTableBodyItemSub key={item.da} item={item} open={open} />
       ))}
     </>

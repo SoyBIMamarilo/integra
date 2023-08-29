@@ -49,6 +49,7 @@ export const fetchBudgetPackage = async (budget) => {
     `http://localhost:8080/presupuestos/paquetes/${budget}`,
     {
       next: { tags: ["paquete"] },
+      cache: "no-store",
     }
   );
   const json = await res.json();
@@ -74,8 +75,6 @@ export const fetchBudgetValues = async (budget) => {
     }
   );
   const json = await res.json();
-  console.log("IN BUDGET VALUES");
-  console.log(json);
   return json;
 };
 

@@ -7,16 +7,20 @@ import {
 } from "@/app/actions/budget-actions";
 
 export default async function Page({ params }) {
-  const paquetes = await fetchBudgetPackage(params.budget);
+  const packages = await fetchBudgetPackage(params.budget);
   const itemsValues = await fetchBudgetItems(params.budget);
   const packagesValues = await fetchBudgetPackageValues(params.budget);
   const budgetValues = await fetchBudgetValues(params.budget);
+
+  // console.log(packagesValues);
+  // console.log(itemsValues);
   return (
     <BudgetTable
-      paquetes={paquetes}
+      packages={packages}
       budget={params.budget}
-      items={itemsValues}
-      packageItems={packagesValues}
+      project={params.project}
+      itemsValues={itemsValues}
+      packagesValues={packagesValues}
       budgetValues={budgetValues}
     />
   );

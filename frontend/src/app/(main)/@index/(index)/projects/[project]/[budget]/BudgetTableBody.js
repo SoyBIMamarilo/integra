@@ -1,20 +1,25 @@
 import BudgetTableBodyItem from "./BudgetTableBodyItem";
+// import BudgetTableBodyItem from "./BudgetItemTest";
 
-const BudgetTableBody = ({ paquete, items, budget }) => {
+const BudgetTableBody = ({ packages, itemsValues, packagesValues }) => {
+  console.log("Budget Body");
+  console.log(packagesValues);
+  console.log(itemsValues);
+  console.log(packages);
   return (
     <>
-      {paquete.map((packageItem) => (
+      {/* <BudgetTableBodyItem /> */}
+      {packages.map((packageItem) => (
         <BudgetTableBodyItem
-          budget={budget}
           paquete={packageItem}
-          items={items.items.filter(
-            (it) => it.pqid == packageItem.paquete_trabajo_id
-          )}
-          packageItem={
-            items.items.filter(
+          packageValue={
+            packagesValues.items.filter(
               (it) => it.pqid == packageItem.paquete_trabajo_id
             )[0]
           }
+          itemValue={itemsValues.items.filter(
+            (it) => it.pqid == packageItem.paquete_trabajo_id
+          )}
         />
       ))}
     </>

@@ -6,12 +6,16 @@ import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 
 const BudgetTable = ({
-  paquetes,
+  packages,
   budget,
-  items,
-  packageItems,
+  project,
+  itemsValues,
+  packagesValues,
   budgetValues,
 }) => {
+  console.log("Budget Table");
+  console.log(packagesValues);
+  console.log(itemsValues);
   const totalValues = budgetValues.items[0] ? budgetValues.items[0] : {};
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
@@ -20,10 +24,9 @@ const BudgetTable = ({
         <tbody>
           <tr className="h-2"></tr>
           <BudgetTableBody
-            budget={budget}
-            paquete={paquetes}
-            items={items}
-            packageItem={packageItems}
+            packages={packages}
+            itemsValues={itemsValues}
+            packagesValues={packagesValues}
           />
 
           <tr className="text-xs">
@@ -48,7 +51,7 @@ const BudgetTable = ({
           </tr>
           <tr>
             <td>
-              <Link href={path + "/create"}>
+              <Link href={`/projects/${project}/${budget}/create`}>
                 <button className="button-black my-3">Añadir paquete </button>
               </Link>
             </td>
