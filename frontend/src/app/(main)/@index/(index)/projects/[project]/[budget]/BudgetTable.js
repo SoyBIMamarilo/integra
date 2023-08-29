@@ -13,23 +13,22 @@ const BudgetTable = ({
   packagesValues,
   budgetValues,
 }) => {
-  console.log("Budget Table");
-  console.log(packagesValues);
-  console.log(itemsValues);
   const totalValues = budgetValues.items[0] ? budgetValues.items[0] : {};
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min	w-full 	table-auto ">
         <BudgetTableHeaders />
         <tbody>
-          <tr className="h-2"></tr>
+          <tr className="h-2 "></tr>
           <BudgetTableBody
             packages={packages}
             itemsValues={itemsValues}
             packagesValues={packagesValues}
           />
 
-          <tr className="text-xs">
+          <tr className="h-2" />
+
+          <tr className="text-xs font-bold">
             <td colSpan={1} className="table-content cursor-pointer">
               <div className="flex flex-row place-items-center px-2">Total</div>
             </td>

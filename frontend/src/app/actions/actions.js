@@ -36,15 +36,13 @@ export async function postReferente(
       cache: "no-store",
     }
   );
-  revalidateTag("presupuestos")
+  revalidateTag("presupuestos");
 }
 
 export async function getReferente(presupuesto_id, paquete_trabajo_id) {
-  console.log("Getting referente");
   const res = await fetch(
     `http://localhost:8080/presupuestos/paquetes/${presupuesto_id}/${paquete_trabajo_id}`
   );
   const json = await res.json();
-  console.log(json);
   return json;
 }

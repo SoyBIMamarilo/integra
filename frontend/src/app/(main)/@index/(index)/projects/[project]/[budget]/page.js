@@ -12,8 +12,6 @@ export default async function Page({ params }) {
   const packagesValues = await fetchBudgetPackageValues(params.budget);
   const budgetValues = await fetchBudgetValues(params.budget);
 
-  // console.log(packagesValues);
-  // console.log(itemsValues);
   return (
     <BudgetTable
       packages={packages}

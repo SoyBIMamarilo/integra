@@ -11,6 +11,7 @@ const BudgetTableHeaders = () => {
         <th className="table-header w-[11%]">Valor Total M2 Area Vendible</th>
         <th className="table-header w-[11%]">% Incidencia</th>
         <th className="w-4"></th>
+        <th className="w-4"></th>
       </tr>
     </thead>
   );

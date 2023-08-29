@@ -5,22 +5,19 @@ import { deleteItem } from "@/app/actions/item-actions";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemSub = ({ item, open }) => {
-  console.log(item);
-
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    // console.log(item.item_id);
     await deleteItem(item.item_id);
   };
   return (
     <>
-      <tr className={`${openStyle} text-xs`}>
-        <td className="table-content indent-4">
-          <div className="flex flex-row">
-            <div className="font-light ">{item.descripcion}</div>
-            <div>{item.pyrefnombre}</div>
+      <tr className={`${openStyle} text-xs font-light `}>
+        <td className="table-content">
+          <div className=" flex flex-row flex-wrap gap-2 pl-2">
+            <div className="">{item.descripcion}</div>
+            <div className="font-semibold">{item.pyrefnombre}</div>
           </div>
-          <div>CBS: {item.cbs}</div>
+          <div className="pl-2">CBS: {item.cbs}</div>
         </td>
         <td />
         <td className="table-content text-center">

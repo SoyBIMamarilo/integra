@@ -2,9 +2,9 @@ import GroupCard from "@/components/card/group-card";
 import BudgetListCard from "./BudgetListCard";
 import BudgetListCreateButton from "./BudgetListCreateButton";
 
-const BudgetList = ({ budgets, project }) => {
+const BudgetList = async ({ budgets, project }) => {
   return (
-    <GroupCard title="Presupuestos">
+    <GroupCard title="Presupuestos" styles="min-w-[30%]">
       {budgets.map((budget) => (
         <BudgetListCard budget={budget} />
       ))}

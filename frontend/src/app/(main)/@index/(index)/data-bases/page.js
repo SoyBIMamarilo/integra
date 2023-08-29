@@ -6,7 +6,6 @@ const fetchCiudades = async () => {
     cache: "no-store",
   });
   const json = await res.json();
-  // console.log(json);
   return json;
 };
 

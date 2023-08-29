@@ -8,11 +8,10 @@ import { deletePresupuestoPaquete } from "@/app/actions/budget-actions";
 import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
+import Arrow from "@/components/svg/arrow";
+import Plus from "@/components/svg/plus";
 
 const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
-  console.log("Item");
-  console.log(itemValue);
-  console.log(packageValue);
   const path = usePathname() + "/create-item";
   const packageValueAdj = packageValue ? packageValue : {};
   const router = useRouter();
@@ -31,12 +30,13 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
 
   return (
     <>
-      <tr className="text-xs">
+      <tr className="text-xs font-semibold">
         <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center px-2">
+          <div className="flex flex-row place-items-center pl-2">
             <div onClick={clickHandler} className="grow ">
               {paquete.nombre}
             </div>
+            <Arrow open={open} />
           </div>
         </td>
         <td />
@@ -68,7 +68,7 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
               query: { paquete: paquete.paquete_trabajo_id },
             }}
           >
-            +
+            <Plus />
           </Link>
         </td>
       </tr>

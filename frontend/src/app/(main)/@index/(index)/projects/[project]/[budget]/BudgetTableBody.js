@@ -2,10 +2,6 @@ import BudgetTableBodyItem from "./BudgetTableBodyItem";
 // import BudgetTableBodyItem from "./BudgetItemTest";
 
 const BudgetTableBody = ({ packages, itemsValues, packagesValues }) => {
-  console.log("Budget Body");
-  console.log(packagesValues);
-  console.log(itemsValues);
-  console.log(packages);
   return (
     <>
       {/* <BudgetTableBodyItem /> */}

@@ -174,6 +174,36 @@ exports.getValuesBudget = async (req, res, next) => {
   res.status(200).json({ items });
 };
 
+exports.getValuesProject = async (req, res, next) => {
+  console.log("presupuesto-controllers getProjects");
+  const proyectoId = req.params.projectId;
+
+  try {
+    items = await sequelize.query(
+      `select prid,
+              max(indicador_paquete) indicador,
+              sum(pond_interno) valor_interno_paquete,
+              sum(vrtot) valor_total,
+              sum(vrtot)/1000000 valor_total_mm,
+              sum(vrm2const) valor_m2const,
+              sum(vrm2vend) valor_m2vent,
+              sum(incidencia) incidencia,
+              max(presupuesto_version) version
+      from presupuesto.valor_item
+      where presupuesto.valor_item.proyecto_id=:prid
+      group by prid
+      order by version`,
+      {
+        replacements: { prid: proyectoId },
+        type: QueryTypes.SELECT,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).json({ items });
+};
+
 exports.getEjecutados = async (req, res, next) => {
   console.log("proyect-controllers getEjecutados");
 

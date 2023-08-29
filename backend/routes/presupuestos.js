@@ -4,6 +4,11 @@ const presupuestoControllers = require("../controllers/presupuesto-controllers")
 
 const router = express.Router();
 
+router.get(
+  "/proyecto/values/:projectId",
+  presupuestoControllers.getValuesProject
+);
+
 router.get("/proyecto/:projectId", presupuestoControllers.getBudgetProject);
 
 router.post("/proyecto/:projectId", presupuestoControllers.postBudget);

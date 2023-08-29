@@ -13,6 +13,18 @@ export const fetchBudgetProject = async (projectId) => {
   return json;
 };
 
+export const fetchProjectValues = async (projectId) => {
+  const res = await fetch(
+    `http://localhost:8080/presupuestos/proyecto/values/${projectId}`,
+    {
+      next: { tags: ["presupuestos"] },
+      cache: "no-store",
+    }
+  );
+  const json = await res.json();
+  return json;
+};
+
 export const fetchBudgetItems = async (budgetId) => {
   const res = await fetch(
     `http://localhost:8080/presupuestos/items/${budgetId}`,
@@ -85,6 +97,7 @@ export const createBudgetPackage = async (presupuesto_id, paquete_id) => {
     body: JSON.stringify({
       paquete: paquete_id,
     }),
+    cache: "no-store",
   });
   revalidateTag("paquete");
 };
@@ -103,6 +116,7 @@ export async function deletePresupuestoPaquete(presupuesto_id, paquete_id) {
       presupuesto_id,
       paquete_id,
     }),
+    cache: "no-store",
   });
   const data = await res.json();
   revalidateTag("paquete");
