@@ -2,10 +2,11 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../util/database");
 
-const Ciudad = require("./ciudad");
+const Proyecto = require("./proyecto");
+const Indicador = require("./indicadores");
 
-const Proyecto = sequelize.define(
-  "proyecto",
+const ProyectoIndicador = sequelize.define(
+  "proyecto_indicador",
   {
     id: {
       type: DataTypes.BIGINT,
@@ -14,16 +15,23 @@ const Proyecto = sequelize.define(
       primaryKey: true,
     },
     created_at: "TIMESTAMP",
-    nombre: DataTypes.TEXT,
-    ciudad_id: {
+    proyecto_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Ciudad,
+        model: Proyecto,
         key: "id",
       },
     },
+    indicador_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Indicador,
+        key: "id",
+      },
+    },
+    valor: DataTypes.NUMBER,
   },
   { schema: "presupuesto", freezeTableName: true }
 );
 
-module.exports = Proyecto;
+module.exports = ProyectoIndicador;

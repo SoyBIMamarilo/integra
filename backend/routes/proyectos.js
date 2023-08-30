@@ -10,4 +10,8 @@ router.get("/:pid", proyectosControllers.getPresupuestos);
 
 router.get("/", proyectosControllers.getProjects);
 
+router.post("/indices", proyectosControllers.postProjectIndices);
+
+router.post("/", proyectosControllers.postProject);
+
 module.exports = router;

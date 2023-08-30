@@ -1,5 +1,6 @@
 const Ciudad = require("../models/ciudad");
 const PaqueteTrabajo = require("../models/paquete_trabajo");
+const Indicadores = require("../models/indicadores");
 
 exports.getCiudades = async (req, res, next) => {
   let ciudades;
@@ -23,4 +24,15 @@ exports.getPaquetesTrabajo = async (req, res, next) => {
   }
   res.json(paquetesTrabajo);
   return next();
+};
+
+exports.getIndexes = async (req, res, next) => {
+  let indicadores;
+
+  try {
+    indicadores = await Indicadores.findAll();
+  } catch (err) {
+    console.log(err);
+  }
+  res.json(indicadores);
 };

@@ -9,31 +9,29 @@ const dataFormatter = (number) => {
       maximumFractionDigits: 0,
     })
       .format(number)
-      .toString() +
-    "MM"
+      .toString()
   );
 };
 
-const ReportTotal = ({ data }) => {
+const ReportVendible = ({ data, categories }) => {
   // console.log("Report Indices");
   // console.log(data);
   return (
     <div className="w-1/2 p-2">
       <Card className="bg-neutral-50">
-        <Title>Valores totales Presupuestos (MM)</Title>
+        <Title>Valores por m2 Vendible</Title>
         <BarChart
-          className="mt-6 h-[250px] p-2"
+          className="mt-4 h-[250px]"
           data={data}
           index="version"
-          categories={["valor_total_mm"]}
-          description="Valor total versiones presupuestos"
+          categories={categories}
+          colors={["orange", "teal", "amber", "rose", "sky", "emerald", "blue"]}
           valueFormatter={dataFormatter}
-          colors={["emerald", "blue", "amber", "rose", "indigo", "teal"]}
-          yAxisWidth={80}
+          yAxisWidth={70}
         />
       </Card>
     </div>
   );
 };
 
-export default ReportTotal;
+export default ReportVendible;

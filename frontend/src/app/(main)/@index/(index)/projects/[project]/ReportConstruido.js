@@ -13,19 +13,19 @@ const dataFormatter = (number) => {
   );
 };
 
-const ReportIndices = ({ data }) => {
-  console.log("Report Indices");
-  console.log(data);
+const ReportConstruido = ({ data, categories }) => {
+  // console.log("Report Indices");
+  // console.log(data);
   return (
-    <div className="w-1/2 grow p-6">
-      <Card>
-        <Title>Valores por m2 Presupuestos</Title>
+    <div className="w-1/2 p-2">
+      <Card className="bg-neutral-50">
+        <Title>Valores por m2 Construido</Title>
         <BarChart
-          className="mt-6 h-[500px] p-2"
+          className="mt-4 h-[250px]"
           data={data}
           index="version"
-          categories={["valor_m2const", "valor_m2vent"]}
-          colors={["emerald", "blue", "amber", "rose", "indigo", "teal"]}
+          categories={categories}
+          colors={["sky", "emerald", "blue", "amber", "rose", "teal"]}
           valueFormatter={dataFormatter}
           yAxisWidth={70}
         />
@@ -34,4 +34,4 @@ const ReportIndices = ({ data }) => {
   );
 };
 
-export default ReportIndices;
+export default ReportConstruido;

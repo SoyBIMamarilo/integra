@@ -1,5 +1,6 @@
 const Proyecto = require("../models/proyecto");
 const Presupuesto = require("../models/presupuesto");
+const ProyectoIndicador = require("../models/proyecto_indicador");
 
 exports.getProjects = async (req, res, next) => {
   console.log("proyecto-controllers getProjects");
@@ -55,4 +56,46 @@ exports.postPresupuestos = async (req, res, next) => {
   }
 
   res.status(201).json({ message: "Presupuesto Creado" });
+};
+
+exports.postProject = async (req, res, next) => {
+  console.log("proyecto-controllers postProject");
+  const nombre = req.body.nombre;
+  const ciudad_id = req.body.ciudad;
+  const version = Proyecto.build({
+    nombre,
+    ciudad_id,
+  });
+
+  try {
+    await version.save();
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.status(201).json({ message: "Presupuesto Creado", presupuesto: version });
+};
+
+exports.postProjectIndices = async (req, res, next) => {
+  console.log("proyecto-controllers postIndicador");
+  const proyecto_id = req.body.project_id;
+  const indices = req.body.indices;
+  console.log(proyecto_id);
+  console.log(indices);
+
+  for (var key in indices) {
+    const temp = ProyectoIndicador.build({
+      indicador_id: +key,
+      proyecto_id,
+      valor: +indices[key],
+    });
+    console.log(temp);
+    try {
+      await temp.save();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  res.status(201).json({ message: "Indicadores creados" });
 };

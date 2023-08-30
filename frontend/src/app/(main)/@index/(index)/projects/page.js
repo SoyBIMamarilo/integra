@@ -1,11 +1,11 @@
-import ProjectList from "./ProjectList";
-
+import ProjectSection from "./ProjectSection";
+import IndexexSelection from "./IndexesSelection";
 const Projects = () => {
   return (
-    <>
-      <div className="title-black">Proyectos</div>
-      <ProjectList />
-    </>
+    <div className="flex grow flex-col justify-stretch">
+      <ProjectSection />
+      <IndexexSelection />
+    </div>
   );
 };
 
