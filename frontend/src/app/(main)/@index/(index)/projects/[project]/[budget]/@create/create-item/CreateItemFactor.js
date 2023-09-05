@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 import { getIndicadores, postReferente } from "@/app/actions/actions";
 
-const Factors = ({ selected, setIndicador }) => {
+const CreateItemFactor = ({ selected, setIndicador }) => {
   const params = useParams();
   const selectedProject = params.project;
 
@@ -14,8 +14,8 @@ const Factors = ({ selected, setIndicador }) => {
   useEffect(() => {
     const fetchIndicadores = async () => {
       const indicadores = await getIndicadores(
-        selectedProject,
-        selected.proyecto_id
+        selected.proyecto_id,
+        selectedProject
       );
       setIndicadores(indicadores.indicadores);
     };
@@ -43,8 +43,7 @@ const Factors = ({ selected, setIndicador }) => {
       </select>
     </div>
   );
-  // return <div>Prueba</div>;
   return component;
 };
 
-export default Factors;
+export default CreateItemFactor;

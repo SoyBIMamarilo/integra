@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 import { postReferente } from "@/app/actions/actions";
 
-const ReferenteForm = ({ indicador, selected }) => {
+const CreateItemForm = ({ indicador, selected }) => {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
@@ -90,4 +90,4 @@ const ReferenteForm = ({ indicador, selected }) => {
   );
 };
 
-export default ReferenteForm;
+export default CreateItemForm;

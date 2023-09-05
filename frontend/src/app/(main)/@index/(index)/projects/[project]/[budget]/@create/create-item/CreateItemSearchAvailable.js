@@ -1,4 +1,4 @@
-const Available = ({ selectedPresupuestos, onAddHandler }) => {
+const CreateItemSearchAvailable = ({ selectedPresupuestos, onAddHandler }) => {
   let nf = new Intl.NumberFormat("en", {
     maximumFractionDigits: 0,
   });
@@ -25,4 +25,4 @@ const Available = ({ selectedPresupuestos, onAddHandler }) => {
   );
 };
 
-export default Available;
+export default CreateItemSearchAvailable;

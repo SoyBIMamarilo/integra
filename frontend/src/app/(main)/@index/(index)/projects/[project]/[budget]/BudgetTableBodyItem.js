@@ -10,7 +10,8 @@ import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
-
+import View from "@/components/svg/view";
+import Pencil from "@/components/svg/pencil";
 const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
   const path = usePathname() + "/create-item";
   const packageValueAdj = packageValue ? packageValue : {};
@@ -71,6 +72,12 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
             <Plus />
           </Link>
         </td>
+        {/* <td>
+          <View />
+        </td>
+        <td>
+          <Pencil />
+        </td> */}
       </tr>
       {itemValue.map((item) => (
         <BudgetTableBodyItemSub key={item.da} item={item} open={open} />

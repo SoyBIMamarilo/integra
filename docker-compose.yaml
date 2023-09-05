@@ -1,0 +1,29 @@
+version: 3.8
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on: 
+      - backend
+  
+  pgAdmin:
+    build: dpage/pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL : andres.lozano@amarilo.com
+      PGADMIN_DEFAULT_PASSWORD : Amarilo.2023
+      

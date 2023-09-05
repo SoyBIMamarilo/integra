@@ -1,24 +1,20 @@
 "use client";
 
-import { headers } from "../../../../../../../../next.config";
-
 const CreateProjectForm = ({ ciudades, indicadores }) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const nombre = event.target.nombre.value;
     const ciudad = event.target.ciudad.value;
-    // const res1 = await fetch("http://localhost:3000/api/indexes/get");
-    // const json = await res1.json();
+    const res = await fetch("http://localhost:3000/api/projects/post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, ciudad }),
+    });
+    const json = await res.json();
     // console.log(json);
-    // const res = await fetch("http://localhost:3000/api/projects/post", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ nombre, ciudad }),
-    // });
-    // const json = await res.json();
-
-    const project_id = 4;
-    // const projectId = json.presupuesto.id;
+    // const project_id = 4;
+    const project_id = json.presupuesto.id;
+    // console.log(project_id);
     const indices = {
       1: event.target.m2const.value,
       3: event.target.m2vend.value,

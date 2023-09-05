@@ -1,4 +1,4 @@
-const Selected = ({ selected }) => {
+const CreateItemSelected = ({ selected }) => {
   let nf = new Intl.NumberFormat("en", {
     maximumFractionDigits: 0,
   });
@@ -18,4 +18,4 @@ const Selected = ({ selected }) => {
   );
 };
 
-export default Selected;
+export default CreateItemSelected;

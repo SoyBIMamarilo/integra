@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 
-import Datalist from "./datalist";
-import Available from "./available";
+import CreateItemSearchData from "./CreateItemSearchData";
+import CreateItemSearchAvailable from "./CreateItemSearchAvailable";
 
-const Search = ({ presupuestos, onAddHandler }) => {
+const CreateItemSearch = ({ presupuestos, onAddHandler }) => {
   const [project, setProject] = useState(null);
   const [type, setType] = useState(null);
   const [description, setDescription] = useState(null);
@@ -60,23 +60,23 @@ const Search = ({ presupuestos, onAddHandler }) => {
   return (
     <>
       <div className="mb-2 grid grid-cols-2 ">
-        <Datalist
+        <CreateItemSearchData
           key="proyecto"
           label="proyecto"
           list={selectedPresupuestos.map((el) => el.nombre)}
           onChange={onChangeHandler}
         />
-        <Datalist
+        <CreateItemSearchData
           label="nivel"
           list={selectedPresupuestos.map((el) => el.line_type)}
           onChange={onChangeHandler}
         />
-        <Datalist
+        <CreateItemSearchData
           label="descripcion"
           list={selectedPresupuestos.map((el) => el.descripcion)}
           onChange={onChangeHandler}
         />
-        <Datalist
+        <CreateItemSearchData
           label="cbs"
           list={selectedPresupuestos.map((el) => el.cbs)}
           onChange={onChangeHandler}
@@ -85,7 +85,7 @@ const Search = ({ presupuestos, onAddHandler }) => {
 
       <div>Actividades Disponibles: {selectedPresupuestos.length}</div>
       <div className="mb-3 h-1/4 overflow-auto">
-        <Available
+        <CreateItemSearchAvailable
           onAddHandler={onAddHandler}
           selectedPresupuestos={selectedPresupuestos}
         />
@@ -94,4 +94,4 @@ const Search = ({ presupuestos, onAddHandler }) => {
   );
 };
 
-export default Search;
+export default CreateItemSearch;

@@ -1,6 +1,6 @@
 "use client";
 
-export default function Datalist(props) {
+export default function CreateItemSearchData(props) {
   const uniqueElements = Array.from(new Set(props.list));
   return (
     <div className="relative flex flex-col px-2">
