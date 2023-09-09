@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import Input from "@/src/components/input";
+import Input from "@/components/input";
 
-import LogoAmarilo from "@/src/public/amarilo-logo.png";
+import LogoAmarilo from "@/public/amarilo-logo.png";
 
-import PasswordForm from "@/src/components/passwordForm";
+import PasswordForm from "@/components/passwordForm";
 
 export default function Auth() {
   return (
