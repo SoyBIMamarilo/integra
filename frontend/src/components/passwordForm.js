@@ -5,7 +5,6 @@ import LogoAmarilo from "../public/amarilo-logo.png";
 import Image from "next/image";
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { cookies } from "next/dist/client/components/headers";
 import { getAuth,  setAuthCookies } from "./cookieSetter";
 
 export default function PasswordForm(props) {

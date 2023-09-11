@@ -4,7 +4,7 @@ const proyectosControllers = require("../controllers/proyecto-controllers");
 
 const router = express.Router();
 
-router.get("/:projectId", proyectosControllers.getProject);
+router.get("/proyecto/:projectId", proyectosControllers.getProject);
 
 router.get("/:pid", proyectosControllers.getPresupuestos);
 

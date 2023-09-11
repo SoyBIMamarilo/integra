@@ -1,12 +1,18 @@
 "use server";
 
+import { getAuth } from "@/components/cookieSetter";
 import { revalidateTag } from "next/cache";
 
 export const fetchBudgetProject = async (projectId) => {
   const res = await fetch(
     `http://localhost:8080/presupuestos/proyecto/${projectId}`,
     {
-      next: { tags: ["presupuestos"] },
+      headers: {
+        access_token: await getAuth(
+          process.env.DB_HOST,
+          process.env.DB_ANON_KEY
+        ),
+      },
     }
   );
   const json = await res.json();
@@ -14,21 +20,31 @@ export const fetchBudgetProject = async (projectId) => {
 };
 
 export const fetchProjectValues = async (projectId) => {
-  const res = await fetch(
-    `http://localhost:8080/presupuestos/proyecto/values/${projectId}`,
-    {
-      next: { tags: ["presupuestos"] },
-      cache: "no-store",
-    }
-  );
-  const json = await res.json();
-  return json;
+  // const res = await fetch(
+  //   `http://localhost:8080/presupuestos/proyecto/values/${projectId}`,
+  //   {
+  //     next: { tags: ["presupuestos"] },
+  //     cache: "no-store",
+  //   }
+  // );
+  // const json = await res.json();
+  // return json;
+  return [];
 };
 
 export const fetchBudgetItems = async (budgetId) => {
   const res = await fetch(
     `http://localhost:8080/presupuestos/items/${budgetId}`,
-    { next: { tags: ["presupuestos"] }, cache: "no-store" }
+    {
+      next: { tags: ["presupuestos"] },
+      cache: "no-store",
+      headers: {
+        access_token: await getAuth(
+          process.env.DB_HOST,
+          process.env.DB_ANON_KEY
+        ),
+      },
+    }
   );
   const json = await res.json();
   return json;
@@ -62,6 +78,12 @@ export const fetchBudgetPackage = async (budget) => {
     {
       next: { tags: ["paquete"] },
       cache: "no-store",
+      headers: {
+        access_token: await getAuth(
+          process.env.DB_HOST,
+          process.env.DB_ANON_KEY
+        ),
+      },
     }
   );
   const json = await res.json();
@@ -120,4 +142,17 @@ export async function deletePresupuestoPaquete(presupuesto_id, paquete_id) {
   });
   const data = await res.json();
   revalidateTag("paquete");
+}
+
+export async function uploadTempTable(input_data) {
+  const res = await fetch("http://localhost:8080/presupuestos/temp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      access_token: await getAuth(process.env.DB_HOST, process.env.DB_ANON_KEY),
+    },
+    body: JSON.stringify({ data: input_data }),
+  });
+  const data = await res.json();
+  return data;
 }

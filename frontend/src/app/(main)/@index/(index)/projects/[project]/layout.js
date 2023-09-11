@@ -5,7 +5,7 @@ import { fetchProject } from "@/app/actions/project-actions";
 import Information from "@/components/svg/information";
 
 const Layout = async ({ create, children, params }) => {
-  const project = await fetchProject(params.project);
+  const project = (await fetchProject(params.project))[0];
   return (
     <>
       <div className="flex flex-row gap-2">
@@ -15,9 +15,9 @@ const Layout = async ({ create, children, params }) => {
         >
           {project.nombre}
         </Link>
-        {/* <Link href={`/projects/${project.id}/project-info`}> */}
-        <Information />
-        {/* </Link> */}
+        <Link href={`/projects/${project.id}/view-project`}>
+          <Information />
+        </Link>
       </div>
       {create}
       {children}

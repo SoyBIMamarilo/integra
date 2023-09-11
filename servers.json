@@ -1,0 +1,18 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "Integra",
+            "Group": "Integra",
+            "Host": "db.kfkiyhtoznvoealcynsj.supabase.co",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "postgres",
+            "SSLMode": "require",
+            "SSLCert": "./prod-ca-2021.cer",
+            "BGColor": "##1C3041",
+            "FGColor": "#5D9FD9",
+            "PasswordExecCommand": "echo 'Amarilo.2023'",
+            "PasswordExecExpiration": 100
+        }
+    }
+}

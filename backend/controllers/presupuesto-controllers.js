@@ -39,9 +39,90 @@ exports.postReferente = supabaseFunctions.getExpressCall(
       factor_ponderacion: body.ponderacion,
       indicador_destino_id: body.destino_id,
       descripcion_ajuste: body.descripcion,
-    });
-  }
+    });}
 );
+
+
+exports.getBudgetProject = supabaseFunctions.getExpressCall(
+  async (supabase,params) => {return supabase.from("presupuesto").select().eq("proyecto_id",params.projectId).order("version",{ascending:false})} 
+)
+
+// const Presupuesto = require("../models/presupuesto");
+// const PresupuestoPaqueteTrabajo = require("../models/presupuesto_paquete_trabajo");
+// const ValorPresupuesto = require("../models/valor_presupuesto");
+// const Item = require("../models/item");
+// const sequelize = require("../util/database");
+
+// exports.postBudget = async (req, res, next) => {
+//   console.log("proyecto-controllers postPresupuestos");
+//   const projectId = req.params.projectId;
+//   const versionNumber = req.body.version;
+//   const version = Presupuesto.build({
+//     version: versionNumber,
+//     proyecto_id: projectId,
+//   });
+
+//   try {
+//     await version.save();
+//   } catch (err) {
+//     console.log(err);
+//   }
+
+//   res.status(201).json({ message: "Presupuesto Creado" });
+// };
+
+// exports.getPaquetesPresupuesto = async (req, res, next) => {
+//   console.log("proyect-controllers getPaquetesPresupuesto");
+//   const presupuestoId = req.params.budgetId;
+//   let paquetes;
+
+//   try {
+//     paquetes = await sequelize.query(
+//       `select * from presupuesto.presupuesto_paquete_trabajo ppt 
+//       left join presupuesto.paquete_trabajo pt on ppt.paquete_trabajo_id=pt.id
+//       where ppt.presupuesto_id=:presupuestoId;`,
+//       {
+//         replacements: { presupuestoId: presupuestoId },
+//         type: QueryTypes.SELECT,
+//       }
+//     );
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   res.json(paquetes);
+//   return next();
+// };
+
+// exports.getValorPresupuesto = async (req, res, next) => {
+//   console.log("proyect-controllers getValorPresupuesto");
+
+//   let valorPresupuesto;
+
+//   try {
+//     valorPresupuesto = await ValorPresupuesto.findAll();
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   res.json(valorPresupuesto);
+//   return next();
+// };
+
+// exports.postPaquetes = async (req, res, next) => {
+//   console.log("proyect-controllers postPaquetes");
+
+//   const presupuestoId = req.params.budgetId;
+//   const paquete = req.body.paquete;
+
+//   const presupuestoPaquete = PresupuestoPaqueteTrabajo.build({
+//     presupuesto_id: presupuestoId,
+//     paquete_trabajo_id: paquete,
+//   });
+
+//   try {
+//     await presupuestoPaquete.save();
+//   } catch (err) {
+//     console.log(err);
+//   }}
 
 exports.getReferente = supabaseFunctions.getExpressCall(
   async (supabase, params) => {
@@ -98,6 +179,11 @@ exports.getReferente = supabaseFunctions.getExpressCall(
 //   res.status(201).json({ message: "Presupuesto Creado" });
 // };
 
+exports.getItemsBudget = supabaseFunctions.fetchFilter("valor_item","prid","budgetId")
+
+exports.insertTemps = supabaseFunctions.getExpressCall(async (supabase,params, body) =>{
+  return supabase.from("temp").insert(body.data)
+})
 
 
 // exports.getItemsBudget = async (req, res, next) => {

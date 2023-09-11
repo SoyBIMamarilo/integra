@@ -13,7 +13,7 @@ const BudgetTableBody = ({ packages, itemsValues, packagesValues }) => {
               (it) => it.pqid == packageItem.paquete_trabajo_id
             )[0]
           }
-          itemValue={itemsValues.items.filter(
+          itemValue={itemsValues.filter(
             (it) => it.pqid == packageItem.paquete_trabajo_id
           )}
         />

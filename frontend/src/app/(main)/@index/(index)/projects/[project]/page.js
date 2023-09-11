@@ -22,7 +22,7 @@ export default async function Page({ params }) {
       <div className=" flex grow flex-row">
         <BudgetList budgets={budgets} project={params.project} />
         {/* <GroupCard title="Reportes" /> */}
-        <Report data={budgetSummary.items} />
+        {/* <Report data={budgetSummary.items} /> */}
       </div>
     </>
   );

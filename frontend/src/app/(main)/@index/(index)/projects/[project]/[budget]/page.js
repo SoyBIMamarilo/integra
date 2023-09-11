@@ -9,9 +9,10 @@ import {
 export default async function Page({ params }) {
   const packages = await fetchBudgetPackage(params.budget);
   const itemsValues = await fetchBudgetItems(params.budget);
-  const packagesValues = await fetchBudgetPackageValues(params.budget);
-  const budgetValues = await fetchBudgetValues(params.budget);
-
+  // const packagesValues = await fetchBudgetPackageValues(params.budget);
+  const packagesValues = {items:[]}
+  // const budgetValues = await fetchBudgetValues(params.budget);
+  const budgetValues =  {items:[{}]}
   return (
     <BudgetTable
       packages={packages}

@@ -1,7 +1,8 @@
 import { getIndexes } from "@/app/actions/data-base-actions";
 import IndexesSelctionList from "./IndexesSelctionList";
 const IndexexSelection = async () => {
-  const indexes = await getIndexes();
+  // const indexes = await getIndexes();
+  const indexes =[]
   return (
     <div className="basis-1/2">
       <div className="title-black w-min	">Indices</div>

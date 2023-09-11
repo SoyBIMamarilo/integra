@@ -5,8 +5,8 @@ import ReportVendible from "./ReporVendible";
 
 const Report = ({ data }) => {
   return (
-    <GroupCard title="Reportes" styles="grow">
-      <div className="flex flex-row flex-wrap">
+    <GroupCard title="Reportes" styles="grow z-0">
+      <div className="z-0 flex flex-row flex-wrap">
         <ReportTotal data={data} />
         <ReportConstruido data={data} categories={["valor_m2const"]} />
         <ReportVendible data={data} categories={["valor_m2vent"]} />

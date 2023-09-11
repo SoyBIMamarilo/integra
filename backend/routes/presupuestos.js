@@ -9,7 +9,7 @@ const router = express.Router();
 //   presupuestoControllers.getValuesProject
 // );
 
-// router.get("/proyecto/:projectId", presupuestoControllers.getBudgetProject);
+router.get("/proyecto/:projectId", presupuestoControllers.getBudgetProject);
 
 // router.post("/proyecto/:projectId", presupuestoControllers.postBudget);
 
@@ -25,7 +25,7 @@ const router = express.Router();
 
 // router.get("/values/:budgetId", presupuestoControllers.getValuesBudget);
 
-// router.get("/items/:budgetId", presupuestoControllers.getItemsBudget);
+ router.get("/items/:budgetId", presupuestoControllers.getItemsBudget);
 
 // router.post("/paquete/:budgetId", presupuestoControllers.postPaquetes);
 
@@ -35,11 +35,12 @@ const router = express.Router();
 
 // router.get("/ejecutados", presupuestoControllers.getEjecutados);
 
-// router.get("/paquetes/:prid/:pqid", presupuestoControllers.getReferente);
+//router.get("/paquetes/:prid/:pqid", presupuestoControllers.getReferente);
 
 // router.get("/vr_prueba", presupuestoControllers.getValorPresupuesto);
 
-// router.get("/paquetes/:prid", presupuestoControllers.getPaquetesPresupuesto);
+router.get("/paquetes/:prid", presupuestoControllers.getPaquetesPresupuesto);
+router.post("/temp",presupuestoControllers.insertTemps)
 
 // router.post("/:prid/:pqid", presupuestoControllers.postReferente);
 
