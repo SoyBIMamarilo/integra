@@ -8,6 +8,7 @@ const Input = (props) => {
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
+        name={props.name}
       />
     ) : (
       <textarea id={props.id} rows={props.rows || 3} />

@@ -8,12 +8,12 @@ export default async function OptionalSession() {
     {
       options: {
         db: {
-          schema: "presupuesto",
+          schema: "public",
         },
       },
     }
   );
-  const { data, error } = await supabase.from("ciudad").select("*");
+  const { data, error } = await supabase.from("prueba").select("*");
   console.log(supabase);
   console.log(data);
   console.log(error);
