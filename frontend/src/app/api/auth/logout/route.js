@@ -6,18 +6,11 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request) {
   const requestUrl = new URL(request.url);
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
   const supabase = createRouteHandlerClient({ cookies });
-  console.log("LOGGING IN");
-  //   console.log(supabase);
-  await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
 
-  return NextResponse.redirect(requestUrl.origin, {
+  await supabase.auth.signOut();
+
+  return NextResponse.redirect(`${requestUrl.origin}/`, {
     status: 301,
   });
 }

@@ -9,6 +9,9 @@ const Layout = (props) => {
             INTEGRA
           </div>
           <div className="p-2 text-right text-2xl">Mi Perfil</div>
+          <form action="/api/auth/logout" method="POST">
+            <button className="p-2 text-right text-2xl">Salir</button>
+          </form>
         </div>
         <div className="flex flex-row">
           <SideBar />
