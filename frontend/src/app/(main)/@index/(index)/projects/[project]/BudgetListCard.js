@@ -7,13 +7,15 @@ import Copy from "@/components/svg/copy";
 import Block from "@/components/svg/block";
 import Trash from "@/components/svg/trash";
 
-import { deleteBudget } from "@/app/actions/budget-actions";
-
 const BudgetListCard = ({ budget }) => {
   const router = useRouter();
 
   const deletePresupuestoHandler = async () => {
-    await deleteBudget(budget.id);
+    const res = await fetch(`http://localhost:3000/api/budget`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: budget.id }),
+    });
     router.refresh();
   };
 

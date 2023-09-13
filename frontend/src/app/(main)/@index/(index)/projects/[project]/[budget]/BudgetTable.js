@@ -1,30 +1,29 @@
 import Link from "next/link";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
+import { supabaseOptions } from "@/util/supabase";
 
 import { nf, nf_per } from "@/util/date-format";
 
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 
-const BudgetTable = ({
-  packages,
-  budget,
-  project,
-  itemsValues,
-  packagesValues,
-  budgetValues,
-}) => {
-  const totalValues = budgetValues.items[0] ? budgetValues.items[0] : {};
+const BudgetTable = async ({ budget, project, itemsValues }) => {
+  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+  const { data: budgetValues, error } = await supabase.rpc(
+    "presupuesto_total",
+    {
+      presupuesto: budget,
+    }
+  );
+  const totalValues = budgetValues ? budgetValues[0] : {};
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min	w-full 	table-auto ">
         <BudgetTableHeaders />
         <tbody>
           <tr className="h-2 "></tr>
-          <BudgetTableBody
-            packages={packages}
-            itemsValues={itemsValues}
-            packagesValues={packagesValues}
-          />
+          <BudgetTableBody budget={budget} itemsValues={itemsValues} />
 
           <tr className="h-2" />
 
@@ -36,13 +35,13 @@ const BudgetTable = ({
             <td className="table-content text-center">-</td>
             <td className="table-content text-center">-</td>
             <td className="table-content text-center">
-              {nf.format(totalValues.valor_total)}
+              {nf.format(totalValues.vrtot)}
             </td>
             <td className="table-content text-center">
-              {nf.format(totalValues.valor_m2const)}
+              {nf.format(totalValues.vrm2const)}
             </td>
             <td className="table-content text-center">
-              {nf.format(totalValues.valor_m2vent)}
+              {nf.format(totalValues.vrm2vend)}
             </td>
             <td className="table-content text-center">
               {nf_per.format(totalValues.incidencia)}

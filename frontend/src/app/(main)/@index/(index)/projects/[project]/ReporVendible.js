@@ -27,7 +27,7 @@ const ReportVendible = ({ data, categories }) => {
           categories={categories}
           colors={["orange", "teal", "amber", "rose", "sky", "emerald", "blue"]}
           valueFormatter={dataFormatter}
-          yAxisWidth={70}
+          yAxisWidth={100}
         />
       </Card>
     </div>

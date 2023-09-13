@@ -27,7 +27,7 @@ const ReportConstruido = ({ data, categories }) => {
           categories={categories}
           colors={["sky", "emerald", "blue", "amber", "rose", "teal"]}
           valueFormatter={dataFormatter}
-          yAxisWidth={70}
+          yAxisWidth={100}
         />
       </Card>
     </div>

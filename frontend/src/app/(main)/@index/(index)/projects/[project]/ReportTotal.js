@@ -25,11 +25,11 @@ const ReportTotal = ({ data }) => {
           className="mt-6 h-[250px] p-2"
           data={data}
           index="version"
-          categories={["valor_total_mm"]}
+          categories={["vrtot"]}
           description="Valor total versiones presupuestos"
           valueFormatter={dataFormatter}
           colors={["emerald", "blue", "amber", "rose", "indigo", "teal"]}
-          yAxisWidth={80}
+          yAxisWidth={150}
         />
       </Card>
     </div>

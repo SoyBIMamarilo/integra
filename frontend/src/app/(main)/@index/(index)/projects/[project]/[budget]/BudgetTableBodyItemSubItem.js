@@ -24,7 +24,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
           {item.indicador_paquete} {item.ind_abrevietura}
         </td>
         <td className="table-content text-center">
-          ${nf.format(item.pond_interno)} /{item.ind_abrevietura}
+          {/* ${nf.format(item.pond_interno)} /{item.ind_abrevietura} */}
         </td>
         <td className="table-content text-center">${nf.format(item.vrtot)}</td>
         <td className="table-content text-center">

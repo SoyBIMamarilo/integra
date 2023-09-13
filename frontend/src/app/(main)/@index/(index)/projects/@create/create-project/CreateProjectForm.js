@@ -1,29 +1,40 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 const CreateProjectForm = ({ ciudades, indicadores }) => {
+  const router = useRouter();
   const submitHandler = async (event) => {
     event.preventDefault();
     const nombre = event.target.nombre.value;
     const ciudad = event.target.ciudad.value;
-    const res = await fetch("http://localhost:3000/api/projects/post", {
+    const res = await fetch("http://localhost:3000/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre, ciudad }),
     });
-    const json = await res.json();
-    // console.log(json);
-    // const project_id = 4;
-    const project_id = json.presupuesto.id;
-    // console.log(project_id);
-    const indices = {
-      1: event.target.m2const.value,
-      3: event.target.m2vend.value,
-    };
-    const res_indices = await fetch("http://localhost:3000/api/indexes/post", {
+    const createdProject = await res.json();
+    const proyecto_id = createdProject.id;
+    const res_construido = await fetch("http://localhost:3000/api/indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ project_id, indices }),
+      body: JSON.stringify({
+        indicador_id: 1,
+        proyecto_id,
+        valor: +event.target.m2const.value,
+      }),
     });
+    const res_vendible = await fetch("http://localhost:3000/api/indexes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        indicador_id: 3,
+        proyecto_id,
+        valor: +event.target.m2vend.value,
+      }),
+    });
+    router.refresh();
+    router.back();
   };
 
   return (
@@ -41,14 +52,6 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
         <input type="number" name="m2const" />
         <label>m2 vend*</label>
         <input type="number" name="m2vend" />
-        {/* <>
-          {indicadores.map((it) => (
-            <>
-              <label>{it.abreviatura}*</label>
-              <input type="number" />
-            </>
-          ))}
-        </> */}
         <button type="submit" className="button-black">
           Crear
         </button>

@@ -1,15 +1,20 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
+
+import { supabaseOptions } from "@/util/supabase";
 import { getCiudades, getIndexes } from "@/app/actions/data-base-actions";
 import Modal from "@/components/modal/create-modal";
 import CreateProjectForm from "./CreateProjectForm";
 
 const Create = async ({ params }) => {
-  const ciudadesData = getCiudades();
-  const indicadoresData = getIndexes();
+  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+  const { data: indicadores, errorIndicadores } = await supabase
+    .from("indicador")
+    .select("*");
+  const { data: ciudades, errorCiudades } = await supabase
+    .from("ciudad")
+    .select("*");
 
-  const [ciudades, indicadores] = await Promise.all([
-    ciudadesData,
-    indicadoresData,
-  ]);
   return (
     <Modal>
       <div className="mb-4 font-bold">Crear Proyecto</div>

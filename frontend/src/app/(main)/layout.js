@@ -7,10 +7,7 @@ const Layout = async ({ index, login }) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const isLoggedIn = session ? true : false;
-  // console.log(session);
-  // console.log(isLoggedIn);
-  return isLoggedIn ? index : login;
+  return session ? index : login;
 };
 
 export default Layout;

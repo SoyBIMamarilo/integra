@@ -1,8 +1,15 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
+
+import { supabaseOptions } from "@/util/supabase";
 import LinkCard from "@/components/card/link-card";
-import { fetchProjects } from "@/app/actions/project-actions";
 
 const ProjectList = async () => {
-  const projects = await fetchProjects();
+  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+  const { data: projects, error } = await supabase.from("proyecto").select("*");
+  // const projectsData = await fetch("http://localhost:3000/api/projects");
+  // const projects = await projectsData.json();
+  // console.log("projects", projects);
   return (
     <div className="flex w-1/2 flex-row gap-2">
       {projects.map((project) => (

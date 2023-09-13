@@ -12,6 +12,7 @@ import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
 import View from "@/components/svg/view";
 import Pencil from "@/components/svg/pencil";
+
 const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
   const path = usePathname() + "/create-item";
   const packageValueAdj = packageValue ? packageValue : {};
@@ -45,16 +46,16 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
           {packageValueAdj.indicador} m2
         </td>
         <td className="table-content text-center">
-          {nf.format(packageValueAdj.valor_interno_paquete)}
+          {/* {nf.format(packageValueAdj.valor_interno_paquete)} */}
         </td>
         <td className="table-content text-center">
-          {nf.format(packageValueAdj.valor_total)}
+          {nf.format(packageValueAdj.vrtot)}
         </td>
         <td className="table-content text-center">
-          {nf.format(packageValueAdj.valor_m2const)}
+          {nf.format(packageValueAdj.vrm2const)}
         </td>
         <td className="table-content text-center">
-          {nf.format(packageValueAdj.valor_m2vent)}
+          {nf.format(packageValueAdj.vrm2vend)}
         </td>
         <td className="table-content text-center">
           {nf_per.format(packageValueAdj.incidencia)}

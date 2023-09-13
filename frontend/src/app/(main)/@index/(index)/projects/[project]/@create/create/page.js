@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
 import Modal from "@/components/modal/create-modal";
-import { createBudget } from "@/app/actions/budget-actions";
 
 export default function Create({ params }) {
   const router = useRouter();
@@ -13,7 +12,12 @@ export default function Create({ params }) {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const version = versionRef.current.value;
-    createBudget(version, params.project);
+    const res = await fetch("http://localhost:3000/api/budget", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ version, proyecto_id: params.project }),
+    });
+    console.log(res);
     router.refresh();
     router.back();
   };
