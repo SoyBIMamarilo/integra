@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { deletePresupuestoPaquete } from "@/app/actions/budget-actions";
 import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
@@ -23,10 +22,14 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
   };
 
   const deletePaqueteHandler = async () => {
-    await deletePresupuestoPaquete(
-      paquete.presupuesto_id,
-      paquete.paquete_trabajo_id
-    );
+    const res = await fetch("http://localhost:3000/api/budget-package", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        presupuesto_id: paquete.presupuesto_id,
+        paquete_trabajo_id: paquete.paquete_trabajo_id,
+      }),
+    });
     router.refresh();
   };
 

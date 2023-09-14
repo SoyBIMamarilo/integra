@@ -2,7 +2,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 
 import { supabaseOptions } from "@/util/supabase";
-import { getCiudades, getIndexes } from "@/app/actions/data-base-actions";
 import Modal from "@/components/modal/create-modal";
 import CreateProjectForm from "./CreateProjectForm";
 

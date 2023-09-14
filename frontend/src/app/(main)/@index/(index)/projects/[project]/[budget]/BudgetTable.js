@@ -8,7 +8,7 @@ import { nf, nf_per } from "@/util/date-format";
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 
-const BudgetTable = async ({ budget, project, itemsValues }) => {
+const BudgetTable = async ({ budget, project }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: budgetValues, error } = await supabase.rpc(
     "presupuesto_total",
@@ -16,14 +16,15 @@ const BudgetTable = async ({ budget, project, itemsValues }) => {
       presupuesto: budget,
     }
   );
-  const totalValues = budgetValues ? budgetValues[0] : {};
+  const totalValues = budgetValues[0] ? budgetValues[0] : {};
+  console.log("total values", totalValues);
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min	w-full 	table-auto ">
         <BudgetTableHeaders />
         <tbody>
           <tr className="h-2 "></tr>
-          <BudgetTableBody budget={budget} itemsValues={itemsValues} />
+          <BudgetTableBody budget={budget} />
 
           <tr className="h-2" />
 

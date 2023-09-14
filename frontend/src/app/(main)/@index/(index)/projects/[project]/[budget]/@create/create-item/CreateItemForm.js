@@ -4,8 +4,6 @@ import { useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { postReferente } from "@/app/actions/actions";
-
 const CreateItemForm = ({ indicador, selected }) => {
   const router = useRouter();
   const params = useParams();
@@ -23,16 +21,30 @@ const CreateItemForm = ({ indicador, selected }) => {
     setPonderacion(e.target.value);
   };
 
-  const submitItemHandler = () => {
-    postReferente(
-      params.budget,
-      paquete,
-      selected.linea_id,
-      indicador.id_or,
-      indicador.id_dest,
-      ponderacion,
-      descripcion.current.value
-    );
+  const submitItemHandler = async () => {
+    const res = await fetch("http://localhost:3000/api/item", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        presupuesto_id: params.budget,
+        paquete_trabajo_id: paquete,
+        referente_id: selected.linea_id,
+        indicador_origen_id: indicador.id_or,
+        indicador_destino_id: indicador.id_dest,
+        factor_ponderacion: ponderacion,
+        descripcion_ajuste: descripcion.current.value,
+      }),
+    });
+    console.log(res);
+    // postReferente(
+    //   params.budget,
+    //   paquete,
+    //   selected.linea_id,
+    //   indicador.id_or,
+    //   indicador.id_dest,
+    //   ponderacion,
+    //   descripcion.current.value
+    // // );
     router.refresh();
     router.back();
   };
