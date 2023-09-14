@@ -1,11 +1,18 @@
 import Link from "next/link";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
 
-import { fetchProject } from "@/app/actions/project-actions";
-
+import { supabaseOptions } from "@/util/supabase";
 import Information from "@/components/svg/information";
 
 const Layout = async ({ create, children, params }) => {
-  const project = await fetchProject(params.project);
+  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+  const { data, error } = await supabase
+    .from("proyecto")
+    .select()
+    .eq("id", params.project);
+  const project = data[0];
+  console.log("LAYOUT PORJECT", project);
   return (
     <>
       <div className="flex flex-row gap-2">
