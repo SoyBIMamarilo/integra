@@ -1,6 +1,7 @@
 import GroupCard from "@/components/card/group-card";
 import BudgetListCard from "./BudgetListCard";
 import BudgetListCreateButton from "./BudgetListCreateButton";
+import BudgetListDuplicateButton from "./BudgetListDuplicateButton";
 
 const BudgetList = async ({ budgets, project }) => {
   return (
@@ -9,6 +10,7 @@ const BudgetList = async ({ budgets, project }) => {
         <BudgetListCard budget={budget} />
       ))}
       <BudgetListCreateButton project={project} />
+      <BudgetListDuplicateButton project={project} />
     </GroupCard>
   );
 };
