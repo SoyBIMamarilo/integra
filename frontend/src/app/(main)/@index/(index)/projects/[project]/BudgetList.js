@@ -7,7 +7,7 @@ const BudgetList = async ({ budgets, project }) => {
   return (
     <GroupCard title="Presupuestos" styles="min-w-[30%]">
       {budgets.map((budget) => (
-        <BudgetListCard budget={budget} />
+        <BudgetListCard key={budget.id} budget={budget} />
       ))}
       <BudgetListCreateButton project={project} />
       <BudgetListDuplicateButton project={project} />

@@ -23,7 +23,7 @@ export default async function BasesDatos() {
         <div className="mb-8 text-3xl font-semibold">Ciudades</div>
         <div className="mb-8 flex basis-24 flex-row justify-start gap-y-3">
           {ciudades.map((ciudad) => (
-            <CiudadesCard name={ciudad.nombre} id={ciudad.id} />
+            <CiudadesCard key={ciudad.id} name={ciudad.nombre} id={ciudad.id} />
           ))}
         </div>
         <Link href="/bases-datos/login ">Crear Ciudad</Link>
@@ -32,7 +32,11 @@ export default async function BasesDatos() {
         <div className="mb-8 text-3xl font-semibold">Paquetes de trabajo</div>
         <div className="flex flex-row flex-wrap gap-y-3">
           {paquetesTrabajo.map((paquete) => (
-            <CiudadesCard name={paquete.nombre} id={paquete.id} />
+            <CiudadesCard
+              key={paquete.id}
+              name={paquete.nombre}
+              id={paquete.id}
+            />
           ))}
         </div>
       </div>

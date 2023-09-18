@@ -36,6 +36,7 @@ const BudgetTableBody = async ({ budget }) => {
       {/* <BudgetTableBodyItem /> */}
       {packages.map((packageItem) => (
         <BudgetTableBodyItem
+          key={packageItem.paquete_trabajo_id}
           paquete={packageItem}
           packageValue={
             packagesValues.filter(

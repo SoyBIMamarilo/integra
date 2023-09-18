@@ -45,7 +45,9 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
         <label>Ciudad *</label>
         <select name="ciudad">
           {ciudades.map((it) => (
-            <option value={it.id}>{it.nombre}</option>
+            <option key={it.id} value={it.id}>
+              {it.nombre}
+            </option>
           ))}
         </select>
         <label>m2 const*</label>
