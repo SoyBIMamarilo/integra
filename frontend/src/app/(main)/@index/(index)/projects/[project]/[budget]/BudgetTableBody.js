@@ -26,6 +26,10 @@ const BudgetTableBody = async ({ budget }) => {
       presupuesto: budget,
     }
   );
+  const { data: itemsValuesManual, errorValuesItemsManual } =
+    await supabase.rpc("presupuesto_por_item_manual", {
+      presupuesto: budget,
+    });
 
   return (
     <>
@@ -39,6 +43,9 @@ const BudgetTableBody = async ({ budget }) => {
             )[0]
           }
           itemValue={itemsValues.filter(
+            (it) => it.paquete_trabajo_id == packageItem.paquete_trabajo_id
+          )}
+          manualValue={itemsValuesManual.filter(
             (it) => it.paquete_trabajo_id == packageItem.paquete_trabajo_id
           )}
         />

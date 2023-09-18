@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
+import BudgetTableBodyItemManual from "./BudgetTableBodyItemManualItem";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
@@ -12,7 +13,12 @@ import Plus from "@/components/svg/plus";
 import View from "@/components/svg/view";
 import Pencil from "@/components/svg/pencil";
 
-const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
+const BudgetTableBodyItem = ({
+  paquete,
+  itemValue,
+  packageValue,
+  manualValue,
+}) => {
   const path = usePathname() + "/create-item";
   const packageValueAdj = packageValue ? packageValue : {};
   const router = useRouter();
@@ -85,6 +91,13 @@ const BudgetTableBodyItem = ({ paquete, itemValue, packageValue }) => {
       </tr>
       {itemValue.map((item) => (
         <BudgetTableBodyItemSub key={item.da} item={item} open={open} />
+      ))}
+      {manualValue.map((item) => (
+        <BudgetTableBodyItemManual
+          key={item.paquete_trabajo_id}
+          item={item}
+          open={open}
+        />
       ))}
     </>
   );
