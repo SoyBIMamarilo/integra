@@ -1,4 +1,4 @@
-export default function ({ create, children, params }) {
+export default function Layout({ create, children, params }) {
   return (
     <>
       {create}

@@ -4,6 +4,8 @@ import { supabaseOptions } from "@/util/supabase";
 
 import TestComponent from "./TestComponent";
 
+export const dynamic = "force-dynamic";
+
 export default async function OptionalSession(params) {
   // const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   // const allCookies = cookies().getAll();
