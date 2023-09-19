@@ -9,13 +9,14 @@ const BatchForm = ({ project, budget }) => {
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
+    console.log(items);
     const res = await fetch("http://localhost:3000/api/temp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({items}),
+      body: JSON.stringify({ items }),
     });
-    router.refresh();
-    router.back();
+    // router.refresh();
+    // router.back();
   };
 
   const handleUpload = async (event) => {
@@ -34,12 +35,34 @@ const BatchForm = ({ project, budget }) => {
         },
         complete: function (results, file) {
           const reads = results.data;
+          const adjustedList = [];
           reads.forEach((element) => {
-            element.proyecto_id = project;
-            element.parent_id = budget;
+            const id = +element.Id;
+            const parent_id = +element.ParentId;
+            const cbs = element.CBS;
+            const descripcion = element["Descripción"];
+            const unidad_medida = element.UdM;
+            const cantidad = +element.Cantidad;
+            const precio = +element["Precio unitario"];
+            const line_type = element["BoQ Line Type"];
+            const proyecto_id = project;
+            adjustedList.push({
+              id,
+              parent_id,
+              cbs,
+              descripcion,
+              unidad_medida,
+              cantidad,
+              precio,
+              line_type,
+              proyecto_id,
+            });
+            // console.log(element);
+            // element.parent_id = budget;
           });
-          console.log(reads);
-          setItems(reads);
+          // console.log(adjustedList);
+          // console.log(reads);
+          setItems(adjustedList);
         },
       });
     }

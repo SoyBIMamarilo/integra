@@ -12,7 +12,6 @@ const Layout = async ({ create, children, params }) => {
     .select()
     .eq("id", params.project);
   const project = data[0];
-  console.log("LAYOUT PORJECT", project);
   return (
     <>
       <div className="flex flex-row gap-2">

@@ -10,9 +10,8 @@ export async function POST(req) {
   const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
   const body = await req.json();
   const items = body.items;
-  const { data, error } = await supabase
-    .from("temp")
-    .insert(items);
+  // console.log(items);
+  const { data, error } = await supabase.from("temp").insert(items);
   console.log(data);
   console.log(error);
   return NextResponse.json(data);
