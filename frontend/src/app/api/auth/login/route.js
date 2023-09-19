@@ -20,4 +20,5 @@ export async function POST(request) {
   return NextResponse.redirect(requestUrl.origin, {
     status: 301,
   });
+  // return NextResponse.redirect("/projects");
 }
