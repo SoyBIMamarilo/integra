@@ -28,7 +28,7 @@ const BudgetTableBodyItem = ({
   };
 
   const deletePaqueteHandler = async () => {
-    const res = await fetch("http://localhost:3000/api/budget-package", {
+    const res = await fetch("/api/budget-package", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

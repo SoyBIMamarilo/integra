@@ -19,6 +19,7 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  // console.log("API PROJECTS REACHED!!!!");
   const supabase = createRouteHandlerClient({ cookies }, options);
   const body = await req.json();
   const nombre = body.nombre;

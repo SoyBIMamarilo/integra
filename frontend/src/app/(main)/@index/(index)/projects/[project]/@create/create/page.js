@@ -12,7 +12,7 @@ export default function Create({ params }) {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const version = versionRef.current.value;
-    const res = await fetch("http://localhost:3000/api/budget", {
+    const res = await fetch("/api/budget", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ version, proyecto_id: params.project }),

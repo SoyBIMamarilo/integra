@@ -19,7 +19,7 @@ const CreateItemManual = () => {
   const valor = useRef();
 
   const submitItemHandler = async () => {
-    const res = await fetch("http://localhost:3000/api/item-manual", {
+    const res = await fetch("/api/item-manual", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

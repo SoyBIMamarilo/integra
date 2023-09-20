@@ -10,7 +10,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
     // console.log(item);
-    const res = await fetch("http://localhost:3000/api/item", {
+    const res = await fetch("/api/item", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

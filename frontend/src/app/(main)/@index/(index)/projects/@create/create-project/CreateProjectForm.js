@@ -8,14 +8,14 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
     event.preventDefault();
     const nombre = event.target.nombre.value;
     const ciudad = event.target.ciudad.value;
-    const res = await fetch("http://localhost:3000/api/projects", {
+    const res = await fetch("/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre, ciudad }),
     });
     const createdProject = await res.json();
     const proyecto_id = createdProject.id;
-    const res_construido = await fetch("http://localhost:3000/api/indexes", {
+    const res_construido = await fetch("/api/indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -24,7 +24,7 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
         valor: +event.target.m2const.value,
       }),
     });
-    const res_vendible = await fetch("http://localhost:3000/api/indexes", {
+    const res_vendible = await fetch("/api/indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

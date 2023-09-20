@@ -11,7 +11,7 @@ const BudgetListCard = ({ budget }) => {
   const router = useRouter();
 
   const deletePresupuestoHandler = async () => {
-    const res = await fetch(`http://localhost:3000/api/budget`, {
+    const res = await fetch(`/api/budget`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: budget.id }),

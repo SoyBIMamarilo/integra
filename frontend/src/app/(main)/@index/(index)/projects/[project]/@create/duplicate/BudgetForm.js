@@ -11,7 +11,7 @@ const BudgetForm = ({ budgets }) => {
     event.preventDefault();
     const old_presupuesto_id = event.target.selection.value;
     const version = versionRef.current.value;
-    const res = await fetch("http://localhost:3000/api/budget/duplicate", {
+    const res = await fetch("/api/budget/duplicate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

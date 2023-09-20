@@ -10,7 +10,7 @@ const BatchForm = ({ project, budget }) => {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     console.log(items);
-    const res = await fetch("http://localhost:3000/api/temp", {
+    const res = await fetch("/api/temp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items }),

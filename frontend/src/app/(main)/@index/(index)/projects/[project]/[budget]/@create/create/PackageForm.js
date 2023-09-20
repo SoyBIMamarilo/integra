@@ -9,12 +9,12 @@ const PackageForm = ({ budget, paquetes }) => {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const paquete_trabajo_id = event.target.selection.value;
-    const res = await fetch("http://localhost:3000/api/budget-package", {
+    const res = await fetch("/api/budget-package", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         paquete_trabajo_id,
-        presupuesto_id:budget
+        presupuesto_id: budget,
       }),
     });
     router.refresh();
