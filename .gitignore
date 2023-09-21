@@ -1,5 +1,4 @@
 /**/node_modules
 /**/.next
 /backend/
-/plantilla.*
-/prod-ca-2021.cer
+/pgpass.conf
