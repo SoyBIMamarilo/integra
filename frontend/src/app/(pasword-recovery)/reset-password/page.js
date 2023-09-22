@@ -5,12 +5,12 @@ import Input from "@/components/input";
 
 import LogoAmarilo from "@/public/amarilo-logo.png";
 
-export default function Auth() {
+export default function Reset() {
   return (
     <div className="w-100 flex h-screen flex-wrap content-evenly justify-center">
       <div className="flex h-fit w-64 flex-col gap-3">
         <h1 className="text-center text-6xl font-semibold">INTEGRA </h1>
-        <form className="flex flex-col" action="/api/auth/login" method="post">
+        <form className="flex flex-col" action="/api/auth/recover" method="post">
           <Input
             type="email"
             element="input"
@@ -19,17 +19,8 @@ export default function Auth() {
             placeholder="Tu Correo"
             name="email"
           />
-          <Input
-            type="password"
-            element="input"
-            id="contrasña"
-            label="Contraseña"
-            placeholder="Tu Contraseña"
-            name="password"
-          />
 
-          <button className="button-black grow">INICIAR SESIÓN</button>
-          <a href="/reset-password" className="text-center text-blue-600">Olvidé mi contraseña</a>
+          <button className="button-black grow">Recuperar contraseña</button>
         </form>
         <div className="content-center justify-center">
           <Image src={LogoAmarilo} />
