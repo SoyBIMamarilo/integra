@@ -10,10 +10,7 @@
             "SSLMode": "require",
             "SSLCert": "./prod-ca-2021.cer",
             "BGColor": "##1C3041",
-            "FGColor": "#5D9FD9",
-            "PassFile": "./pgpass.conf",
-            "PasswordExecCommand": "echo 'Amarilo.2023'",
-            "PasswordExecExpiration": 100
+            "FGColor": "#5D9FD9"
         }
     }
 }
