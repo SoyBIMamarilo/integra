@@ -2,12 +2,12 @@ import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import { supabaseOptions } from "@/util/supabase";
-
+import { Suspense } from "react";
 import { nf, nf_per } from "@/util/date-format";
 
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
-
+import Excel from "@/components/svg/excel";
 const BudgetTable = async ({ budget, project }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: valorTotal, errorValorTotal } = await supabase.rpc(
@@ -57,15 +57,20 @@ const BudgetTable = async ({ budget, project }) => {
             <td className="table-content text-center">{nf_per.format(1)}</td>
           </tr>
           <tr>
-            <td>
+            <td className="inline-flex">
               <Link href={`/projects/${project}/${budget}/create`}>
-                <button className="button-black my-3">Añadir paquete </button>
+                <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">Añadir paquete </button>
               </Link>
               <Link href={`/projects/${project}/${budget}/batch-items`}>
-                <button className="button-black my-3">
+                <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">
                   Importar Items CSV
                 </button>
               </Link>
+              <Suspense>
+                <Link href={`/projects/${project}/${budget}/download-file`}>
+                  <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">Download<Excel /></button>
+                </Link>
+              </Suspense>
             </td>
           </tr>
         </tbody>
