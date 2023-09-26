@@ -11,7 +11,7 @@ export default async function TestComponent() {
   const packages = await supabase.rpc("presupuesto_paquetes_trabajo", {
     presupuesto: 1,
   });
-  console.log(packages);
+  console.log("Packages", packages);
   return (
     <>
       <div>procesado</div>
