@@ -8,6 +8,6 @@ export const JSONtoCSV = (objArray) => {
         }).join(',')
     })
     csv.unshift(fields.join(',')) // add header column
-    csv = csv.join('\r\n');    
+    csv = csv.join('\r\n');
     return csv;
 }

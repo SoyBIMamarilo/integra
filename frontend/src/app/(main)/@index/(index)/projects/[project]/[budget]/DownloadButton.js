@@ -3,14 +3,14 @@ import Excel from "@/components/svg/excel";
 import Link from "next/link";
 import { JSONtoCSV } from "@/util/json-convert-csv";
 const DownloadFile = (props) => {
-    let rootApi = process.env.ROOT_URL ? process.env.ROOT_URL : "http://localhost:3000"; 
+    let rootApi = process.env.ROOT_URL ? process.env.ROOT_URL : "http://localhost:3000";
     const downloadData = async () => {
         let Idata = "";
         fetch(`${rootApi}/api/budget/download/${props.budget}`)
             .then(response => response.json())
-            .then(data => {                
-                Idata = data;
-                Idata = JSONtoCSV(Idata);
+            .then(data => {
+                if (!data) return alert("No Existe informacion a Descargar.");
+                Idata = JSONtoCSV(data);
                 const jsonString = `data:${props.fileType};chatset=utf-8,${encodeURIComponent(
                     Idata
                 )}`;
@@ -18,9 +18,9 @@ const DownloadFile = (props) => {
                 link.href = jsonString;
                 link.download = props.fileName;
                 link.click();
-                alert("Archivo descargado.");               
-             })
-            .catch(err => { console.error("DonwloadButton",err); });
+                alert("Archivo descargado.");
+            })
+            .catch(err => { console.error("DonwloadButton", err); });
     };
     return (
         <Link href="#">

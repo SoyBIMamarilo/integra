@@ -18,7 +18,7 @@ export async function GET(req, res) {
         let data = [...data_item_manual, ...data_item];
         return NextResponse.json(data);
     } catch (err) {
-        console.log("test", err);
+        console.log("Api Presupuesto Op:Get", err);
     }
 
 }
