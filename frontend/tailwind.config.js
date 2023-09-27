@@ -8,13 +8,18 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontSize: {
+        sm: "0.8rem",
+        base: "2rem",
       },
       colors: {
-        // light mode
+        integra: {
+          text: "#171717",
+          background: "#E5E5E5",
+          primary: "#EAD990",
+          secondary: "#EFE3AE",
+          accent: "#FFD200",
+        },
         tremor: {
           brand: {
             faint: "#eff6ff", // blue-50

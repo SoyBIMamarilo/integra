@@ -1,32 +1,26 @@
 version: '3.8'
 services:
-
   pgadmin:
     image: dpage/pgadmin4
-    restart: always
+    # restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL : andres.lozano@amarilo.com
-      PGADMIN_DEFAULT_PASSWORD : amarilo
+      PGADMIN_DEFAULT_EMAIL: andres.lozano@amarilo.com
+      PGADMIN_DEFAULT_PASSWORD: amarilo
+      PGADMIN_CONFIG_ENABLE_PSQL: "True"
     ports:
       - "80:80"
     volumes:
       - ./servers.json:/pgadmin4/servers.json
+      - ./pgpass:/var/lib/pgadmin/pgpass
 
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./backend:/app
-  #     - /app/node_modules
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./frontend:/app
-  #     - /app/node_modules
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on: 
-  #     - backend
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: [ "npm", "run", "dev" ]
+    # stdin_open: true
+    # tty: true
+

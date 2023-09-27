@@ -11,7 +11,7 @@ const ProjectList = async () => {
   // const projects = await projectsData.json();
   // console.log("projects", projects);
   return (
-    <div className="flex w-1/2 flex-row gap-2">
+    <div className="flex w-2/3 flex-row flex-wrap gap-2">
       {projects.map((project) => (
         <LinkCard
           key={project.id}

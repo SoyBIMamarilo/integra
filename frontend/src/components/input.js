@@ -4,7 +4,7 @@ const Input = (props) => {
   const element =
     props.element === "input" ? (
       <input
-        className="w-full border border-none outline-none"
+        className=" w-full border border-none pl-2 outline-none"
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
@@ -15,7 +15,7 @@ const Input = (props) => {
     );
 
   return (
-    <div className="m-1 border border-solid border-black p-2">
+    <div className=" m-1  border border-solid border-black bg-white">
       <label htmlFor={props.id} />
       {element}
       {/* {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>} */}

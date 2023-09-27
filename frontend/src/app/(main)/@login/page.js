@@ -8,8 +8,8 @@ import LogoAmarilo from "@/public/amarilo-logo.png";
 export default function Auth() {
   return (
     <div className="w-100 flex h-screen flex-wrap content-evenly justify-center">
-      <div className="flex h-fit w-64 flex-col gap-3">
-        <h1 className="text-center text-6xl font-semibold">INTEGRA </h1>
+      <div className="flex h-fit w-min flex-col gap-3">
+        <h1 className=" p-0 text-6xl font-semibold">INTEGRA </h1>
         <form className="flex flex-col" action="/api/auth/login" method="post">
           <Input
             type="email"

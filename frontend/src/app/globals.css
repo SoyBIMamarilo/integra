@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer utilities {
+  h1 {
+    @apply p-4 text-4xl;
+  }
+  body {
+    @apply bg-neutral-50 text-lg;
+  }
+}
+
+@layer utilities {
+  .button-main {
+    @apply m-2 rounded-lg border-2 border-solid	 border-integra-text bg-integra-primary px-5 py-2.5 font-bold;
+  }
+  .text-integra-thin {
+    @apply text-xs	font-extralight;
+  }
+  .text-integra-small {
+    @apply text-xs	font-normal;
+  }
   .button-black {
     @apply rounded border border-solid border-white bg-black px-6 py-2 text-center font-medium text-white hover:invert;
   }
