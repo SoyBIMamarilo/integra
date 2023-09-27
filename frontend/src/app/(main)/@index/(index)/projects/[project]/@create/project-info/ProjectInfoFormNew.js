@@ -4,23 +4,31 @@ import { useState, useRef } from "react";
 
 import Plus from "@/components/svg/plus";
 
-export default function ProjectInfoFormNew({ pendingIndices }) {
+export default function ProjectInfoFormNew({
+  pendingIndices,
+  clickHandler,
+  changeHandler,
+}) {
   const [added, setAdded] = useState([]);
   const selected = useRef();
 
   const addedHandler = () => {
     const id = selected.current.value;
     const array = [...pendingIndices.filter((ind) => ind.id == id)];
-    console.log(...array);
+    // console.log(...array);
     setAdded((prev) => [...prev, ...array]);
+    clickHandler(selected.current.value);
   };
-
+  const changeInputHandler = (event) => {
+    console.log(event);
+    changeHandler(event.target.value, +event.target.name);
+  };
   return (
     <>
       <select ref={selected}>
-        <option value="default" selected="selected">
+        {/* <option value="default" selected="selected">
           Adiciona un Indicador
-        </option>
+        </option> */}
         {pendingIndices.map((it) => (
           <option key={it.id} value={it.id}>
             {it.abreviatura}
@@ -30,7 +38,7 @@ export default function ProjectInfoFormNew({ pendingIndices }) {
       <Plus onClick={addedHandler} />
       {added.map((ind) => (
         <>
-          <div className="flex flex-col">
+          <div key={ind.id} className="flex flex-col">
             <p className="text-integra-small">{ind.abreviatura}</p>
             <p className="text-integra-thin">{ind.descripcion}</p>
           </div>
@@ -39,6 +47,7 @@ export default function ProjectInfoFormNew({ pendingIndices }) {
               className="box-border w-full border-none"
               type="number"
               name={ind.id}
+              onChange={changeInputHandler}
             ></input>
           </div>
         </>

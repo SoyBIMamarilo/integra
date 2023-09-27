@@ -21,7 +21,7 @@ const Layout = async ({ create, children, params }) => {
         >
           {project.nombre}
         </Link>
-        <Link href={`/projects/${project.id}/view-project`}>
+        <Link href={`/projects/${project.id}/project-info`}>
           <Information />
         </Link>
       </div>
