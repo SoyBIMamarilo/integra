@@ -18,7 +18,7 @@ const TempTable = async ({ project, template }) => {
         <TempTableHeaders />
         <tbody>
           {tempItems.map((item) => (
-            <TempTableItem tempRow={item} />
+            <TempTableItem tempRow={item} key = {item.id} />
           ))}
 
           <tr>
