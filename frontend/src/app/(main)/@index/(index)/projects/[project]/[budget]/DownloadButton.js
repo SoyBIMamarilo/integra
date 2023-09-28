@@ -20,7 +20,7 @@ const DownloadFile = (props) => {
                 link.click();
                 alert("Archivo descargado.");
             })
-            .catch(err => { console.error("DonwloadButton", err); });
+            .catch(err => { console.error("DownloadButton", err); });
     };
     return (
         <Link href="#">

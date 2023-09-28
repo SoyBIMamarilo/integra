@@ -1,3 +1,6 @@
+/*
+Function to Convert JSon to Csv Strin output.
+ */
 export const JSONtoCSV = (objArray) => {
     var json = objArray;
     var fields = Object.keys(json[0])
