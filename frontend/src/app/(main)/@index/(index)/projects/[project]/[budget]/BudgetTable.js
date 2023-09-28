@@ -61,11 +61,11 @@ const BudgetTable = async ({ budget, project }) => {
               <Link href={`/projects/${project}/${budget}/create`}>
                 <button className="button-black my-3">Añadir paquete </button>
               </Link>
-              <Link href={`/projects/${project}/${budget}/batch-items`}>
+              {/* <Link href={`/projects/${project}/${budget}/batch-items`}>
                 <button className="button-black my-3">
                   Importar Items CSV
                 </button>
-              </Link>
+              </Link> */}
             </td>
           </tr>
         </tbody>

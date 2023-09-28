@@ -8,8 +8,8 @@ import { supabaseOptions } from "@/util/supabase";
 export default async function Create({ params, searchParams }) {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: ejecutados, error } = await supabase.rpc("ejecutados_valor");
-  // const paquete = searchParams.paquete;
-  // console.log(ejecutados[1])
+  const paquete = searchParams.paquete;
+  console.log(ejecutados[1]);
   return (
     <>
       <Modal>

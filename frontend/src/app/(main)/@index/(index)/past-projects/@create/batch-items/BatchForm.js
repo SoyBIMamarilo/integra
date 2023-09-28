@@ -3,20 +3,26 @@ import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { useState } from "react";
 
-const BatchForm = ({ project, budget }) => {
+const BatchForm = ({ projects, project, budget }) => {
   const router = useRouter();
   const [items, setItems] = useState([]);
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
+    const project = event.target.proyecto.value;
+    const itemsLoad = items.map((it) => ({
+      ...it,
+      proyecto_id: project,
+    }));
+    console.log(itemsLoad);
     console.log(items);
     const res = await fetch("/api/temp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items }),
+      body: JSON.stringify({ items: itemsLoad }),
     });
-    // router.refresh();
-    // router.back();
+    router.refresh();
+    router.back();
   };
 
   const handleUpload = async (event) => {
@@ -62,6 +68,7 @@ const BatchForm = ({ project, budget }) => {
           });
           // console.log(adjustedList);
           // console.log(reads);
+          console.log(adjustedList);
           setItems(adjustedList);
         },
       });
@@ -71,7 +78,15 @@ const BatchForm = ({ project, budget }) => {
   return (
     <form onSubmit={formSubmitHandler}>
       <div className="grid max-w-[70%] grid-cols-2 gap-3">
-        <label className="basis-1/4">Archivo csv </label>
+        <label>Proyecto:</label>
+        <select name="proyecto">
+          {projects.map((it) => (
+            <option key={it.id} value={it.id}>
+              {it.nombre}
+            </option>
+          ))}
+        </select>
+        <label>Archivo csv: </label>
         <input type="file" id="csvfile" accept=".csv" onChange={handleUpload} />
         <button type="submit" className="button-black">
           Importar
