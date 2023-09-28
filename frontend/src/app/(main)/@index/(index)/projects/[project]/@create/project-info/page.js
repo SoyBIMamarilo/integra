@@ -1,5 +1,5 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 import { supabaseOptions } from "@/util/supabase";
 import Modal from "@/components/modal/create-modal";
@@ -22,7 +22,11 @@ const Create = async ({ params }) => {
   return (
     <Modal>
       <div className="mb-4 font-bold">Ver Proyecto</div>
-      <ProjectInfoForm indices={indices} pendingIndices={pendingIndices} />
+      <ProjectInfoForm
+        project={params.project}
+        indices={indices}
+        pendingIndices={pendingIndices}
+      />
     </Modal>
   );
 };
