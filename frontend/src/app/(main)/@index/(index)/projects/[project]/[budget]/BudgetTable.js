@@ -61,11 +61,6 @@ const BudgetTable = async ({ budget, project }) => {
               <Link href={`/projects/${project}/${budget}/create`}>
                 <button className="button-black my-3">Añadir paquete </button>
               </Link>
-              <Link href={`/projects/${project}/${budget}/batch-items`}>
-                <button className="button-black my-3">
-                  Importar Items CSV
-                </button>
-              </Link>
             </td>
           </tr>
         </tbody>

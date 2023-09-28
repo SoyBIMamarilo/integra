@@ -5,6 +5,7 @@ const routes = [
   { href: "projects", name: "Proyectos" },
   { href: "reports", name: "Reportes" },
   { href: "data-bases", name: "Bases de Datos" },
+  { href:"historic-items", name:"Historico de items"}
 ];
 
 const SideBar = () => {

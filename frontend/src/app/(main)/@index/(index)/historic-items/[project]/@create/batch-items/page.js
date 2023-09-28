@@ -8,7 +8,7 @@ const Page = ({ params }) => {
   return (
     <Modal>
       <div className="mb-4 font-bold">Añadir Items de csv</div>
-      <BatchForm project={params.project} budget={params.budget} />
+      <BatchForm project={params.project} />
     </Modal>
   );
 };
