@@ -7,10 +7,12 @@ import TestComponent from "./TestComponent";
 export const dynamic = "force-dynamic";
 
 export default async function OptionalSession(params) {
+  const cookieStore = cookies();
   // const supabase = createServerComponentClient({ cookies }, supabaseOptions);
-  // const cookieLiteral = cookies().get("sb-kfkiyhtoznvoealcynsj-auth-token");
-  // const cookie = JSON.parse(cookieLiteral.value);
-  // console.log("COOKIE", cookie, "RES COOKIE");
+  const cookieLiteral = cookieStore.get("sb-kfkiyhtoznvoealcynsj-auth-token");
+  const cookie = JSON.parse(cookieLiteral.value);
+  console.log("COOKIES", cookies);
+  console.log("COOKIE", cookie[0], "RES COOKIE");
   // const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/prueba`;
   // console.log(`Bearer: ${cookie[0]}`);
   // const res = await fetch(url, {

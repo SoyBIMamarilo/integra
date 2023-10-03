@@ -20,6 +20,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
         "proyecto_indicadores_comun",
         { pr_or: selected.proyecto_id, pr_dest: selectedProject }
       );
+      console.log(indicadores);
 
       setIndicadores(indicadores);
     };
