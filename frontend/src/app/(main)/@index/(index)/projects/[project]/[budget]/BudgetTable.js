@@ -2,14 +2,15 @@ import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import { supabaseOptions } from "@/util/supabase";
-
 import { nf, nf_per } from "@/util/date-format";
 
+import DownloadFile from "./DownloadButton";
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 
 const BudgetTable = async ({ budget, project }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+
   const { data: valorTotal, errorValorTotal } = await supabase.rpc(
     "presupuesto_total_valor",
     {
@@ -28,6 +29,7 @@ const BudgetTable = async ({ budget, project }) => {
       presupuesto: budget,
     }
   );
+
   return (
     <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min	w-full 	table-auto ">
@@ -57,15 +59,16 @@ const BudgetTable = async ({ budget, project }) => {
             <td className="table-content text-center">{nf_per.format(1)}</td>
           </tr>
           <tr>
-            <td>
+            <td className="inline-flex">
               <Link href={`/projects/${project}/${budget}/create`}>
-                <button className="button-black my-3">Añadir paquete </button>
+                <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">Añadir paquete </button>
               </Link>
               {/* <Link href={`/projects/${project}/${budget}/batch-items`}>
-                <button className="button-black my-3">
+                <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">
                   Importar Items CSV
                 </button>
               </Link> */}
+              <DownloadFile project={project} budget={budget} fileType="application/octet-stream" fileName={`${Date.now().toFixed()}${project}${budget}.csv`} />
             </td>
           </tr>
         </tbody>
