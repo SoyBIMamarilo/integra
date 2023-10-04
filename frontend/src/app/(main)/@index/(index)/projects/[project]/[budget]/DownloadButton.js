@@ -6,7 +6,7 @@ const DownloadFile = (props) => {
     let rootApi = process.env.ROOT_URL ? process.env.ROOT_URL : "http://localhost:3000";
     const downloadData = async () => {
         let Idata = "";
-        fetch(`${rootApi}/api/budget/download/${props.budget}`)
+        fetch(`/api/budget/download/${props.budget}`)
             .then(response => response.json())
             .then(data => {
                 if (!data) return alert("No Existe informacion a Descargar.");

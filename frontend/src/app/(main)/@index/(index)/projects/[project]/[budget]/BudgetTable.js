@@ -63,12 +63,12 @@ const BudgetTable = async ({ budget, project }) => {
               <Link href={`/projects/${project}/${budget}/create`}>
                 <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">Añadir paquete </button>
               </Link>
-              {/* <Link href={`/projects/${project}/${budget}/batch-items`}>
+              <Link target="_blank" href={`/projects/${project}/${budget}/comparer`}>
                 <button className="button-black my-3 text-sm mr-2 mb-2 px-5 py-2.5 inline-flex items-center rounded-lg">
-                  Importar Items CSV
+                  Comparador
                 </button>
-              </Link> */}
-              <DownloadFile project={project} budget={budget} fileType="application/octet-stream" fileName={`${Date.now().toFixed()}${project}${budget}.csv`} />
+              </Link>
+              <DownloadFile project={project} budget={budget} fileType="application/octet-stream" fileName={`${Date.now().toFixed()}_Project${project}_Pres${budget}.csv`} />
             </td>
           </tr>
         </tbody>
