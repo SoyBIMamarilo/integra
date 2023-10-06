@@ -17,5 +17,4 @@ export async function GET(req, res) {
     } catch (err) {
         console.log("Api Presupuesto Op:Get", err);
     }
-
 }
