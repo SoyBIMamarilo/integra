@@ -8,7 +8,9 @@ const Layout = (props) => {
           <h1 className="bg-colors grow pl-14 tracking-wide	">INTEGRA</h1>
           {/* <div className="p-2 text-right text-2xl">Mi Perfil</div> */}
           <form action="/api/auth/logout" method="POST">
-            <button className="button-main text-integra-text">Salir</button>
+            <button className="m-2 rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert px-5 py-2.5 font-bold text-integra-text">
+              Salir
+            </button>
           </form>
         </div>
         <div className="flex grow flex-row">

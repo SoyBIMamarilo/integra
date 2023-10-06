@@ -29,8 +29,8 @@ const BudgetTable = async ({ budget, project }) => {
     }
   );
   return (
-    <div className="mt-5 flex h-full justify-center rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
-      <table className="h-min	w-full 	table-auto ">
+    <div className="mt-5 flex h-full flex-col justify-start rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
+      <table className="h-min	w-full table-fixed	border-separate ">
         <BudgetTableHeaders />
         <tbody>
           <tr className="h-2 "></tr>
@@ -38,7 +38,7 @@ const BudgetTable = async ({ budget, project }) => {
 
           <tr className="h-2" />
 
-          <tr className="text-xs font-bold">
+          <tr className="font-bold">
             <td colSpan={1} className="table-content cursor-pointer">
               <div className="flex flex-row place-items-center px-2">Total</div>
             </td>
@@ -56,20 +56,13 @@ const BudgetTable = async ({ budget, project }) => {
             </td>
             <td className="table-content text-center">{nf_per.format(1)}</td>
           </tr>
-          <tr>
-            <td>
-              <Link href={`/projects/${project}/${budget}/create`}>
-                <button className="button-black my-3">Añadir paquete </button>
-              </Link>
-              {/* <Link href={`/projects/${project}/${budget}/batch-items`}>
-                <button className="button-black my-3">
-                  Importar Items CSV
-                </button>
-              </Link> */}
-            </td>
-          </tr>
         </tbody>
       </table>
+      <Link href={`/projects/${project}/${budget}/create`}>
+        <button className="m-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
+          Añadir Paquete
+        </button>
+      </Link>
     </div>
   );
 };

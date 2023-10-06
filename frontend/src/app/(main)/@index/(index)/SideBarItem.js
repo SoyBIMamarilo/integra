@@ -8,7 +8,7 @@ const SideBarItem = ({ href, name, disabled }) => {
   const active = pathName == href;
   const activateStyles = !active
     ? "hover:text-neutral-900"
-    : "border border-solid border-black rounded-full bg-neutral-800	text-neutral-100 hover:text-neutral-200";
+    : "border py-1 border-solid border-black rounded-full bg-neutral-800	text-neutral-100 hover:text-neutral-200";
   console.log(disabled);
   return (
     <Link

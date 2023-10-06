@@ -10,7 +10,7 @@ const routes = [
 
 const SideBar = () => {
   return (
-    <div className="pr-24-4 sticky top-[10vh] z-40 box-border flex basis-1/6 flex-col items-stretch gap-1 bg-neutral-200 px-12  pt-12 text-neutral-600">
+    <div className="sticky top-[10vh] z-40 box-border flex basis-1/6 flex-col items-stretch gap-1 bg-neutral-200 px-16 pt-12 text-xl text-neutral-600">
       {routes.map((route) => (
         <SideBarItem
           key={route.href}
