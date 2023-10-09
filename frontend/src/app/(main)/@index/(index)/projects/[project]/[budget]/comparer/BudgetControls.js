@@ -20,7 +20,6 @@ const BudgetControls = (params) => {
             data = data.map((item) => ({ label: item.nombre, id: item.id }));
             setProjects(data);
             setIsLoading(false);
-            console.log(data);
         };
         getprojects().catch(error => {
             console.error('Error al obtener projectos:', error);
