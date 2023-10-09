@@ -16,7 +16,7 @@ const Layout = async ({ create, children, params }) => {
     <>
       <div className="flex flex-row gap-2">
         <Link
-          className="title-black	max-w-max shrink "
+          className="mb-2 mt-1 max-w-max shrink	text-2xl font-semibold "
           href={`/projects/${project.id}`}
         >
           {project.nombre}

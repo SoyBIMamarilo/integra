@@ -39,27 +39,38 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="grid max-w-[70%] grid-cols-2 gap-3">
-        <label>Nombre *</label>
-        <input type="text" name="nombre" />
-        <label>Ciudad *</label>
-        <select name="ciudad">
-          {ciudades.map((it) => (
-            <option key={it.id} value={it.id}>
-              {it.nombre}
-            </option>
-          ))}
-        </select>
-        <label>m2 const*</label>
-        <input type="number" name="m2const" />
-        <label>m2 vend*</label>
-        <input type="number" name="m2vend" />
-        <button type="submit" className="button-black">
-          Crear
-        </button>
-        <button type="button" className="button-black  ">
-          Cancelar
-        </button>
+      <div className="flex max-w-[70%] flex-col gap-3">
+        <div className="grid grid-cols-2 gap-3">
+          <label>Nombre *</label>
+          <input className="rounded-sm" type="text" name="nombre" />
+          <label>Ciudad *</label>
+          <select className="rounded-sm" name="ciudad">
+            {ciudades.map((it) => (
+              <option key={it.id} value={it.id}>
+                {it.nombre}
+              </option>
+            ))}
+          </select>
+          <label>m2 const*</label>
+          <input className="rounded-sm" type="number" name="m2const" />
+          <label>m2 vend*</label>
+          <input className="rounded-sm" type="number" name="m2vend" />
+        </div>
+        <div className="mt-2 flex flex-row justify-end gap-2">
+          <button
+            type="submit"
+            className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
+          >
+            Crear Proyecto
+          </button>
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text "
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </form>
   );
