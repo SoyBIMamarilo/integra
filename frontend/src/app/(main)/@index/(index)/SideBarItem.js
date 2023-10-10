@@ -12,7 +12,7 @@ const SideBarItem = ({ href, name, disabled }) => {
   console.log(disabled);
   return (
     <Link
-      href={`/${href}`}
+      href={`${href}`}
       className={` ${activateStyles} px-4 py-1 ${
         disabled ? "pointer-events-none text-neutral-300" : ""
       }`}

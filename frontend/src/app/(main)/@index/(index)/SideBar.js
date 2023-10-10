@@ -2,10 +2,10 @@ import Link from "next/link";
 import SideBarItem from "./SideBarItem";
 
 const routes = [
-  { href: "projects", name: "Proyectos", disabled: false },
-  { href: "past-projects", name: "Históricos", disabled: false },
-  { href: "reports", name: "Reportes", disabled: true },
-  { href: "data-bases", name: "Bases de Datos", disabled: true },
+  { href: "/projects", name: "Proyectos", disabled: false },
+  { href: "/past-projects", name: "Históricos", disabled: false },
+  { href: "/reports", name: "Reportes", disabled: true },
+  { href: "/data-bases", name: "Bases de Datos", disabled: true },
 ];
 
 const SideBar = () => {
