@@ -38,7 +38,6 @@ const BudgetTableBodyItem = ({
     });
     router.refresh();
   };
-
   return (
     <>
       <tr>
@@ -94,14 +93,10 @@ const BudgetTableBodyItem = ({
         </td> */}
       </tr>
       {itemValue.map((item) => (
-        <BudgetTableBodyItemSub key={item.da} item={item} open={open} />
+        <BudgetTableBodyItemSub key={item.item_id} item={item} open={open} />
       ))}
       {manualValue.map((item) => (
-        <BudgetTableBodyItemManual
-          key={item.paquete_trabajo_id}
-          item={item}
-          open={open}
-        />
+        <BudgetTableBodyItemManual key={item.nombre} item={item} open={open} />
       ))}
     </>
   );

@@ -1,11 +1,21 @@
-"use client"
+"use client";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { cookies } from "next/headers";
-import { supabaseOptions } from "@/util/supabase";
+// import { supabaseOptions } from "@/util/supabase";
+import { useState } from "react";
 
-export const dynamic = "force-dynamic";
+import Loading from "./loading";
+
+const promise = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("foo");
+    }, 300);
+  });
+};
 
 export default function TestComponent() {
+  const [loading, setLoading] = useState(false);
   //const supabase = createServerComponentClient({ /*cookies*/ }, supabaseOptions);
   // const allCookies = cookies().getAll();
   // console.log(allCookies);
@@ -13,22 +23,16 @@ export default function TestComponent() {
   //   presupuesto: 1,
   // });
   const callHandler = async () => {
-    fetch("http://localhost:3000/api/budget/download/1", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify({
-      //   paquete_trabajo_id,
-      //   presupuesto_id: budget,
-      // }),
-    }).then(response => response.json())
-      .then(data => {
-        console.log(data);
-      }).catch(err => { console.error(err) });
+    console.log("Loading");
+    setLoading(true);
+    await promise();
+    setLoading(false);
   };
   return (
     <>
+      {loading && <Loading />}
       <div>procesado</div>
-      <button onClick={callHandler }>test Btn</button>
+      <button onClick={callHandler}>test Btn</button>
     </>
   );
 }

@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import { supabaseOptions } from "@/util/supabase";
 import SuspenseComponent from "./testLoading";
+import TestComponent from "./TestComponent";
 
 export default async function OptionalSession(params) {
   // const supabase = createClient(
@@ -31,9 +32,10 @@ export default async function OptionalSession(params) {
 
   return (
     <>
-      <Suspense fallback={<p>LOADING...</p>}>
+      {/* <Suspense fallback={<p>LOADING...</p>}>
         <SuspenseComponent />
-      </Suspense>
+      </Suspense> */}
+      <TestComponent />
     </>
   );
 }

@@ -41,12 +41,14 @@ const CreateItem = ({ presupuestos }) => {
     </>
   );
 
-  const active = "bg-neutral-200 rounded-sm border border-black px-2";
-  const inactive = "rounded-sm border border-black px-2";
+  const active =
+    "w-32 bg-integra-text text-integra-background rounded-sm border border-black px-2 first:rounded-tl-full first:rounded-bl-full last:rounded-tr-full last:rounded-br-full ";
+  const inactive =
+    "w-32	 bg-integra-background text-integra-text rounded-sm border border-black px-2 first:rounded-tl-full first:rounded-bl-full last:rounded-tr-full last:rounded-br-full";
 
   return (
     <>
-      <div className="mb-2 flex flex-row gap-2">
+      <div className="mb-2 flex flex-row ">
         <button
           onClick={changeFormHandler}
           className={!manual ? active : inactive}
@@ -61,16 +63,6 @@ const CreateItem = ({ presupuestos }) => {
         </button>
       </div>
       {content}
-      {/* <CreateItemSearch
-        presupuestos={presupuestos}
-        onAddHandler={onAddHandler}
-      />
-      <CreateItemSelected selected={addedPresupuestos} />
-      <CreateItemFactor
-        selected={addedPresupuestos}
-        setIndicador={setIndicador}
-      />
-      <CreateItemForm selected={addedPresupuestos} indicador={indicador} /> */}
     </>
   );
 };
