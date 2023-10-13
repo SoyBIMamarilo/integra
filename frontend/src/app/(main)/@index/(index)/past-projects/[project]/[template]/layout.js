@@ -14,6 +14,7 @@ export default async function Layout({ create, children, params }) {
     <>
       {create}
       <div className="mt-1 font-semibold">Versión: {temp.version}</div>
+      <div className="mt-1 font-semibold">Fecha de ejecución: {temp.fecha_ejecucion}</div>
       {children}
     </>
   );

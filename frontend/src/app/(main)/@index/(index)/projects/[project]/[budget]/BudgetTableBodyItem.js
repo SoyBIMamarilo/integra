@@ -38,35 +38,38 @@ const BudgetTableBodyItem = ({
     });
     router.refresh();
   };
-
   return (
     <>
-      <tr className="text-xs font-semibold">
-        <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center pl-2">
-            <div onClick={clickHandler} className="grow ">
-              {paquete.nombre}
-            </div>
+      <tr>
+        <td
+          colSpan={1}
+          className="h-8 cursor-pointer border border-solid  	 border-neutral-200 hover:bg-neutral-50"
+        >
+          <div
+            onClick={clickHandler}
+            className="flex flex-row place-items-center pl-2"
+          >
+            <div className="grow ">{paquete.nombre}</div>
             <Arrow open={open} />
           </div>
         </td>
         <td />
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {packageValueAdj.indicador} m2
         </td>
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {/* {nf.format(packageValueAdj.valor_interno_paquete)} */}
         </td>
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf.format(packageValueAdj.vrtot)}
         </td>
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf.format(packageValueAdj.vrm2const)}
         </td>
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf.format(packageValueAdj.vrm2vend)}
         </td>
-        <td className="table-content text-center">
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf_per.format(packageValueAdj.incidencia)}
         </td>
         <td>
@@ -90,14 +93,10 @@ const BudgetTableBodyItem = ({
         </td> */}
       </tr>
       {itemValue.map((item) => (
-        <BudgetTableBodyItemSub key={item.da} item={item} open={open} />
+        <BudgetTableBodyItemSub key={item.item_id} item={item} open={open} />
       ))}
       {manualValue.map((item) => (
-        <BudgetTableBodyItemManual
-          key={item.paquete_trabajo_id}
-          item={item}
-          open={open}
-        />
+        <BudgetTableBodyItemManual key={item.nombre} item={item} open={open} />
       ))}
     </>
   );

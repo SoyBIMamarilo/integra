@@ -12,7 +12,6 @@ services:
     volumes:
       - ./servers.json:/pgadmin4/servers.json
       - ./pgpass:/var/lib/pgadmin/pgpass
-
   frontend:
     build: ./frontend
     ports:

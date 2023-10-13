@@ -23,7 +23,7 @@ export default function ProjectSelector() {
   return (
     <div className="relative">
       <Listbox value={selectedProject} onChange={projectChangeHandler}>
-        <Listbox.Button className="title-black self-start ">
+        <Listbox.Button className="mb-2 mt-1 text-2xl font-semibold ">
           {selectedProject.nombre}
         </Listbox.Button>
         <Listbox.Options className="ring-opacity-1 absolute z-10 mt-1 self-start rounded bg-white py-1 text-base shadow ring-1 ring-black focus:outline-none">

@@ -19,6 +19,7 @@ module.exports = {
           primary: "#EAD990",
           secondary: "#EFE3AE",
           accent: "#FFD200",
+          alert: "#EB8A86",
         },
         tremor: {
           brand: {

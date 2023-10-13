@@ -17,9 +17,18 @@ export default function Create({ params }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ version, proyecto_id: params.project }),
     });
-    console.log(res);
+    if (!res.ok){
+      const messageRes = await res.json()
+      alert(
+        `No se ha podido crear el nuevo presupuesto ya que se presenta el siguiente error: ${messageRes.message}`
+      );
+    }
+    else {
+      console.log(res);
     router.refresh();
     router.back();
+    }
+    
   };
 
   return (

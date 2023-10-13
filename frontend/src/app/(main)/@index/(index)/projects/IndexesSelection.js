@@ -12,7 +12,7 @@ const IndexexSelection = async () => {
 
   return (
     <div className="basis-1/2">
-      <div className="title-black w-min	">Indices</div>
+      <div className="mb-2 mt-1 text-2xl font-semibold	">Indices</div>
       <IndexesSelctionList indexes={indexes} />
     </div>
   );

@@ -19,5 +19,14 @@ export async function POST(req) {
     })
   console.log(data);
   console.log(error);
-  return NextResponse.json(data);
+  if (data === null) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  } else if (data.length === 0) {
+    return NextResponse.json(
+      { message: "No cuenta con los permisos para la creacion en esta tabla" },
+      { status: 500 }
+    );
+  } else {
+    return NextResponse.json(data);
+  }
 }

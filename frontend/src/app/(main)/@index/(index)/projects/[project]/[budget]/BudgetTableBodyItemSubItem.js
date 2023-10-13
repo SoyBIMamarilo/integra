@@ -21,7 +21,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
   };
   return (
     <>
-      <tr className={`${openStyle} text-xs font-light `}>
+      <tr className={`${openStyle} `}>
         <td className="table-content">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
             <div className="">{item.descripcion}</div>

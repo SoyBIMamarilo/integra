@@ -4,10 +4,11 @@ export default function CreateItemSearchData(props) {
   const uniqueElements = Array.from(new Set(props.list));
   return (
     <div className="relative flex flex-col px-2">
-      <label className="font-light" htmlFor={props.label}>
+      <label className="font-bold" htmlFor={props.label}>
         {props.label}:
       </label>
       <input
+        className="rounded-sm"
         list={`list-${props.label}`}
         id={`${props.label}`}
         name={`${props.label}`}

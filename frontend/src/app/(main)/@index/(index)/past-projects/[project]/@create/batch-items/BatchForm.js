@@ -8,10 +8,12 @@ const BatchForm = ({ project }) => {
   const [items, setItems] = useState([]);
   const fileref = useRef();
   const versionRef = useRef();
+  const dateRef = useRef();
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    if (items) {
+    console.log(dateRef.current.value);
+    if (items && versionRef.current.value && dateRef.current.value) {
       const res = await fetch("/api/temp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -19,12 +21,21 @@ const BatchForm = ({ project }) => {
           items,
           project,
           version: versionRef.current.value,
+          date: dateRef.current.value,
         }),
       });
-      router.refresh();
-      router.back();
+      if (!res.ok) {
+        const messageRes = await res.json();
+        alert(
+          `No se ha podido crear la plantilla ya que se presenta el siguiente error: ${messageRes.message}`
+        );
+      } else {
+        console.log(res);
+        router.refresh();
+        router.back();
+      }
     } else {
-      alert("Selecciona un archivo valido para continuar");
+      alert("Completa los campos necesarios para continuar");
     }
   };
 
@@ -69,7 +80,7 @@ const BatchForm = ({ project }) => {
               // element.parent_id = budget;
             });
             setItems(adjustedList);
-            console.log(adjustedList)
+            console.log(adjustedList);
           } else {
             alert("Ingresa un archivo valido");
             fileref.current.value = "";
@@ -90,6 +101,8 @@ const BatchForm = ({ project }) => {
           onChange={handleUpload}
           ref={fileref}
         />
+        <label className="basis-1/4">Fecha de ejecución </label>
+        <input type="date" ref={dateRef} />
         <label>Versión: </label>
         <input
           ref={versionRef}

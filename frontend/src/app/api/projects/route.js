@@ -25,12 +25,22 @@ export async function POST(req) {
   const nombre = body.nombre;
   const ciudad_id = body.ciudad;
   console.log("BEFORE POST PROYECTO");
-  const res = await supabase.from("proyecto").insert({ nombre, ciudad_id });
-  const newProyect = await supabase
+  const { data, error } = await supabase
     .from("proyecto")
-    .select()
-    .eq("nombre", nombre);
-  console.log("Created Project", newProyect);
+    .insert({ nombre, ciudad_id })
+    .select();
 
-  return NextResponse.json(newProyect.data[0]);
+  console.log(data);
+  console.log(error);
+
+  if (data === null) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  } else if (data.length === 0) {
+    return NextResponse.json(
+      { message: "No cuenta con los permisos para la creacion en esta tabla" },
+      { status: 500 }
+    );
+  } else {
+    return NextResponse.json(data[0]);
+  }
 }

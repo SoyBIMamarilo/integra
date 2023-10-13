@@ -19,6 +19,22 @@ const BudgetListCard = ({ budget }) => {
     router.refresh();
   };
 
+  const blockPresupuestoHandler = async () => {
+    const res = await fetch("/api/budget", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: budget.id }),
+    });
+
+
+    if (!res.ok) {
+      const response = await res.json();
+      alert(response.message);
+    } else {
+      router.refresh();
+    }
+  };
+
   return (
     <>
       <div className="m-2 flex flex-row flex-wrap justify-between rounded border border-neutral-200 bg-neutral-100 p-3 hover:bg-neutral-300 ">
@@ -29,9 +45,9 @@ const BudgetListCard = ({ budget }) => {
           <div> Versión: </div>
           <div className="mx-2 grow">{budget.version}</div>
         </Link>
-        <Copy />
-        <Block />
-        <Trash onClick={deletePresupuestoHandler} />
+        <Copy blocked={budget.bloqueado} />
+        <Block onClick={blockPresupuestoHandler} blocked={budget.bloqueado} />
+        <Trash onClick={deletePresupuestoHandler} blocked={budget.bloqueado} />
       </div>
     </>
   );

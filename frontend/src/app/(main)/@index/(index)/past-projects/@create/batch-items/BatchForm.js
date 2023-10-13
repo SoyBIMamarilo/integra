@@ -31,10 +31,8 @@ const BatchForm = ({ projects }) => {
       Papa.parse(f, {
         header: true,
         skipEmptyLines: true,
-        before: function (file, inputElem) {
-          // executed before parsing each file begins;
-          // what you return here controls the flow
-        },
+        encoding: "ISO-8859-1",
+        before: function (file, inputElem) {},
         error: function (err, file, inputElem, reason) {
           // executed if an error occurs while loading the file,
           // or if before callback aborted for some reason
@@ -42,6 +40,7 @@ const BatchForm = ({ projects }) => {
         complete: function (results, file) {
           const reads = results.data;
           const adjustedList = [];
+          console.log(reads);
           reads.forEach((element) => {
             const id = +element.Id;
             const parent_id = element.ParentId ? +element.ParentId : null;
