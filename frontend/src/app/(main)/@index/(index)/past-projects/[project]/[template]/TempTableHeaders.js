@@ -10,8 +10,6 @@ const TempTableHeaders = () => {
         <th className="table-header w-[13%]">Cantidad</th>
         <th className="table-header w-[13%]">Precio Unitario</th>
         <th className="table-header w-[13%]">BoQ Line Type</th>
-        <th className="w-4"></th>
-        <th className="w-4"></th>
       </tr>
     </thead>
   );

@@ -20,10 +20,10 @@ export async function POST(req) {
   const newViD = tempV[0].id;
   items.forEach((element) => {
     element.plantilla_presupuesto_id = newViD;
+    element.proyecto_id = project
   });
   console.log(items);
-  const { data, error } = await supabase.from("temp").insert(items);
-  //console.log(data);
-  //console.log(error);
+  const { data, error } = await supabase.from("presupuesto_historico").insert(items);
+  console.log(error)
   return NextResponse.json(data);
 }

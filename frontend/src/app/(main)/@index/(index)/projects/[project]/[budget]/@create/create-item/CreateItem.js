@@ -11,7 +11,7 @@ import CreateItemManual from "./CreateItemManual";
 const CreateItem = ({ presupuestos }) => {
   const [addedPresupuestos, setAddedPresupuestos] = useState(null);
   const [indicador, setIndicador] = useState(null);
-  const [manual, setManual] = useState(true);
+  const [manual, setManual] = useState(false);
 
   const onAddHandler = (e, p) => {
     setAddedPresupuestos(p);

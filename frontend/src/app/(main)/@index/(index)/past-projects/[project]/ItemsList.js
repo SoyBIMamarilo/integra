@@ -11,7 +11,7 @@ const ItemsList = async ({project}) => {
 
   const { data: templates, error } = await supabase
     .from("plantilla_presupuesto")
-    .select("*");
+    .select("*").eq("proyecto_id",project);
   return (
     <GroupCard title="Plantillas de presupuesto" styles="min-w-[30%]">
       {templates.map((template) => {

@@ -69,6 +69,7 @@ const BatchForm = ({ project }) => {
               // element.parent_id = budget;
             });
             setItems(adjustedList);
+            console.log(adjustedList)
           } else {
             alert("Ingresa un archivo valido");
             fileref.current.value = "";

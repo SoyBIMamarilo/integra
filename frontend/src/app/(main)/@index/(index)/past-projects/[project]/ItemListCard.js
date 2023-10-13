@@ -8,7 +8,7 @@ const ItemListCard = ({ item }) => {
     <>
       <div className="m-2 flex flex-row flex-wrap justify-between rounded border border-neutral-200 bg-neutral-100 p-3 hover:bg-neutral-300 ">
         <Link
-          href={`/historic-items/${item.proyecto_id}/${item.id}`}
+          href={`/past-projects/${item.proyecto_id}/${item.id}`}
           className="flex grow flex-row"
         >
           <div> Versión: </div>
