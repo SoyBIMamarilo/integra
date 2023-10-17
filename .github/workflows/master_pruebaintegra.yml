@@ -20,7 +20,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-
+      - name: List files in the repository
+        run: |
+            ls ${{ github.workspace }}
       - name: npm install, build, and test
         run: |
           npm install
