@@ -11,7 +11,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="title" content="Integra Site BIM Amarilo" />
+        <meta name="description" content="Site to Count Quantity" />
+        <meta name="keywords" content="BIM,Amarilo,Viewer,Autodesk" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="English" />
+        <meta name="author" content="Amarilo" />
+        <link rel="stylesheet" type="text/css" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css" />
+
+      </head>
+
       <body className={inter.className}>{children}</body>
+
     </html>
   );
 }

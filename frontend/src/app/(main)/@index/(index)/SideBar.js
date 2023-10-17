@@ -6,6 +6,7 @@ const routes = [
   { href: "/past-projects", name: "Históricos", disabled: false },
   { href: "/reports", name: "Reportes", disabled: true },
   { href: "/data-bases", name: "Bases de Datos", disabled: true },
+  { href: "/viewer", name: "Visor Amarilo", disabled: false }
 ];
 
 const SideBar = () => {

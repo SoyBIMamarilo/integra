@@ -6,29 +6,39 @@
   h1 {
     @apply p-4 text-4xl;
   }
+
   body {
     @apply bg-neutral-50 text-lg text-integra-text;
   }
 }
 
 @layer utilities {
+  .button-main {
+    @apply m-2 rounded-lg border-2 border-solid border-integra-text bg-integra-primary px-5 py-2.5 font-bold;
+  }
+
   .text-integra-thin {
-    @apply text-xs	font-extralight;
+    @apply text-xs font-extralight;
   }
+
   .text-integra-small {
-    @apply text-xs	font-normal;
+    @apply text-xs font-normal;
   }
+
   .button-black {
     @apply rounded border border-solid border-white bg-black px-6 py-2 text-center font-medium text-white hover:invert;
   }
+
   .title-black {
     @apply mb-1 text-xl font-semibold;
   }
+
   .table-header {
-    @apply h-16 border border-neutral-500 bg-neutral-800 p-2	align-middle font-bold	 text-neutral-100;
+    @apply h-16 border border-neutral-500 bg-neutral-800 p-2 align-middle font-bold text-neutral-100;
   }
+
   .table-content {
-    @apply h-8 border border-solid border-neutral-300  	 hover:bg-neutral-50;
+    @apply h-8 border border-solid border-neutral-300 hover:bg-neutral-50;
   }
 }
 
@@ -48,4 +58,105 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/*Visor Styles*/
+
+#header,
+#sidebar,
+#viewer {
+  position: relative;
+}
+
+#header {
+  height: 2em;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sidebar {
+  width: 25%;
+  left: 0;
+  top: 3em;
+  bottom: 0;
+  overflow-y: scroll;
+}
+
+#viewer {
+  width: 100%;
+  right: 0;
+  top: 2em;
+  bottom: 0;
+}
+
+#header>* {
+  height: 2em;
+  margin: 0 0.5em;
+}
+
+#login {
+  font-family: ArtifaktElement;
+  font-size: 1em;
+}
+
+#header .title {
+  height: auto;
+  margin-right: auto;
+}
+
+#tree {
+  margin: 0.5em;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    top: 3em;
+    bottom: 75%;
+  }
+
+  #viewer {
+    width: 100%;
+    top: 25%;
+    bottom: 0;
+  }
+}
+
+.icon-hub:before {
+  background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/apps-16.svg);
+  /* or https://raw.githubusercontent.com/primer/octicons/main/icons/stack-16.svg */
+  background-size: cover;
+}
+
+.icon-project-bim360:before {
+
+  background-image: url(https://play-lh.googleusercontent.com/h482y0tJBO5m49H6qULIK8lUOsOUIqKeCXI8ZSvfCPEuNzAiS-4L_SolHfhGPfh5EQ);
+  /* or https://raw.githubusercontent.com/primer/octicons/main/icons/organization-16.svg */
+  background-size: cover;
+}
+
+.icon-project-acc:before {
+
+  background-image: url(https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/517c849af4185b8387160e5ae5512506);
+  /* or https://raw.githubusercontent.com/primer/octicons/main/icons/organization-16.svg */
+  background-size: cover;
+}
+
+
+.icon-my-folder:before {
+  background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/file-directory-16.svg);
+  background-size: cover;
+}
+
+.icon-item:before {
+  background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/file-16.svg);
+  background-size: cover;
+}
+
+.icon-version:before {
+  background-image: url(https://raw.githubusercontent.com/primer/octicons/main/icons/clock-16.svg);
+  background-size: cover;
 }
