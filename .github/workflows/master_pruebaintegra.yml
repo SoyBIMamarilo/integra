@@ -15,12 +15,12 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./frontend
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '18.x'
       - name: List files in the repository
@@ -43,7 +43,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./frontend
+        working-directory: frontend
     needs: build
     environment:
       name: 'Production'
@@ -51,9 +51,11 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: node-app
+      - name: Test Artifact Download Next
+        run: ls -R 
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
