@@ -60,7 +60,7 @@ const ViewerAps = (params) => {
             };
             Autodesk.Viewing.Initializer(options, () => {
                 const config = {
-                    extensions: ['Autodesk.DocumentBrowser', 'Autodesk.VisualClusters', "LoggerExtension"]
+                    extensions: ['Autodesk.DocumentBrowser', 'Autodesk.VisualClusters', "LoggerExtension", "HistogramExtension"]
                 };
                 const viewer = new Autodesk.Viewing.GuiViewer3D(viewer3DRef.current, config);
                 var startedCode1 = viewer.start();
@@ -86,6 +86,7 @@ const ViewerAps = (params) => {
                         viewer.loadExtension('Autodesk.VisualClusters');
                         viewer.loadExtension("NestedViewerExtension", { filter: ["2d", "3d"], crossSelection: true });
                         viewer.loadExtension("LoggerExtension");
+                        viewer.loadExtension("HistogramExtension");
                     }
                     function onDocumentLoadFailure(code, message, errors) {
                         reject({ code, message, errors });
@@ -114,14 +115,15 @@ const ViewerAps = (params) => {
             <Script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" />
             <Script src="https://unpkg.com/inspire-tree@4.3.1/dist/inspire-tree.js" />
             <Script src="https://unpkg.com/inspire-tree-dom@4.0.6/dist/inspire-tree-dom.min.js" />
+
+            {/* <!-- //extensions -->
+            <!-- planesviewer --> */}
+            <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.css" />
+            <Script strategy="afterInteractive" src="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.js"></Script>
             {/* <!-- summaryExt --> */}
             <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="/extensions/summary/LoggerExtension.js"></Script>
-            {/* <!-- //extensions -->
-        <!-- planesviewer --> */}
-            <link rel="stylesheet"
-                href="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.css" />
-            <Script strategy="lazyOnload"
-                src="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.js"></Script>
+            {/* <!-- histograma --> */}
+            <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="extensions/Histograms/HistogramExtension.js"></Script>
             {({ docUrn }) ? (
                 <div id="viewer"
                     ref={viewer3DRef}
