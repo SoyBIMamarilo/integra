@@ -11,6 +11,7 @@ on:
     - "README.md"
     - ".next"
     - .env*
+    - Dockerfile
   workflow_dispatch:
 
 jobs:
