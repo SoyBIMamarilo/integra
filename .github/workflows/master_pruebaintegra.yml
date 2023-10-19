@@ -48,10 +48,6 @@ jobs:
           path: frontend/next.zip    
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ github.workspace }}/frontend
     needs: build
     environment:
       name: 'Production'
@@ -63,7 +59,7 @@ jobs:
         with:
           name: node-app
       - name: Test Artifact Download Next
-        run: ls -R 
+        run: ls -R
       - name: unzip artifact for deployment
         run: unzip next.zip
       - name: 'Deploy to Azure Web App'
