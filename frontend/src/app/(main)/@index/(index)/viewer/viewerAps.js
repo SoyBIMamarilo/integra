@@ -124,10 +124,10 @@ const ViewerAps = (params) => {
             <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="/extensions/summary/LoggerExtension.js"></Script>
             {/* <!-- histograma --> */}
             <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="extensions/Histograms/HistogramExtension.js"></Script>
+
             {({ docUrn }) ? (
                 <div id="viewer"
                     ref={viewer3DRef}
-                    style={{ height: "100%" }}
                 ></div>
             ) : (
                 <div> Plese include viewer3D.min.js to the index.html</div>

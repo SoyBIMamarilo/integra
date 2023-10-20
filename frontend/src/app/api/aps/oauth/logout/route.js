@@ -6,7 +6,12 @@ export const dynamic = "force-dynamic";
 export async function GET(req, res) {
     try {
         request.cookies.delete("cookieAps");
-        return NextResponse.status(200);
+        const cookieStore = cookies();
+        cookieStore.delete("cookieAps");
+        const url = request.nextUrl.clone();
+        const response = NextResponse.redirect(
+            url, { status: 302 }
+        );
     } catch (err) {
         console.log("Api APS Op:Get", err);
     }
