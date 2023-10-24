@@ -9,7 +9,7 @@ import TempTableItem from "./TempTableItem";
 const TempTable = async ({ project, template }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: tempItems, error } = await supabase
-    .from("presupuesto_historico")
+    .from("valor_presupuesto_v2")
     .select("*")
     .eq("plantilla_presupuesto_id", template);
   const COPcurrency = Intl.NumberFormat("en-US", {
@@ -17,14 +17,13 @@ const TempTable = async ({ project, template }) => {
     currency: "COP",
   });
 
+  console.log(error)
+
   // const {data: tData, error:error2} = await supabase.from("presupuesto_historico").select("sum(cantidad").eq("plantilla_presupuesto_id", template)
 
   // console.log(error2)
 
   var total = 0;
-  tempItems.map((item) => {
-    total += item.cantidad * item.precio;
-  });
   return (
     <div className="relative mt-5 flex h-full flex-col justify-between overflow-x-scroll rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
       <table className="h-min w-full">
@@ -38,7 +37,7 @@ const TempTable = async ({ project, template }) => {
         <th colSpan={8} className="h-6"></th>
         <thead className="border border-solid">
           <tr>
-            <th colSpan="6" className="border bg-black text-white">
+            <th colSpan="5" className="border bg-black text-white">
               Total:
             </th>
             <th colSpan="2">{COPcurrency.format(total)}</th>
