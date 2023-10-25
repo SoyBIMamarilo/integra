@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Alert from "@/components/alert";
 
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
@@ -9,7 +10,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    // console.log(item);
+    setLoading(true);
     const res = await fetch("/api/item", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -18,16 +19,18 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
       }),
     });
     router.refresh();
+    setLoading(true);
   };
   return (
     <>
+      <Alert />
       <tr className={`${openStyle} `}>
-        <td className="table-content">
+        <td className="table-content indent-2 text-sm ">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
             <div className="">{item.descripcion}</div>
             <div className="font-semibold">{item.pyrefnombre}</div>
           </div>
-          <div className="pl-2">CBS: {item.cbs}</div>
+          <div className="pl-2 ">CBS: {item.cbs}</div>
         </td>
         <td />
         <td className="table-content text-center">

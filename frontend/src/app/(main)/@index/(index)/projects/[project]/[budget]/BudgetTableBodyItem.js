@@ -10,8 +10,6 @@ import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
-import View from "@/components/svg/view";
-import Pencil from "@/components/svg/pencil";
 
 const BudgetTableBodyItem = ({
   paquete,
@@ -85,12 +83,6 @@ const BudgetTableBodyItem = ({
             <Plus />
           </Link>
         </td>
-        {/* <td>
-          <View />
-        </td>
-        <td>
-          <Pencil />
-        </td> */}
       </tr>
       {itemValue.map((item) => (
         <BudgetTableBodyItemSub key={item.item_id} item={item} open={open} />

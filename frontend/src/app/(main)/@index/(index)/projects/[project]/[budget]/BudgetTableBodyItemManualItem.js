@@ -9,20 +9,21 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    // console.log(item);
-    const res = await fetch("/api/item", {
+    setLoading(true);
+    const res = await fetch("/api/item-manual", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        item_id: item.item_id,
+        item_id: item.id,
       }),
     });
     router.refresh();
+    setLoading(false);
   };
   return (
     <>
-      <tr className={`${openStyle} text-xs font-light `}>
-        <td className="table-content">
+      <tr className={`${openStyle} `}>
+        <td className="table-content indent-2 text-sm">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
             <div className="">{item.nombre}</div>
           </div>

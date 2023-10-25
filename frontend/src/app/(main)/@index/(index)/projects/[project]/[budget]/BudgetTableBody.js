@@ -14,13 +14,13 @@ const BudgetTableBody = async ({ budget }) => {
       presupuesto: budget,
     }
   );
-  const { data: packagesValues, errorValues } = await supabase.rpc(
+  const { data: packagesValues, error: errorValues } = await supabase.rpc(
     "presupuesto_por_paquetes",
     {
       presupuesto: budget,
     }
   );
-  const { data: itemsValues, errorValuesItems } = await supabase.rpc(
+  const { data: itemsValues, error: errorValuesItems } = await supabase.rpc(
     "presupuesto_por_item",
     {
       presupuesto: budget,

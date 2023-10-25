@@ -58,7 +58,7 @@ const BudgetTable = async ({ budget, project }) => {
             </td>
             <td className="table-content text-center">{nf_per.format(1)}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td className="inline-flex">
               <Link href={`/projects/${project}/${budget}/create`}>
                 <button className="button-black my-3 mb-2 mr-2 inline-flex items-center rounded-lg px-5 py-2.5 text-sm">
@@ -80,14 +80,21 @@ const BudgetTable = async ({ budget, project }) => {
                 fileName={`${Date.now().toFixed()}_Project${project}_Pres${budget}.csv`}
               />
             </td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
-      <Link href={`/projects/${project}/${budget}/create`}>
-        <button className="m-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
-          Añadir Paquete
-        </button>
-      </Link>
+      <div className="flex flex-row">
+        <Link href={`/projects/${project}/${budget}/create`}>
+          <button className="mx-1 my-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
+            Añadir Paquete
+          </button>
+        </Link>
+        <Link href={`/projects/${project}/${budget}/parameters`}>
+          <button className="mx-1 my-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
+            Parámetros
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

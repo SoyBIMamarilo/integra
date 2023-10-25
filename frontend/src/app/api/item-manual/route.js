@@ -33,7 +33,7 @@ export async function DELETE(req) {
   const body = await req.json();
   const id = body.item_id;
   const { data, error } = await supabase
-    .from("item-manual")
+    .from("item_manual")
     .delete()
     .eq("id", id);
   console.log(error);

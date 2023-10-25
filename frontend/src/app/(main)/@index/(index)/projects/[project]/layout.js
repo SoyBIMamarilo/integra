@@ -17,15 +17,15 @@ const Layout = async ({ create, children, params }) => {
   console.log(route);
   return (
     <>
-      <div className="flex flex-row gap-2">
+      <div className="mb-2 mt-1 flex flex-row gap-2">
         <Link
-          className="mb-2 mt-1 max-w-max shrink	text-2xl font-semibold "
+          className="max-w-max shrink	text-2xl font-semibold "
           href={`${route}`}
           replace={true}
         >
           {project.nombre}
         </Link>
-        <Link href={`projects/${project.id}/project-info`}>
+        <Link href={`/projects/${project.id}/project-info`}>
           <Information />
         </Link>
       </div>

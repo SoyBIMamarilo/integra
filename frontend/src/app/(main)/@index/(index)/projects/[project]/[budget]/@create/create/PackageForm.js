@@ -23,7 +23,7 @@ const PackageForm = ({ budget, paquetes }) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="grid max-w-[70%] grid-cols-2 gap-3">
+      <div className="grid max-w-[50%] grid-cols-2 gap-3">
         <label className="basis-1/4">Paquete: </label>
         <select
           name="selection"
@@ -35,13 +35,16 @@ const PackageForm = ({ budget, paquetes }) => {
             </option>
           ))}
         </select>
-        <button type="submit" className="button-black">
-          Crear
+        <button
+          type="submit"
+          className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
+        >
+          Enviar
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="button-black"
+          className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text"
         >
           Cancelar
         </button>
