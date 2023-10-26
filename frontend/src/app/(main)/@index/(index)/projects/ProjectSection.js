@@ -9,7 +9,7 @@ const ProjectSection = () => {
       <div className="mt-4">
         <Link
           href="projects/create-project"
-          className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-secondary px-5 py-2.5 font-bold text-integra-text hover:bg-integra-primary"
+          className="rounded border-2 border-solid	 border-integra-text bg-integra-secondary px-5 py-2.5 font-bold text-integra-text hover:bg-integra-primary"
         >
           Crear Proyecto
         </Link>

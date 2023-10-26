@@ -15,6 +15,12 @@ export default async function Page({ params }) {
     .eq("proyecto_id", params.project)
     .order("version", { ascending: true });
 
+  console.log("PAGE MAIN");
+  process.on("warning", (warning) => {
+    console.log(warning.stack);
+  });
+  console.log("PAGE MAIN");
+
   const { data: m2const, error: errorConst } = await supabase.rpc(
     "presupuesto_proyecto_m2const",
     {
