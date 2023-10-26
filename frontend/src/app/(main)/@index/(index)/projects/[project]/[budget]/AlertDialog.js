@@ -3,7 +3,7 @@
 import Trash from "@/components/svg/trash";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 
-const Alert = () => (
+const Alert = ({ name, value, onConfirm }) => (
   <AlertDialog.Root>
     <AlertDialog.Trigger asChild>
       <button>
@@ -11,24 +11,23 @@ const Alert = () => (
       </button>
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
-      <AlertDialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-integra-blackA6" />
-      <AlertDialog.Content className="data-[state=open]:animate-contentShow fixed left-[50%] top-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
-        <AlertDialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
-          Are you absolutely sure?
+      <AlertDialog.Overlay className="fixed inset-0 data-[state=open]:animate-overlayShow" />
+      <AlertDialog.Content className="fixed left-[50%] top-[50%] z-[200]  max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow">
+        <AlertDialog.Title className="m-0 text-[17px] font-medium text-mauve12">
+          Confirmar Eliminación
         </AlertDialog.Title>
-        <AlertDialog.Description className="text-mauve11 mb-5 mt-4 text-[15px] leading-normal">
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
+        <AlertDialog.Description className="mb-5 mt-4 text-[15px] leading-normal text-mauve11">
+          {`Va a eliminar el elemento '${name}' por un total de $${value}. Este paso no se puede deshacer`}
         </AlertDialog.Description>
         <div className="flex justify-end gap-[25px]">
           <AlertDialog.Cancel asChild>
-            <button className="text-mauve11 bg-mauve4 hover:bg-mauve5 focus:shadow-mauve7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
-              Cancel
+            <button className="rounded-lg bg-gray4 px-5 py-1 font-bold text-integra-text hover:bg-gray6">
+              Cancelar
             </button>
           </AlertDialog.Cancel>
-          <AlertDialog.Action asChild>
-            <button className="text-red11 bg-red4 hover:bg-red5 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
-              Yes, delete account
+          <AlertDialog.Action onClick={onConfirm} asChild>
+            <button className="ext-red11 border-2border-solid rounded-lg border-integra-text bg-red4 px-5 py-1 font-bold text-red11 hover:bg-red5">
+              Sí, eliminar
             </button>
           </AlertDialog.Action>
         </div>
@@ -38,36 +37,3 @@ const Alert = () => (
 );
 
 export default Alert;
-
-// const Alert = ({ name, value, onConfirm }) => {
-//   return (
-//     <AlertDialog.Root>
-//       <AlertDialog.Trigger>
-//         <button>
-//           <EmptyTrash />
-//         </button>
-//       </AlertDialog.Trigger>
-//       <AlertDialog.Content className="absolute">
-//         <AlertDialog.Title>Confirmar Eliminación</AlertDialog.Title>
-//         <AlertDialog.Description size="2">
-//           {`Va a eliminar el elemento "${name}" por un total de $${value}. Este paso no se puede
-//           deshacer`}
-//         </AlertDialog.Description>
-//         <Flex gap="3" mt="4" justify="end">
-//           <AlertDialog.Cancel>
-//             <Button variant="soft" color="gray">
-//               Cancelar
-//             </Button>
-//           </AlertDialog.Cancel>
-//           <AlertDialog.Action>
-//             <Button onClick={onConfirm} variant="solid" color="red">
-//               Eliminar
-//             </Button>
-//           </AlertDialog.Action>
-//         </Flex>
-//       </AlertDialog.Content>
-//     </AlertDialog.Root>
-//   );
-// };
-
-// export default Alert;

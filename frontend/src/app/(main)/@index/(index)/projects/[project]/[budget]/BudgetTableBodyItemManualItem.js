@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Trash from "@/components/svg/trash";
+import Alert from "./AlertDialog";
+import LoadingComponent from "@/components/loading";
+// import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemManual = ({ item, open }) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
@@ -17,11 +21,12 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
         item_id: item.id,
       }),
     });
-    router.refresh();
+    await router.refresh();
     setLoading(false);
   };
   return (
     <>
+      {loading && <LoadingComponent />}
       <tr className={`${openStyle} `}>
         <td className="table-content indent-2 text-sm">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
@@ -46,7 +51,11 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
           {nf_per.format(item.incidencia)}
         </td>
         <td>
-          <Trash onClick={itemDeleteHandler} />
+          <Alert
+            name={item.descripcion}
+            value={nf.format(item.vrtot)}
+            onConfirm={itemDeleteHandler}
+          />
         </td>
       </tr>
     </>
