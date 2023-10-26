@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Alert from "@/components/alert";
+import Alert from "./AlertDialog";
 
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
@@ -10,7 +10,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    setLoading(true);
+    // setLoading(true);
     const res = await fetch("/api/item", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -19,11 +19,10 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
       }),
     });
     router.refresh();
-    setLoading(true);
+    // setLoading(true);
   };
   return (
     <>
-      <Alert />
       <tr className={`${openStyle} `}>
         <td className="table-content indent-2 text-sm ">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
@@ -50,7 +49,36 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
           {nf_per.format(item.incidencia)}
         </td>
         <td>
-          <Trash onClick={itemDeleteHandler} />
+          <Alert
+            name={item.descripcion}
+            value={nf.format(item.vrtot)}
+            onConfirm={itemDeleteHandler}
+          />
+          {/* <AlertDialog.Root>
+            <AlertDialog.Trigger>
+              <Trash onClick={itemDeleteHandler} />
+              <Trash />
+            </AlertDialog.Trigger>
+            <AlertDialog.Content style={{ maxWidth: 450 }}>
+              <AlertDialog.Title>Confirmar Eliminación</AlertDialog.Title>
+              <AlertDialog.Description size="2">
+                Va a eliminar el elemento corrspondiente. Este paso no se puede
+                deshacer
+              </AlertDialog.Description>
+              <Flex gap="3" mt="4" justify="end">
+                <AlertDialog.Cancel>
+                  <Button variant="soft" color="gray">
+                    Cancelar
+                  </Button>
+                </AlertDialog.Cancel>
+                <AlertDialog.Action>
+                  <Button variant="solid" color="red">
+                    Eliminar
+                  </Button>
+                </AlertDialog.Action>
+              </Flex>
+            </AlertDialog.Content>
+          </AlertDialog.Root> */}
         </td>
       </tr>
     </>

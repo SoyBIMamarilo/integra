@@ -83,14 +83,14 @@ const BudgetTable = async ({ budget, project }) => {
           </tr> */}
         </tbody>
       </table>
-      <div className="flex flex-row">
+      <div className="mt-4 flex flex-row gap-3">
         <Link href={`/projects/${project}/${budget}/create`}>
-          <button className="mx-1 my-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
+          <button className="rounded-lg border-2 border-solid	 border-integra-text bg-gray4 px-5 py-1 font-bold text-integra-text hover:bg-gray6">
             Añadir Paquete
           </button>
         </Link>
         <Link href={`/projects/${project}/${budget}/parameters`}>
-          <button className="mx-1 my-2 rounded-lg border-2 border-solid	 border-white bg-black px-5 py-2.5 font-bold text-white hover:invert">
+          <button className="rounded-lg border-2 border-solid	 border-integra-text bg-gray4 px-5 py-1 font-bold text-integra-text hover:bg-gray6">
             Parámetros
           </button>
         </Link>
