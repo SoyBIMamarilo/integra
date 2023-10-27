@@ -1,11 +1,31 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import PackageFormItem from "./PackageFormItem";
 
 const PackageForm = ({ budget, paquetes }) => {
+  const [paquetesStatus, setPaquetesStatus] = useState(
+    paquetes.map((pq) => ({ ...pq, include: false }))
+  );
+  console.log(paquetes);
   const router = useRouter();
-
+  const changeHandler = (id) => {
+    const newInclude = !prev.filter((it) => it.paquete_trabajo_id == id)[0]
+      .include;
+    console.log(newInclude);
+    setPaquetesStatus((prev) => {
+      console.log(prev);
+      // return [
+      //   ...prev.filter((it) => it.paquete_trabajo_id != id),
+      //   {
+      //     ...prev.filter((it) => it.paquete_trabajo_id == id)[0],
+      //     include: newInclude,
+      //   },
+      // ];
+    });
+  };
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const paquete_trabajo_id = event.target.selection.value;
@@ -23,9 +43,25 @@ const PackageForm = ({ budget, paquetes }) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="grid max-w-[50%] grid-cols-2 gap-3">
-        <label className="basis-1/4">Paquete: </label>
-        <select
+      <div className="flex max-w-[75%] flex-col ">
+        {/* <label className="basis-1/4">Paquete: </label> */}
+        <div>
+          <div>Paquetes disponibles</div>
+          {paquetesStatus
+            .filter((pq) => pq.include === false)
+            .map((pq) => (
+              <PackageFormItem packageItem={pq} changeHandler={changeHandler} />
+            ))}
+        </div>
+        <div>
+          <div>Paquetes incluir</div>
+          {paquetesStatus
+            .filter((pq) => pq.include === true)
+            .map((pq) => (
+              <PackageFormItem packageItem={pq} changeHandler={changeHandler} />
+            ))}
+        </div>
+        {/* <select
           name="selection"
           className="w-full basis-3/4 border border-none outline-none"
         >
@@ -34,7 +70,7 @@ const PackageForm = ({ budget, paquetes }) => {
               {paquete.nombre}
             </option>
           ))}
-        </select>
+        </select> */}
         <button
           type="submit"
           className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
