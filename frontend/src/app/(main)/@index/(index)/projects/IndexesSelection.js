@@ -7,8 +7,7 @@ import IndexesSelctionList from "./IndexesSelctionList";
 const IndexexSelection = async () => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: indexes, error } = await supabase.from("indicador").select("*");
-  console.log(indexes);
-  // console.log(error);
+  console.log(error);
 
   return (
     <div className="basis-1/2">

@@ -36,13 +36,16 @@ export default function Create({ params }) {
             name="version"
             id="version"
           />
-          <button type="submit" className="button-black">
+          <button
+            type="submit"
+            className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text "
+          >
             Crear
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="button-black  "
+            className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
           >
             Cancelar
           </button>

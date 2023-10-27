@@ -16,9 +16,11 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
   useEffect(() => {
     // console.log(selectedProject);
     const fetchIndicadores = async () => {
+      console.log(selected.proyecto_id);
+      console.log(params.budget);
       const { data: indicadores, error } = await supabase.rpc(
         "proyecto_indicadores_comun",
-        { pr_or: selected.proyecto_id, pr_dest: selectedProject }
+        { pr_or: selected.proyecto_id, pr_dest: params.budget }
       );
       console.log(indicadores);
 

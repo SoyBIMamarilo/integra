@@ -63,7 +63,7 @@ export default function ProjectInfoForm({
         valor: ind.valor,
       }));
     console.log(indexes);
-    const res = await fetch("/api/budget-indexes-create", {
+    const res = await fetch("/api/create-budget-indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ indexes, budget }),

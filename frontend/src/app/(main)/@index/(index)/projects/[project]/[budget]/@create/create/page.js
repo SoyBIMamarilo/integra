@@ -12,11 +12,6 @@ const Page = async ({ params }) => {
     { presupuesto: params.budget }
   );
 
-  console.log(paquetes);
-  console.log(error);
-  // const { data: paquetes, error } = await supabase
-  // .from("paquete_trabajo")
-  // .select();
   return (
     <Modal>
       <div className="mb-4 font-bold">Añadir Paquete de Trabajo</div>

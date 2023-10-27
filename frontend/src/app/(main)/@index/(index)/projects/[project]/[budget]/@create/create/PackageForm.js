@@ -45,34 +45,29 @@ const PackageForm = ({ budget, paquetes }) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="flex max-w-[75%] flex-col ">
+      <div className="flex max-w-[75%] flex-row flex-wrap ">
         {/* <label className="basis-1/4">Paquete: </label> */}
         <div>
-          <div>Paquetes disponibles</div>
-          {paquetesStatus
-            .filter((pq) => pq.include === false)
-            .map((pq) => (
-              <PackageFormItem packageItem={pq} changeHandler={changeHandler} />
-            ))}
+          <div className="font-bold">Paquetes disponibles</div>
+          <div className="h-2/4">
+            {paquetesStatus
+              .filter((pq) => pq.include === false)
+              .map((pq) => (
+                <PackageFormItem
+                  packageItem={pq}
+                  changeHandler={changeHandler}
+                />
+              ))}
+          </div>
         </div>
         <div>
-          <div>Paquetes incluir</div>
+          <div className="font-bold">Paquetes incluir</div>
           {paquetesStatus
             .filter((pq) => pq.include === true)
             .map((pq) => (
               <PackageFormItem packageItem={pq} changeHandler={changeHandler} />
             ))}
         </div>
-        {/* <select
-          name="selection"
-          className="w-full basis-3/4 border border-none outline-none"
-        >
-          {paquetes.map((paquete) => (
-            <option key={paquete.id} value={paquete.id}>
-              {paquete.nombre}
-            </option>
-          ))}
-        </select> */}
         <button
           type="submit"
           className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
