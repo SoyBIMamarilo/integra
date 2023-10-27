@@ -9,33 +9,35 @@ const PackageForm = ({ budget, paquetes }) => {
   const [paquetesStatus, setPaquetesStatus] = useState(
     paquetes.map((pq) => ({ ...pq, include: false }))
   );
-  console.log(paquetes);
+  console.log(paquetesStatus);
   const router = useRouter();
   const changeHandler = (id) => {
-    const newInclude = !prev.filter((it) => it.paquete_trabajo_id == id)[0]
-      .include;
-    console.log(newInclude);
     setPaquetesStatus((prev) => {
-      console.log(prev);
-      // return [
-      //   ...prev.filter((it) => it.paquete_trabajo_id != id),
-      //   {
-      //     ...prev.filter((it) => it.paquete_trabajo_id == id)[0],
-      //     include: newInclude,
-      //   },
-      // ];
+      const newInclude = !prev.filter((it) => it.paquete_trabajo_id == id)[0]
+        .include;
+      console.log(newInclude);
+      return [
+        ...prev.filter((it) => it.paquete_trabajo_id != id),
+        {
+          ...prev.filter((it) => it.paquete_trabajo_id == id)[0],
+          include: newInclude,
+        },
+      ];
     });
   };
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    const paquete_trabajo_id = event.target.selection.value;
+    const packagesSend = paquetesStatus
+      .filter((pq) => pq.include)
+      .map((pq) => ({
+        paquete_trabajo_id: pq.paquete_trabajo_id,
+        presupuesto_id: +budget,
+      }));
+    console.log(packagesSend);
     const res = await fetch("/api/budget-package", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        paquete_trabajo_id,
-        presupuesto_id: budget,
-      }),
+      body: JSON.stringify(packagesSend),
     });
     router.refresh();
     router.back();
