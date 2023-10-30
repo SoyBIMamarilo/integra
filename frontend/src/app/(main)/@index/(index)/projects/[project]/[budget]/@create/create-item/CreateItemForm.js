@@ -68,7 +68,7 @@ const CreateItemForm = ({ indicador, selected }) => {
         type="number"
         onChange={ponderacionHandler}
       />
-      <div>Descripción Ajuste</div>
+      <div>Descripción del Factor</div>
       <input ref={descripcion} />
       <div>Valor Total Destino</div>
       <div>
@@ -82,18 +82,18 @@ const CreateItemForm = ({ indicador, selected }) => {
   return (
     <>
       {card}
-      <div className="m-2 grid max-w-[70%] grid-cols-2 gap-3">
+      <div className="mt-4 flex flex-row gap-4">
         <button
           type="submit"
-          className="button-black"
+          className=" rounded-lg border-2 border-solid	 border-gray12 bg-gray8 px-5 py-1 font-bold text-gray12 hover:bg-gray9"
           onClick={submitItemHandler}
         >
-          Crear
+          Añadir
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="button-black"
+          className=" rounded-lg border-2 border-solid	 border-red11 bg-red5 px-5 py-1 font-bold text-red11 hover:bg-red6"
         >
           Cancelar
         </button>

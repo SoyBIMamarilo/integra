@@ -45,11 +45,11 @@ const PackageForm = ({ budget, paquetes }) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="flex max-w-[75%] flex-row flex-wrap ">
+      <div className="grid  grid-cols-2 gap-3">
         {/* <label className="basis-1/4">Paquete: </label> */}
         <div>
-          <div className="font-bold">Paquetes disponibles</div>
-          <div className="h-2/4">
+          <div className="font-bold">Disponibles</div>
+          <div className="h-52 overflow-y-auto">
             {paquetesStatus
               .filter((pq) => pq.include === false)
               .map((pq) => (
@@ -61,23 +61,30 @@ const PackageForm = ({ budget, paquetes }) => {
           </div>
         </div>
         <div>
-          <div className="font-bold">Paquetes incluir</div>
-          {paquetesStatus
-            .filter((pq) => pq.include === true)
-            .map((pq) => (
-              <PackageFormItem packageItem={pq} changeHandler={changeHandler} />
-            ))}
+          <div className="font-bold">Incluir</div>
+          <div className="h-52 overflow-y-auto ">
+            {paquetesStatus
+              .filter((pq) => pq.include === true)
+              .map((pq) => (
+                <PackageFormItem
+                  packageItem={pq}
+                  changeHandler={changeHandler}
+                />
+              ))}
+          </div>
         </div>
+      </div>
+      <div className="mt-4 flex flex-row gap-4">
         <button
           type="submit"
-          className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
+          className=" rounded-lg border-2 border-solid	 border-gray12 bg-gray8 px-5 py-1 font-bold text-gray12 hover:bg-gray9"
         >
-          Enviar
+          Añadir
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text"
+          className=" rounded-lg border-2 border-solid	 border-red11 bg-red5 px-5 py-1 font-bold text-red11 hover:bg-red6"
         >
           Cancelar
         </button>

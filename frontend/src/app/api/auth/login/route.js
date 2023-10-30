@@ -16,7 +16,7 @@ export async function POST(request) {
     email,
     password,
   });
-
+  console.log(supabase);
   return NextResponse.redirect(new URL("/projects", requestUrl), {
     status: 301,
   });

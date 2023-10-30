@@ -36,16 +36,18 @@ export default function Create({ params }) {
             name="version"
             id="version"
           />
+        </div>
+        <div className="mt-4 flex flex-row gap-4">
           <button
             type="submit"
-            className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text "
+            className=" rounded-lg border-2 border-solid	 border-gray12 bg-gray8 px-5 py-1 font-bold text-gray12 hover:bg-gray9"
           >
             Crear
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="flex-1 rounded-lg border-2 border-solid	 border-white bg-integra-text px-5 py-1 font-bold text-white"
+            className=" rounded-lg border-2 border-solid	 border-red11 bg-red5 px-5 py-1 font-bold text-red11 hover:bg-red6"
           >
             Cancelar
           </button>

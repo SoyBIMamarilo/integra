@@ -11,24 +11,24 @@ import BudgetTableBody from "./BudgetTableBody";
 const BudgetTable = async ({ budget, project }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
 
-  const { data: valorTotal, errorValorTotal } = await supabase.rpc(
-    "presupuesto_total_valor",
-    {
-      presupuesto: budget,
-    }
-  );
-  const { data: valorMetroConst, errorValorMetroConst } = await supabase.rpc(
-    "presupuesto_valor_m2const",
-    {
-      presupuesto: budget,
-    }
-  );
-  const { data: valorMetroVend, errorValorMetroVend } = await supabase.rpc(
-    "presupuesto_valor_m2vend",
-    {
-      presupuesto: budget,
-    }
-  );
+  const { data: budgetTotal, error } = await supabase.rpc("valor_presupuesto", {
+    presupuesto: budget,
+  });
+
+  const total = budgetTotal.reduce((accumulator, item) => {
+    return accumulator + item.vrtot;
+  }, 0);
+  const totalConst = budgetTotal.reduce((accumulator, item) => {
+    return accumulator + item.vrm2const;
+  }, 0);
+  const totalVend = budgetTotal.reduce((accumulator, item) => {
+    return accumulator + item.vrm2vend;
+  }, 0);
+  const incidencia = budgetTotal.reduce((accumulator, item) => {
+    return accumulator + item.incidencia;
+  }, 0);
+  const categorias = [...new Set(budgetTotal.map((it) => it.categoria))];
+  console.log(categorias);
 
   return (
     <div className="mt-5 flex h-full flex-col justify-start rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
@@ -36,7 +36,14 @@ const BudgetTable = async ({ budget, project }) => {
         <BudgetTableHeaders />
         <tbody>
           <tr className="h-2 "></tr>
-          <BudgetTableBody budget={budget} />
+          {categorias.map((cat) => (
+            <BudgetTableBody
+              key={cat}
+              name={cat}
+              budget={budgetTotal.filter((it) => it.categoria == cat)}
+            />
+          ))}
+          {/* <BudgetTableBody budget={budget} budgetTotal={budgetTotal} /> */}
 
           <tr className="h-2" />
 
@@ -47,16 +54,16 @@ const BudgetTable = async ({ budget, project }) => {
             <td />
             <td className="table-content text-center">-</td>
             <td className="table-content text-center">-</td>
+            <td className="table-content text-center">{nf.format(total)}</td>
             <td className="table-content text-center">
-              {valorTotal ? nf.format(valorTotal) : 0}
+              {nf.format(totalConst)}
             </td>
             <td className="table-content text-center">
-              {valorMetroConst ? nf.format(valorMetroConst) : 0}
+              {nf.format(totalVend)}
             </td>
             <td className="table-content text-center">
-              {valorMetroVend ? nf.format(valorMetroVend) : 0}
+              {nf_per.format(incidencia)}
             </td>
-            <td className="table-content text-center">{nf_per.format(1)}</td>
           </tr>
           {/* <tr>
             <td className="inline-flex">

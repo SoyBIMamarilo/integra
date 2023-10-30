@@ -11,14 +11,26 @@ import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
 
-const BudgetTableBodyItem = ({
-  paquete,
-  itemValue,
-  packageValue,
-  manualValue,
-}) => {
+const BudgetTableBodyItem = ({ packageValue }) => {
+  console.log(packageValue);
+  const total = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrtot;
+  }, 0);
+  const totalConst = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrm2const;
+  }, 0);
+  const totalVend = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrm2vend;
+  }, 0);
+  const incidencia = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.incidencia;
+  }, 0);
+  const indicadorValor = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.indicadorValor;
+  }, 0);
+  const manual = packageValue.filter((it) => it.manual == 1 && it.id);
+  const referente = packageValue.filter((it) => it.manual == 0 && it.id);
   const path = usePathname() + "/create-item";
-  const packageValueAdj = packageValue ? packageValue : {};
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
@@ -30,8 +42,8 @@ const BudgetTableBodyItem = ({
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        presupuesto_id: paquete.presupuesto_id,
-        paquete_trabajo_id: paquete.paquete_trabajo_id,
+        presupuesto_id: packageValue[0].presupuesto_id,
+        paquete_trabajo_id: packageValue[0].paquete_trabajo_id,
       }),
     });
     router.refresh();
@@ -47,28 +59,28 @@ const BudgetTableBodyItem = ({
             onClick={clickHandler}
             className="flex flex-row place-items-center pl-2"
           >
-            <div className="grow ">{paquete.nombre}</div>
+            <div className="grow ">{packageValue[0].paquete}</div>
             <Arrow open={open} />
           </div>
         </td>
         <td />
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {packageValueAdj.indicador} m2
+          m2
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {/* {nf.format(packageValueAdj.valor_interno_paquete)} */}
+          {nf.format(indicadorValor)}
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {nf.format(packageValueAdj.vrtot)}
+          {nf.format(total)}
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {nf.format(packageValueAdj.vrm2const)}
+          {nf.format(totalConst)}
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {nf.format(packageValueAdj.vrm2vend)}
+          {nf.format(totalVend)}
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          {nf_per.format(packageValueAdj.incidencia)}
+          {nf_per.format(incidencia)}
         </td>
         <td>
           <Trash onClick={deletePaqueteHandler} />
@@ -77,18 +89,18 @@ const BudgetTableBodyItem = ({
           <Link
             href={{
               pathname: path,
-              query: { paquete: paquete.paquete_trabajo_id },
+              query: { paquete: packageValue[0].paquete_trabajo_id },
             }}
           >
             <Plus />
           </Link>
         </td>
       </tr>
-      {itemValue.map((item) => (
-        <BudgetTableBodyItemSub key={item.item_id} item={item} open={open} />
+      {referente.map((item) => (
+        <BudgetTableBodyItemSub key={item.id} item={item} open={open} />
       ))}
-      {manualValue.map((item) => (
-        <BudgetTableBodyItemManual key={item.nombre} item={item} open={open} />
+      {manual.map((item) => (
+        <BudgetTableBodyItemManual key={item.id} item={item} open={open} />
       ))}
     </>
   );

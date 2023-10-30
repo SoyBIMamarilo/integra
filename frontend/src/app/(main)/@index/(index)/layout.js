@@ -5,7 +5,7 @@ const Layout = (props) => {
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <div className="sticky top-0 z-50 box-border flex  min-h-fit flex-row items-center  bg-blackA10 text-neutral-200 ">
+        <div className="sticky top-0 z-50 box-border flex  min-h-fit flex-row items-center  bg-blackA11 text-neutral-200 ">
           <h1 className=" text-WHITE grow pl-14	tracking-wide">INTEGRA</h1>
           <form action="/api/auth/logout" method="POST">
             <button className="m-2 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-2.5 font-bold text-integra-text">

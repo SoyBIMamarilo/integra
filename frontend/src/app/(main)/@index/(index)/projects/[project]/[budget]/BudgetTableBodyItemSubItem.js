@@ -8,6 +8,7 @@ import LoadingComponent from "@/components/loading";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemSub = ({ item, open }) => {
+  console.log(item);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
@@ -17,7 +18,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        item_id: item.item_id,
+        item_id: item.id,
       }),
     });
     await router.refresh();
