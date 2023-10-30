@@ -17,7 +17,7 @@ export async function POST(request) {
     password,
   });
 
-  return NextResponse.redirect(new URL("/projects", request.url), {
+  return NextResponse.redirect(new URL("/projects", requestUrl), {
     status: 301,
   });
   // return NextResponse.redirect("/projects");
