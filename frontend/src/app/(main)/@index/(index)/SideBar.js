@@ -24,7 +24,7 @@ const SideBar = async () => {
     { href: "/reports", name: "Reportes", disabled: true },
     { href: "/data-bases", name: "Bases de Datos", disabled: true },
     {
-      href: "/new-user",
+      href: "/user-admin",
       name: "Agregar usuario",
       disabled: data[0].rol !== "GERENTE",
     },

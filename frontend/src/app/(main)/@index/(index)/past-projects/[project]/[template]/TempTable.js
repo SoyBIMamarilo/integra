@@ -3,6 +3,7 @@ import TempTableHeaders from "./TempTableHeaders";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 
+
 import { supabaseOptions } from "@/util/supabase";
 import TempTableItem from "./TempTableItem";
 
@@ -11,13 +12,14 @@ const TempTable = async ({ project, template }) => {
   const { data: tempItems, error } = await supabase
     .from("valor_presupuesto_v2")
     .select("*")
-    .eq("plantilla_presupuesto_id", template);
+    .eq("plantilla_presupuesto_id", template)
+    .eq("cbs", "c");  //dfdfvfgdgbdgsdgbsdfgsdbsdrdgds
   const COPcurrency = Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "COP",
   });
 
-  console.log(error)
+  console.log(error);
 
   // const {data: tData, error:error2} = await supabase.from("presupuesto_historico").select("sum(cantidad").eq("plantilla_presupuesto_id", template)
 
@@ -32,7 +34,6 @@ const TempTable = async ({ project, template }) => {
           {tempItems.map((item) => (
             <TempTableItem tempRow={item} key={item.id} />
           ))}
-
         </tbody>
         <th colSpan={8} className="h-6"></th>
         <thead className="border border-solid">
