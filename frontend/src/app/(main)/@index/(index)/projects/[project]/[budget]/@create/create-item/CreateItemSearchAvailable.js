@@ -16,7 +16,10 @@ const CreateItemSearchAvailable = ({ selectedPresupuestos, onAddHandler }) => {
             <div>{nf.format(ejecutado.sum)}</div>
           </div>
           <div className="flex flex-row">
-            <div className="grow font-bold">{ejecutado.cbs}</div>
+            <div className="grow">
+              <span className="font-bold">{ejecutado.cbs}</span>
+              <span>, {ejecutado.line_type}</span>
+            </div>
             <div>{ejecutado.nombre}</div>
           </div>
         </div>

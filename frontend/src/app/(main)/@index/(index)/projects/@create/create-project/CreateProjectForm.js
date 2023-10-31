@@ -1,37 +1,65 @@
 "use client";
 
+import CreateProjectFormIndices from "./CreateProjectFormIndices";
+
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const CreateProjectForm = ({ ciudades, indicadores }) => {
+const CreateProjectForm = ({ ciudades, indices }) => {
+  const [error, setError] = useState(false);
   const router = useRouter();
+  const [input, setInput] = useState([
+    ...indices.map((elem) => ({
+      indicador_id: +elem.id,
+      modify: false,
+      abreviatura: elem.abreviatura,
+      descripcion: elem.descripcion,
+      newIndex: true,
+    })),
+  ]);
+
+  const clickHandler = (value) => {
+    setInput((prev) => {
+      const status = prev.filter((ind) => ind.indicador_id == +value)[0].modify;
+      return [
+        ...prev.filter((ind) => ind.indicador_id !== +value),
+        {
+          ...prev.filter((ind) => ind.indicador_id == +value)[0],
+          modify: !status,
+        },
+      ];
+    });
+  };
+  const changeHandler = (value, indicador) => {
+    setInput((prev) => {
+      const status = prev.filter((ind) => ind.indicador_id == indicador)[0]
+        .modify;
+      return [
+        ...prev.filter((ind) => ind.indicador_id !== indicador),
+        {
+          ...prev.filter((ind) => ind.indicador_id == indicador)[0],
+          modify: status,
+          valor: value,
+        },
+      ];
+    });
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const nombre = event.target.nombre.value;
     const ciudad = event.target.ciudad.value;
-    const res = await fetch("/api/projects", {
+    const indexes = input
+      .filter((ind) => ind.modify == true)
+      .map((ind) => ({
+        indicador_id: ind.indicador_id,
+        valor: ind.valor,
+      }));
+
+    const res = await fetch("/api/create-project-indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, ciudad }),
-    });
-    const createdProject = await res.json();
-    const proyecto_id = createdProject.id;
-    const res_construido = await fetch("/api/indexes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        indicador_id: 1,
-        proyecto_id,
-        valor: +event.target.m2const.value,
-      }),
-    });
-    const res_vendible = await fetch("/api/indexes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        indicador_id: 3,
-        proyecto_id,
-        valor: +event.target.m2vend.value,
-      }),
+      body: JSON.stringify({ nombre, ciudad, indexes }),
     });
     router.refresh();
     router.back();
@@ -39,27 +67,43 @@ const CreateProjectForm = ({ ciudades, indicadores }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="grid max-w-[70%] grid-cols-2 gap-3">
-        <label>Nombre *</label>
-        <input type="text" name="nombre" />
-        <label>Ciudad *</label>
-        <select name="ciudad">
-          {ciudades.map((it) => (
-            <option key={it.id} value={it.id}>
-              {it.nombre}
-            </option>
-          ))}
-        </select>
-        <label>m2 const*</label>
-        <input type="number" name="m2const" />
-        <label>m2 vend*</label>
-        <input type="number" name="m2vend" />
-        <button type="submit" className="button-black">
-          Crear
-        </button>
-        <button type="button" className="button-black  ">
-          Cancelar
-        </button>
+      <div className="flex max-w-[70%] flex-col gap-3">
+        <div className="grid grid-cols-2 gap-3">
+          <label>Nombre *</label>
+          <input className="rounded-sm" type="text" name="nombre" />
+          <label>Ciudad *</label>
+          <select className="rounded-sm" name="ciudad">
+            {ciudades.map((it) => (
+              <option key={it.id} value={it.id}>
+                {it.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mt-4 font-bold">Añadir Indicadores</div>
+        <div className="grid grid-cols-2 gap-3">
+          <CreateProjectFormIndices
+            pendingIndices={input.filter((it) => it.newIndex === true)}
+            clickHandler={clickHandler}
+            changeHandler={changeHandler}
+          />
+        </div>
+        <div className="mt-4 flex flex-row gap-4">
+          <button
+            type="submit"
+            className=" rounded-lg border-2 border-solid	 border-gray12 bg-gray8 px-5 py-1 font-bold text-gray12 hover:bg-gray9"
+          >
+            Crear
+          </button>
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className=" rounded-lg border-2 border-solid	 border-red11 bg-red5 px-5 py-1 font-bold text-red11 hover:bg-red6"
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </form>
   );

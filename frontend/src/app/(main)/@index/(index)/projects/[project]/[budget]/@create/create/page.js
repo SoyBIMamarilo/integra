@@ -7,9 +7,10 @@ import PackageForm from "./PackageForm";
 
 const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
-  const { data: paquetes, error } = await supabase
-    .from("paquete_trabajo")
-    .select();
+  const { data: paquetes, error } = await supabase.rpc(
+    "paquetes_trabajo_disponibles_presupuesto",
+    { presupuesto: params.budget }
+  );
 
   return (
     <Modal>

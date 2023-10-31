@@ -14,11 +14,13 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
   const [indicadores, setIndicadores] = useState([]);
 
   useEffect(() => {
-    // console.log(selectedProject);
+    setIndicador(null);
     const fetchIndicadores = async () => {
+      console.log(selected.proyecto_id);
+      console.log(params.budget);
       const { data: indicadores, error } = await supabase.rpc(
         "proyecto_indicadores_comun",
-        { pr_or: selected.proyecto_id, pr_dest: selectedProject }
+        { pr_or: selected.proyecto_id, pr_dest: params.budget }
       );
       console.log(indicadores);
 
@@ -41,7 +43,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
     <div className="m-2 grid grid-cols-2 gap-2 rounded-md border border-solid bg-neutral-200 p-1">
       <div>Indicadores disponibles</div>
       <select defaultValue={null} onChange={changeSelectHandler}>
-        <option value={null} />
+        <option value={null}>Selecciona un indicador..</option>
         {indicadores.map((ind) => (
           <option key={ind.id} value={ind.id}>
             {ind.abreviatura}

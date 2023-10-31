@@ -7,14 +7,11 @@
     @apply p-4 text-4xl;
   }
   body {
-    @apply bg-neutral-50 text-lg;
+    @apply bg-neutral-50 text-lg text-integra-text;
   }
 }
 
 @layer utilities {
-  .button-main {
-    @apply m-2 rounded-lg border-2 border-solid	 border-integra-text bg-integra-primary px-5 py-2.5 font-bold;
-  }
   .text-integra-thin {
     @apply text-xs	font-extralight;
   }
@@ -28,7 +25,7 @@
     @apply mb-1 text-xl font-semibold;
   }
   .table-header {
-    @apply h-16 border border-neutral-500 bg-neutral-800 p-2	align-middle text-base	font-bold	 text-neutral-100;
+    @apply h-16 border border-neutral-500 bg-neutral-800 p-2	align-middle font-bold	 text-neutral-100;
   }
   .table-content {
     @apply h-8 border border-solid border-neutral-300  	 hover:bg-neutral-50;

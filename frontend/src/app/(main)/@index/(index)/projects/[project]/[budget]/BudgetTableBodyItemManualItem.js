@@ -1,30 +1,35 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import Trash from "@/components/svg/trash";
+import Alert from "./AlertDialog";
+import LoadingComponent from "@/components/loading";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemManual = ({ item, open }) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    // console.log(item);
-    const res = await fetch("/api/item", {
+    setLoading(true);
+    const res = await fetch("/api/item-manual", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        item_id: item.item_id,
+        item_id: item.id,
       }),
     });
-    router.refresh();
+    await router.refresh();
+    setLoading(false);
   };
   return (
     <>
-      <tr className={`${openStyle} text-xs font-light `}>
-        <td className="table-content">
+      {loading && <LoadingComponent />}
+      <tr className={`${openStyle} `}>
+        <td className="table-content indent-2 text-sm">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
-            <div className="">{item.nombre}</div>
+            <div className="">{item.descripcion}</div>
           </div>
         </td>
         <td />
@@ -45,7 +50,11 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
           {nf_per.format(item.incidencia)}
         </td>
         <td>
-          <Trash onClick={itemDeleteHandler} />
+          <Alert
+            name={item.descripcion}
+            value={nf.format(item.vrtot)}
+            onConfirm={itemDeleteHandler}
+          />
         </td>
       </tr>
     </>

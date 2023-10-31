@@ -15,5 +15,11 @@ export async function POST(req) {
     .insert(indexes);
   console.log(data);
   console.log(error);
+  if (error) {
+    return NextResponse.json(
+      { error: "Algún parametro se encuentra en 0" },
+      { status: 403 }
+    );
+  }
   return NextResponse.json(data);
 }

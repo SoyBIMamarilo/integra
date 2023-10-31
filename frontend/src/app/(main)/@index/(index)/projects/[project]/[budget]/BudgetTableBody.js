@@ -1,56 +1,54 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
-
-import { supabaseOptions } from "@/util/supabase";
+import { nf, nf_per } from "@/util/date-format";
 import BudgetTableBodyItem from "./BudgetTableBodyItem";
 // import BudgetTableBodyItem from "./BudgetItemTest";
 
-const BudgetTableBody = async ({ budget }) => {
-  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
+const BudgetTableBody = ({ budget, name }) => {
+  const total = budget.reduce((accumulator, item) => {
+    return accumulator + item.vrtot;
+  }, 0);
+  const totalConst = budget.reduce((accumulator, item) => {
+    return accumulator + item.vrm2const;
+  }, 0);
+  const totalVend = budget.reduce((accumulator, item) => {
+    return accumulator + item.vrm2vend;
+  }, 0);
+  const incidencia = budget.reduce((accumulator, item) => {
+    return accumulator + item.incidencia;
+  }, 0);
 
-  const { data: packages, errorPackages } = await supabase.rpc(
-    "presupuesto_paquetes_trabajo",
-    {
-      presupuesto: budget,
-    }
-  );
-  const { data: packagesValues, errorValues } = await supabase.rpc(
-    "presupuesto_por_paquetes",
-    {
-      presupuesto: budget,
-    }
-  );
-  const { data: itemsValues, errorValuesItems } = await supabase.rpc(
-    "presupuesto_por_item",
-    {
-      presupuesto: budget,
-    }
-  );
-  const { data: itemsValuesManual, errorValuesItemsManual } =
-    await supabase.rpc("presupuesto_por_item_manual", {
-      presupuesto: budget,
-    });
-
+  const packages = [
+    ...new Set(
+      budget.sort((a, b) => a.orden - b.orden).map((it) => it.paquete)
+    ),
+  ];
   return (
     <>
-      {/* <BudgetTableBodyItem /> */}
+      <tr>
+        <td className="mt-3 flex flex-row place-items-center px-2 font-bold">
+          {name}
+        </td>
+      </tr>
       {packages.map((packageItem) => (
         <BudgetTableBodyItem
-          key={packageItem.paquete_trabajo_id}
+          key={packageItem}
           paquete={packageItem}
-          packageValue={
-            packagesValues.filter(
-              (it) => it.paquete_trabajo_id == packageItem.paquete_trabajo_id
-            )[0]
-          }
-          itemValue={itemsValues.filter(
-            (it) => it.paquete_trabajo_id == packageItem.paquete_trabajo_id
-          )}
-          manualValue={itemsValuesManual.filter(
-            (it) => it.paquete_trabajo_id == packageItem.paquete_trabajo_id
-          )}
+          packageValue={budget.filter((it) => it.paquete == packageItem)}
         />
       ))}
+      <tr>
+        <td colSpan={1} className="table-content cursor-pointer">
+          <div className="flex flex-row place-items-center px-2">Sub Total</div>
+        </td>
+        <td />
+        <td className="table-content text-center"></td>
+        <td className="table-content text-center"></td>
+        <td className="table-content text-center">{nf.format(total)}</td>
+        <td className="table-content text-center">{nf.format(totalConst)}</td>
+        <td className="table-content text-center">{nf.format(totalVend)}</td>
+        <td className="table-content text-center">
+          {nf_per.format(incidencia)}
+        </td>
+      </tr>
     </>
   );
 };

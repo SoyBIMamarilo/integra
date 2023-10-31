@@ -15,7 +15,9 @@ export default async function Page() {
 
   return (
     <>
-      <div className="title-black">Proyectos Históricos</div>
+      <div className="mb-2 mt-1 text-2xl font-semibold">
+        Proyectos Históricos
+      </div>
       <div className="mb-4 mt-4 w-1/2">
         <ProjectsTable projects={historicos} />
       </div>

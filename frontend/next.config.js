@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    logging: "verbose",
+    logging: {
+      level: "verbose", // control log level
+      fullUrl: true, // console fetching url logging
+    },
   },
 };
 

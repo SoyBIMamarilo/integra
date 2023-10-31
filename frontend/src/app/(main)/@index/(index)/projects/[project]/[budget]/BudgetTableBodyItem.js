@@ -6,22 +6,41 @@ import { useRouter, usePathname } from "next/navigation";
 
 import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
 import BudgetTableBodyItemManual from "./BudgetTableBodyItemManualItem";
+import Alert from "./AlertDialog";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
-import View from "@/components/svg/view";
-import Pencil from "@/components/svg/pencil";
 
-const BudgetTableBodyItem = ({
-  paquete,
-  itemValue,
-  packageValue,
-  manualValue,
-}) => {
-  const path = usePathname() + "/create-item";
-  const packageValueAdj = packageValue ? packageValue : {};
+const BudgetTableBodyItem = ({ packageValue }) => {
   const router = useRouter();
+  console.log(packageValue);
+  const total = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrtot;
+  }, 0);
+  const totalConst = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrm2const;
+  }, 0);
+  const totalVend = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.vrm2vend;
+  }, 0);
+  const incidencia = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.incidencia;
+  }, 0);
+  const indicadorValor = packageValue.reduce((accumulator, item) => {
+    return accumulator + item.indicador_valor;
+  }, 0);
+
+  const manual = packageValue.filter((it) => it.manual == 1 && it.id);
+  const referente = packageValue.filter((it) => it.manual == 0 && it.id);
+  const path = usePathname() + "/create-item";
+  const unidadMedida = packageValue[0].valor_parametro ? (
+    <div>
+      {nf.format(packageValue[0].valor_parametro)} {packageValue[0].codigo}
+    </div>
+  ) : (
+    <div className="text-sm">Añadir {packageValue[0].indicador_nombre}</div>
+  );
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -32,72 +51,70 @@ const BudgetTableBodyItem = ({
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        presupuesto_id: paquete.presupuesto_id,
-        paquete_trabajo_id: paquete.paquete_trabajo_id,
+        presupuesto_id: packageValue[0].presupuesto_id,
+        paquete_trabajo_id: packageValue[0].paquete_trabajo_id,
       }),
     });
     router.refresh();
   };
-
   return (
     <>
-      <tr className="text-xs font-semibold">
-        <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center pl-2">
-            <div onClick={clickHandler} className="grow ">
-              {paquete.nombre}
-            </div>
+      <tr>
+        <td
+          colSpan={1}
+          className="h-8 cursor-pointer border border-solid  	 border-neutral-200 hover:bg-neutral-50"
+        >
+          <div
+            onClick={clickHandler}
+            className="flex flex-row place-items-center pl-2"
+          >
+            <div className="grow ">{packageValue[0].paquete}</div>
             <Arrow open={open} />
           </div>
         </td>
         <td />
-        <td className="table-content text-center">
-          {packageValueAdj.indicador} m2
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {unidadMedida}
         </td>
-        <td className="table-content text-center">
-          {/* {nf.format(packageValueAdj.valor_interno_paquete)} */}
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {nf.format(indicadorValor)}
         </td>
-        <td className="table-content text-center">
-          {nf.format(packageValueAdj.vrtot)}
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {nf.format(total)}
         </td>
-        <td className="table-content text-center">
-          {nf.format(packageValueAdj.vrm2const)}
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {nf.format(totalConst)}
         </td>
-        <td className="table-content text-center">
-          {nf.format(packageValueAdj.vrm2vend)}
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {nf.format(totalVend)}
         </td>
-        <td className="table-content text-center">
-          {nf_per.format(packageValueAdj.incidencia)}
-        </td>
-        <td>
-          <Trash onClick={deletePaqueteHandler} />
+        <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+          {nf_per.format(incidencia)}
         </td>
         <td>
+          <Alert
+            name={packageValue[0].paquete}
+            value={nf.format(total)}
+            onConfirm={deletePaqueteHandler}
+          />
+          {/* <Trash onClick={deletePaqueteHandler} /> */}
+        </td>
+        <td className="align-top	">
           <Link
             href={{
               pathname: path,
-              query: { paquete: paquete.paquete_trabajo_id },
+              query: { paquete: packageValue[0].paquete_trabajo_id },
             }}
           >
             <Plus />
           </Link>
         </td>
-        {/* <td>
-          <View />
-        </td>
-        <td>
-          <Pencil />
-        </td> */}
       </tr>
-      {itemValue.map((item) => (
-        <BudgetTableBodyItemSub key={item.da} item={item} open={open} />
+      {referente.map((item) => (
+        <BudgetTableBodyItemSub key={item.id} item={item} open={open} />
       ))}
-      {manualValue.map((item) => (
-        <BudgetTableBodyItemManual
-          key={item.paquete_trabajo_id}
-          item={item}
-          open={open}
-        />
+      {manual.map((item) => (
+        <BudgetTableBodyItemManual key={item.id} item={item} open={open} />
       ))}
     </>
   );

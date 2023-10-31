@@ -35,7 +35,7 @@ export default function ProjectInfoFormCurrent({
     </>
   ) : (
     <>
-      <div className="text-integra-small grow ">{nf.format(index.valor)}</div>
+      <div className=" grow ">{nf.format(index.valor)}</div>
       <Pencil onClick={editHandler} />
     </>
   );
@@ -43,8 +43,8 @@ export default function ProjectInfoFormCurrent({
   return (
     <>
       <div className="flex flex-col">
-        <p className="text-integra-small">{index.abreviatura}</p>
-        <p className="text-integra-thin">{index.descripcion}</p>
+        <p className="font-bold	">{index.abreviatura}</p>
+        <p className="text-xs">{index.descripcion}</p>
       </div>
       <div className="box-border flex w-full flex-row items-center justify-between pr-8">
         {content}

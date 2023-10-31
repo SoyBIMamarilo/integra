@@ -15,41 +15,54 @@ const CreateItemSearch = ({ presupuestos, onAddHandler }) => {
     useState(presupuestos);
 
   useEffect(() => {
+    console.log(project);
+    console.log(description);
+    console.log(presupuestos[0]);
     setSelectedPresupuestos(
       presupuestos
         .filter(
-          (el) => project == null || el.nombre.toLowerCase().includes(project)
+          (el) =>
+            project == null ||
+            el.nombre == null ||
+            el.nombre.toLowerCase().includes(project)
         )
         .filter(
-          (el) => type == null || el.line_type.toLowerCase().includes(type)
+          (el) =>
+            type == null ||
+            el.line_type == null ||
+            el.line_type.toLowerCase().includes(type)
         )
         .filter(
           (el) =>
             description == null ||
+            el.descripcion == null ||
             el.descripcion.toLowerCase().includes(description)
         )
-        .filter((el) => cbs == null || el.cbs.toLowerCase().includes(cbs))
+        .filter(
+          (el) =>
+            cbs == null || el.cbs == null || el.cbs.toLowerCase().includes(cbs)
+        )
     );
   }, [project, type, description, cbs]);
 
   const onChangeHandler = (event) => {
     switch (event.target.name) {
-      case "proyecto":
+      case "Proyecto":
         setProject(
           event.target.value == "" ? null : event.target.value.toLowerCase()
         );
         break;
-      case "nivel":
+      case "Nivel":
         setType(
           event.target.value == "" ? null : event.target.value.toLowerCase()
         );
         break;
-      case "descripcion":
+      case "Descripcion":
         setDescription(
           event.target.value == "" ? null : event.target.value.toLowerCase()
         );
         break;
-      case "cbs":
+      case "CBS":
         setCbs(
           event.target.value == "" ? null : event.target.value.toLowerCase()
         );
@@ -62,22 +75,22 @@ const CreateItemSearch = ({ presupuestos, onAddHandler }) => {
       <div className="mb-2 grid grid-cols-2 ">
         <CreateItemSearchData
           key="proyecto"
-          label="proyecto"
+          label="Proyecto"
           list={selectedPresupuestos.map((el) => el.nombre)}
           onChange={onChangeHandler}
         />
         <CreateItemSearchData
-          label="nivel"
+          label="Nivel"
           list={selectedPresupuestos.map((el) => el.line_type)}
           onChange={onChangeHandler}
         />
         <CreateItemSearchData
-          label="descripcion"
+          label="Descripcion"
           list={selectedPresupuestos.map((el) => el.descripcion)}
           onChange={onChangeHandler}
         />
         <CreateItemSearchData
-          label="cbs"
+          label="CBS"
           list={selectedPresupuestos.map((el) => el.cbs)}
           onChange={onChangeHandler}
         />

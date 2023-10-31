@@ -1,33 +1,40 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Trash from "@/components/svg/trash";
+import Alert from "./AlertDialog";
+import LoadingComponent from "@/components/loading";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemSub = ({ item, open }) => {
+  console.log(item);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
   const itemDeleteHandler = async () => {
-    // console.log(item);
+    setLoading(true);
     const res = await fetch("/api/item", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        item_id: item.item_id,
+        item_id: item.id,
       }),
     });
-    router.refresh();
+    await router.refresh();
+    setLoading(false);
   };
   return (
     <>
-      <tr className={`${openStyle} text-xs font-light `}>
-        <td className="table-content">
+      {loading && <LoadingComponent />}
+
+      <tr className={`${openStyle} `}>
+        <td className="table-content indent-2 text-sm ">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
             <div className="">{item.descripcion}</div>
             <div className="font-semibold">{item.pyrefnombre}</div>
           </div>
-          <div className="pl-2">CBS: {item.cbs}</div>
+          <div className="pl-2 ">CBS: {item.cbs}</div>
         </td>
         <td />
         <td className="table-content text-center">
@@ -47,7 +54,11 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
           {nf_per.format(item.incidencia)}
         </td>
         <td>
-          <Trash onClick={itemDeleteHandler} />
+          <Alert
+            name={item.descripcion}
+            value={nf.format(item.vrtot)}
+            onConfirm={itemDeleteHandler}
+          />
         </td>
       </tr>
     </>

@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   pgadmin:
     image: dpage/pgadmin4
@@ -11,16 +11,13 @@ services:
       - "80:80"
     volumes:
       - ./servers.json:/pgadmin4/servers.json
-      - ./pgpass:/var/lib/pgadmin/pgpass
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    command: [ "npm", "run", "dev" ]
-    # stdin_open: true
-    # tty: true
-
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   command: [ "npm", "run", "dev" ]
+  # stdin_open: true
+  # tty: true
