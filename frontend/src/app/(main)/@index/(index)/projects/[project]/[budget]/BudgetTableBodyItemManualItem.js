@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Alert from "./AlertDialog";
 import LoadingComponent from "@/components/loading";
-// import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemManual = ({ item, open }) => {
@@ -30,7 +29,7 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
       <tr className={`${openStyle} `}>
         <td className="table-content indent-2 text-sm">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">
-            <div className="">{item.nombre}</div>
+            <div className="">{item.descripcion}</div>
           </div>
         </td>
         <td />

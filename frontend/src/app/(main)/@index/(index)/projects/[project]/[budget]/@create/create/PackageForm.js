@@ -54,6 +54,7 @@ const PackageForm = ({ budget, paquetes }) => {
               .filter((pq) => pq.include === false)
               .map((pq) => (
                 <PackageFormItem
+                  key={pq.id}
                   packageItem={pq}
                   changeHandler={changeHandler}
                 />
@@ -67,6 +68,7 @@ const PackageForm = ({ budget, paquetes }) => {
               .filter((pq) => pq.include === true)
               .map((pq) => (
                 <PackageFormItem
+                  key={pq.id}
                   packageItem={pq}
                   changeHandler={changeHandler}
                 />

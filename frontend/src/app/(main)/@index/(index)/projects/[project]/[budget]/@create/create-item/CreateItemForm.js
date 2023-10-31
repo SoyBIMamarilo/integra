@@ -52,14 +52,12 @@ const CreateItemForm = ({ indicador, selected }) => {
   const card = indicador && (
     <div className="m-2 grid grid-cols-2 gap-2 rounded-md border border-solid bg-neutral-200 p-1">
       <div>Cantidad Origen</div>
-      <div>{indicador.vr_or}</div>
+      <div>{nf.format(indicador.vr_or)}</div>
       <div>Cantidad Destino</div>
-      <div>{indicador.vr_dest}</div>
+      <div>{nf.format(indicador.vr_dest)}</div>
       <div>Valor Unitario</div>
       <div>
-        {`${nf.format(selected.sum / indicador.vr_or)} $/${
-          indicador.abreviatura
-        }`}
+        {`${nf.format(selected.sum / indicador.vr_or)} $/${indicador.codigo}`}
       </div>
       <div>Factor Ponderación</div>
       <input

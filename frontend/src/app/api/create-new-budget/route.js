@@ -9,17 +9,15 @@ export const dynamic = "force-dynamic";
 export async function POST(req) {
   const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
   const body = await req.json();
-  const indexes = body.indexes;
-  const { data, error } = await supabase
-    .from("proyecto_indicador")
-    .insert(indexes);
+  console.log(body);
+  const { data, error } = await supabase.rpc(
+    "crear_nuevo_presupuesto_indicador",
+    {
+      version_presupuesto: body.version,
+      proyecto_id: body.proyecto_id,
+    }
+  );
   console.log(data);
   console.log(error);
-  if (error) {
-    return NextResponse.json(
-      { error: "Algún parametro se encuentra en 0" },
-      { status: 403 }
-    );
-  }
   return NextResponse.json(data);
 }

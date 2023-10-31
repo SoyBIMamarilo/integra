@@ -6,12 +6,14 @@ import { useRouter, usePathname } from "next/navigation";
 
 import BudgetTableBodyItemSub from "./BudgetTableBodyItemSubItem";
 import BudgetTableBodyItemManual from "./BudgetTableBodyItemManualItem";
+import Alert from "./AlertDialog";
 import Trash from "@/components/svg/trash";
 import { nf, nf_per } from "@/util/date-format";
 import Arrow from "@/components/svg/arrow";
 import Plus from "@/components/svg/plus";
 
 const BudgetTableBodyItem = ({ packageValue }) => {
+  const router = useRouter();
   console.log(packageValue);
   const total = packageValue.reduce((accumulator, item) => {
     return accumulator + item.vrtot;
@@ -26,12 +28,19 @@ const BudgetTableBodyItem = ({ packageValue }) => {
     return accumulator + item.incidencia;
   }, 0);
   const indicadorValor = packageValue.reduce((accumulator, item) => {
-    return accumulator + item.indicadorValor;
+    return accumulator + item.indicador_valor;
   }, 0);
+
   const manual = packageValue.filter((it) => it.manual == 1 && it.id);
   const referente = packageValue.filter((it) => it.manual == 0 && it.id);
   const path = usePathname() + "/create-item";
-  const router = useRouter();
+  const unidadMedida = packageValue[0].valor_parametro ? (
+    <div>
+      {nf.format(packageValue[0].valor_parametro)} {packageValue[0].codigo}
+    </div>
+  ) : (
+    <div className="text-sm">Añadir {packageValue[0].indicador_nombre}</div>
+  );
   const [open, setOpen] = useState(false);
   const clickHandler = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -65,7 +74,7 @@ const BudgetTableBodyItem = ({ packageValue }) => {
         </td>
         <td />
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
-          m2
+          {unidadMedida}
         </td>
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf.format(indicadorValor)}
@@ -83,9 +92,14 @@ const BudgetTableBodyItem = ({ packageValue }) => {
           {nf_per.format(incidencia)}
         </td>
         <td>
-          <Trash onClick={deletePaqueteHandler} />
+          <Alert
+            name={packageValue[0].paquete}
+            value={nf.format(total)}
+            onConfirm={deletePaqueteHandler}
+          />
+          {/* <Trash onClick={deletePaqueteHandler} /> */}
         </td>
-        <td>
+        <td className="align-top	">
           <Link
             href={{
               pathname: path,

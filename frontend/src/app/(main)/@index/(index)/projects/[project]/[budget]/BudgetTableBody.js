@@ -16,12 +16,15 @@ const BudgetTableBody = ({ budget, name }) => {
     return accumulator + item.incidencia;
   }, 0);
 
-  const packages = [...new Set(budget.map((it) => it.paquete))];
-
+  const packages = [
+    ...new Set(
+      budget.sort((a, b) => a.orden - b.orden).map((it) => it.paquete)
+    ),
+  ];
   return (
     <>
       <tr>
-        <td className="flex flex-row place-items-center px-2 font-bold">
+        <td className="mt-3 flex flex-row place-items-center px-2 font-bold">
           {name}
         </td>
       </tr>
@@ -37,8 +40,8 @@ const BudgetTableBody = ({ budget, name }) => {
           <div className="flex flex-row place-items-center px-2">Sub Total</div>
         </td>
         <td />
-        <td className="table-content text-center">-</td>
-        <td className="table-content text-center">-</td>
+        <td className="table-content text-center"></td>
+        <td className="table-content text-center"></td>
         <td className="table-content text-center">{nf.format(total)}</td>
         <td className="table-content text-center">{nf.format(totalConst)}</td>
         <td className="table-content text-center">{nf.format(totalVend)}</td>

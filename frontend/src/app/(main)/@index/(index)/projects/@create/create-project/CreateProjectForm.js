@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const CreateProjectForm = ({ ciudades, indices }) => {
+  const [error, setError] = useState(false);
   const router = useRouter();
   const [input, setInput] = useState([
     ...indices.map((elem) => ({
@@ -18,7 +19,6 @@ const CreateProjectForm = ({ ciudades, indices }) => {
   ]);
 
   const clickHandler = (value) => {
-    console.log(value);
     setInput((prev) => {
       const status = prev.filter((ind) => ind.indicador_id == +value)[0].modify;
       return [

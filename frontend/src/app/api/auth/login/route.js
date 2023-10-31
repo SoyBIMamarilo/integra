@@ -16,7 +16,14 @@ export async function POST(request) {
     email,
     password,
   });
-  console.log(supabase);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session) {
+    console.log("FAILED");
+    console.log(requestUrl);
+    return NextResponse.redirect(new URL(requestUrl.host));
+  }
   return NextResponse.redirect(new URL("/projects", requestUrl), {
     status: 301,
   });

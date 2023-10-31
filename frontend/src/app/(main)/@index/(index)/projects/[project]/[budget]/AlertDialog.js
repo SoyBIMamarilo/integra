@@ -5,8 +5,8 @@ import * as AlertDialog from "@radix-ui/react-alert-dialog";
 
 const Alert = ({ name, value, onConfirm }) => (
   <AlertDialog.Root>
-    <AlertDialog.Trigger asChild>
-      <button>
+    <AlertDialog.Trigger className="h-min" asChild>
+      <button className="h-min">
         <Trash />
       </button>
     </AlertDialog.Trigger>
@@ -17,7 +17,7 @@ const Alert = ({ name, value, onConfirm }) => (
           Confirmar Eliminación
         </AlertDialog.Title>
         <AlertDialog.Description className="mb-5 mt-4 text-[15px] leading-normal text-mauve11">
-          {`Va a eliminar el elemento '${name}' por un total de $${value}. Este paso no se puede deshacer`}
+          {`Vas a eliminar el elemento '${name}' por un total de $${value}. Este paso no se puede deshacer.`}
         </AlertDialog.Description>
         <div className="flex justify-end gap-[25px]">
           <AlertDialog.Cancel asChild>

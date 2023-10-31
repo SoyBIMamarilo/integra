@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import { supabaseOptions } from "@/util/supabase";
 import { nf, nf_per } from "@/util/date-format";
+import { supabaseOptions } from "@/util/supabase";
 
 import DownloadFile from "./DownloadButton";
 import BudgetTableHeaders from "./BudgetTableHeaders";
@@ -43,8 +43,6 @@ const BudgetTable = async ({ budget, project }) => {
               budget={budgetTotal.filter((it) => it.categoria == cat)}
             />
           ))}
-          {/* <BudgetTableBody budget={budget} budgetTotal={budgetTotal} /> */}
-
           <tr className="h-2" />
 
           <tr className="font-bold">

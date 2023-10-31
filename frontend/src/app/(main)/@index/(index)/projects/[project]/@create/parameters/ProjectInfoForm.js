@@ -68,6 +68,10 @@ export default function ProjectInfoForm({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ indexes, budget }),
     });
+    if (res.status === 403) {
+      console.log("ERROR!!");
+      throw new Error("Creado con valor 0");
+    }
     router.refresh();
     router.back();
   };

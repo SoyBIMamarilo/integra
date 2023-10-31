@@ -6,7 +6,7 @@ const Projects = () => {
     <div className="flex grow flex-col justify-stretch">
       {/* <Summary /> */}
       <ProjectSection />
-      <IndexexSelection />
+      {/* <IndexexSelection /> */}
     </div>
   );
 };
