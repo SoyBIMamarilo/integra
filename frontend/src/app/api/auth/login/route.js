@@ -22,6 +22,7 @@ export async function POST(request) {
   if (!session) {
     console.log("FAILED");
     console.log(requestUrl);
+    console.log(requestUrl.host);
     return NextResponse.redirect(new URL(requestUrl.host));
   }
   return NextResponse.redirect(new URL("/projects", requestUrl), {
