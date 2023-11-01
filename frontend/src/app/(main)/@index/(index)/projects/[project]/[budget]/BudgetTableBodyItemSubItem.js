@@ -8,7 +8,6 @@ import LoadingComponent from "@/components/loading";
 import { nf, nf_per } from "@/util/date-format";
 
 const BudgetTableBodyItemSub = ({ item, open }) => {
-  console.log(item);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const openStyle = open ? "table-row" : "hidden";
@@ -26,8 +25,10 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
   };
   return (
     <>
-      {loading && <LoadingComponent />}
-
+      <tr>
+        <td></td>
+        {loading && <LoadingComponent />}
+      </tr>
       <tr className={`${openStyle} `}>
         <td className="table-content indent-2 text-sm ">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">

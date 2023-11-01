@@ -25,7 +25,7 @@ const BudgetTableBodyItemManual = ({ item, open }) => {
   };
   return (
     <>
-      {loading && <LoadingComponent />}
+      <tr>{loading && <LoadingComponent />}</tr>
       <tr className={`${openStyle} `}>
         <td className="table-content indent-2 text-sm">
           <div className=" flex flex-row flex-wrap gap-2 pl-2">

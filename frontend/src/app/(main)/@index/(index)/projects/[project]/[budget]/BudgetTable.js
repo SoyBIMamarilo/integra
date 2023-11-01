@@ -32,7 +32,7 @@ const BudgetTable = async ({ budget, project }) => {
 
   return (
     <div className="mt-5 flex h-full flex-col justify-start rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
-      <table className="h-min	w-full table-fixed	border-separate ">
+      <table className="h-min table-fixed	border-separate ">
         <BudgetTableHeaders />
         <tbody>
           <tr className="h-2 "></tr>

@@ -14,7 +14,6 @@ import Plus from "@/components/svg/plus";
 
 const BudgetTableBodyItem = ({ packageValue }) => {
   const router = useRouter();
-  console.log(packageValue);
   const total = packageValue.reduce((accumulator, item) => {
     return accumulator + item.vrtot;
   }, 0);
@@ -91,7 +90,7 @@ const BudgetTableBodyItem = ({ packageValue }) => {
         <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
           {nf_per.format(incidencia)}
         </td>
-        <td>
+        <td className="w-max">
           <Alert
             name={packageValue[0].paquete}
             value={nf.format(total)}
@@ -99,7 +98,7 @@ const BudgetTableBodyItem = ({ packageValue }) => {
           />
           {/* <Trash onClick={deletePaqueteHandler} /> */}
         </td>
-        <td className="align-top	">
+        <td className="w-min">
           <Link
             href={{
               pathname: path,

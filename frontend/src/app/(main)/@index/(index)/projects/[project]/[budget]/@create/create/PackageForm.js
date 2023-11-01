@@ -42,7 +42,7 @@ const PackageForm = ({ budget, paquetes }) => {
     router.refresh();
     router.back();
   };
-
+  console.log("PACKAGE FORM");
   return (
     <form onSubmit={formSubmitHandler}>
       <div className="grid  grid-cols-2 gap-3">
@@ -54,7 +54,7 @@ const PackageForm = ({ budget, paquetes }) => {
               .filter((pq) => pq.include === false)
               .map((pq) => (
                 <PackageFormItem
-                  key={pq.id}
+                  key={pq.paquete_trabajo_id}
                   packageItem={pq}
                   changeHandler={changeHandler}
                 />
@@ -68,7 +68,7 @@ const PackageForm = ({ budget, paquetes }) => {
               .filter((pq) => pq.include === true)
               .map((pq) => (
                 <PackageFormItem
-                  key={pq.id}
+                  key={pq.paquete_trabajo_id}
                   packageItem={pq}
                   changeHandler={changeHandler}
                 />
