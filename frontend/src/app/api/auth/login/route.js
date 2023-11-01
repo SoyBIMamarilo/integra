@@ -23,12 +23,14 @@ export async function POST(request) {
     console.log("FAILED");
     console.log(requestUrl);
     console.log(requestUrl.host);
-    return NextResponse.redirect(new URL(requestUrl.host), {
-      status: 301,
-    });
+    return NextResponse.json(
+      { error: "Falla autenticacion" },
+      {
+        status: 401,
+      }
+    );
   }
-  return NextResponse.redirect(new URL("/projects", requestUrl), {
+  return NextResponse.redirect(new URL("/projects", requestUrl.host), {
     status: 301,
   });
-  // return NextResponse.redirect("/projects");
 }

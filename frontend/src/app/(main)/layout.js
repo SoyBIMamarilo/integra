@@ -9,11 +9,7 @@ const Layout = async ({ index, login }) => {
     data: { session },
   } = await supabase.auth.getSession();
   console.log(session);
-  return !session
-    ? login
-    : session.user.role == "authenticated"
-    ? index
-    : login;
+  return session && session.user.role == "authenticated" ? index : login;
 };
 
 export default Layout;
