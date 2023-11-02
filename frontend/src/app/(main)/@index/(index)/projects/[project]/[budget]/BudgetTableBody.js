@@ -21,6 +21,7 @@ const BudgetTableBody = ({ budget, name }) => {
       budget.sort((a, b) => a.orden - b.orden).map((it) => it.paquete)
     ),
   ];
+  console.log(packages);
   return (
     <>
       <tr>

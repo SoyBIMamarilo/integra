@@ -23,6 +23,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
         "proyecto_indicadores_comun",
         { pr_or: selected.proyecto_id, pr_dest: params.budget }
       );
+      console.log("Fetching indicadores común");
       console.log(error);
       console.log(indicadores);
 
