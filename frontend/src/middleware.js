@@ -17,7 +17,6 @@ export async function middleware(req) {
   // console.log("Middleware");
   // console.log(req);
   // return redirect("/");
-  // return NextResponse.redirect(new URL(requestUrl.origin));
 }
 
 // export const config = {

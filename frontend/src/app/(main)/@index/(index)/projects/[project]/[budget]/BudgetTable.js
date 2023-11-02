@@ -27,7 +27,14 @@ const BudgetTable = async ({ budget, project }) => {
   const incidencia = budgetTotal.reduce((accumulator, item) => {
     return accumulator + item.incidencia;
   }, 0);
-  const categorias = [...new Set(budgetTotal.map((it) => it.categoria))];
+  console.log(budgetTotal);
+  const categorias = [
+    ...new Set(
+      budgetTotal
+        .sort((a, b) => a.categoria_id - b.categoria_id)
+        .map((it) => it.categoria)
+    ),
+  ];
   console.log(categorias);
 
   return (
