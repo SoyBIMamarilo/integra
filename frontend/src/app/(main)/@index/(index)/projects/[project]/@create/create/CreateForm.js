@@ -39,7 +39,7 @@ const Create = ({ project, indices }) => {
           />
         </div>
         <div className="mt-4	max-w-[70%] font-bold">
-          El presuspuesto se creará con los siguientes indicadores, que desués
+          El presuspuesto se creará con los siguientes indicadores, que después
           podrán ser modificados:
         </div>
         <div className=" mt-2 grid grid-cols-2 gap-3">

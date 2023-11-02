@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 
 export async function middleware(req) {
-  // return null;
   const requestUrl = new URL(req.url);
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
@@ -15,9 +14,10 @@ export async function middleware(req) {
     console.log("AUTHENTICATED");
     return res;
   }
-  console.log(requestUrl.host);
-  redirect("/");
-  // return NextResponse.redirect(new URL(requestUrl.host));
+  // console.log("Middleware");
+  // console.log(req);
+  // return redirect("/");
+  // return NextResponse.redirect(new URL(requestUrl.origin));
 }
 
 // export const config = {
