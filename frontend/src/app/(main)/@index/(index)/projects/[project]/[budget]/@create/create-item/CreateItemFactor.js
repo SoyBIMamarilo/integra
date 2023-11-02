@@ -7,27 +7,25 @@ import { useParams } from "next/navigation";
 import { supabaseOptions } from "@/util/supabase";
 
 const CreateItemFactor = ({ selected, setIndicador }) => {
-  console.log(supabaseOptions);
-
   const params = useParams();
   const selectedProject = params.project;
-
+  const supabase = createClientComponentClient(supabaseOptions);
   const [indicadores, setIndicadores] = useState([]);
-
+  console.log(supabase);
   useEffect(() => {
     setIndicador(null);
     const fetchIndicadores = async () => {
-      const supabase = createClientComponentClient(supabaseOptions);
-      console.log(selected.proyecto_id);
-      console.log(params.budget);
+      // console.log(selected.proyecto_id);
+      // console.log(params.budget);
       const { data: indicadores, error } = await supabase.rpc(
         "proyecto_indicadores_comun",
         { pr_or: selected.proyecto_id, pr_dest: params.budget }
       );
-      console.log("Fetching indicadores común");
-      console.log(error);
-      console.log(indicadores);
-
+      // console.log("Fetching indicadores común");
+      // console.log(supabase);
+      // console.log(error);
+      // console.log(indicadores);
+      console.log(supabase);
       setIndicadores(indicadores);
     };
     if (selected) {
@@ -43,7 +41,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
     }
     setIndicador(indicadores.filter((indicador) => indicador.id == id)[0]);
   };
-  const component = selected && (
+  const component = selected ? (
     <div className="m-2 grid grid-cols-2 gap-2 rounded-md border border-solid bg-neutral-200 p-1">
       <div>Indicadores disponibles</div>
       <select defaultValue={null} onChange={changeSelectHandler}>
@@ -55,7 +53,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
         ))}
       </select>
     </div>
-  );
+  ) : null;
   return component;
 };
 
