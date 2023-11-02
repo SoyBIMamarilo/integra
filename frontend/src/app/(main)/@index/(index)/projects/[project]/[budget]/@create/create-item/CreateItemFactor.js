@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { supabaseOptions } from "@/util/supabase";
 
 const CreateItemFactor = ({ selected, setIndicador }) => {
+  console.log(supabaseOptions);
   const supabase = createClientComponentClient(supabaseOptions);
   const params = useParams();
   const selectedProject = params.project;
@@ -22,7 +23,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
         "proyecto_indicadores_comun",
         { pr_or: selected.proyecto_id, pr_dest: params.budget }
       );
-
+      console.log(error);
       console.log(indicadores);
 
       setIndicadores(indicadores);
@@ -30,7 +31,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
     if (selected) {
       fetchIndicadores();
     }
-  }, [selected, selectedProject]);
+  }, [selected, selectedProject, supabase]);
 
   const changeSelectHandler = (e) => {
     const id = e.target.value;
