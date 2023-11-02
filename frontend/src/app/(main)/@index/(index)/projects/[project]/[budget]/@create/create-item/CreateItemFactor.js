@@ -8,7 +8,7 @@ import { supabaseOptions } from "@/util/supabase";
 
 const CreateItemFactor = ({ selected, setIndicador }) => {
   console.log(supabaseOptions);
-  const supabase = createClientComponentClient(supabaseOptions);
+
   const params = useParams();
   const selectedProject = params.project;
 
@@ -17,6 +17,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
   useEffect(() => {
     setIndicador(null);
     const fetchIndicadores = async () => {
+      const supabase = createClientComponentClient(supabaseOptions);
       console.log(selected.proyecto_id);
       console.log(params.budget);
       const { data: indicadores, error } = await supabase.rpc(
@@ -32,7 +33,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
     if (selected) {
       fetchIndicadores();
     }
-  }, [selected, selectedProject, supabase]);
+  }, [selected, selectedProject]);
 
   const changeSelectHandler = (e) => {
     const id = e.target.value;
