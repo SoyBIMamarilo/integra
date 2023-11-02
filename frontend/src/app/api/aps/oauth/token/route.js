@@ -33,9 +33,12 @@ export async function GET(request, { params }) {
                 expires_in: Math.round((cookieAps.expires_at - Date.now()) / 1000)
             };
             //return response.json(publicOAuthToken);
-            if (request.cookies.get('cookieAps'))
-                request.cookies.delete('cookieAps');
+
             const cookieStore = cookies();
+            if (request.cookies.get('cookieAps')) {
+                request.cookies.delete('cookieAps');
+                cookieStore.delete('cookieAps');
+            }
             cookieStore.set("cookieAps", JSON.stringify(cookieAps), {
                 httpOnly: true,
                 secure: process.env.NODE_ENV ? process.env.NODE_ENV : "production",
@@ -45,6 +48,8 @@ export async function GET(request, { params }) {
             //     status: 200,
             //     headers: { "Set-Cookie": `${JSON.stringify(cookieAps)}; sameSite=strict; httpOnly=true; maxAge=60*60*24` },
             // });
+        } else {
+            return NextResponse.json({ error: "Debe Iniciar Session" }, { status: 401 });
         }
     } catch (err) {
         return NextResponse.json({ error: "Debe iniciar Session" }, { status: 401 });

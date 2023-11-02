@@ -15,8 +15,8 @@ class LoggerExtension extends BaseExtension {
 
     async onModelLoaded(model) {
         super.onModelLoaded(model);
-        const props = await this.findPropertyNames(this.viewer.model);
-        console.log('New model has been loaded. Its objects contain the following properties:', props);
+        //const props = await this.findPropertyNames(this.viewer.model);
+        //console.log('New model has been loaded. Its objects contain the following properties:', props);
     }
 
     async onSelectionChanged(model, dbids) {
@@ -26,6 +26,12 @@ class LoggerExtension extends BaseExtension {
 
     onIsolationChanged(model, dbids) {
         super.onIsolationChanged(model, dbids);
+        // getprops
+        // dbids.forEach(function (dbid) {
+        //     model.getProperties(dbid, function (props) {
+        //         console.log(props.properties)
+        //     })
+        // })
         console.log('Isolation has changed', dbids);
     }
 }

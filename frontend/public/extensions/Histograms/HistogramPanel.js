@@ -4,7 +4,7 @@ export class HistogramPanel extends Autodesk.Viewing.UI.DockingPanel {
         this.extension = extension;
         this.container.style.left = (options.x || 0) + 'px';
         this.container.style.top = (options.y || 0) + 'px';
-        this.container.style.width = (options.width || 500) + 'px';
+        this.container.style.width = (options.width || 600) + 'px';
         this.container.style.height = (options.height || 400) + 'px';
         this.container.style.resize = 'none';
         this.chartType = options.chartType || 'bar'; // See https://www.chartjs.org/docs/latest for all the supported types of charts
@@ -38,7 +38,19 @@ export class HistogramPanel extends Autodesk.Viewing.UI.DockingPanel {
                 labels: [],
                 datasets: [{ data: [], backgroundColor: [], borderColor: [], borderWidth: 1 }],
             },
-            options: { maintainAspectRatio: false }
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Chantity'
+                }
+            }
         });
     }
 

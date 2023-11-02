@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 const APS = require('forge-apis');
@@ -13,13 +14,16 @@ export async function GET(request, { params }) {
             const internalCredentials = await internalAuthClient.getToken(code);
             const publicCredentials = await publicAuthClient.refreshToken(internalCredentials);
             let cookieAps = {};
-            const url = request.nextUrl.clone()
-            url.pathname = '/viewer'
+            const url = request.nextUrl.origin + "/viewer";
             const response = NextResponse.redirect(
                 url, { status: 302 }
             );
-            if (request.cookies.get('cookieAps'))
+            const cookieStore = cookies();
+            if (request.cookies.get('cookieAps')) {
                 request.cookies.delete('cookieAps');
+                cookieStore.delete('cookieAps');
+            }
+
             if (request.cookies.get('cookieAps'))
                 cookieAps = request.cookies.get('cookieAps');
             else {
@@ -27,11 +31,11 @@ export async function GET(request, { params }) {
                 cookieAps.internal_token = internalCredentials.access_token;
                 cookieAps.refresh_token = publicCredentials.refresh_token;
                 cookieAps.expires_at = Date.now() + internalCredentials.expires_in * 1000;
-                request.cookies.set("cookieAps", cookieAps);
                 response.cookies.set("cookieAps", JSON.stringify(cookieAps), {
                     httpOnly: true,
                     secure: process.env.NODE_ENV ? process.env.NODE_ENV : "production",
                 });
+
             }
             return response;
         } else {

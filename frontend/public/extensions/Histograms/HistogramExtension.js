@@ -66,6 +66,41 @@ class HistogramExtension extends BaseExtension {
 
     async findPropertyValueOccurrences(model, propertyName) {
         const dbids = await this.findLeafNodes(model);
+        //Adesd by me
+        // let mydbids = [];
+        // let instance = model.getData().instanceTree;
+        // if (instance.nodeAccess) {
+        //     let alldbsIDS = Object.keys(instance.nodeAccess.dbIdToIndex);
+        //     mydbids = alldbsIDS.map((id) => parseInt(id));
+        // }
+        // let typesRevit = {
+        //     categorys: [],
+        //     family: [],
+        //     familyType: [],
+        //     items: []
+        // };
+        // model.getBulkProperties(mydbids, {}, function (results) {
+        //     for (const result of results) {
+        //         if (result.properties.length > 0) {
+        //             if (result.properties[0].displayName == "Category") {
+        //                 if (result.properties[1].displayName == '_RC') {
+        //                     typesRevit.categorys.push({ dbid: result.dbId, categoryName: result.properties[1].displayValue, childrens: result.properties.filter((item) => item.displayName == "child").map(item => item.displayValue), parent: result.properties.filter((item) => item.displayName == "parent").map(item => item.displayValue) });
+        //                 } else if (result.properties[1].displayName == '_RFN') {
+        //                     typesRevit.family.push({ dbid: result.dbId, categoryName: result.properties[1].displayValue, childrens: result.properties.filter((item) => item.displayName == "child").map(item => item.displayValue), parent: result.properties.filter((item) => item.displayName == "parent").map(item => item.displayValue) });
+        //                 } else if (result.properties[1].displayName == '_RFT') {
+        //                     typesRevit.familyType.push({ dbid: result.dbId, categoryName: result.properties[1].displayValue, childrens: result.properties.filter((item) => item.displayName == "child").map(item => item.displayValue), parent: result.properties.filter((item) => item.displayName == "parent").map(item => item.displayValue) });
+        //                 }
+        //             }
+        //             else if (result.properties[0].displayName == "ElementId") {
+        //                 typesRevit.items.push({ dbid: result.dbId, categoryName: result.properties[0].displayValue, parent: result.properties.filter((item) => item.displayName == "parent").map(item => item.displayValue) });
+        //             }
+
+
+        //         }
+        //     }
+        // });
+        // console.log(typesRevit);
+        //Adesd by me
         return new Promise(function (resolve, reject) {
             model.getBulkProperties(dbids, { propFilter: [propertyName] }, function (results) {
                 let histogram = new Map();
