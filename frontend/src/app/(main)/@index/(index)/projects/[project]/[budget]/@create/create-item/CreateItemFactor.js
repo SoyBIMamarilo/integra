@@ -15,18 +15,22 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
   useEffect(() => {
     setIndicador(null);
     const fetchIndicadores = async () => {
-      // console.log(selected.proyecto_id);
-      // console.log(params.budget);
-      const { data: indicadores, error } = await supabase.rpc(
-        "proyecto_indicadores_comun",
-        { pr_or: selected.proyecto_id, pr_dest: params.budget }
-      );
-      // console.log("Fetching indicadores común");
-      // console.log(supabase);
-      // console.log(error);
-      // console.log(indicadores);
-      console.log(supabase);
-      setIndicadores(indicadores);
+      // const { data: indicadores, error } = await supabase.rpc(
+      //   "proyecto_indicadores_comun",
+      //   { pr_or: selected.proyecto_id, pr_dest: params.budget }
+      // );
+
+      const res = await fetch("/api/common-indexes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          proyecto_id: selected.proyecto_id,
+          budget: params.budget,
+        }),
+      });
+      const commonIndices = await res.json();
+      // console.log(commonIndices);
+      setIndicadores(commonIndices);
     };
     if (selected) {
       fetchIndicadores();
