@@ -50,14 +50,14 @@ const Create = ({ project, indices }) => {
         <div className="mt-4 flex flex-row gap-4">
           <button
             type="submit"
-            className=" rounded-lg border-2 border-solid	 border-gray12 bg-gray8 px-5 py-1 font-bold text-gray12 hover:bg-gray9"
+            className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-confirm-main px-5 py-1 font-bold text-integra-text hover:bg-integra-confirm-focus"
           >
             Crear
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className=" rounded-lg border-2 border-solid	 border-red11 bg-red5 px-5 py-1 font-bold text-red11 hover:bg-red6"
+            className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert-main px-5 py-1 font-bold text-integra-text hover:bg-integra-alert-focus"
           >
             Cancelar
           </button>

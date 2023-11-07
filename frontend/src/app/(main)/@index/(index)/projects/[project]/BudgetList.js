@@ -9,8 +9,10 @@ const BudgetList = async ({ budgets, project }) => {
       {budgets.map((budget) => (
         <BudgetListCard key={budget.id} budget={budget} />
       ))}
-      <BudgetListCreateButton project={project} />
-      <BudgetListDuplicateButton project={project} />
+      <div className="ml-2 mt-4 flex flex-row gap-3">
+        <BudgetListCreateButton project={project} />
+        <BudgetListDuplicateButton project={project} />
+      </div>
     </GroupCard>
   );
 };

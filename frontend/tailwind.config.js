@@ -22,11 +22,16 @@ module.exports = {
         ...blackA,
         integra: {
           text: "#171717",
-          background: "#E5E5E5",
+          background: {
+            principal: "#E5E5E5",
+            light: "#E8E8E8",
+            strong: "#D9D9D9",
+          },
           primary: "#EAD990",
           secondary: "#EFE3AE",
           accent: "#FFD200",
-          alert: "#EB8A86",
+          alert: { main: "#FDBDBE", focus: "#EB8A86" },
+          confirm: { main: "#cddbd7", focus: "#ADB8B4" },
         },
         tremor: {
           brand: {
