@@ -11,8 +11,6 @@ export default async function Page() {
     "get_ejecutados_historicos"
   );
 
-  console.log("HISTORICOS", historicos);
-
   return (
     <>
       <div className="mb-2 mt-1 text-2xl font-semibold">

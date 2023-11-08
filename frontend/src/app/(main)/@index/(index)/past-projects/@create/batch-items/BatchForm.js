@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { useState } from "react";
 
-const BatchForm = ({ projects, project, budget }) => {
+const BatchForm = ({ projects }) => {
   const router = useRouter();
   const [items, setItems] = useState([]);
 
@@ -80,8 +80,8 @@ const BatchForm = ({ projects, project, budget }) => {
         <label>Proyecto:</label>
         <select name="proyecto">
           {projects.map((it) => (
-            <option key={it.id} value={it.id}>
-              {it.nombre}
+            <option key={it.proyecto_id} value={it.proyecto_id}>
+              {it.proyecto}
             </option>
           ))}
         </select>

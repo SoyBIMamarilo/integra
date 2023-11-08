@@ -1,4 +1,7 @@
-const CreateItemSearchAvailable = ({ selectedPresupuestos, onAddHandler }) => {
+const CreateItemSearchAvailable = async ({
+  selectedPresupuestos,
+  onAddHandler,
+}) => {
   let nf = new Intl.NumberFormat("en", {
     maximumFractionDigits: 0,
   });

@@ -8,7 +8,7 @@ import CreateItemFactor from "./CreateItemFactor";
 import CreateItemForm from "./CreateItemForm";
 import CreateItemManual from "./CreateItemManual";
 
-const CreateItem = ({ presupuestos }) => {
+const CreateItem = ({filterLists}) => {
   const [addedPresupuestos, setAddedPresupuestos] = useState(null);
   const [indicador, setIndicador] = useState(null);
   const [manual, setManual] = useState(false);
@@ -25,8 +25,8 @@ const CreateItem = ({ presupuestos }) => {
   const content = !manual ? (
     <>
       <CreateItemSearch
-        presupuestos={presupuestos}
         onAddHandler={onAddHandler}
+        filterLists = {filterLists}
       />
       <CreateItemSelected selected={addedPresupuestos} />
       <CreateItemFactor
