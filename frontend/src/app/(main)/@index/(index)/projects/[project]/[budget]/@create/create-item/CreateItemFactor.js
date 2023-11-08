@@ -29,7 +29,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
         }),
       });
       const commonIndices = await res.json();
-      // console.log(commonIndices);
+      console.log(commonIndices);
       setIndicadores(commonIndices);
     };
     if (selected) {
