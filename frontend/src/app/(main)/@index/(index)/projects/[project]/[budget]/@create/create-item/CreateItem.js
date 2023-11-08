@@ -42,7 +42,7 @@ const CreateItem = ({ presupuestos }) => {
   );
 
   const active =
-    "w-32 bg-integra-text text-integra-background rounded-sm border border-black px-2 first:rounded-tl-full first:rounded-bl-full last:rounded-tr-full last:rounded-br-full ";
+    "w-32 bg-integra-text text-integra-background-principal rounded-sm border border-black px-2 first:rounded-tl-full first:rounded-bl-full last:rounded-tr-full last:rounded-br-full ";
   const inactive =
     "w-32	 bg-integra-background text-integra-text rounded-sm border border-black px-2 first:rounded-tl-full first:rounded-bl-full last:rounded-tr-full last:rounded-br-full";
 

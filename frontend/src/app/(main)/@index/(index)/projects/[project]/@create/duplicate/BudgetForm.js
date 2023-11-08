@@ -46,13 +46,18 @@ const BudgetForm = ({ budgets }) => {
           name="version"
           id="version"
         />
-        <button type="submit" className="button-black">
+      </div>
+      <div className="mt-4 flex flex-row gap-4">
+        <button
+          type="submit"
+          className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-confirm-main px-5 py-1 font-bold text-integra-text hover:bg-integra-confirm-focus"
+        >
           Crear Duplicado
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="button-black"
+          className="hover:bg-integra-alert-focuss rounded-lg border-2	 border-solid border-integra-text bg-integra-alert-main px-5 py-1 font-bold text-integra-text hover:bg-integra-alert-focus"
         >
           Cancelar
         </button>
