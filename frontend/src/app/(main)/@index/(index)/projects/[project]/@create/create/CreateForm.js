@@ -19,8 +19,6 @@ const Create = ({ project, indices }) => {
       body: JSON.stringify({ version, proyecto_id: project }),
     });
     console.log(res);
-    // router.refresh();
-    // router.back();
   };
 
   return (

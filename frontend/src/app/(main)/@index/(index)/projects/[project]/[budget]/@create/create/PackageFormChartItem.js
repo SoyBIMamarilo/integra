@@ -1,6 +1,6 @@
 "use client";
 
-const PackageFormItem = ({ packageItem, changeHandler }) => {
+const PackageFormChartItem = ({ packageItem, changeHandler }) => {
   const clickHandler = () => {
     // console.log(packageItem);
     changeHandler(packageItem.paquete_trabajo_id);
@@ -15,4 +15,4 @@ const PackageFormItem = ({ packageItem, changeHandler }) => {
   );
 };
 
-export default PackageFormItem;
+export default PackageFormChartItem;

@@ -30,6 +30,7 @@ const CreateProjectForm = ({ ciudades, indices }) => {
       ];
     });
   };
+
   const changeHandler = (value, indicador) => {
     setInput((prev) => {
       const status = prev.filter((ind) => ind.indicador_id == indicador)[0]

@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import PackageFormItem from "./PackageFormItem";
+import PackageFormChart from "./PackageFormChart";
+import PackageFormChartItem from "./PackageFormChartItem";
 
 const PackageForm = ({ budget, paquetes }) => {
   const [paquetesStatus, setPaquetesStatus] = useState(
@@ -42,39 +43,19 @@ const PackageForm = ({ budget, paquetes }) => {
     router.refresh();
     router.back();
   };
-  console.log("PACKAGE FORM");
   return (
     <form onSubmit={formSubmitHandler}>
       <div className="grid  grid-cols-2 gap-3">
-        {/* <label className="basis-1/4">Paquete: </label> */}
-        <div>
-          <div className="font-bold">Disponibles</div>
-          <div className="h-52 overflow-y-auto">
-            {paquetesStatus
-              .filter((pq) => pq.include === false)
-              .map((pq) => (
-                <PackageFormItem
-                  key={pq.paquete_trabajo_id}
-                  packageItem={pq}
-                  changeHandler={changeHandler}
-                />
-              ))}
-          </div>
-        </div>
-        <div>
-          <div className="font-bold">Incluir</div>
-          <div className="h-52 overflow-y-auto ">
-            {paquetesStatus
-              .filter((pq) => pq.include === true)
-              .map((pq) => (
-                <PackageFormItem
-                  key={pq.paquete_trabajo_id}
-                  packageItem={pq}
-                  changeHandler={changeHandler}
-                />
-              ))}
-          </div>
-        </div>
+        <PackageFormChart
+          changeHandler={changeHandler}
+          title="Disponibles"
+          paquetesStatus={paquetesStatus.filter((pq) => pq.include === false)}
+        />
+        <PackageFormChart
+          changeHandler={changeHandler}
+          title="Incluir"
+          paquetesStatus={paquetesStatus.filter((pq) => pq.include === true)}
+        />
       </div>
       <div className="mt-4 flex flex-row gap-4">
         <button
