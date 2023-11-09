@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
                 };
                 let profile = await new APS.UserProfileApi().getUserProfile(internalAuthClient, internalOAuthToken);
                 profile = profile.body;
-                return NextResponse.json({ name: `${profile.firstName} ${profile.lastName}` });
+                return NextResponse.json(profile);
             }
         }
         return NextResponse.json({ error: "Debe Iniciar Session" }, { status: 401 });

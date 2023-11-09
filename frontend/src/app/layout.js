@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <meta name="language" content="English" />
         <meta name="author" content="Amarilo" />
         <link rel="stylesheet" type="text/css" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css" />
-
+        <link rel="icon" type="image/x-icon" href="https://amarilo.com.co/images/logo-white.svg" />
       </head>
 
       <body className={inter.className}>{children}</body>

@@ -34,39 +34,144 @@ const ViewerAps = (params) => {
     const selectTtemDbRef = useRef(null);
     const selectFilterDbRef = useRef(null);
     const tableRef = useRef(null);
+    /**
+     *Funcion Handler para seleccionar la categoria
+     *
+     * @param {*} e parametro events.
+     */
     function handleCategorysSelect(e) {
         const categorySel = e.target.value;
         setSelectedCategory(categorySel);
         setSelectedFamily("");
         setSelectedFamilyType("");
+        // restart Cbs filters
+        setselectedGroupItemdb("");
+        setSelectedItemdb("");
+        setselectedFilterDb("");
     }
 
+
+    /**
+     *Funcion Handler para Seleccion de la Familia.
+     *
+     * @param {*} e parametro events
+     */
     function handleFamilysSelect(e) {
         const familySel = e.target.value;
         setSelectedFamily(familySel);
         setSelectedFamilyType("");
+        // restart Cbs filters
+        setselectedGroupItemdb("");
+        setSelectedItemdb("");
+        setselectedFilterDb("");
+
     }
+    /**
+     *Funcion Handler para Seleccion del typo de Familia.
+     *
+     * @param {*} e parametro events
+     */
     function handleFamilyTypesSelect(e) {
         const familyTypeSel = e.target.value;
         setSelectedFamilyType(familyTypeSel);
+        // restart Cbs filters
+        setselectedGroupItemdb("");
+        setSelectedItemdb("");
+        setselectedFilterDb("");
     }
-    function handleItemdbSelect(e) {
-        const itemValue = e.target.value;
-        setSelectedItemdb(itemValue);
-    }
+    /**
+     *Funcion Handler para Seleccion del grupo o tipoesCBS.
+     *
+     * @param {*} e parametro events
+     */
     function handleItemGroupdbSelect(e) {
         const itemValue = e.target.value;
+        setSelectedItemdb("");
+        setselectedFilterDb("");
         setselectedGroupItemdb(itemValue);
     }
+    /**
+     *Funcion Handler para Seleccion de la unidades de Medida.
+     *
+     * @param {*} e parametro events
+     */
+    function handleItemdbSelect(e) {
+        const itemValue = e.target.value;
+        setselectedFilterDb("");
+        setSelectedItemdb(itemValue);
+    }
+    /**
+     *Funcion Handler Seleccion de una unica CBS.
+     *
+     * @param {*} e parametro events
+     */
     function handleFilterDbSelect(e) {
         const itemValue = e.target.value;
         setselectedFilterDb(itemValue);
     }
+
+    /**
+     *Funcion
+     *
+     * @param {*} dbid
+     */
     function isolateItems(dbid) {
         viewer3D.isolate();
+        viewer3D.fitToView();
+        viewer3D.select(dbid);
         viewer3D.isolate(dbid);
-        //viewer3D.fitToView(dbid, viewer3D);
+        viewer3D.fitToView(dbid, viewer3D.model);
     }
+    /**
+     *
+     *
+     * @param {*} tableBody cuerpo de la tabla
+     * @param {*} headerValue Headers de tabla
+     * @param {*} classItems Clases aplicables a la celda
+     * @param {*} typeRow TH TR o TD
+     * @param {boolean} [addSpan=false] Use este para crear un Vinculo para aislar Itemas
+     */
+    function createTableRow(tableBody, headerValue, classItems, typeRow, addSpan = false) {
+        let td = "";
+        let tr = "";
+        tr = document.createElement('TR');
+        td = document.createElement(typeRow);
+        td.className = classItems
+        td.width = '75';
+        td.appendChild(document.createTextNode(headerValue[0]));
+        tr.appendChild(td);
+        td = document.createElement(typeRow);
+        td.className = classItems
+        td.width = '75';
+        td.appendChild(document.createTextNode(headerValue[1]));
+        tr.appendChild(td);
+        //Add item
+        td = document.createElement(typeRow);
+        td.className = classItems
+        td.width = '12';
+        if (addSpan) {
+            let spanDbid = document.createElement('p');
+            spanDbid.onclick = () => isolateItems(`${headerValue[2]}`);
+            spanDbid.appendChild(document.createTextNode(`${headerValue[2]}`));
+            spanDbid.className = "underline text-blue-600 cursor-pointer  !text-ellipsis !overflow-hidden w-20 max-w-20";
+            td.appendChild(spanDbid);
+        } else
+            td.appendChild(document.createTextNode(headerValue[2]));
+        tr.appendChild(td);
+        //add item
+        td = document.createElement(typeRow);
+        td.className = classItems
+        td.width = '75';
+        td.appendChild(document.createTextNode(headerValue[3]));
+        tr.appendChild(td);
+        tableBody.appendChild(tr);
+    }
+
+    /**
+     *Funcion par obtener el tocken de APS para el visor y no genere errores por Session.
+     *
+     * @param {*} callback
+     */
     async function getAccessToken(callback) {
         try {
             const resp = await fetch('/api/aps/oauth/token');
@@ -80,6 +185,7 @@ const ViewerAps = (params) => {
             console.error("Could not obtain access token", err);
         }
     }
+
     useEffect(() => {
         if (selectedItemdb !== "" && selectedGroupItemdb !== "") {
             if (customParams) {
@@ -95,142 +201,47 @@ const ViewerAps = (params) => {
                     total = typeof evalProp !== "undefined" ? Number(evalProp.displayValue.toFixed(2)) : 0;
                     return { group: (typeof selectedProp !== "undefined" ? selectedProp.displayValue : ""), valor: total, dbid: item.dbid };
                 });
-                if (selectedFilterDb !== "")
-                    data = data.filter(item => item.group == selectedFilterDb);
                 //Filter only selected property
                 tableRef.current.innerHTML = "";
-                let table = document.createElement('TABLE');
-                table.className = "min-w-full divide-y divide-gray-200 dark:divide-gray-700";
-                table.border = '1';
+                let table = tableRef.current;
                 let tableBody = document.createElement('TBODY');
-                let td = "";
                 let valorItem = 0;
                 let subTotal = 0;
                 let totalCountdb = 0;
-                let tr = "";
-                let classItems = "border px-6 py-3 text-left text-xs";
+                let classItems = "border px-6 py-3 text-left text-[10px]";
                 labels = [...new Set(data.map(item => item.group))];
                 //Load other Dropdown
                 selectFilterDbRef.current.innerHTML = `<option className='text-xs' value="">Select the Filter</option>${labels.map((item) => (`<option className='text-xs' value="${item}">${item}</option>`)).join('\n')}`;
                 let itemText = "";
-                itemText += selectedCategory !== "" ? `${modelProperties.categorys.find(x => x.dbid == parseInt(selectedCategory)).categoryName}>` : "";
-                itemText += selectedFamily !== "" ? `${modelProperties.family.find(x => x.dbid == parseInt(selectedFamily)).categoryName}>` : "";
-                itemText += selectedFamilyType !== "" ? `${modelProperties.familyType.find(x => x.dbid == parseInt(selectedFamilyType)).categoryName}>` : "";
+                itemText += selectedCategory !== "" ? `>${modelProperties.categorys.find(x => x.dbid == parseInt(selectedCategory)).categoryName}` : "";
+                itemText += selectedFamily !== "" ? `>${modelProperties.family.find(x => x.dbid == parseInt(selectedFamily)).categoryName}` : "";
+                itemText += selectedFamilyType !== "" ? `>${modelProperties.familyType.find(x => x.dbid == parseInt(selectedFamilyType)).categoryName}` : "";
                 let dataChart = [];
+                if (selectedFilterDb !== "") {
+                    data = data.filter(item => item.group == selectedFilterDb);
+                    labels = labels.filter(item => item == selectedFilterDb);
+                }
                 for (let label of labels) {
-                    tr = document.createElement('TR');
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${itemText}${label}`));
-                    tr.appendChild(td);
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Cant`));
-                    tr.appendChild(td);
-                    //Add item
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '12';
-                    td.appendChild(document.createTextNode(`Viewer Id`));
-                    tr.appendChild(td);
-                    //add item
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Valor`));
-                    tr.appendChild(td);
-                    tableBody.appendChild(tr);
+                    createTableRow(tableBody, [`${itemText}>${label}`, "Cant", "Viewer Id", "Valor"], classItems, "TH");//Addmethod
                     subTotal = 0;
                     countdb = 0;
                     data.forEach(function (groupby, index) {
                         if (groupby.group == label) {
                             valorItem = groupby.valor;
                             subTotal += parseFloat(valorItem);
-                            tr = document.createElement('TR');
-                            td = document.createElement('TD');
-                            td.className = classItems
-                            td.width = '75';
-                            td.appendChild(document.createTextNode(`${itemText}${label}`));
-                            tr.appendChild(td);
-                            td = document.createElement('TD');
-                            td.className = classItems
-                            td.width = '75';
-                            td.appendChild(document.createTextNode(`1 Unit`));
-                            tr.appendChild(td);
-                            //Add item
-                            td = document.createElement('TD');
-                            td.className = classItems
-                            td.width = '12';
-                            let spanDbid = document.createElement('span');
-                            spanDbid.onclick = () => isolateItems(`${groupby.dbid}`);
-                            spanDbid.appendChild(document.createTextNode(`${item.dbid}`));
-                            td.appendChild(spanDbid);
-                            tr.appendChild(td);
-                            //add item
-                            td = document.createElement('TD');
-                            td.className = classItems
-                            td.width = '75';
-                            td.appendChild(document.createTextNode(`${valorItem}`));
-                            tr.appendChild(td);
-                            tableBody.appendChild(tr);
+                            createTableRow(tableBody, [`${itemText}`, "1 Unit", `${groupby.dbid}`, `${valorItem}`], classItems, "TD", true);//Addmethod               
                             countdb += 1;
                         }
                     });
                     totalCountdb += countdb;
                     total += subTotal;
-                    tr = document.createElement('TR');
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Subtotal Items`));
-                    tr.appendChild(td);
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${countdb} Unit`));
-                    tr.appendChild(td);
-                    //Add item
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '12';
-                    tr.appendChild(td);
-                    //add item
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${subTotal.toFixed(2)}`));
-                    tr.appendChild(td);
-                    tableBody.appendChild(tr);
-
+                    createTableRow(tableBody, [`Subtotal Items`, `${countdb} Units`, "", `${subTotal.toFixed(2)}`], classItems, "TH");//Addmethod
+                    subTotal = 0;
                     dataChart.push(subTotal);
                 }
-                tr = document.createElement('TR');
-                td = document.createElement('TH');
-                td.className = classItems
-                td.width = '75';
-                td.appendChild(document.createTextNode(`Total Items`));
-                tr.appendChild(td);
-                td = document.createElement('TH');
-                td.className = classItems
-                td.width = '75';
-                td.appendChild(document.createTextNode(`${totalCountdb} Unit`));
-                tr.appendChild(td);
-                //Add item
-                td = document.createElement('TD');
-                td.className = classItems
-                td.width = '12';
-                tr.appendChild(td);
-                //add item
-                td = document.createElement('TH');
-                td.className = classItems
-                td.width = '75';
-                td.appendChild(document.createTextNode(`${total.toFixed(2)}`));
-                tr.appendChild(td);
-                tableBody.appendChild(tr);
+                createTableRow(tableBody, [`Total Items`, `${totalCountdb} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod        
                 table.appendChild(tableBody);
-                tableRef.current.appendChild(table);
+                //tableRef.current.appendChild(table);
                 if (!window.Chart)
                     return;
                 if (window.chartCustom)
@@ -269,8 +280,6 @@ const ViewerAps = (params) => {
                     }
                 });
             }
-        } else {
-
         }
     }, [selectedItemdb, customParams, selectedGroupItemdb, selectedFilterDb])
     //Chart Family Type Subtype
@@ -339,143 +348,52 @@ const ViewerAps = (params) => {
                 //dataBarVolumen.label.push("Volumen");
             }
             if (selectedFamilyType !== "") {
-                let item = modelProperties.familyType.find(x => x.dbid.toString() == selectedFamilyType.toString());
+                let item = modelProperties.familyType.find(x => x.dbid == parseInt(selectedFamilyType));
                 dbids = item.childrens;
                 childsTypes = [];
                 childsTypes.push({ name: item.categoryName, childs: dbids });
             }
             let customItems = [];
             tableRef.current.innerHTML = "";
-            let table = document.createElement('TABLE');
-            table.className = "min-w-full divide-y divide-gray-200 dark:divide-gray-700";
-            table.border = '1';
+            let table = tableRef.current;
             let tableBody = document.createElement('TBODY');
-            let td = "";
             let valorItem = 0;
-            let tr = "";
-            let classItems = "border px-6 py-3 text-left text-xs";
+            let classItems = "border px-6 py-3 text-left text-[10px]";
+            let dbIsolateDbids = [];
             childsTypes.map((propertys, index) => {
                 let items = modelProperties.items.filter(item => propertys.childs.includes(item.dbid));
                 if (index == 0) {
-                    selectTtemDbRef.current.innerHTML = `<option className='text-xs' value="">Select the Dimension</option>${items[0].props.filter(x => x.type == 3).map((x) => x.displayName).map((item) => (`<option className='text-xs' value="${item}">${item}</option>`)).join('\n')}`;
-                    selectTtemGroupDbRef.current.innerHTML = `<option className='text-xs' value="">Select the Group</option>${items[0].props.filter(x => x.type == 20).map((x) => x.displayName).map((item) => (`<option className='text-xs' value="${item}">${item}</option>`)).join('\n')}`
+                    let filterDimension = ["Area", "Volume", "Length"];
+                    selectTtemDbRef.current.innerHTML = `<option className='text-xs' value="">Select the Dimension</option>${items[0].props.filter(x => x.type == 3 && filterDimension.includes(x.displayName)).map((x) => x.displayName).map((item) => (`<option className='text-xs' value="${item}">${item}</option>`)).join('\n')}`;
+                    selectTtemGroupDbRef.current.innerHTML = `<option className='text-xs' value="">Select the Group</option>${items[0].props.filter(x => x.type == 20 && x.displayName.toLowerCase().indexOf("cbs") > -1).map((x) => x.displayName).map((item) => (`<option className='text-xs' value="${item}">${item}</option>`)).join('\n')}`
                 }
                 if (items.length > 0) {
                     let evalProp = null;
                     customItems = [...customItems, ...items];
                     let itemText = "";
-                    itemText += selectedCategory !== "" ? `${modelProperties.categorys.find(x => x.dbid == parseInt(selectedCategory)).categoryName}>` : "";
-                    itemText += selectedFamily !== "" ? `${modelProperties.family.find(x => x.dbid == parseInt(selectedFamily)).categoryName}>` : "";
-                    itemText += selectedFamilyType !== "" ? `${modelProperties.familyType.find(x => x.dbid == parseInt(selectedFamilyType)).categoryName}` : "";
-                    tr = document.createElement('TR');
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${itemText}`));
-                    tr.appendChild(td);
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Cant`));
-                    tr.appendChild(td);
-                    //Add item
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '12';
-                    td.appendChild(document.createTextNode(`Viewer Id`));
-                    tr.appendChild(td);
-                    //add item
-                    td = document.createElement('TH');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Valor`));
-                    tr.appendChild(td);
-                    tableBody.appendChild(tr);
-                    items.forEach(function (item, index) {
+                    itemText += selectedCategory !== "" ? `>${modelProperties.categorys.find(x => x.dbid == parseInt(selectedCategory)).categoryName}` : "";
+                    itemText += selectedFamily !== "" ? `>${modelProperties.family.find(x => x.dbid == parseInt(selectedFamily)).categoryName}` : "";
+                    itemText += selectedFamilyType !== "" ? `>${modelProperties.familyType.find(x => x.dbid == parseInt(selectedFamilyType)).categoryName}` : "";
+                    createTableRow(tableBody, [`${itemText}>${propertys.name}`, "Cant", "Viewer Id", "Valor"], classItems, "TH");//Addmethod
+                    items.forEach(function (item) {
                         evalProp = item.props.find(x => x.displayName == (selectedItemdb !== "" ? selectedItemdb : "Area"));
                         valorItem = typeof evalProp !== "undefined" ? Number(evalProp.displayValue.toFixed(2)) : 0;
                         subTotal += valorItem;
-                        tr = document.createElement('TR');
-                        td = document.createElement('TD');
-                        td.className = classItems
-                        td.width = '75';
-                        td.appendChild(document.createTextNode(`${itemText} ${item.categoryName}`));
-                        tr.appendChild(td);
-                        td = document.createElement('TD');
-                        td.className = classItems
-                        td.width = '75';
-                        td.appendChild(document.createTextNode(`1 Unit`));
-                        tr.appendChild(td);
-                        //Add item
-                        td = document.createElement('TD');
-                        td.className = classItems
-                        td.width = '12';
-                        let spanDbid = document.createElement('span');
-                        spanDbid.onclick = () => isolateItems(`${item.dbid}`);
-                        spanDbid.appendChild(document.createTextNode(`${item.dbid}`));
-                        td.appendChild(spanDbid);
-                        tr.appendChild(td);
-                        //add item
-                        td = document.createElement('TD');
-                        td.className = classItems
-                        td.width = '75';
-                        td.appendChild(document.createTextNode(`${valorItem}`));
-                        tr.appendChild(td);
-                        tableBody.appendChild(tr);
+                        createTableRow(tableBody, [`${itemText}>${item.categoryName}`, "1 Unit", `${item.dbid}`, `${valorItem}`], `${classItems} item-${index}`, "TD", true);//Addmethod
+                        dbIsolateDbids.push(item.dbid);
                     });
-                    tr = document.createElement('TR');
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`Subtotal Items`));
-                    tr.appendChild(td);
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${items.length} Unit`));
-                    tr.appendChild(td);
-                    //Add item
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '12';
-                    tr.appendChild(td);
-                    //add item
-                    td = document.createElement('TD');
-                    td.className = classItems
-                    td.width = '75';
-                    td.appendChild(document.createTextNode(`${subTotal.toFixed(2)}`));
-                    tr.appendChild(td);
-                    tableBody.appendChild(tr);
+                    createTableRow(tableBody, [`Subtotal Items`, `${items.length} Units`, dbIsolateDbids, `${subTotal.toFixed(2)}`], `${classItems} item-${index}`, "TH", true);//Addmethod                    
+
                 }
                 dataBarArea.data.push(subTotal);
                 total += subTotal;
+                subTotal = 0;
+                dbIsolateDbids = [];
                 //dataBarVolumen.data.push(totalVol);
             });
-            tr = document.createElement('TR');
-            td = document.createElement('TH');
-            td.className = classItems
-            td.width = '75';
-            td.appendChild(document.createTextNode(`Total Items`));
-            tr.appendChild(td);
-            td = document.createElement('TH');
-            td.className = classItems
-            td.width = '75';
-            td.appendChild(document.createTextNode(`${customItems.length} Unit`));
-            tr.appendChild(td);
-            //Add item
-            td = document.createElement('TH');
-            td.className = classItems
-            td.width = '12';
-            tr.appendChild(td);
-            //add item
-            td = document.createElement('TH');
-            td.className = classItems
-            td.width = '75';
-            td.appendChild(document.createTextNode(`${total.toFixed(2)}`));
-            tr.appendChild(td);
-            tableBody.appendChild(tr);
+            createTableRow(tableBody, [`Total Items`, `${customItems.length} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod    
             table.appendChild(tableBody);
-            tableRef.current.appendChild(table);
+            //tableRef.current.appendChild(table);
             setCustomParams(customItems);
             dataChart.push(dataBarArea);
             //dataChart.push(dataBarVolumen);
@@ -526,7 +444,7 @@ const ViewerAps = (params) => {
 
     }, [modelProperties, selectedCategory, selectedFamily])
 
-    //Used to detect if load Autodesk
+    //Metodo para determinar si Autodesk js esta creado.
     useEffect(() => {
         if (scriptLoaded && !initialized) {
             let options = {
@@ -537,7 +455,7 @@ const ViewerAps = (params) => {
 
         }
     }, [initialized, scriptLoaded]);
-    //loadAutodesk
+    //Generamos la data desde el Visor y la almacenamos en un Array. por tipologias.
     useEffect(() => {
         if (scriptLoaded && initialized) {
             let options = {
@@ -603,7 +521,6 @@ const ViewerAps = (params) => {
                         }
                         selectCategorysRef.current.innerHTML = `<option className='text-xs' value="">Select the category</option>${modelProperties.categorys.map((item) => (`<option className='text-xs' value="${item.dbid}">${item.categoryName}</option>`)).join('\n')}`;
                         setModelProperties(modelProperties);
-                        console.log(modelProperties);
                     });
                 }
             }
@@ -618,8 +535,10 @@ const ViewerAps = (params) => {
                 return new Promise(function (resolve, reject) {
                     function onDocumentLoadSuccess(doc) {
                         resolve(viewer.loadDocumentNode(doc, doc.getRoot().getDefaultGeometry()));
+                        //Cargamos Extensiones Autodesk
                         viewer.loadExtension('Autodesk.Explode');
                         viewer.loadExtension('Autodesk.DocumentBrowser');
+                        //Custom Extensions referenciadas en Js
                         viewer.loadExtension('Autodesk.VisualClusters');
                         viewer.loadExtension("NestedViewerExtension", { filter: ["2d", "3d"], crossSelection: true });
                         viewer.loadExtension("LoggerExtension");
@@ -646,18 +565,18 @@ const ViewerAps = (params) => {
     }, [token, initialized, scriptLoaded, docUrn]);
     return (
         <>
-            <Script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js" onLoad={() => setScriptLoaded(true)} />
+            <Script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js" strategy="beforeInteractive" onLoad={() => setScriptLoaded(true)} />
             <Script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" />
             {/* <!-- //extensions -->
             <!-- planesviewer --> */}
             <link rel="stylesheet" href="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.css" as="style" />
             <Script strategy="afterInteractive" src="http://cdn.jsdelivr.net/gh/autodesk-forge/forge-extensions/public/extensions/NestedViewerExtension/contents/main.js"></Script>
             {/* <!-- summaryExt --> */}
-            <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="/extensions/summary/LoggerExtension.js"></Script>
+            <Script type="module" crossOrigin="anonymous" strategy="afterInteractive" src="extensions/summary/LoggerExtension.js" />
             {/* <!-- histograma --> */}
-            <Script type="module" crossorigin="anonymous" strategy="afterInteractive" src="extensions/Histograms/HistogramExtension.js"></Script>
-            <script src="https://cdnjs.com/libraries/Chart.js"></script>
-            {({ docUrn }) ? (
+            <Script type="module" crossOrigin="anonymous" strategy="afterInteractive" src="extensions/Histograms/HistogramExtension.js" />
+            <Script src="https://cdnjs.com/libraries/Chart.js"></Script>
+            {({ viewer3D }) ? (
                 <div className="grid">
                     <div className="h-[2.5vh]">
                         <label htmlFor="cbCategoria" className="text-xs basis-1/4 pr-2">Categoria: </label>
@@ -667,7 +586,7 @@ const ViewerAps = (params) => {
                         <label htmlFor="cbFamilysTypes" className="text-xs basis-1/4 pr-2">Tipo: </label>
                         <select id="cbFamilysTypes" className='text-xs' name="FamilyTypes" ref={selectFamilyTypesRef} onChange={e => handleFamilyTypesSelect(e)} value={selectedFamilyType}><option className='text-xs' value="">Select the FamilyType</option></select>
                     </div>
-                    <div className="h-[2.5vh]">
+                    <div className="h-[3vh]">
                         <label htmlFor="cbitemdb" className="text-xs basis-1/4 pr-2">Agrupar por: </label>
                         <select id="cbitemdb" className='text-xs' name="cbitemdb" ref={selectTtemGroupDbRef} onChange={e => handleItemGroupdbSelect(e)} value={selectedGroupItemdb}><option className='text-xs' value="">Select the Group</option></select>
                         <label htmlFor="cbDimesion" className="text-xs basis-1/4 pr-2">Dimension: </label>
@@ -677,12 +596,12 @@ const ViewerAps = (params) => {
                     </div>
                     <div className="h-[82vh] grid"><div id="viewer" ref={viewer3DRef}></div></div>
                     <div id="ChartContainer" className="chart-container overflow-auto mt-16" style={{ zIndex: "3", position: 'absolute', width: "35em", height: '18em', backgroundColor: "White", display: "none", padding: '1px' }}>
-                        <span className="float-right rounded-md bg-slate-400" onClick={() => { document.getElementById("ChartContainer").style.display = "none" }}>X</span>
+
                         {/* remove !hidden if you need a Graphic */}
-                        <div className="docking-panel-title">Property Histogram</div>
+                        <div id="ChartContainerheader" className="docking-panel-title sticky top-0 text-center gap-28 bg-slate-500">Cantidades<span className="float-right rounded-md bg-slate-400 cursor-pointer" onClick={() => { document.getElementById("ChartContainer").style.display = "none" }}>X</span></div>
                         <canvas ref={chartBarRef} className="chart mt-2 !hidden"></canvas>
                         <canvas ref={chartBarCustomRef} className="chart mt-2 !hidden"></canvas>
-                        <div ref={tableRef} id="myDynamicTable"></div>
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" ref={tableRef} id="myDynamicTable"></table>
                     </div>
                 </div>
 
