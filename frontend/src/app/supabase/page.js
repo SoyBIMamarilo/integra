@@ -7,5 +7,5 @@ import SuspenseComponent from "./testLoading";
 import TestComponent from "./TestComponent";
 
 export default async function OptionalSession(params) {
-  return <></>;
+  return <SuspenseComponent />;
 }

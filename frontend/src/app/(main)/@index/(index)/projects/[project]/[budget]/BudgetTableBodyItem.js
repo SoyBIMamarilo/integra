@@ -96,15 +96,17 @@ const BudgetTableBodyItem = ({ packageValue }) => {
             value={nf.format(total)}
             onConfirm={deletePaqueteHandler}
           />
-          {/* <Trash onClick={deletePaqueteHandler} /> */}
         </td>
         <td className="w-min">
-          <Link
+          {/* <Link
             href={{
               pathname: path,
               query: { paquete: packageValue[0].paquete_trabajo_id },
             }}
           >
+            <Plus />
+          </Link> */}
+          <Link href={usePathname() + `/${packageValue[0].paquete_trabajo_id}`}>
             <Plus />
           </Link>
         </td>

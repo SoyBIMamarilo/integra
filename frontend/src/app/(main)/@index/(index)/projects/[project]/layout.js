@@ -14,7 +14,6 @@ const Layout = async ({ create, children, params }) => {
   const project = data[0];
   const projectId = params.project;
   const route = `/projects/${projectId}`;
-  console.log(route);
   return (
     <>
       <div className="mb-2 mt-1 flex flex-row gap-2">

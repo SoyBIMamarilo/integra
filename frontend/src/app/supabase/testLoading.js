@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 const clickFetch = async () => {
   const result = await new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve("Resolved");
-    }, 3000);
+    }, 1000);
   });
   return result;
 };
@@ -21,8 +21,9 @@ export default function SuspenseComponent() {
   //   const test = clickFetch();
   return (
     <div>
-      <div>procesado</div>
-      <button onClick={clickHandler}>Click me</button>
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <button onClick={clickHandler}>Click me</button>
+      </Suspense>
       <p>{state}</p>
       {/* <p>{test}</p> */}
     </div>
