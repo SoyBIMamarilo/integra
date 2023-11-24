@@ -7,7 +7,6 @@ import { supabaseOptions } from "@/util/supabase";
 const ProjectList = async () => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: projects, error } = await supabase.from("proyecto").select("*");
-  console.log(error);
   return (
     <div className="flex w-2/3 flex-row flex-wrap gap-2">
       {projects.map((project) => (

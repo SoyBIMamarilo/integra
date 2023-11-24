@@ -35,7 +35,7 @@ const AvailableItem = ({ project, addItemsHandler }) => {
   return (
     <>
       <div
-        className="flex flex-row items-center p-1 hover:cursor-pointer hover:bg-neutral-300	"
+        className="flex flex-row items-center p-1 text-xs hover:cursor-pointer hover:bg-neutral-300	"
         value={project.linea_id}
         onClick={(event) => null}
       >
@@ -44,7 +44,7 @@ const AvailableItem = ({ project, addItemsHandler }) => {
           <div className="grow ">{project.descripcion}</div>
           <div>{project.nombre}</div>
         </div>
-        <div className="flex grow flex-col items-end pl-5">
+        <div className="flex grow flex-col items-end ">
           <div className="font-bold">{nf.format(project.sum)}</div>
           <span>{project.cbs}</span>
         </div>
@@ -59,7 +59,7 @@ const AvailableItem = ({ project, addItemsHandler }) => {
         </Checkbox.Root>
       </div>
 
-      <div className="pl-4">
+      <div className="pl-2">
         {expanded &&
           items &&
           items.map((item) => (

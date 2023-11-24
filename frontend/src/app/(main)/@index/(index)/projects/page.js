@@ -1,12 +1,10 @@
 import ProjectSection from "./ProjectSection";
-import IndexexSelection from "./IndexesSelection";
-// import Summary from "./Summary";
+import CityGroup from "./CityGroup";
 const Projects = () => {
   return (
     <div className="flex grow flex-col justify-stretch">
-      {/* <Summary /> */}
       <ProjectSection />
-      {/* <IndexexSelection /> */}
+      <CityGroup />
     </div>
   );
 };
