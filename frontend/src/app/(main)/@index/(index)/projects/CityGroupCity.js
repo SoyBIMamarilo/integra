@@ -23,14 +23,14 @@ const CityGroupCity = ({ city }) => {
 
   console.log("CITY GROUP", city);
   return (
-    <Accordion.Item className=" grow" key={city.id} value={city.id}>
+    <Accordion.Item className="" key={city.id} value={city.id}>
       <Accordion.Header>
         <Accordion.Trigger className="flex grow flex-row items-center">
           <ChevronDownIcon aria-hidden />
           <div className="ml-1">{city.nombre}</div>
         </Accordion.Trigger>
       </Accordion.Header>
-      <Accordion.Content className="whitespace-nowrap pl-6">
+      <Accordion.Content className=" pl-6">
         {projects && projects.map((pr) => <div key={pr.id}>{pr.nombre}</div>)}
       </Accordion.Content>
     </Accordion.Item>

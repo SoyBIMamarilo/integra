@@ -19,7 +19,7 @@ const CityGroup = ({ cities }) => {
   return (
     <div className="flex flex-row items-start">
       <Accordion.Root
-        className="flex w-1/4 flex-col"
+        className="flex w-96 flex-col"
         type="single"
         collapsible={true}
       >
