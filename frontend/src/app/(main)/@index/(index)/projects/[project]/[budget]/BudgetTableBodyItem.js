@@ -106,7 +106,10 @@ const BudgetTableBodyItem = ({ packageValue }) => {
           >
             <Plus />
           </Link> */}
-          <Link href={usePathname() + `/${packageValue[0].paquete_trabajo_id}`}>
+          <Link
+            className="w-min"
+            href={usePathname() + `/${packageValue[0].paquete_trabajo_id}`}
+          >
             <Plus />
           </Link>
         </td>

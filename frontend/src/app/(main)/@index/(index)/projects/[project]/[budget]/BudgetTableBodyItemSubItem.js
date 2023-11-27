@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import SubItemView from "./SubItemView";
 import Alert from "./AlertDialog";
 import LoadingComponent from "@/components/loading";
 import { nf, nf_per } from "@/util/date-format";
@@ -60,6 +61,9 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
             value={nf.format(item.vrtot)}
             onConfirm={itemDeleteHandler}
           />
+        </td>
+        <td className="w-min">
+          <SubItemView />
         </td>
       </tr>
     </>

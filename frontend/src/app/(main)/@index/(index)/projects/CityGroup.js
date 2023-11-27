@@ -1,35 +1,34 @@
-// "use client";
+"use client";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-import { supabaseOptions } from "@/util/supabase";
+import CityGroupCity from "./CityGroupCity";
+import CityGroupProject from "./CityGroupProject";
 
-const CityGroup = async () => {
-  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
-  const { data: cities, error } = await supabase.rpc("ciudades_con_proyectos");
-  console.log("CityGroup", cities);
+const CityGroup = ({ cities }) => {
+  const [project, setProject] = useState(1);
+  const changeProjectHandler = (id) => {
+    setProject((prevProject) => {
+      if (prevProject == id) {
+        return null;
+      }
+      return id;
+    });
+  };
   return (
-    // <Accordion.Root
-    //   className="w-[300px] rounded-md bg-mauve6 shadow-[0_2px_10px] shadow-black/5"
-    //   type="single"
-    //   defaultValue="item-1"
-    //   collapsible
-    // >
-    <>
-      {cities.map((city) => (
-        <div>Test</div>
-        // <Accordion.Item value="item-1">
-        //   <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-        //   <Accordion.Content>
-        //     Yes. It adheres to the WAI-ARIA design pattern.
-        //   </Accordion.Content>
-        // </Accordion.Item>
-      ))}
-    </>
-    // </Accordion.Root>
+    <div className="flex flex-row items-start">
+      <Accordion.Root
+        className="flex w-1/4 flex-col"
+        type="single"
+        collapsible={true}
+      >
+        {cities.map((city) => (
+          <CityGroupCity key={city.id} city={city} />
+        ))}
+      </Accordion.Root>
+      {project && <CityGroupProject project={project} />}
+    </div>
   );
 };
 

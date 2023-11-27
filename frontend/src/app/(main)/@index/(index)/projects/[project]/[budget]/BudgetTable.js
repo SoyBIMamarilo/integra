@@ -70,29 +70,6 @@ const BudgetTable = async ({ budget, project }) => {
               {nf_per.format(incidencia)}
             </td>
           </tr>
-          {/* <tr>
-            <td className="inline-flex">
-              <Link href={`/projects/${project}/${budget}/create`}>
-                <button className="button-black my-3 mb-2 mr-2 inline-flex items-center rounded-lg px-5 py-2.5 text-sm">
-                  Añadir paquete{" "}
-                </button>
-              </Link>
-              <Link
-                target="_blank"
-                href={`/projects/${project}/${budget}/comparer`}
-              >
-                <button className="button-black my-3 mb-2 mr-2 inline-flex items-center rounded-lg px-5 py-2.5 text-sm">
-                  Comparador
-                </button>
-              </Link>
-              <DownloadFile
-                project={project}
-                budget={budget}
-                fileType="application/octet-stream"
-                fileName={`${Date.now().toFixed()}_Project${project}_Pres${budget}.csv`}
-              />
-            </td>
-          </tr> */}
         </tbody>
       </table>
       <div className="mt-4 flex flex-row gap-3">
