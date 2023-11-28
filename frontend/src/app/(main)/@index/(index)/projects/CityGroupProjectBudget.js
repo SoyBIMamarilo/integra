@@ -9,12 +9,20 @@ const CityGroupProjectBudget = ({ item }) => {
   const params = useParams();
   return (
     <tr>
-      <td>
-        <Link href={`/projects/${1}/${item.id}`}>{item.version}</Link>
+      <td className="overflow-hidden border-2 border-integra-background-strong text-center">
+        <Link href={`/projects/${1}/${item.id}`} className="hover:underline">
+          {item.version}
+        </Link>
       </td>
-      <td>{nf.format(item.vrtot)}</td>
-      <td>{nf.format(item.vrm2const)}</td>
-      <td>{nf.format(item.vrm2vend)}</td>
+      <td className="overflow-hidden border-2 border-integra-background-strong text-center">
+        {nf.format(item.vrtot)}
+      </td>
+      <td className="overflow-hidden border-2 border-integra-background-strong text-center">
+        {nf.format(item.vrm2const)}
+      </td>
+      <td className="overflow-hidden border-2 border-integra-background-strong text-center">
+        {nf.format(item.vrm2vend)}
+      </td>
     </tr>
   );
 };

@@ -16,14 +16,11 @@ const AvailableItem = ({ project, addItemsHandler }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      const supabase = createPagesBrowserClient(supabaseOptions);
-      // console.log("Available Item", project.id);
-      // console.log("Available Item", project.proyecto_id);
-      const { data, error } = await supabase.rpc("valor_referente", {
-        parent: +project.id,
-        proyecto: +project.proyecto_id,
-      });
-      setItems(data.map((item) => ({ ...item, modified: false })));
+      const data = await fetch(
+        `/api/historic-budgets/${project.id}/${project.proyecto_id}`
+      );
+      const dataProjects = await data.json();
+      setItems(dataProjects.map((item) => ({ ...item, modified: false })));
     };
     loadData();
   }, [setItems]);

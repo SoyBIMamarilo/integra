@@ -6,6 +6,7 @@ const AddButton = ({ addedItems }) => {
   const params = useParams();
   const router = useRouter();
   const submitItemHandler = async () => {
+    console.log(addedItems);
     const adjustedItems = addedItems.map((item) => ({
       descripcion_ajuste: item.descripcion_ajuste,
       factor_ponderacion: +item.factor_ponderacion,
@@ -15,7 +16,6 @@ const AddButton = ({ addedItems }) => {
       paquete_trabajo_id: +params.package,
       presupuesto_id: +params.budget,
     }));
-
     const res = await fetch("/api/multiple-items", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ const AddButton = ({ addedItems }) => {
       </button>
       <button
         type="button"
-        // onClick={() => router.back()}
+        onClick={() => router.back()}
         className="hover:bg-integra-alert-focuss rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert-main px-5 py-1 text-xs font-bold text-integra-text hover:bg-integra-alert-focus"
       >
         Cancelar

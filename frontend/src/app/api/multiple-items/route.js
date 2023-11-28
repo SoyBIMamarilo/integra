@@ -11,6 +11,8 @@ export async function POST(req) {
   const body = await req.json();
   console.log(body);
   const { data, error } = await supabase.from("item").insert(body);
+  console.log("DATA", data);
+  console.log("ERROR", error);
   if (error) {
     return NextResponse.json(
       { error: "Algún parametro se encuentra en 0" },

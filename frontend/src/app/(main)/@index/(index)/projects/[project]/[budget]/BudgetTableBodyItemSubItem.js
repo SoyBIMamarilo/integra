@@ -63,7 +63,7 @@ const BudgetTableBodyItemSub = ({ item, open }) => {
           />
         </td>
         <td className="w-min">
-          <SubItemView />
+          <SubItemView item={item.id} />
         </td>
       </tr>
     </>

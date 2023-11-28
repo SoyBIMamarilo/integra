@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 
 import AddButton from "./AddButton";
 import SeparatorComponent from "@/components/separator";
-import { supabaseOptions } from "@/util/supabase";
 import Available from "./Available";
 import Added from "./Added";
 
@@ -14,9 +12,9 @@ const AddPackage = () => {
   const [addedItems, setAddedItems] = useState([]);
   useEffect(() => {
     const loadData = async () => {
-      const supabase = createPagesBrowserClient(supabaseOptions);
-      const { data, error } = await supabase.rpc("valor_referente");
-      setProjects(data.map((item) => ({ ...item, modified: false })));
+      const data = await fetch(`/api/historic-budgets`);
+      const dataProjects = await data.json();
+      setProjects(dataProjects.map((item) => ({ ...item, modified: false })));
     };
     loadData();
   }, [setProjects]);
@@ -34,7 +32,7 @@ const AddPackage = () => {
             ...changeItem,
             indicador_origen_id: null,
             indicador_destino_id: null,
-            factor_ponderacion: null,
+            factor_ponderacion: 1,
             descripcion_ajuste: null,
           },
         ];
