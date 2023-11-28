@@ -26,7 +26,7 @@ const SideBar = async () => {
     // { href: "/data-bases", name: "Bases de Datos", disabled: true },
     {
       href: "/user-admin",
-      name: "Agregar usuario",
+      name: "Usuarios",
       disabled: data[0].rol !== "GERENTE",
     },
   ];

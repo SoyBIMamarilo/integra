@@ -6,7 +6,7 @@ const ProjectList = async ({ userId, projects }) => {
   return (
     <GroupCard title="Proyectos del usuario" styles="min-w-[30%]">
       {projects.map((project) => (
-        <ProjectListCard project={project} />
+        <ProjectListCard key={project.id} project={project} />
       ))}
       <div className="my-5 ml-2 place-self-end">
         <Link href={`/user-admin/${userId}/create`} className="button-black">
