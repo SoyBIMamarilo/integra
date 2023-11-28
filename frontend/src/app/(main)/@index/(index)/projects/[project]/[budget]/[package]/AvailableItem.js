@@ -8,6 +8,7 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import { supabaseOptions } from "@/util/supabase";
 import { nf } from "@/util/date-format";
 import Plus from "@/components/svg/plus";
+import Minus from "@/components/svg/minus";
 
 const AvailableItem = ({ project, addItemsHandler }) => {
   // console.log("Available Item", project);
@@ -36,13 +37,14 @@ const AvailableItem = ({ project, addItemsHandler }) => {
         value={project.linea_id}
         onClick={(event) => null}
       >
-        <Plus onClick={setExpandedHandler} />
-        <div className="flex flex-col">
-          <div className="grow ">{project.descripcion}</div>
-          <div>{project.nombre}</div>
+        {!expanded && <Plus onClick={setExpandedHandler} />}
+        {expanded && <Minus onClick={setExpandedHandler} />}
+        <div className="flex grow flex-col">
+          <div>{project.descripcion}</div>
+          <div className="font-bold">{nf.format(project.sum)}</div>
         </div>
         <div className="flex grow flex-col items-end ">
-          <div className="font-bold">{nf.format(project.sum)}</div>
+          <div>{project.nombre}</div>
           <span>{project.cbs}</span>
         </div>
         <Checkbox.Root
@@ -56,7 +58,7 @@ const AvailableItem = ({ project, addItemsHandler }) => {
         </Checkbox.Root>
       </div>
 
-      <div className="pl-2">
+      <div className="pl-1">
         {expanded &&
           items &&
           items.map((item) => (

@@ -20,19 +20,21 @@ const CityGroup = ({ cities }) => {
   };
   return (
     <div className="flex h-1/2 flex-row items-start">
-      <Accordion.Root
-        className="flex w-96 flex-col"
-        type="single"
-        collapsible={true}
-      >
-        {cities.map((city) => (
-          <CityGroupCity
-            key={city.id}
-            city={city}
-            changeHandler={changeProjectHandler}
-          />
-        ))}
-      </Accordion.Root>
+      <div className=" h-full w-96 overflow-y-auto">
+        <Accordion.Root
+          className="flex grow flex-col gap-1"
+          type="single"
+          collapsible={true}
+        >
+          {cities.map((city) => (
+            <CityGroupCity
+              key={city.id}
+              city={city}
+              changeHandler={changeProjectHandler}
+            />
+          ))}
+        </Accordion.Root>
+      </div>
       <SeparatorComponent />
       {project && <CityGroupProject project={project} />}
     </div>

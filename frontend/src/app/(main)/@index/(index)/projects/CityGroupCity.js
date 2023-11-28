@@ -25,13 +25,13 @@ const CityGroupCity = ({ city, changeHandler }) => {
   console.log("CITY GROUP", city);
   return (
     <Accordion.Item key={city.id} value={city.id}>
-      <Accordion.Header className="mx-2 my-[0.25px] flex grow border border-black px-4">
+      <Accordion.Header className="mx-2 flex grow border border-black px-4">
         <Accordion.Trigger className="flex grow flex-row items-center">
           <div className=" ml-1 grow text-left">{city.nombre}</div>
           <ChevronDownIcon aria-hidden />
         </Accordion.Trigger>
       </Accordion.Header>
-      <Accordion.Content className="mx-2 flex flex-col gap-1 px-6 ">
+      <Accordion.Content className="mx-2 flex flex-col gap-1 px-6">
         {projects &&
           projects.map((pr) => (
             <div key={pr.id} className="flex flex-row text-sm font-bold">
