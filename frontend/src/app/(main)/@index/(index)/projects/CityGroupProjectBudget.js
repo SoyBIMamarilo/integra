@@ -5,12 +5,15 @@ import Link from "next/link";
 
 import { nf } from "@/util/date-format";
 
-const CityGroupProjectBudget = ({ item }) => {
+const CityGroupProjectBudget = ({ item, project }) => {
   const params = useParams();
   return (
     <tr>
       <td className="overflow-hidden border-2 border-integra-background-strong text-center">
-        <Link href={`/projects/${1}/${item.id}`} className="hover:underline">
+        <Link
+          href={`/projects/${project}/${item.id}`}
+          className="hover:underline"
+        >
           {item.version}
         </Link>
       </td>

@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 
-import { supabaseOptions } from "@/util/supabase";
 import { nf } from "@/util/date-format";
 import Plus from "@/components/svg/plus";
 import Minus from "@/components/svg/minus";
@@ -59,15 +57,17 @@ const AvailableItem = ({ project, addItemsHandler }) => {
       </div>
 
       <div className="pl-1">
-        {expanded &&
-          items &&
-          items.map((item) => (
-            <AvailableItem
-              key={item.linea_id}
-              project={item}
-              addItemsHandler={addItemsHandler}
-            />
-          ))}
+        {expanded && items && (
+          <div className="flex flex-row">
+            {items.map((item) => (
+              <AvailableItem
+                key={item.linea_id}
+                project={item}
+                addItemsHandler={addItemsHandler}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

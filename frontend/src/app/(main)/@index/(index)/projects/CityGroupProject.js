@@ -34,7 +34,11 @@ const CityGroupProject = ({ project }) => {
             {budgets
               .sort((a, b) => a.version - b.version)
               .map((budget) => (
-                <CityGroupProjectBudget key={budget.id} item={budget} />
+                <CityGroupProjectBudget
+                  key={budget.id}
+                  item={budget}
+                  project={project}
+                />
               ))}
           </tbody>
         </table>

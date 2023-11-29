@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import * as Accordion from "@radix-ui/react-accordion";
@@ -35,16 +36,18 @@ const CityGroupCity = ({ city, changeHandler }) => {
         {projects &&
           projects.map((pr) => (
             <div key={pr.id} className="flex flex-row text-sm font-bold">
-              <div className="grow">{pr.nombre}</div>
+              <div className="grow uppercase">{pr.nombre}</div>
               <div
                 onClick={() => clickHandler(pr.id)}
                 className="px-2 hover:cursor-pointer hover:underline"
               >
                 ver
               </div>
-              <div className="px-2 hover:cursor-pointer hover:underline">
-                ir
-              </div>
+              <Link replace={true} href={`projects/${pr.id}`}>
+                <div className="px-2 hover:cursor-pointer hover:underline">
+                  ir
+                </div>
+              </Link>
             </div>
           ))}
       </Accordion.Content>
