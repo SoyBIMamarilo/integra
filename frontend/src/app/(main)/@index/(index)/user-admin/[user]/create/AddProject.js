@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-export default async function AddProject({ projects, user }) {
+export default function AddProject({ projects, user }) {
   const router = useRouter();
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -43,7 +43,7 @@ export default async function AddProject({ projects, user }) {
           </button>
           <button
             type="button"
-            className="flex-1 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background px-5 py-1 font-bold text-integra-text "
+            className="bg-integra-background flex-1 rounded-lg border-2	 border-solid border-integra-text px-5 py-1 font-bold text-integra-text "
           >
             Cancelar
           </button>

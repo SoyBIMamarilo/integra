@@ -35,7 +35,7 @@ const CreateItemFactor = ({ selected, setIndicador }) => {
     if (selected) {
       fetchIndicadores();
     }
-  }, [selected, selectedProject]);
+  }, [selected, selectedProject, params]);
 
   const changeSelectHandler = (e) => {
     const id = e.target.value;

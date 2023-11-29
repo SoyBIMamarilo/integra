@@ -3,7 +3,7 @@
 import Modal from "@/components/modal/create-modal";
 import { useRouter } from "next/navigation";
 
-const Create = async ({ params }) => {
+const Create = ({ params }) => {
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();

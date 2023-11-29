@@ -18,7 +18,7 @@ const CityGroupCity = ({ city, changeHandler }) => {
       setProjects(dataProjects);
     };
     loadData();
-  }, []);
+  }, [city]);
   const clickHandler = (id) => {
     changeHandler(id);
   };

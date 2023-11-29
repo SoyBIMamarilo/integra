@@ -37,7 +37,7 @@ const CreateItemSearch = ({ onAddHandler, filterLists }) => {
     calcTotals();
 
     setCurrentPage(1);
-  }, [project, type, description, cbs]);
+  }, [project, type, description, cbs, filterLists]);
 
   useEffect(() => {
     const filters = { project, type, description, cbsin: cbs };

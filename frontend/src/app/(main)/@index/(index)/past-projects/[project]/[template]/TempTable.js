@@ -3,7 +3,6 @@ import TempTableHeaders from "./TempTableHeaders";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 
-
 import { supabaseOptions } from "@/util/supabase";
 import TempTableItem from "./TempTableItem";
 
@@ -13,7 +12,7 @@ const TempTable = async ({ project, template }) => {
     .from("valor_presupuesto_v2")
     .select("*")
     .eq("plantilla_presupuesto_id", template)
-    .eq("cbs", "c");  //dfdfvfgdgbdgsdgbsdfgsdbsdrdgds
+    .eq("cbs", "c"); //dfdfvfgdgbdgsdgbsdfgsdbsdrdgds
   const COPcurrency = Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "COP",

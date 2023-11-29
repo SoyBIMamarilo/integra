@@ -2,7 +2,7 @@
 import Arrow from "@/components/svg/arrow";
 import { useEffect, useState } from "react";
 
-const TempTableItem = async ({ tempRow }) => {
+const TempTableItem = ({ tempRow }) => {
   const [open, setOpen] = useState(false);
   const [childsList, setChildList] = useState([]);
   const [hideArrow, setHideArrow] = useState(false);
@@ -43,7 +43,7 @@ const TempTableItem = async ({ tempRow }) => {
         <td className="table-content text-center">{tempRow.line_type}</td>
       </tr>
       {childsList.map((item) => {
-        return <TempTableItem tempRow={item} />;
+        return <TempTableItem key={item.id} tempRow={item} />;
       })}
     </>
   );
