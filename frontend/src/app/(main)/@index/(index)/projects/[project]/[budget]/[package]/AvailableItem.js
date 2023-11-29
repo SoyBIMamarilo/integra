@@ -57,17 +57,15 @@ const AvailableItem = ({ project, addItemsHandler }) => {
       </div>
 
       <div className="pl-1">
-        {expanded && items && (
-          <div className="flex flex-row">
-            {items.map((item) => (
-              <AvailableItem
-                key={item.linea_id}
-                project={item}
-                addItemsHandler={addItemsHandler}
-              />
-            ))}
-          </div>
-        )}
+        {expanded &&
+          items &&
+          items.map((item) => (
+            <AvailableItem
+              key={item.linea_id}
+              project={item}
+              addItemsHandler={addItemsHandler}
+            />
+          ))}
       </div>
     </>
   );
