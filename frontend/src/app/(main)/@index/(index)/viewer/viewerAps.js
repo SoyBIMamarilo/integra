@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Script from 'next/script'
+import Link from "next/link";
 /**
  *Viewer page
  *
@@ -25,6 +26,7 @@ const ViewerAps = (params) => {
     const [selectedItemdb, setSelectedItemdb] = useState("");
     const [selectedGroupItemdb, setselectedGroupItemdb] = useState("");
     const [selectedFilterDb, setselectedFilterDb] = useState("");
+    const [totals, setTotals] = useState({})
     const selectTtemGroupDbRef = useRef(null);
     const selectCategorysRef = useRef(null);
     const selectFamilysRef = useRef(null);
@@ -122,6 +124,34 @@ const ViewerAps = (params) => {
         viewer3D.isolate(dbid);
         viewer3D.fitToView(dbid, viewer3D.model);
     }
+
+
+    async function handleFilterData(){
+        const cat = modelProperties.categorys.filter(category=>category.dbid ==selectedCategory)
+        const fam = modelProperties.family.filter(family=>family.dbid == selectedFamily)
+        const typ = modelProperties.familyType.filter(famT=>famT.dbid == selectedFamilyType)
+        const filterData = {
+            categoria:selectedCategory!==""? cat[0].categoryName:null, 
+            familia:selectedFamily!==""?fam[0].categoryName:null, 
+            tipo:selectedFamilyType!==""?typ[0].categoryName:null, 
+            parametro:selectedGroupItemdb, 
+            dimension:selectedItemdb, 
+            filtro:selectedFilterDb,
+            ...totals,
+            modelo_id:1
+        }
+
+        const res = await fetch("/api/revit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(filterData),
+          });
+
+        console.log(res.status)
+        console.log(await res.json())
+        console.log(filterData)
+    }
+
     /**
      *
      *
@@ -239,7 +269,8 @@ const ViewerAps = (params) => {
                     subTotal = 0;
                     dataChart.push(subTotal);
                 }
-                createTableRow(tableBody, [`Total Items`, `${totalCountdb} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod        
+                createTableRow(tableBody, [`Total Items`, `${totalCountdb} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod    
+                setTotals({unidades: totalCountdb, cantidad: total})    
                 table.appendChild(tableBody);
                 //tableRef.current.appendChild(table);
                 if (!window.Chart)
@@ -281,6 +312,7 @@ const ViewerAps = (params) => {
                 });
             }
         }
+        console.log(customParams)
     }, [selectedItemdb, customParams, selectedGroupItemdb, selectedFilterDb])
     //Chart Family Type Subtype
     useEffect(() => {
@@ -392,7 +424,9 @@ const ViewerAps = (params) => {
                 //dataBarVolumen.data.push(totalVol);
             });
             createTableRow(tableBody, [`Total Items`, `${customItems.length} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod    
+            
             table.appendChild(tableBody);
+            setTotals({unidades: customItems.length, cantidad: total})
             //tableRef.current.appendChild(table);
             setCustomParams(customItems);
             dataChart.push(dataBarArea);
@@ -593,7 +627,10 @@ const ViewerAps = (params) => {
                         <select id="cbDimesion" className='text-xs' name="cbDimesion" ref={selectTtemDbRef} onChange={e => handleItemdbSelect(e)} value={selectedItemdb}><option className='text-xs' value="">Select the Dimension</option></select>
                         <label htmlFor="cbFilter" className="text-xs basis-1/4 pr-2">Filter: </label>
                         <select id="cbFilter" className='text-xs' name="cbFilter" ref={selectFilterDbRef} onChange={e => handleFilterDbSelect(e)} value={selectedFilterDb}><option className='text-xs' value="">Select the Filter</option></select>
+                        <button className="h-4 text-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0 px-0 rounded-2 ml-6 px-3" onClick={handleFilterData}>Añadir cantidad</button>
+                        <Link href="/viewer/values"><button className="h-4 text-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0 px-0 rounded-2 ml-6 px-3" >Registro Cantidades</button></Link>
                     </div>
+                    
                     <div className="h-[82vh] grid"><div id="viewer" ref={viewer3DRef}></div></div>
                     <div id="ChartContainer" className="chart-container overflow-auto mt-16" style={{ zIndex: "3", position: 'absolute', width: "35em", height: '18em', backgroundColor: "White", display: "none", padding: '1px' }}>
 

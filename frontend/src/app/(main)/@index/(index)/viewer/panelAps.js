@@ -4,7 +4,8 @@ import LoginAps from "./login";
 import { useState } from "react";
 
 export default function PanelAps({ params }) {
-    const [docUrn, setdocUrn] = useState("dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLlJmNG01T0pXUjRTM2xSZkhfZ0JOSGc/dmVyc2lvbj0z");
+    const plan2d = "dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLlJmNG01T0pXUjRTM2xSZkhfZ0JOSGc/dmVyc2lvbj0z"
+    const [docUrn, setdocUrn] = useState("dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLnpldlFDaHZlUnZHeGc2LVU0NTZQWnc/dmVyc2lvbj02");
     const [api, setapi] = useState("");
     const [token, setToken] = useState("");
     const handlerDocUrn = (e, value) => {
