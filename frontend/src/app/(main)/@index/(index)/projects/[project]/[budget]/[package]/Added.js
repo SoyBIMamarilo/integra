@@ -1,5 +1,6 @@
 "use client";
 
+import TreeArrow from "@/components/svg/treeArrow";
 import AddedTableHeaders from "./AddedTableHeaders";
 import AddedTaleItem from "./AddedTableItem";
 
@@ -8,7 +9,7 @@ const Added = ({ addedItems, changeItemHandler }) => {
   return (
     <div className="flex flex-col">
       <div>Añadir Item</div>
-      <table className="h-min table-fixed text-xs ">
+      <table className="h-min min-w-full table-auto text-xs border-separate">
         <AddedTableHeaders />
         <tbody>
           {addedItems

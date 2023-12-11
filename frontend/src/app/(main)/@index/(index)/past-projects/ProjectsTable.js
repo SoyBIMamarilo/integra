@@ -21,15 +21,16 @@ export default function ProjectsTable({ projects }) {
         </tr>
       </thead>
       <tbody>
-        {projects.map((pr) => (
-          <tr key={pr.proyecto_id} className="hover:bg-gray-200 cursor-pointer" onClick={()=>{router.push("/past-projects/"+pr.proyecto_id)}}>
+        {projects &&
+          projects.map((pr) => (
+            <tr key={pr.proyecto_id} className="hover:bg-gray-200 cursor-pointer" onClick={() => { router.push("/past-projects/" + pr.proyecto_id) }}>
               <td className="table-content px-6 text-center hover:bg-gray-200">{pr.proyecto}</td>
               <td className="table-content px-6 text-center hover:bg-gray-200">{pr.ciudad}</td>
               <td className="table-content px-6 text-center hover:bg-gray-200">
                 {nf.format(pr.sum)}
               </td>
-          </tr>
-        ))}
+            </tr>
+          ))}
       </tbody>
     </table>
   );

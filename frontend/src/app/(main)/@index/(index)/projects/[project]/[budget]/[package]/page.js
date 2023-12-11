@@ -52,7 +52,7 @@ const AddPackage = () => {
     <div className="flex w-full flex-row gap-2">
       <Available projects={projects} addItemsHandler={addItemsHandler} />
       <SeparatorComponent />
-      <div className="flex grow flex-col">
+      <div className="max-w-full overflow-auto flex grow flex-col">
         <Added addedItems={addedItems} changeItemHandler={changeItemHandler} />
         {addedItems.length > 0 && <AddButton addedItems={addedItems} />}
       </div>

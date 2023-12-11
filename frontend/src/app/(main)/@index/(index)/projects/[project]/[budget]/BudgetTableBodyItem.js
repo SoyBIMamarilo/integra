@@ -67,7 +67,7 @@ const BudgetTableBodyItem = ({ packageValue }) => {
             onClick={clickHandler}
             className="flex flex-row place-items-center pl-2"
           >
-            <div className="grow ">{packageValue[0].paquete}</div>
+            <div className="grow">{packageValue[0].paquete}</div>
             <Arrow open={open} />
           </div>
         </td>
