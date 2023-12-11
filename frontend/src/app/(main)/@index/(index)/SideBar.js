@@ -17,8 +17,6 @@ const SideBar = async () => {
     .select("rol")
     .eq("user_id", user.id);
 
-  console.log(data);
-
   const routes = [
     { href: "/projects", name: "Proyectos", disabled: false },
     { href: "/past-projects", name: "Históricos", disabled: false },

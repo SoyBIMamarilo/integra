@@ -9,7 +9,6 @@ import Plus from "@/components/svg/plus";
 import Minus from "@/components/svg/minus";
 
 const AvailableItem = ({ project, addItemsHandler }) => {
-  // console.log("Available Item", project);
   const [items, setItems] = useState(null);
   const [expanded, setExpanded] = useState(false);
 

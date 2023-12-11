@@ -10,6 +10,8 @@ import Added from "./Added";
 const AddPackage = () => {
   const [projects, setProjects] = useState();
   const [addedItems, setAddedItems] = useState([]);
+  const [searchItems, setSearchItems] = useState(null);
+
   useEffect(() => {
     const loadData = async () => {
       const data = await fetch(`/api/historic-budgets`);
@@ -19,13 +21,15 @@ const AddPackage = () => {
     loadData();
   }, [setProjects]);
 
+  const setSearchItemsHandler = (items) => {
+    setSearchItems(items);
+  };
   const addItemsHandler = (changeItem) => {
     setAddedItems((prevItems) => {
       if (
         prevItems.filter((it) => it.linea_id === changeItem.linea_id).length ===
         0
       ) {
-        console.log("Entered filter");
         return [
           ...prevItems,
           {
@@ -50,7 +54,12 @@ const AddPackage = () => {
 
   return (
     <div className="flex w-full flex-row gap-2">
-      <Available projects={projects} addItemsHandler={addItemsHandler} />
+      <Available
+        projects={projects}
+        addItemsHandler={addItemsHandler}
+        searchItems={searchItems}
+        setSearchItemsHandler={setSearchItemsHandler}
+      />
       <SeparatorComponent />
       <div className="flex grow flex-col">
         <Added addedItems={addedItems} changeItemHandler={changeItemHandler} />
