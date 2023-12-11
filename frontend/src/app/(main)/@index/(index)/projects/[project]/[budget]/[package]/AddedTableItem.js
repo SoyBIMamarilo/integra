@@ -60,7 +60,7 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
 
   return (
     <tr>
-      <td className="sticky left-0 h-8 border border-solid border-neutral-200 text-center hover:bg-neutral-50">{item.descripcion}</td>
+      <td className="h-8 border border-solid border-neutral-200 text-center hover:bg-neutral-50">{item.descripcion}</td>
       <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">{nf.format(item.sum)}</td>
       <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
         <select defaultValue={null} onChange={factorChangeHandler}>
