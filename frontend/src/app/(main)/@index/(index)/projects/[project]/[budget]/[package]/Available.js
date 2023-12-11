@@ -1,8 +1,8 @@
 "use client";
 
 import AvailableItem from "./AvailableItem";
-import AvailableItemSearch from "./AvailableItemSearch";
-import Search from "./Search";
+import AvailableSearchItem from "./AvailableSearchItem";
+import AvailableSearch from "./AvailableSearch";
 
 const Available = ({
   projects,
@@ -13,7 +13,7 @@ const Available = ({
   return (
     <div className="flex w-[30%] flex-col">
       <div className="mb-3">Projectos Disponibles</div>
-      <Search setSearchItemsHandler={setSearchItemsHandler} />
+      <AvailableSearch setSearchItemsHandler={setSearchItemsHandler} />
       {!searchItems &&
         projects &&
         projects.map((project) => (
@@ -27,7 +27,7 @@ const Available = ({
         searchItems
           .filter((pr) => pr.parent_id == null)
           .map((project) => (
-            <AvailableItemSearch
+            <AvailableSearchItem
               key={project.linea_id}
               project={project}
               addItemsHandler={addItemsHandler}

@@ -8,7 +8,7 @@ import { nf } from "@/util/date-format";
 import Plus from "@/components/svg/plus";
 import Minus from "@/components/svg/minus";
 
-const AvailableItemSearch = ({ project, addItemsHandler, itemList }) => {
+const AvailableSearchItem = ({ project, addItemsHandler, itemList }) => {
   const childItems = itemList.filter(
     (it) => it.parent_id == project.id && it.proyecto_id == project.proyecto_id
   );
@@ -51,7 +51,7 @@ const AvailableItemSearch = ({ project, addItemsHandler, itemList }) => {
         {expanded &&
           childItems &&
           childItems.map((item) => (
-            <AvailableItemSearch
+            <AvailableSearchItem
               key={item.linea_id}
               project={item}
               addItemsHandler={addItemsHandler}
@@ -63,4 +63,4 @@ const AvailableItemSearch = ({ project, addItemsHandler, itemList }) => {
   );
 };
 
-export default AvailableItemSearch;
+export default AvailableSearchItem;

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const Search = ({ setSearchItemsHandler }) => {
+const AvailableSearch = ({ setSearchItemsHandler }) => {
   const searchRef = useRef();
 
   const searchHandler = async () => {
@@ -45,4 +45,4 @@ const Search = ({ setSearchItemsHandler }) => {
   );
 };
 
-export default Search;
+export default AvailableSearch;
