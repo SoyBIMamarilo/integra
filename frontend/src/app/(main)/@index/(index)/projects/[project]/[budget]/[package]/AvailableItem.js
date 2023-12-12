@@ -44,12 +44,12 @@ const AvailableItem = ({ project, addItemsHandler, isChild, isLastChild }) => {
         </div>
 
         <div className="flex grow flex-col">
-          <div>{project.descripcion}</div>
-          <div className="font-bold">{nf.format(project.sum)}</div>
-        </div>
-        <div className="flex grow flex-col items-end ">
-          <div>{project.nombre}</div>
+          <div className="flex grow flex-row">
+            <div >{project.descripcion + " ,"}</div>
+            <div className="pl-1 font-bold">{project.nombre}</div>
+          </div>
           <span>{project.cbs}</span>
+          <div className="font-bold">{nf.format(project.sum)}</div>
         </div>
         <Checkbox.Root
           className="ml-3 flex h-[25px] w-[25px]  items-center justify-center rounded-[4px] bg-white  shadow-blackA4 outline outline-1 outline-blackA4  hover:bg-integra-secondary focus:shadow-[0_0_0_2px_black] shrink-0"
