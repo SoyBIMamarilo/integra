@@ -9,16 +9,7 @@ export async function middleware(req) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  // console.log(session);
   if (session && session.user.role == "authenticated") {
-    console.log("AUTHENTICATED");
     return res;
   }
-  // console.log("Middleware");
-  // console.log(req);
-  // return redirect("/");
 }
-
-// export const config = {
-//   matcher: "/api/(.*)",
-// };

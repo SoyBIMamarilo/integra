@@ -30,8 +30,5 @@ export async function POST(req) {
   const res = await supabase
     .from("proyecto_indicador")
     .insert({ indicador_id, proyecto_id, valor });
-
-  console.log("Created Index", res);
-
   return NextResponse.json(res);
 }

@@ -14,7 +14,6 @@ export async function GET(req, res) {
       parent: +parent,
       proyecto: +project,
     });
-    console.log(data);
     return NextResponse.json(data);
   } catch (err) {
     console.log("Api versions Op:Get", err);

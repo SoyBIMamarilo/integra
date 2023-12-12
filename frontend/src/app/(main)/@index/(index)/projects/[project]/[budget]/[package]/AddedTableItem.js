@@ -21,7 +21,6 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
         }),
       });
       const commonIndices = await res.json();
-      console.log(commonIndices);
       setIndicadores(commonIndices);
     };
 
@@ -30,7 +29,6 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
 
   const factorChangeHandler = (e) => {
     const id = e.target.value;
-    console.log(id);
     if (id == "Selecciona..") {
       setSelectedIndicador(null);
       return;
