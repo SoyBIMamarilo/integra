@@ -1,12 +1,11 @@
-import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import { nf, nf_per } from "@/util/date-format";
 import { supabaseOptions } from "@/util/supabase";
 
 import DownloadFile from "./DownloadButton";
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
+import BudgetTableFooter from "./BudgetTableFooter";
 
 const BudgetTable = async ({ budget, project }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
@@ -27,7 +26,7 @@ const BudgetTable = async ({ budget, project }) => {
   const incidencia = budgetTotal.reduce((accumulator, item) => {
     return accumulator + item.incidencia;
   }, 0);
-  console.log(budgetTotal);
+
   const categorias = [
     ...new Set(
       budgetTotal
@@ -38,53 +37,25 @@ const BudgetTable = async ({ budget, project }) => {
   console.log(categorias);
 
   return (
-    <div className="mt-5 flex h-full flex-col justify-start rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
-      <table className="h-min table-fixed	border-separate ">
-        <BudgetTableHeaders />
-        <tbody>
-          <tr className="h-2 "></tr>
-          {categorias.map((cat) => (
-            <BudgetTableBody
-              key={cat}
-              name={cat}
-              budget={budgetTotal.filter((it) => it.categoria == cat)}
-            />
-          ))}
-          <tr className="h-2" />
-
-          <tr className="font-bold">
-            <td colSpan={1} className="table-content cursor-pointer">
-              <div className="flex flex-row place-items-center px-2">Total</div>
-            </td>
-            <td />
-            <td className="table-content text-center">-</td>
-            <td className="table-content text-center">-</td>
-            <td className="table-content text-center">{nf.format(total)}</td>
-            <td className="table-content text-center">
-              {nf.format(totalConst)}
-            </td>
-            <td className="table-content text-center">
-              {nf.format(totalVend)}
-            </td>
-            <td className="table-content text-center">
-              {nf_per.format(incidencia)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="mt-4 flex flex-row gap-3">
-        <Link href={`/projects/${project}/${budget}/create`}>
-          <button className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-1 font-bold text-integra-text hover:bg-integra-background-strong">
-            Añadir Paquete
-          </button>
-        </Link>
-        <Link href={`/projects/${project}/${budget}/parameters`}>
-          <button className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-1 font-bold text-integra-text hover:bg-integra-background-strong">
-            Parámetros
-          </button>
-        </Link>
-      </div>
-    </div>
+    <table className="h-min table-fixed	border-separate ">
+      <BudgetTableHeaders />
+      <tbody>
+        <tr className="h-2 "></tr>
+        {categorias.map((cat) => (
+          <BudgetTableBody
+            key={cat}
+            name={cat}
+            budget={budgetTotal.filter((it) => it.categoria == cat)}
+          />
+        ))}
+        <BudgetTableFooter
+          total={total}
+          totalConst={totalConst}
+          totalVend={totalVend}
+          incidencia={incidencia}
+        />
+      </tbody>
+    </table>
   );
 };
 
