@@ -12,10 +12,15 @@ const Available = ({
 }) => {
   return (
     <div className="flex w-[30%] flex-col">
+<<<<<<< HEAD
+      <div>Proyectos Disponibles</div>
+      {projects &&
+=======
       <div className="mb-3">Projectos Disponibles</div>
       <AvailableSearch setSearchItemsHandler={setSearchItemsHandler} />
       {!searchItems &&
         projects &&
+>>>>>>> development
         projects.map((project) => (
           <AvailableItem
             key={project.linea_id}
