@@ -45,14 +45,14 @@ const AvailableItem = ({ project, addItemsHandler, isChild, isLastChild }) => {
 
         <div className="flex grow flex-col">
           <div className="flex grow flex-row">
-            <div >{project.descripcion + " ,"}</div>
+            <div>{project.descripcion + " ,"}</div>
             <div className="pl-1 font-bold">{project.nombre}</div>
           </div>
           <span>{project.cbs}</span>
           <div className="font-bold">{nf.format(project.sum)}</div>
         </div>
         <Checkbox.Root
-          className="ml-3 flex h-[25px] w-[25px]  items-center justify-center rounded-[4px] bg-white  shadow-blackA4 outline outline-1 outline-blackA4  hover:bg-integra-secondary focus:shadow-[0_0_0_2px_black] shrink-0"
+          className="ml-3 flex h-[25px] w-[25px]  shrink-0 items-center justify-center rounded-[4px]  bg-white shadow-blackA4 outline outline-1  outline-blackA4 hover:bg-integra-secondary focus:shadow-[0_0_0_2px_black]"
           id="c1"
           onClick={() => addItemsHandler(project)}
         >
@@ -63,19 +63,17 @@ const AvailableItem = ({ project, addItemsHandler, isChild, isLastChild }) => {
       </div>
 
       <div className="pl-3.5">
-        <div className="border 2 border-transparent border-l-blackA6">
+        <div className="2 border border-transparent border-l-blackA6">
           {expanded && items && (
             <div className="flex flex-col">
               {items.map((item, index) => (
-                <div >
-                  <AvailableItem
-                    key={item.linea_id}
-                    project={item}
-                    addItemsHandler={addItemsHandler}
-                    isChild={true}
+                <AvailableItem
+                  key={item.linea_id}
+                  project={item}
+                  addItemsHandler={addItemsHandler}
+                  isChild={true}
                   // isLastChild={item.length == 0}
-                  />
-                </div>
+                />
               ))}
             </div>
           )}
