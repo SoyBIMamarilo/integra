@@ -9,7 +9,7 @@ const Added = ({ addedItems, changeItemHandler }) => {
   return (
     <div className="flex flex-col">
       <div>Añadir Item</div>
-      <table className="h-min min-w-full table-auto text-xs border-separate">
+      <table className="border-separate text-xs">
         <AddedTableHeaders />
         <tbody>
           {addedItems
