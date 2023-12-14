@@ -7,7 +7,7 @@ import AddedTaleItem from "./AddedTableItem";
 const Added = ({ addedItems, changeItemHandler }) => {
   console.log("AddedItems", addedItems);
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col overflow-x-auto">
       <div>Añadir Item</div>
       <table className="border-separate text-xs">
         <AddedTableHeaders />
