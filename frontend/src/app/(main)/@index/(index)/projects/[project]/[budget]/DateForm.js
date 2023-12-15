@@ -6,7 +6,7 @@ const DateForm = ({ date, setDateHandler, deleteDateHandler }) => (
   <Popover.Root>
     <Popover.Trigger asChild>
       <button
-        className="w-60 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-1 font-bold text-integra-text hover:bg-integra-background-strong"
+        className="w-60 whitespace-nowrap rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-1 font-bold text-integra-text hover:bg-integra-background-strong"
         aria-label="Update dimensions"
       >
         Entrega: {date}
