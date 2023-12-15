@@ -7,7 +7,7 @@ import Plus from "@/components/svg/plus";
 const TagNew = ({ tagHandler }) => {
   const tag = useRef();
   const tagSubmitHandler = () => {
-    // tagHandler(tag.current.value);
+    tagHandler(tag.current.value);
     tag.current.value = "";
   };
   return (
