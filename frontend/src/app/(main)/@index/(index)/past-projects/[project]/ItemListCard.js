@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Copy from "@/components/svg/copy";
 import Block from "@/components/svg/block";
@@ -6,7 +6,7 @@ import Trash from "@/components/svg/trash";
 import { useRouter } from "next/navigation";
 
 const ItemListCard = ({ item }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleDelete = async () => {
     const res = await fetch("/api/temp", {

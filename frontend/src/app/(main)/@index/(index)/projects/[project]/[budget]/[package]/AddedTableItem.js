@@ -58,8 +58,12 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
 
   return (
     <tr>
-      <td className="h-8 border border-solid border-neutral-200 text-center hover:bg-neutral-50">{item.descripcion}</td>
-      <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">{nf.format(item.sum)}</td>
+      <td className="h-8 border border-solid border-neutral-200 text-center hover:bg-neutral-50">
+        {item.descripcion}
+      </td>
+      <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+        {nf.format(item.sum)}
+      </td>
       <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
         <select defaultValue={null} onChange={factorChangeHandler}>
           <option value={null}>Selecciona..</option>
@@ -72,9 +76,15 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
       </td>
       {selectedIndicador ? (
         <>
-          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">{nf.format(selectedIndicador.vr_or)}</td>
-          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">{nf.format(selectedIndicador.vr_dest)}</td>
-          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">{nf.format(item.sum / selectedIndicador.vr_or)}</td>
+          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+            {nf.format(selectedIndicador.vr_or)}
+          </td>
+          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+            {nf.format(selectedIndicador.vr_dest)}
+          </td>
+          <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
+            {nf.format(item.sum / selectedIndicador.vr_or)}
+          </td>
           <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
             <input
               className="box-border w-full border-none"
@@ -87,7 +97,7 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
           <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
             {nf.format(
               (item.sum * selectedIndicador.vr_dest * ponderacion) /
-              selectedIndicador.vr_or
+                selectedIndicador.vr_or
             )}
           </td>
           <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">

@@ -61,7 +61,7 @@ const AddPackage = () => {
         setSearchItemsHandler={setSearchItemsHandler}
       />
       <SeparatorComponent />
-      <div className="max-w-full overflow-auto flex grow flex-col">
+      <div className="flex max-w-full grow flex-col overflow-auto">
         <Added addedItems={addedItems} changeItemHandler={changeItemHandler} />
         {addedItems.length > 0 && <AddButton addedItems={addedItems} />}
       </div>
