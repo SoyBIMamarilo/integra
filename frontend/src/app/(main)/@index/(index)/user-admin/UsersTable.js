@@ -9,10 +9,10 @@ export default function UsersTable({ users }) {
     <table className="border-separate">
       <thead>
         <tr>
-          <th className="w-1/3 rounded-tl-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
+          <th className="w-1/2 rounded-tl-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
             Usuario
           </th>
-          <th className="h-16 w-1/3 overflow-hidden rounded-tr-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
+          <th className="h-16 w-1/2 overflow-hidden rounded-tr-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
             Rol
           </th>
         </tr>

@@ -9,7 +9,7 @@ const BudgetList = async ({ budgets, project }) => {
       {budgets.map((budget) => (
         <BudgetListCard key={budget.id} budget={budget} />
       ))}
-      <div className="ml-2 mt-4 flex flex-row gap-3">
+      <div className="ml-2 mt-4 mb-2 flex flex-row gap-3 ">
         <BudgetListCreateButton project={project} />
         <BudgetListDuplicateButton project={project} />
       </div>
