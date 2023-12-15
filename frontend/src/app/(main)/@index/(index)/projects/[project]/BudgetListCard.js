@@ -26,7 +26,6 @@ const BudgetListCard = ({ budget }) => {
       body: JSON.stringify({ id: budget.id }),
     });
 
-
     if (!res.ok) {
       const response = await res.json();
       alert(response.message);
