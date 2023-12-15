@@ -13,12 +13,12 @@ const Layout = (props) => {
             </button>
           </form>
         </div>
-        <div className="flex grow flex-row">
+        <div className="flex max-w-full grow flex-row">
           <SideBar />
           <div>
             <Separator />
           </div>
-          <div className="row z-40 box-border flex min-h-full grow flex-col p-4	">
+          <div className="row z-40 box-border flex min-h-full  grow flex-col p-4	">
             {props.children}
           </div>
         </div>

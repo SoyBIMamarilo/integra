@@ -31,7 +31,7 @@ const AvailableSearch = ({ setSearchItemsHandler }) => {
           className="ml-2 box-border w-32 border-none bg-integra-background-light"
         ></input>
       </div>
-      <div className="flex-0 flex flex-row gap-2 self-end">
+      <div className="flex-0 flex flex-row flex-wrap gap-2 self-end">
         <button
           type="button"
           onClick={cancelHandler}
