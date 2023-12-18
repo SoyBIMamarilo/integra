@@ -26,6 +26,14 @@
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Node",
+      "port": 53626,
+      "address": "127.0.0.1"
+      // "processId": "17599"
     }
   ]
 }

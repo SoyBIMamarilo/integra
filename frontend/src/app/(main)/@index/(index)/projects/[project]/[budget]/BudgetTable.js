@@ -1,19 +1,9 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
-import { supabaseOptions } from "@/util/supabase";
-
 import DownloadFile from "./DownloadButton";
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 import BudgetTableFooter from "./BudgetTableFooter";
 
-const BudgetTable = async ({ budget, project }) => {
-  const supabase = createServerComponentClient({ cookies }, supabaseOptions);
-
-  const { data: budgetTotal, error } = await supabase.rpc("valor_presupuesto", {
-    presupuesto: budget,
-  });
-
+const BudgetTable = async ({ budget, project, budgetTotal }) => {
   const total = budgetTotal.reduce((accumulator, item) => {
     return accumulator + item.vrtot;
   }, 0);
