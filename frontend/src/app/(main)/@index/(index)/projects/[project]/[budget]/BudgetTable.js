@@ -1,4 +1,3 @@
-import DownloadFile from "./DownloadButton";
 import BudgetTableHeaders from "./BudgetTableHeaders";
 import BudgetTableBody from "./BudgetTableBody";
 import BudgetTableFooter from "./BudgetTableFooter";
@@ -24,7 +23,6 @@ const BudgetTable = async ({ budget, project, budgetTotal }) => {
         .map((it) => it.categoria)
     ),
   ];
-  console.log(categorias);
 
   return (
     <table className="h-min table-fixed	border-separate ">

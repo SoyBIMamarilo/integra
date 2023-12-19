@@ -1,17 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 
-import { nf } from "@/util/date-format";
-import View from "@/components/svg/view";
-
 const Comparer = ({}) => {
-  const [itemInfo, setItemInfo] = useState(null);
+  const [budgets, setBudgets] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const projects = budgets
+    ? [...new Set(budgets.map((item) => item.proyecto_id))].map(
+        (proyecto_id) => {
+          const proyecto_nombre = budgets.filter(
+            (bt) => bt.proyecto_id == proyecto_id
+          )[0].proyecto_nombre;
+          return { proyecto_id, proyecto_nombre };
+        }
+      )
+    : null;
+
+  const changeSelectHandler = (e) => {
+    setSelectedProject(+e.target.value);
+  };
+
   useEffect(() => {
     const loadData = async () => {
-      const data = await fetch(`/api/item-data/${item}`);
-      setItemInfo((await data.json())[0]);
+      const res = await fetch(`/api/budget/list-all`);
+      const budgetData = await res.json();
+      setBudgets(budgetData.data);
     };
     loadData();
   }, []);
@@ -31,8 +46,40 @@ const Comparer = ({}) => {
           <Dialog.Description className="mb-5 mt-[10px] leading-normal text-mauve11">
             Selecciona el proyecto y el presupuesto con el que deseas comparar
           </Dialog.Description>
-          Descripción
-          <div className="mt-[25px] flex justify-end">
+          <div>
+            <div className="mb-2 flex flex-row justify-end gap-4">
+              <label>Proyecto</label>
+              <select
+                defaultValue={null}
+                onChange={changeSelectHandler}
+                className="w-48 rounded-sm"
+                name="ciudad"
+              >
+                <option value={null}>Selecciona un indicador..</option>
+
+                {budgets &&
+                  projects.map((it) => (
+                    <option key={it.proyecto_id} value={it.proyecto_id}>
+                      {it.proyecto_nombre}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="mb-2	flex flex-row justify-end gap-4">
+              <label>Versión</label>
+              <select className="w-48 rounded-sm" name="ciudad">
+                {budgets &&
+                  selectedProject &&
+                  budgets
+                    .filter((bt) => bt.proyecto_id == selectedProject)
+                    .map((bt) => (
+                      <option key={bt.presupuesto_id} value={bt.presupuesto_id}>
+                        {bt.version}
+                      </option>
+                    ))}
+              </select>
+            </div>
+            <Link href="/projects">Link</Link>
             <Dialog.Close asChild>
               <button className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert-main px-5 py-1 font-bold text-integra-text hover:bg-integra-alert-focus">
                 Cerrar

@@ -7,7 +7,7 @@ import BudgetOptions from "./BudgetOptions";
 import Date from "./Date";
 import Tags from "./Tags";
 import Export from "./Export";
-import Comparer from "./BudgetComparer/Comparer";
+import Comparer from "./Comparer";
 
 export default async function Page({ params }) {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);

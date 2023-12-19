@@ -10,5 +10,5 @@ export async function GET(req) {
   const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
   const { data, error } = await supabase.rpc("listado_todos_presupuestos");
 
-  return NextResponse.json({ tags: [...data] }, { status: 200 });
+  return NextResponse.json({ data }, { status: 200 });
 }

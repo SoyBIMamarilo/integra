@@ -11,7 +11,7 @@ export async function GET(req, res) {
     const { budget_origin_id, budget_destine_id } = res.params;
     const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
 
-    let { data: data_package, error_manual } = await supabase.rpc(
+    let { data: data_package, error: error_manual } = await supabase.rpc(
       "presupuesto_comparer_paquete",
       {
         presupuesto_origen: budget_origin_id,
