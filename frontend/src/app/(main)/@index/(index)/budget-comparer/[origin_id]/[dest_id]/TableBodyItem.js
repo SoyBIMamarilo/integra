@@ -12,7 +12,6 @@ const TableBodyItem = ({ packageValue }) => {
       <td />
       <td className="table-content text-center"></td>
       <td className="table-content text-center"></td>
-      <td className="table-content text-center"></td>
       <td className="table-content text-center">
         {nf.format(packageFirst.vp1_vrtot)}
       </td>
@@ -25,6 +24,7 @@ const TableBodyItem = ({ packageValue }) => {
       <td className="table-content text-center">
         {nf_per.format(packageFirst.vp1_incidencia)}
       </td>
+      <td />
       <td className="table-content text-center"></td>
       <td className="table-content text-center"></td>
       <td className="table-content text-center"></td>

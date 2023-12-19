@@ -4,6 +4,7 @@ import { supabaseOptions } from "@/util/supabase";
 
 import TableFooter from "./TableFooter";
 import TableBody from "./TableBody";
+import TableHeaders from "./TableHeaders";
 
 const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
@@ -22,6 +23,7 @@ const Page = async ({ params }) => {
 
   return (
     <table className="h-min table-fixed	border-separate ">
+      <TableHeaders />
       <tbody>
         {categorias.map((cat) => (
           <TableBody

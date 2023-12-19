@@ -37,13 +37,13 @@ const TableFooter = ({ table }) => {
         <td />
         <td className="table-content text-center"></td>
         <td className="table-content text-center"></td>
-        <td className="table-content text-center"></td>
         <td className="table-content text-center">{nf.format(vp1_total)}</td>
         <td className="table-content text-center">{nf.format(vp1_const)}</td>
         <td className="table-content text-center">{nf.format(vp1_vend)}</td>
         <td className="table-content text-center">
           {nf_per.format(vp1_incidencia)}
         </td>
+        <td />
         <td className="table-content text-center"></td>
         <td className="table-content text-center"></td>
         <td className="table-content text-center"></td>
