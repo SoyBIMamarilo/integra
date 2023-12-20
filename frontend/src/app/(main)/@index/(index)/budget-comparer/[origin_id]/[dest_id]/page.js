@@ -23,7 +23,7 @@ const Page = async ({ params }) => {
 
   return (
     <table className="h-min table-fixed	border-separate ">
-      <TableHeaders />
+      <TableHeaders originProject={originProjectId} destinationProject={destinationProjectName} />
       <tbody>
         {categorias.map((cat) => (
           <TableBody
