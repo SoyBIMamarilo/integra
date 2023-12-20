@@ -27,7 +27,7 @@ export default async function Page({ params }) {
         <BudgetOptions budget={params.budget} project={params.project} />
         <div className=" border-r-4 border-integra-accent" />
         <Export data={budgetTotal} />
-        <Comparer />
+        <Comparer budgetId={params.budget} />
         <Date budget={params.budget} />
         <div className=" border-r-4 border-integra-accent" />
         <Tags budget={params.budget} />

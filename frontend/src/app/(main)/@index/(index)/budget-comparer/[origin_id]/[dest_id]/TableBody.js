@@ -48,9 +48,9 @@ const TableBody = ({ table, name }) => {
         />
       ))}
       <tr className="h-2" />
-      <tr className="font-bold">
+      <tr >
         <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center px-2">Subtotal</div>
+          <div className="flex flex-row place-items-center px-2 font-bold">Subtotal</div>
         </td>
         <td />
         <td className="table-content text-center"></td>
@@ -62,7 +62,6 @@ const TableBody = ({ table, name }) => {
           {nf_per.format(vp1_incidencia)}
         </td>
         <td />
-        <td className="table-content text-center"></td>
         <td className="table-content text-center"></td>
         <td className="table-content text-center"></td>
         <td className="table-content text-center">{nf.format(vp2_total)}</td>
