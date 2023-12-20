@@ -10,33 +10,33 @@ const TableBodyItem = ({ packageValue }) => {
         </div>
       </td>
       <td />
-      <td className="table-content h-8 border border-solid border-neutral-200 text-center hover:bg-neutral-50"></td>
       <td className="table-content text-center"></td>
-      <td className="table-content text-center ">
+      <td className="table-content text-center"></td>
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp1_vrtot)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp1_vrm2const)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp1_vrm2vend)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf_per.format(packageFirst.vp1_incidencia)}
       </td>
       <td />
       <td className="table-content text-center"></td>
       <td className="table-content text-center"></td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp2_vrtot)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp2_vrm2const)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp2_vrm2vend)}
       </td>
-      <td className="table-content text-center">
+      <td className="table-content text-center text-base">
         {nf_per.format(packageFirst.vp2_incidencia)}
       </td>
     </tr>

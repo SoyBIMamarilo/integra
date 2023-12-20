@@ -50,24 +50,24 @@ const TableBody = ({ table, name }) => {
       <tr className="h-2" />
       <tr >
         <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center px-2 font-bold">Subtotal</div>
+          <div className="flex flex-row place-items-center px-2 font-bold bg-integra-background-strong">Subtotal</div>
         </td>
         <td />
-        <td className="table-content text-center"></td>
-        <td className="table-content text-center"></td>
-        <td className="table-content text-center">{nf.format(vp1_total)}</td>
-        <td className="table-content text-center">{nf.format(vp1_const)}</td>
-        <td className="table-content text-center">{nf.format(vp1_vend)}</td>
-        <td className="table-content text-center">
+        <td className="text-center"></td>
+        <td className="text-center"></td>
+        <td className="table-content text-center text-base">{nf.format(vp1_total)}</td>
+        <td className="table-content text-center text-base">{nf.format(vp1_const)}</td>
+        <td className="table-content text-center text-base">{nf.format(vp1_vend)}</td>
+        <td className="table-content text-center text-base">
           {nf_per.format(vp1_incidencia)}
         </td>
         <td />
-        <td className="table-content text-center"></td>
-        <td className="table-content text-center"></td>
-        <td className="table-content text-center">{nf.format(vp2_total)}</td>
-        <td className="table-content text-center">{nf.format(vp2_const)}</td>
-        <td className="table-content text-center">{nf.format(vp2_vend)}</td>
-        <td className="table-content text-center">
+        <td className="text-center"></td>
+        <td className="text-center"></td>
+        <td className="table-content text-center text-base">{nf.format(vp2_total)}</td>
+        <td className="table-content text-center text-base">{nf.format(vp2_const)}</td>
+        <td className="table-content text-center text-base">{nf.format(vp2_vend)}</td>
+        <td className="table-content text-center text-base">
           {nf_per.format(vp2_incidencia)}
         </td>
       </tr>
