@@ -4,14 +4,18 @@ import XlsxPopulate from "xlsx-populate";
 import { saveAs } from "file-saver";
 
 const Export = ({ data }) => {
-  const downloadData = data.map((item) => ({
-    categoria: item.categoria,
-    codigo: item.codigo,
-    pyrefnombre: item.pyrefnombre,
-    vrm2const: item.vrm2const,
-    vrm2vend: item.vrm2vend,
-    vrtot: item.vrtot,
-  }));
+  const downloadData = data
+    .map((item) => ({
+      categoria: item.categoria,
+      paquete: item.paquete,
+      descripcion: item.descripcion,
+      pyrefnombre: item.pyrefnombre,
+      codigo: item.codigo,
+      vrm2const: item.vrm2const,
+      vrm2vend: item.vrm2vend,
+      vrtot: item.vrtot,
+    }))
+    .filter((it) => it.vrtot > 0);
   function getSheetData(header) {
     const fields = Object.keys(downloadData[0]);
     const sheetData = downloadData.map(function (row) {
@@ -26,8 +30,10 @@ const Export = ({ data }) => {
   async function saveAsExcel() {
     const header = [
       "categoria",
-      "codigo",
+      "paquete",
+      "descripcion",
       "pyrefnombre",
+      "codigo",
       "vrm2const",
       "vrm2vend",
       "vrtot",
@@ -43,6 +49,9 @@ const Export = ({ data }) => {
       const endColumn = String.fromCharCode(64 + totalColumns);
       sheet1.row(1).style("bold", true);
       sheet1.range("A1:" + endColumn + "1").style("fill", "EAD990");
+      sheet1.column("A").width(30);
+      sheet1.column("B").width(30);
+      sheet1.column("C").width(50);
       range.style("border", true);
       return workbook.outputAsync().then((res) => {
         saveAs(res, "file.xlsx");

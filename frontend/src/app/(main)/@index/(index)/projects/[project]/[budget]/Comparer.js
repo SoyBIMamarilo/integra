@@ -30,6 +30,7 @@ const Comparer = ({}) => {
     };
     loadData();
   }, []);
+
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
