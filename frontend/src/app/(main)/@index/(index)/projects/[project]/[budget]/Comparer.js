@@ -3,23 +3,29 @@
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { router } from 'next/router';
 
-const Comparer = ({}) => {
+const Comparer = ({ budgetId }) => {
   const [budgets, setBudgets] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedBudget, setSelectedBudget] = useState(null);
   const projects = budgets
     ? [...new Set(budgets.map((item) => item.proyecto_id))].map(
-        (proyecto_id) => {
-          const proyecto_nombre = budgets.filter(
-            (bt) => bt.proyecto_id == proyecto_id
-          )[0].proyecto_nombre;
-          return { proyecto_id, proyecto_nombre };
-        }
-      )
+      (proyecto_id) => {
+        const proyecto_nombre = budgets.filter(
+          (bt) => bt.proyecto_id == proyecto_id
+        )[0].proyecto_nombre;
+        return { proyecto_id, proyecto_nombre };
+      }
+    )
     : null;
 
   const changeSelectHandler = (e) => {
     setSelectedProject(+e.target.value);
+  };
+
+  const changeBudgetSelectHandler = (e) => {
+    setSelectedBudget(e.target.value);
   };
 
   useEffect(() => {
@@ -67,7 +73,12 @@ const Comparer = ({}) => {
             </div>
             <div className="mb-2	flex flex-row justify-end gap-4">
               <label>Versión</label>
-              <select className="w-48 rounded-sm" name="ciudad">
+              <select
+                className="w-48 rounded-sm"
+                name="ciudad"
+                onChange={changeBudgetSelectHandler}>
+
+                <option value={null}>Selecciona una versión..</option>
                 {budgets &&
                   selectedProject &&
                   budgets
@@ -79,7 +90,13 @@ const Comparer = ({}) => {
                     ))}
               </select>
             </div>
-            <Link href="/projects">Link</Link>
+
+            <Link href={`/budget-comparer/${budgetId}/${selectedBudget}`}>
+              <button className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-confirm-main px-5 py-1 mr-5 font-bold text-integra-text hover:bg-integra-confirm-focus">
+                Comparar
+              </button>
+            </Link>
+
             <Dialog.Close asChild>
               <button className="rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert-main px-5 py-1 font-bold text-integra-text hover:bg-integra-alert-focus">
                 Cerrar
