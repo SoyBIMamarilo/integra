@@ -8,7 +8,7 @@ import TableHeaders from "./TableHeaders";
 
 const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
-  const { data: table, error } = await supabase.rpc("comparar_presupeustos", {
+  const { data: table, error } = await supabase.rpc("comparar_presupuestos", {
     origen: params.origin_id,
     destino: params.dest_id,
   });
@@ -20,10 +20,15 @@ const Page = async ({ params }) => {
         .map((it) => it.paquete_categoria)
     ),
   ];
-
+  const project1 = table[0]
+    ? `${table[0].vp1_nombre}, Versión: ${table[0].vp1_version}`
+    : "Presupuesto Sin Datos";
+  const project2 = table[0]
+    ? `${table[0].vp2_nombre}, Versión: ${table[0].vp2_version}`
+    : "Presupuesto Sin Datos";
   return (
     <table className="h-min table-fixed	border-separate ">
-      <TableHeaders originProject={originProjectId} destinationProject={destinationProjectName} />
+      <TableHeaders project1={project1} project2={project2} />
       <tbody>
         {categorias.map((cat) => (
           <TableBody

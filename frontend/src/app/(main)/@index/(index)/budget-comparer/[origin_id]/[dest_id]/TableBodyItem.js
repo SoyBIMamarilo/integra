@@ -10,8 +10,12 @@ const TableBodyItem = ({ packageValue }) => {
         </div>
       </td>
       <td />
-      <td className="table-content text-center"></td>
-      <td className="table-content text-center"></td>
+      <td className="table-content text-center">
+        {nf.format(packageFirst.vp1_valor_parametro)}
+      </td>
+      <td className="table-content text-center">
+        {nf.format(packageFirst.vp1_indicador_valor)}
+      </td>
       <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp1_vrtot)}
       </td>
@@ -25,8 +29,12 @@ const TableBodyItem = ({ packageValue }) => {
         {nf_per.format(packageFirst.vp1_incidencia)}
       </td>
       <td />
-      <td className="table-content text-center"></td>
-      <td className="table-content text-center"></td>
+      <td className="table-content text-center">
+        {nf.format(packageFirst.vp2_valor_parametro)}
+      </td>
+      <td className="table-content text-center">
+        {nf.format(packageFirst.vp2_indicador_valor)}
+      </td>
       <td className="table-content text-center text-base">
         {nf.format(packageFirst.vp2_vrtot)}
       </td>
