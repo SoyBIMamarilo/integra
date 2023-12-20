@@ -26,6 +26,7 @@ module.exports = {
             principal: "#E5E5E5",
             light: "#E8E8E8",
             strong: "#D9D9D9",
+            dark: "#CCC7C7",
           },
           primary: "#EAD990",
           secondary: "#EFE3AE",

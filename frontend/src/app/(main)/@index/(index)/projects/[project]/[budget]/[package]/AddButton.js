@@ -37,7 +37,7 @@ const AddButton = ({ addedItems }) => {
       <button
         type="button"
         onClick={() => router.back()}
-        className="hover:bg-integra-alert-focuss rounded-lg border-2 border-solid	 border-integra-text bg-integra-alert-main px-5 py-1 text-xs font-bold text-integra-text hover:bg-integra-alert-focus"
+        className="rounded-lg border-2 border-solid border-integra-text	 bg-integra-alert-main px-5 py-1 text-xs font-bold text-integra-text hover:bg-integra-alert-focus"
       >
         Cancelar
       </button>

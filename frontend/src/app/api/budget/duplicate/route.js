@@ -12,11 +12,10 @@ export async function POST(req) {
   const version = body.version;
   const old_presupuesto_id = body.old_presupuesto_id;
   //   console.log(body);
-  const { data, error } = await supabase
-    .rpc("duplicate_presupuesto",{
-        old_presupuesto_id,
-        version
-    })
+  const { data, error } = await supabase.rpc("duplicate_presupuesto", {
+    old_presupuesto_id,
+    version,
+  });
   console.log(data);
   console.log(error);
   if (data === null) {

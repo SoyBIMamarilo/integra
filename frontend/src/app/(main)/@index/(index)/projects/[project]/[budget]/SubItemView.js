@@ -8,12 +8,9 @@ import View from "@/components/svg/view";
 
 const SubItemView = ({ item }) => {
   const [itemInfo, setItemInfo] = useState(null);
-  console.log(itemInfo);
   useEffect(() => {
-    console.log("fetched subitem");
     const loadData = async () => {
       const data = await fetch(`/api/item-data/${item}`);
-      // console.log(data);
       setItemInfo((await data.json())[0]);
     };
     loadData();

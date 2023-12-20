@@ -47,7 +47,9 @@ export default function Auth() {
           />
 
           <button className="button-black grow">INICIAR SESIÓN</button>
-          <a href="/reset-password" className="text-center text-blue-600">Olvidé mi contraseña</a>
+          <a href="/reset-password" className="text-center text-blue-600">
+            Olvidé mi contraseña
+          </a>
         </form>
         <div className="content-center justify-center">
           <Image src={LogoAmarilo} />

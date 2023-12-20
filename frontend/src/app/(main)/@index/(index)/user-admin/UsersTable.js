@@ -1,27 +1,37 @@
-"use client"
+"use client";
 import { nf } from "@/util/date-format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function UsersTable({ users }) {
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <table>
+    <table className="border-separate">
       <thead>
         <tr>
-          <th className="border border-neutral-500 bg-neutral-800 p-2 px-6 align-middle text-base font-bold text-neutral-100">
+          <th className="w-1/2 rounded-tl-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
             Usuario
           </th>
-          <th className="border border-neutral-500 bg-neutral-800 p-2 px-6 align-middle text-base font-bold text-neutral-100">
+          <th className="h-16 w-1/2 overflow-hidden rounded-tr-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
             Rol
           </th>
         </tr>
       </thead>
       <tbody>
         {users.map((pr) => (
-          <tr key={pr.id} className="hover:bg-gray-200 cursor-pointer" onClick={()=>{router.push(`/user-admin/${pr.id}`)}}>
-              <td className="table-content px-6 text-center hover:bg-gray-200">{pr.email}</td>
-              <td className="table-content px-6 text-center hover:bg-gray-200">{pr.rol}</td>
+          <tr
+            key={pr.id}
+            className="cursor-pointer hover:bg-gray-200"
+            onClick={() => {
+              router.push(`/user-admin/${pr.id}`);
+            }}
+          >
+            <td className="table-content px-6 text-center hover:bg-gray-200">
+              {pr.email}
+            </td>
+            <td className="table-content px-6 text-center hover:bg-gray-200">
+              {pr.rol}
+            </td>
           </tr>
         ))}
       </tbody>
