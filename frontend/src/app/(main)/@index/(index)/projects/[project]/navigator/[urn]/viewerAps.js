@@ -28,12 +28,10 @@ const ViewerAps = (params) => {
     const [selectedFilterDb, setselectedFilterDb] = useState("");
     const [totals, setTotals] = useState({})
     const [items, setItems] = useState([])
-    const [registerData, setRegisterData] = useState([])
     const [viewerObject, setViewer] = useState(null)
     const [manualAreaObjects, setManualAreaObjects] = useState([])
     const [manualLengthObjects, setManualLengthObjects] = useState([])
     const [dimensionList, setDimensionList] = useState(["Select the dimension"])
-    const [openCuant, setOpenCuant] = useState(false)
     const selectTtemGroupDbRef = useRef(null);
     const selectCategorysRef = useRef(null);
     const selectFamilysRef = useRef(null);
@@ -62,15 +60,6 @@ const ViewerAps = (params) => {
         setselectedGroupItemdb("");
         setSelectedItemdb("");
         setselectedFilterDb("");
-    }
-
-    async function handleSelectFilterElements(recordId) {
-        const res = await fetch(`/api/revit/selections/${recordId}`)
-        const response = await res.json()
-        const ids = response.map(item=>item.dbid)
-        viewerObject.select(ids)
-        viewerObject.isolate(ids)
-        viewerObject.fitToView(ids, viewerObject.model)
     }
 
 
@@ -169,27 +158,8 @@ const ViewerAps = (params) => {
           });
 
         console.log(res.status)
-        const resId = await res.json()
-        if (resId.length>0){
-
-            const elementData = items.map((item)=>{return {dbid:item, cbs_cantidades_rvt:resId[0].id}})
-                const res = await fetch("/api/revit/manual", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({type:"element", data:elementData}),
-                  });
-                console.log(elementData)
-        }
+        console.log(await res.json())
         console.log(filterData)
-    }
-
-    async function handleOpenRegister(){
-        const res = await fetch("/api/revit")
-        const response = await res.json()
-        setRegisterData(response)
-        setOpenCuant(true)
-        console.log(openCuant)
-        console.log(items)
     }
 
     async function handleUploadManual(){
@@ -363,7 +333,6 @@ const ViewerAps = (params) => {
                 let valorItem = 0;
                 let subTotal = 0;
                 let totalCountdb = 0;
-                let itemsList = []
                 let classItems = "border px-6 py-3 text-left text-[10px]";
                 labels = [...new Set(data.map(item => item.group))];
                 //Load other Dropdown
@@ -387,19 +356,16 @@ const ViewerAps = (params) => {
                             subTotal += parseFloat(valorItem);
                             createTableRow(tableBody, [`${itemText}`, "1 Unit", `${groupby.dbid}`, `${valorItem}`], classItems, "TD", true);//Addmethod               
                             countdb += 1;
-                            itemsList.push(groupby.dbid)
                         }
                     });
                     totalCountdb += countdb;
-                    
                     total += subTotal;
                     createTableRow(tableBody, [`Subtotal Items`, `${countdb} Units`, "", `${subTotal.toFixed(2)}`], classItems, "TH");//Addmethod
                     subTotal = 0;
                     dataChart.push(subTotal);
                 }
                 createTableRow(tableBody, [`Total Items`, `${totalCountdb} Units`, "", `${total.toFixed(2)}`], classItems, "TH");//Addmethod    
-                setTotals({unidades: totalCountdb, cantidad: total})  
-                setItems(itemsList)  
+                setTotals({unidades: totalCountdb, cantidad: total})    
                 table.appendChild(tableBody);
                 //tableRef.current.appendChild(table);
                 if (!window.Chart)
@@ -452,7 +418,6 @@ const ViewerAps = (params) => {
         if (selectedCategory) {
             let subTotal = 0;
             let total = 0;
-            let listItems = []
             //let totalLong = 0;  let totalVol = 0;
             const family = selectedCategory !== "" ? modelProperties.family.filter((item) => item.parent[0] == selectedCategory) : [];
             let childrens = [];
@@ -543,7 +508,6 @@ const ViewerAps = (params) => {
                         subTotal += valorItem;
                         createTableRow(tableBody, [`${itemText}>${item.categoryName}`, "1 Unit", `${item.dbid}`, `${valorItem}`], `${classItems} item-${index}`, "TD", true);//Addmethod
                         dbIsolateDbids.push(item.dbid);
-                        listItems.push(item.dbid)
                     });
                     createTableRow(tableBody, [`Subtotal Items`, `${items.length} Units`, dbIsolateDbids, `${subTotal.toFixed(2)}`], `${classItems} item-${index}`, "TH", true);//Addmethod                    
 
@@ -558,7 +522,6 @@ const ViewerAps = (params) => {
             
             table.appendChild(tableBody);
             setTotals({unidades: customItems.length, cantidad: total})
-            setItems(listItems)
             //tableRef.current.appendChild(table);
             setCustomParams(customItems);
             dataChart.push(dataBarArea);
@@ -837,7 +800,7 @@ const ViewerAps = (params) => {
                         <select id="cbFilter" className='text-xs' name="cbFilter" ref={selectFilterDbRef} onChange={e => handleFilterDbSelect(e)} value={selectedFilterDb}><option className='text-xs' value="">Select the Filter</option></select>
                         
                         <button className="h-4 text-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0 px-0 rounded-2 ml-6 px-3" onClick={handleFilterData}>Añadir cantidad</button>
-                        <button className="h-4 text-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0 px-0 rounded-2 ml-6 px-3" onClick={handleOpenRegister}>Registro Cantidades</button>
+                        <Link href="/viewer/values"><button className="h-4 text-xs bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0 px-0 rounded-2 ml-6 px-3" >Registro Cantidades</button></Link>
                     </div>
                     <div className="h-[3vh]">
                         
@@ -863,69 +826,7 @@ const ViewerAps = (params) => {
                         <canvas ref={chartBarCustomRef} className="chart mt-2 !hidden"></canvas>
                         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" ref={tableRef} id="myDynamicTable"></table>
                     </div>
-                    <div id="NNN" className="chart-container overflow-auto mt-16" style={{ zIndex: "3", position: 'absolute', height: '18em', backgroundColor: "White", padding: '1px', display:openCuant?"":"none" }}>
-
-                        {/* remove !hidden if you need a Graphic */}
-                        <div id="ChartContainerheader" className="docking-panel-title sticky top-0 text-center gap-28 bg-slate-500">Cantidades<span className="float-right rounded-md bg-slate-400 cursor-pointer" onClick={() => { setOpenCuant(false) }}>X</span></div>
-                        <canvas ref={chartBarRef} className="chart mt-2 !hidden"></canvas>
-                        <canvas ref={chartBarCustomRef} className="chart mt-2 !hidden"></canvas>
-                        <div className="mt-5 flex h-full flex-col justify-start rounded-lg border border-solid border-neutral-800 p-4 shadow-lg shadow-neutral-300">
-                        <table className="h-min	w-full table-fixed	border-separate ">
-                        <thead>
-                            <tr>
-                            <th className="h-16 rounded-tl-xl border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold ">
-                                Categoria
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Familia
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Tipo
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Parametro
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Dimension
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Filtro
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Unidades
-                            </th>
-                            <th className="h-16 border-2 border-integra-text bg-integra-primary p-2 align-middle font-bold">
-                                Cantidad
-                            </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr className="h-2 "></tr>
-
-                            <tr className="h-2" />
-                            {registerData.map((record) => {
-                            return (
-                            <>
-                                <tr onClick={()=>{handleSelectFilterElements(record.id)}} className="cursor-pointer">
-                                <td className="table-content text-center">{record.categoria||"-"}</td>
-                                <td className="table-content text-center">{record.familia||"-"}</td>
-                                <td className="table-content text-center">{record.tipo||"-"}</td>
-                                <td className="table-content text-center">{record.parametro||"-"}</td>
-                                <td className="table-content text-center">{record.dimension||"-"}</td>
-                                <td className="table-content text-center">{record.filtro||"-"}</td>
-                                <td className="table-content text-center">{record.unidades||"-"}</td>
-                                <td className="table-content text-center">{record.cantidad||"-"}</td>
-                                </tr>
-                            </>
-                            );
-          })}
-
-                        </tbody>
-                        </table>
-    </div>
-                        {/* <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" ref={tableRef} id="myDynamicTable"></table> */}
-                    </div>
+                    
                 </div>
 
             ) : (

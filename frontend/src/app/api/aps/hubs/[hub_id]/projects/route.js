@@ -15,11 +15,12 @@ export async function GET(request, { params }) {
                 access_token: token.internal_token,
                 expires_in: Math.round((token.expires_at - Date.now()) / 1000)
             };
-            const projects = await new APS.HubsApi().getHubProjects(null, internalAuthClient, internalOAuthToken);
+            console.log(params.hub_id)
+            const projects = await new APS.ProjectsApi().getProject(params.hub_id,params.project_id,internalAuthClient,internalOAuthToken)
             return NextResponse.json(projects.body.data);
         }
     } catch (error) {
-        console.log("Api APS Op:Get", err);
+        console.log("Api APS Op:Get", error);
     }
 
 }

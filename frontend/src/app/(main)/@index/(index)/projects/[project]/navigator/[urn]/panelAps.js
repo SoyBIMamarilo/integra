@@ -7,8 +7,9 @@ export default function PanelAps({ params }) {
     const plan3d = "dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLlJmNG01T0pXUjRTM2xSZkhfZ0JOSGc_dmVyc2lvbj0z"
     const plan2d2 = "dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLlRBTUdRMklxUUplQkNibERZZExRQ0E/dmVyc2lvbj0y"
     const plan2d = "dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLnpldlFDaHZlUnZHeGc2LVU0NTZQWnc/dmVyc2lvbj02"
-    const [docUrn, setdocUrn] = useState(plan3d);
-const [api, setapi] = useState("");
+    console.log(params.urn)
+    const [docUrn, setdocUrn] = useState(params.urn);
+    const [api, setapi] = useState("");
     const [token, setToken] = useState("");
     const handlerDocUrn = (e, value) => {
         setdocUrn(e.target.value);

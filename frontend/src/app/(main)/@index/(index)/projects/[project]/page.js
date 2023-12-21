@@ -41,6 +41,11 @@ export default async function Page({ params }) {
         {/* <GroupCard title="Reportes" /> */}
         <Report total={vrTot} m2const={m2const} m2vend={m2vend} />
       </div>
+      <div className="my-5 ml-2 place-self-end">
+        <Link href={`/projects/${params.project}/navigator`} className="button-black">
+          Proyecto en ACC
+        </Link>
+      </div>
     </>
   );
 }

@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
             return NextResponse.json(resp.body.data);
         }
     } catch (error) {
-        console.log("Api APS Op:Get", err);
+        console.log("Api APS Op:Get", error);
     }
 
 }
