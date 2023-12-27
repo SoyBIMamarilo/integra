@@ -27,6 +27,10 @@ const TableBody = ({ table, name }) => {
   const vp2_incidencia = table.reduce((accumulator, item) => {
     return accumulator + item.vp2_incidencia;
   }, 0);
+  const delta_vtotal = Math.abs(vp1_total - vp2_total);
+
+  const delta_m2const = Math.abs(vp1_const - vp2_const);
+
   const packages = [
     ...new Set(
       table
@@ -48,27 +52,46 @@ const TableBody = ({ table, name }) => {
         />
       ))}
       <tr className="h-2" />
-      <tr >
+      <tr className="font-bold">
         <td colSpan={1} className="table-content cursor-pointer">
-          <div className="flex flex-row place-items-center px-2 font-bold bg-integra-background-strong">Subtotal</div>
+          <div className="flex flex-row place-items-center px-2">Subtotal</div>
         </td>
         <td />
         <td className="text-center"></td>
         <td className="text-center"></td>
-        <td className="table-content text-center text-base">{nf.format(vp1_total)}</td>
-        <td className="table-content text-center text-base">{nf.format(vp1_const)}</td>
-        <td className="table-content text-center text-base">{nf.format(vp1_vend)}</td>
-        <td className="table-content text-center text-base">
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp1_total)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp1_const)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp1_vend)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
           {nf_per.format(vp1_incidencia)}
         </td>
         <td />
         <td className="text-center"></td>
         <td className="text-center"></td>
-        <td className="table-content text-center text-base">{nf.format(vp2_total)}</td>
-        <td className="table-content text-center text-base">{nf.format(vp2_const)}</td>
-        <td className="table-content text-center text-base">{nf.format(vp2_vend)}</td>
-        <td className="table-content text-center text-base">
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp2_total)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp2_const)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(vp2_vend)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
           {nf_per.format(vp2_incidencia)}
+        </td>
+        <td />
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(delta_vtotal)}
+        </td>
+        <td className="table-content px-1 text-center text-base">
+          {nf.format(delta_m2const)}
         </td>
       </tr>
     </>

@@ -4,6 +4,7 @@ import { headers, cookies } from "next/headers";
 import { supabaseOptions } from "@/util/supabase";
 import Modal from "@/components/modal/create-modal";
 import ProjectInfoForm from "./ProjectInfoForm";
+import ProjectBasicInfoForm from "./ProjectBasicInfoForm";
 
 const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
@@ -17,12 +18,26 @@ const Page = async ({ params }) => {
     }
   );
 
+  const { data: ciudades, errorCiudades } = await supabase
+    .from("ciudad")
+    .select();
+
+  const { data: proyecto } = await supabase
+    .from("proyecto")
+    .select()
+    .eq("id", params.project);
+
+  const { data: ciudad } = await supabase
+    .from("ciudad")
+    .select()
+    .eq("id", proyecto[0].ciudad_id);
+
   return (
     <Modal>
-      <div className="mb-4 font-bold">Parámetros Presupuesto</div>
       <ProjectInfoForm
-        project={params.project}
-        budget={params.budget}
+        project={proyecto[0]}
+        ciudades={ciudades}
+        ciudadProyecto={ciudad[0].nombre}
         indices={indices}
         pendingIndices={pendingIndices}
       />

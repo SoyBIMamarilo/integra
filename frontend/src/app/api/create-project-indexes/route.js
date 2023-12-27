@@ -13,6 +13,8 @@ export async function POST(req) {
   const { data, error } = await supabase.rpc("crear_proyecto_indicador", {
     nombre: body.nombre,
     ciudad: body.ciudad,
+    codigo_oracle: body.codigo_oracle,
+    link_sharepoint: body.link_sharepoint,
     insertar: body.indexes,
   });
   console.log(data);
