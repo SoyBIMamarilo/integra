@@ -11,13 +11,13 @@ const Page = async ({ params }) => {
     "presupuesto_indicadores",
     {
       presupuesto: params.budget,
-    }
+    },
   );
   const { data: pendingIndices, error: errorIndices } = await supabase.rpc(
     "indicadores_por_incluir_presupuesto",
     {
       presupuesto: params.budget,
-    }
+    },
   );
   console.log(pendingIndices);
   return (

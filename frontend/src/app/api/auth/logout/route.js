@@ -5,10 +5,15 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function POST(request) {
-  const requestUrl = new URL(request.url);
   const supabase = createRouteHandlerClient({ cookies });
 
   await supabase.auth.signOut();
+
+  return new Response(null, {
+    status: 204,
+  });
+
+  const requestUrl = new URL(request.url);
 
   return NextResponse.redirect(`${requestUrl.origin}/`, {
     status: 301,

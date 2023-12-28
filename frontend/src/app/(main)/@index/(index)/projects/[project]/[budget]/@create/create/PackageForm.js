@@ -8,7 +8,7 @@ import PackageFormChartItem from "./PackageFormChartItem";
 
 const PackageForm = ({ budget, paquetes }) => {
   const [paquetesStatus, setPaquetesStatus] = useState(
-    paquetes.map((pq) => ({ ...pq, include: false }))
+    paquetes.map((pq) => ({ ...pq, include: false })),
   );
   console.log(paquetesStatus);
   const router = useRouter();

@@ -27,7 +27,7 @@ const BatchForm = ({ project }) => {
       if (!res.ok) {
         const messageRes = await res.json();
         alert(
-          `No se ha podido crear la plantilla ya que se presenta el siguiente error: ${messageRes.message}`
+          `No se ha podido crear la plantilla ya que se presenta el siguiente error: ${messageRes.message}`,
         );
       } else {
         console.log(res);

@@ -27,7 +27,7 @@ export async function POST(request) {
       { error: "Falla autenticacion" },
       {
         status: 401,
-      }
+      },
     );
   }
   return NextResponse.redirect(new URL("/projects", requestUrl.host), {
