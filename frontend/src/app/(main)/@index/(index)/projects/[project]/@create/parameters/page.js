@@ -14,7 +14,7 @@ const Page = async ({ params }) => {
     "indicadores_por_incluir",
     {
       proyecto: params.project,
-    }
+    },
   );
 
   return (

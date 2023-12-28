@@ -34,7 +34,7 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
       return;
     }
     const newIndicador = indicadores.filter(
-      (indicador) => indicador.id == id
+      (indicador) => indicador.id == id,
     )[0];
     const newItem = {
       ...item,
@@ -97,7 +97,7 @@ const AddedTaleItem = ({ item, changeItemHandler }) => {
           <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">
             {nf.format(
               (item.sum * selectedIndicador.vr_dest * ponderacion) /
-                selectedIndicador.vr_or
+                selectedIndicador.vr_or,
             )}
           </td>
           <td className="h-8 border border-solid border-neutral-200  	 text-center hover:bg-neutral-50">

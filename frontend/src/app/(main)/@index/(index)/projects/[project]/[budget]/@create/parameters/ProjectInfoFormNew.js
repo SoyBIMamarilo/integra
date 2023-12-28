@@ -37,8 +37,8 @@ export default function ProjectInfoFormNew({
               it1.indicador_id < it2.indicador_id
                 ? 1
                 : it1.indicador_id > it2.indicador_id
-                ? -1
-                : 0
+                  ? -1
+                  : 0,
             )
             .map((it) => (
               <option key={it.indicador_id} value={it.indicador_id}>
@@ -60,8 +60,8 @@ export default function ProjectInfoFormNew({
           it1.indicador_id < it2.indicador_id
             ? 1
             : it1.indicador_id > it2.indicador_id
-            ? -1
-            : 0
+              ? -1
+              : 0,
         )
         .map((ind) => (
           <>
