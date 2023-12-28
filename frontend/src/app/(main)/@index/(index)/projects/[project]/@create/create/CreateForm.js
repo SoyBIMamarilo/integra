@@ -18,7 +18,8 @@ const Create = ({ project, indices }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ version, proyecto_id: project }),
     });
-    console.log(res);
+    router.refresh();
+    router.back();
   };
 
   return (
