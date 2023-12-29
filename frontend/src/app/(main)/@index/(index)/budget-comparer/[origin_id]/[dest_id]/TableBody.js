@@ -35,7 +35,7 @@ const TableBody = ({ table, name }) => {
     ...new Set(
       table
         .sort((a, b) => a.paquete_orden - b.paquete_orden)
-        .map((it) => it.paquete_nombre),
+        .map((it) => it.paquete_nombre)
     ),
   ];
   return (

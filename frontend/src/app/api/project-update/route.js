@@ -9,14 +9,16 @@ export const dynamic = "force-dynamic";
 export async function PATCH(req, res) {
   const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
   const body = await req.json();
+  const projectData = body.prueba;
+  const projectDataBody = {};
+
+  projectData.forEach((field) => {
+    let [key, value] = Object.entries(field)[0];
+    projectDataBody[key] = value;
+  });
   const { data, error } = await supabase
     .from("proyecto")
-    .update({
-      nombre: body.nombre,
-      ciudad_id: body.ciudad,
-      codigo_oracle: body.codigo_oracle,
-      link_sharepoint: body.link_sharepoint,
-    })
+    .update(projectDataBody)
     .eq("id", body.proyecto_id);
   if (error) {
     return NextResponse.json(

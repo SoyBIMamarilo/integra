@@ -13,10 +13,10 @@ const Comparer = ({ budgetId }) => {
     ? [...new Set(budgets.map((item) => item.proyecto_id))].map(
         (proyecto_id) => {
           const proyecto_nombre = budgets.filter(
-            (bt) => bt.proyecto_id == proyecto_id,
+            (bt) => bt.proyecto_id == proyecto_id
           )[0].proyecto_nombre;
           return { proyecto_id, proyecto_nombre };
-        },
+        }
       )
     : null;
 

@@ -4,7 +4,6 @@ import { headers, cookies } from "next/headers";
 import { supabaseOptions } from "@/util/supabase";
 import Modal from "@/components/modal/create-modal";
 import ProjectInfoForm from "./ProjectInfoForm";
-import ProjectBasicInfoForm from "./ProjectBasicInfoForm";
 
 const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
@@ -15,7 +14,7 @@ const Page = async ({ params }) => {
     "indicadores_por_incluir",
     {
       proyecto: params.project,
-    },
+    }
   );
 
   const { data: ciudades, errorCiudades } = await supabase

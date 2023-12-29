@@ -14,7 +14,7 @@ const Create = async ({ params }) => {
     "indicadores_por_incluir_presupuesto",
     {
       presupuesto: 0,
-    },
+    }
   );
   return (
     <Modal>

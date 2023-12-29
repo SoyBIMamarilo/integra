@@ -18,7 +18,7 @@ export async function POST(req) {
   if (error) {
     return NextResponse.json(
       { error: "Algún parametro se encuentra en 0" },
-      { status: 403 },
+      { status: 403 }
     );
   }
   return NextResponse.json(data);

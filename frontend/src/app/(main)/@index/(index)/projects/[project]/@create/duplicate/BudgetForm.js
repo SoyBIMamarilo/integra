@@ -22,7 +22,7 @@ const BudgetForm = ({ budgets }) => {
     if (!res.ok) {
       const messageRes = await res.json();
       alert(
-        `No se ha podido crear el nuevo presupuesto ya que se presenta el siguiente error: ${messageRes.message}`,
+        `No se ha podido crear el nuevo presupuesto ya que se presenta el siguiente error: ${messageRes.message}`
       );
     } else {
       console.log(res);

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import ProjectInfoFormCurrent from "./ProjectInfoFormCurrent";
 import ProjectInfoFormNew from "./ProjectInfoFormNew";
-import ProjectBasicInfoForm from "./ProjectBasicInfoForm";
+import ProjectInfoFormData from "./ProjectInfoFormData";
 
 export default function ProjectInfoForm({
   project,
@@ -14,7 +14,6 @@ export default function ProjectInfoForm({
   ciudadProyecto,
   pendingIndices,
 }) {
-
   const router = useRouter();
 
   const [inputParameters, setInputParameters] = useState([
@@ -60,13 +59,12 @@ export default function ProjectInfoForm({
     });
   };
 
-  const [inputProjectInfo, setInputProjectInfo] = useState(
-    {
-      nombre: [project.nombre, false],
-      ciudad: [project.id_ciudad, false],
-      codigo_oracle: [project.codigo_oracle, false],
-      link_sharepoint: [project.link_sharepoint, false]
-    });
+  const [inputProjectInfo, setInputProjectInfo] = useState({
+    nombre: [project.nombre, false],
+    ciudad_id: [project.id_ciudad, false],
+    codigo_oracle: [project.codigo_oracle, false],
+    link_sharepoint: [project.link_sharepoint, false],
+  });
 
   const clickProjectHandler = (key) => {
     setInputProjectInfo((prev) => {
@@ -87,15 +85,19 @@ export default function ProjectInfoForm({
     });
   };
 
-
-
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    const nombre = inputProjectInfo.nombre[0];
-    const ciudad = inputProjectInfo.ciudad[0];
-    const codigo_oracle = inputProjectInfo.codigo_oracle[0];
-    const link_sharepoint = inputProjectInfo.link_sharepoint[0];
-    const proyecto_id = project.id
+    const proyecto_id = project.id;
+    const projectData = Object.entries(inputProjectInfo)
+      .map(([key, value]) => ({
+        [key]: value[0],
+        modify: value[1],
+      }))
+      .filter((field) => field.modify == true)
+      .map((field) => ({
+        [Object.entries(field)[0][0]]: Object.entries(field)[0][1],
+      }));
+
     const indexes = inputParameters
       .filter((ind) => ind.modify == true)
       .map((ind) => ({
@@ -103,21 +105,18 @@ export default function ProjectInfoForm({
         indicador_id: ind.indicador_id,
         valor: ind.valor,
       }));
-    console.log(indexes);
+    // console.log(indexes);
     const resParameters = await fetch("/api/project-indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ indexes }),
     });
 
-    const resProject = await fetch("/api/update-project", {
+    const resProject = await fetch("/api/project-update", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nombre,
-        ciudad,
-        codigo_oracle,
-        link_sharepoint,
+        projectData,
         proyecto_id,
       }),
     });
@@ -137,11 +136,9 @@ export default function ProjectInfoForm({
   return (
     <>
       <form onSubmit={formSubmitHandler}>
-        <div className="mb-4 mt-4 text-2xl font-bold">
-          Información del proyecto
-        </div>
+        <div className="mb-4 mt-4 font-bold">Información del proyecto</div>
         <div className="flex max-w-[100%] flex-col gap-3">
-          <ProjectBasicInfoForm
+          <ProjectInfoFormData
             ciudades={ciudades}
             ciudad={ciudadProyecto}
             project={project}
@@ -149,9 +146,7 @@ export default function ProjectInfoForm({
             changeHandler={changeProjectHandler}
           />
         </div>
-        <div className="mb-4 mt-4 text-2xl font-bold">
-          Parámetros Presupuesto
-        </div>
+        <div className="mb-4 mt-4 font-bold">Parámetros Presupuesto</div>
         <div className="flex max-w-[70%] flex-col gap-3">
           <div className="grid grid-cols-2 gap-3">
             {indices.map((ind) => (
