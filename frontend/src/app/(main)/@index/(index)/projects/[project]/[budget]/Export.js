@@ -1,5 +1,3 @@
-"use client";
-
 import XlsxPopulate from "xlsx-populate";
 import { saveAs } from "file-saver";
 
@@ -62,7 +60,7 @@ const Export = ({ data }) => {
   return (
     <button
       className="whitespace-nowrap rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-1 font-bold text-integra-text hover:bg-integra-background-strong"
-      onClick={saveAsExcel}
+      // onClick={saveAsExcel}
     >
       Descargar
     </button>

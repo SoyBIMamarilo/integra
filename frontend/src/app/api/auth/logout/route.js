@@ -13,9 +13,5 @@ export async function POST(request) {
     status: 204,
   });
 
-  const requestUrl = new URL(request.url);
 
-  return NextResponse.redirect(`${requestUrl.origin}/`, {
-    status: 301,
-  });
 }

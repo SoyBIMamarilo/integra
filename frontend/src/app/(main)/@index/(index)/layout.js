@@ -10,9 +10,6 @@ const Layout = (props) => {
           <h1 className=" text-WHITE grow pl-14	tracking-wide">INTEGRA</h1>
           <form action="/api/auth/logout" method="POST">
             <Logout />
-            <button className="m-2 rounded-lg border-2 border-solid	 border-integra-text bg-integra-background-light px-5 py-2.5 font-bold text-integra-text hover:bg-integra-background-strong">
-              Salir
-            </button>
           </form>
         </div>
         <div className="flex max-w-full grow flex-row">
