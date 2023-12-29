@@ -20,7 +20,7 @@ const BudgetTable = async ({ budget, project, budgetTotal }) => {
     ...new Set(
       budgetTotal
         .sort((a, b) => a.categoria_id - b.categoria_id)
-        .map((it) => it.categoria),
+        .map((it) => it.categoria)
     ),
   ];
 

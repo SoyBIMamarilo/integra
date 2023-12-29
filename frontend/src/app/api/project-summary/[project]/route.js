@@ -14,7 +14,7 @@ export async function GET(req, res) {
       "presupuesto_total_por_proyecto",
       {
         proyecto: project,
-      },
+      }
     );
     return NextResponse.json(data);
   } catch (err) {

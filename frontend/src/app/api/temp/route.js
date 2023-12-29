@@ -39,7 +39,7 @@ export async function POST(req) {
   } else if (tempV.length === 0) {
     return NextResponse.json(
       { message: "No cuenta con los permisos para la creacion en esta tabla" },
-      { status: 500 },
+      { status: 500 }
     );
   } else {
     const newViD = tempV[0].id;

@@ -16,7 +16,7 @@ const AvailableSearchItem = ({
   isChild,
 }) => {
   const childItems = itemList.filter(
-    (it) => it.parent_id == project.id && it.proyecto_id == project.proyecto_id,
+    (it) => it.parent_id == project.id && it.proyecto_id == project.proyecto_id
   );
   // console.log(childItems);
   const [expanded, setExpanded] = useState(true);

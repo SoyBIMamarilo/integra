@@ -15,7 +15,7 @@ export async function POST(req) {
     {
       version_presupuesto: body.version,
       proyecto_id: body.proyecto_id,
-    },
+    }
   );
   console.log(data);
   console.log(error);

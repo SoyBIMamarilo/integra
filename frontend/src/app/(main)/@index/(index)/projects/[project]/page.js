@@ -19,19 +19,19 @@ export default async function Page({ params }) {
     "presupuesto_proyecto_m2const",
     {
       proyecto: params.project,
-    },
+    }
   );
   const { data: m2vend, error: errorVend } = await supabase.rpc(
     "presupuesto_proyecto_m2vend",
     {
       proyecto: params.project,
-    },
+    }
   );
   const { data: vrTot, error: errorTot } = await supabase.rpc(
     "presupuesto_proyecto_vrtot",
     {
       proyecto: params.project,
-    },
+    }
   );
 
   return (

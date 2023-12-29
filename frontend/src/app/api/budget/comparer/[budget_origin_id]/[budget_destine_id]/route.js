@@ -16,7 +16,7 @@ export async function GET(req, res) {
       {
         presupuesto_origen: budget_origin_id,
         presupuesto_dest: budget_destine_id,
-      },
+      }
     );
 
     return NextResponse.json(data_package);

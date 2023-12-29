@@ -50,6 +50,8 @@ const CreateProjectForm = ({ ciudades, indices }) => {
     event.preventDefault();
     const nombre = event.target.nombre.value;
     const ciudad = event.target.ciudad.value;
+    const codigo_oracle = event.target.codigo_oracle.value;
+    const link_sharepoint = event.target.link_sharepoint.value;
     const indexes = input
       .filter((ind) => ind.modify == true)
       .map((ind) => ({
@@ -60,7 +62,13 @@ const CreateProjectForm = ({ ciudades, indices }) => {
     const res = await fetch("/api/create-project-indexes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, ciudad, indexes }),
+      body: JSON.stringify({
+        nombre,
+        ciudad,
+        codigo_oracle,
+        link_sharepoint,
+        indexes,
+      }),
     });
     router.refresh();
     router.back();
@@ -71,15 +79,28 @@ const CreateProjectForm = ({ ciudades, indices }) => {
       <div className="flex max-w-[70%] flex-col gap-3">
         <div className="grid grid-cols-2 gap-3">
           <label>Nombre *</label>
-          <input className="rounded-sm" type="text" name="nombre" />
+          <input className="h-7 rounded-sm" type="text" name="nombre" />
+
           <label>Ciudad *</label>
-          <select className="rounded-sm" name="ciudad">
+          <select className="h-7 rounded-sm" name="ciudad">
             {ciudades.map((it) => (
               <option key={it.id} value={it.id}>
                 {it.nombre}
               </option>
             ))}
           </select>
+          <label>Codigo Oracle</label>
+          <input
+            className="h-7 rounded-sm"
+            type="number"
+            name="codigo_oracle"
+          />
+          <label>Link memoria sharepoint</label>
+          <input
+            className="h-7 rounded-sm"
+            type="text"
+            name="link_sharepoint"
+          />
         </div>
 
         <div className="mt-4 font-bold">Añadir Indicadores</div>

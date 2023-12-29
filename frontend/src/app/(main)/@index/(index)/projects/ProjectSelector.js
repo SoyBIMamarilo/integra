@@ -12,7 +12,7 @@ export default function ProjectSelector() {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects.loadedProjects);
   const selectedProject = useSelector(
-    (state) => state.projects.selectedProject,
+    (state) => state.projects.selectedProject
   );
 
   function projectChangeHandler(event) {

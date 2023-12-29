@@ -71,7 +71,7 @@ const CreateItemForm = ({ indicador, selected }) => {
       <div>Valor Total Destino</div>
       <div>
         {nf.format(
-          (selected.sum * indicador.vr_dest * ponderacion) / indicador.vr_or,
+          (selected.sum * indicador.vr_dest * ponderacion) / indicador.vr_or
         )}
       </div>
     </div>

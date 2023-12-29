@@ -18,7 +18,7 @@ const BudgetTableBody = ({ budget, name }) => {
 
   const packages = [
     ...new Set(
-      budget.sort((a, b) => a.orden - b.orden).map((it) => it.paquete),
+      budget.sort((a, b) => a.orden - b.orden).map((it) => it.paquete)
     ),
   ];
   return (

@@ -6,18 +6,23 @@ import { supabaseOptions } from "@/util/supabase";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(req) {
+export async function PATCH(req, res) {
   const supabase = createRouteHandlerClient({ cookies }, supabaseOptions);
   const body = await req.json();
-  const indexes = body.indexes;
+  const projectData = body.prueba;
+  const projectDataBody = {};
+
+  projectData.forEach((field) => {
+    let [key, value] = Object.entries(field)[0];
+    projectDataBody[key] = value;
+  });
   const { data, error } = await supabase
-    .from("proyecto_indicador")
-    .insert(indexes);
-  console.log(data);
-  console.log(error);
+    .from("proyecto")
+    .update(projectDataBody)
+    .eq("id", body.proyecto_id);
   if (error) {
     return NextResponse.json(
-      { error: "Algún parametro se encuentra en 0" },
+      { error: "No se encontró información del proyecto seleccionado" },
       { status: 403 }
     );
   }
