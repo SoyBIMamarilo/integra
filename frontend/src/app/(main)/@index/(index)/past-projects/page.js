@@ -8,7 +8,7 @@ import ProjectsTable from "./ProjectsTable";
 export default async function Page() {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: historicos, error: error } = await supabase.rpc(
-    "get_ejecutados_historicos"
+    "get_ejecutados_historicos",
   );
 
   return (

@@ -21,7 +21,7 @@ export async function POST(req) {
   console.log(args);
   const { data, error } = await supabase.rpc(
     count ? "count_ejecutados" : "ejecutados_valor_v2",
-    args
+    args,
   );
   console.log(error);
   return NextResponse.json(data);

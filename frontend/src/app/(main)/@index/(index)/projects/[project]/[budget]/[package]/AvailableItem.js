@@ -18,7 +18,7 @@ const AvailableItem = ({ project, addItemsHandler, isChild, isLastChild }) => {
   useEffect(() => {
     const loadData = async () => {
       const data = await fetch(
-        `/api/historic-budgets/${project.id}/${project.proyecto_id}`
+        `/api/historic-budgets/${project.id}/${project.proyecto_id}`,
       );
       const dataProjects = await data.json();
       setItems(dataProjects.map((item) => ({ ...item, modified: false })));

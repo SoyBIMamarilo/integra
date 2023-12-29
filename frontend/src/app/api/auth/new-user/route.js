@@ -16,7 +16,7 @@ export async function POST(req) {
         autoRefreshToken: false,
         persistSession: false,
       },
-    }
+    },
   );
 
   const { data: users, error: userError } =
@@ -28,11 +28,11 @@ export async function POST(req) {
   if (xUser.length !== 0) {
     return NextResponse.json(
       { message: "Este correo ya existe. Revisa tu bandeja de entrada" },
-      { status: 400 }
+      { status: 400 },
     );
   } else {
     const { data, error } = await supabase.auth.admin.inviteUserByEmail(
-      body.email
+      body.email,
     );
     console.log(error);
     supabase = createRouteHandlerClient({ cookies }, supabaseOptions);

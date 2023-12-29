@@ -17,7 +17,7 @@ const ItemListCard = ({ item }) => {
     if (!res.ok) {
       const messageRes = await res.json();
       alert(
-        `No se ha podido borrar la plantilla ya que se presenta el siguiente error: ${messageRes.message}`
+        `No se ha podido borrar la plantilla ya que se presenta el siguiente error: ${messageRes.message}`,
       );
     } else {
       console.log(res);

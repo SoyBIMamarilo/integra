@@ -15,7 +15,7 @@ const Page = async ({ params }) => {
     "indicadores_por_incluir",
     {
       proyecto: params.project,
-    }
+    },
   );
 
   const { data: ciudades, errorCiudades } = await supabase

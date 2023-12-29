@@ -17,7 +17,7 @@ const Page = async ({ params }) => {
     ...new Set(
       table
         .sort((a, b) => a.paquete_categoria_orden - b.paquete_categoria_orden)
-        .map((it) => it.paquete_categoria)
+        .map((it) => it.paquete_categoria),
     ),
   ];
   const project1 = table[0]

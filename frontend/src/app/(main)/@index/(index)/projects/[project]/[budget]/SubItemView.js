@@ -146,7 +146,7 @@ const SubItemView = ({ item }) => {
                     (itemInfo.ref_valor *
                       itemInfo.ind_dest *
                       itemInfo.factor_ponderacion) /
-                      itemInfo.ind_or
+                      itemInfo.ind_or,
                   )}
                 </label>
               </fieldset>

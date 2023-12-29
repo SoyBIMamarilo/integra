@@ -9,7 +9,7 @@ const Page = async ({ params }) => {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: paquetes, error } = await supabase.rpc(
     "paquetes_trabajo_disponibles_presupuesto",
-    { presupuesto: params.budget }
+    { presupuesto: params.budget },
   );
 
   return (

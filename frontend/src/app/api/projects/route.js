@@ -38,7 +38,7 @@ export async function POST(req) {
   } else if (data.length === 0) {
     return NextResponse.json(
       { message: "No cuenta con los permisos para la creacion en esta tabla" },
-      { status: 500 }
+      { status: 500 },
     );
   } else {
     return NextResponse.json(data[0]);

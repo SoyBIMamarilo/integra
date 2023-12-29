@@ -9,15 +9,15 @@ export default async function Create({ params }) {
   const supabase = createServerComponentClient({ cookies }, supabaseOptions);
   const { data: projectList, error: errorProjects } = await supabase.rpc(
     "unique_list",
-    { filter_type: "proyecto" }
+    { filter_type: "proyecto" },
   );
   const { data: line_typesList, error: errorLines } = await supabase.rpc(
     "unique_list",
-    { filter_type: "line_type" }
+    { filter_type: "line_type" },
   );
   const { data: descriptionList, error: errorDescription } = await supabase.rpc(
     "unique_list",
-    { filter_type: "descripcion" }
+    { filter_type: "descripcion" },
   );
   const { data: cbsList, error: errorCbs } = await supabase.rpc("unique_list", {
     filter_type: "cbs",
